@@ -1,0 +1,98 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String    @id @default(cuid())
+  name            String
+  email           String    @unique
+  password        String
+  resetToken      String?
+  resetTokenExpiry DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  addresses       Address[]
+  orders          Order[]
+  deliveryNotifications DeliveryNotification[]
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  userId        String
+  user          User        @relation(fields: [userId], references: [id])
+  items         OrderItem[]
+  totalAmount   Int
+  status        String      @default("pending")
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  shippingAddressId String
+  shippingAddress Address   @relation(fields: [shippingAddressId], references: [id])
+  cancelReason  String?
+  cancelledAt   DateTime?
+  trackingInfo  TrackingInfo?
+  deliveryNotifications DeliveryNotification[]
+}
+
+model OrderItem {
+  id            String    @id @default(cuid())
+  orderId       String
+  order         Order     @relation(fields: [orderId], references: [id])
+  productName   String
+  quantity      Int
+  price         Float
+  options       String    // JSON string of options
+}
+
+model Address {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  name          String
+  postalCode    String
+  prefecture    String
+  city          String
+  address1      String
+  address2      String?
+  phone         String
+  isDefault     Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model TrackingInfo {
+  id            String      @id @default(cuid())
+  orderId       String      @unique
+  order         Order       @relation(fields: [orderId], references: [id])
+  carrier       String      // 配送業者
+  trackingNumber String     // 追跡番号
+  status        String      // 配送状態
+  estimatedDelivery DateTime? // 予定配達日
+  currentLocation String?   // 現在の場所
+  history       Json[]      // 配送履歴
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model DeliveryNotification {
+  id        String   @id @default(cuid())
+  orderId   String
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  order Order @relation(fields: [orderId], references: [id])
+  user  User  @relation(fields: [userId], references: [id])
+
+  @@unique([orderId])
+}
