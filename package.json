@@ -1,4 +1,13 @@
 {
+  "name": "apparel",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000 -H 0.0.0.0",
+    "build": "next build",
+    "start": "next start -p 3000 -H 0.0.0.0",
+    "lint": "next lint"
+  },
   "devDependencies": {
     "@types/node": "^22.14.0",
     "@types/react": "^19.1.0",
