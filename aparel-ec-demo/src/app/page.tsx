@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { FC } from "react";
 
 // 仮のデータ
 const newArrivals = [
@@ -16,7 +17,7 @@ const featuredProducts = [
   { id: 8, name: "スニーカー", price: 12900, image: "/products/sneakers.jpg" },
 ];
 
-export default function Home() {
+const Home: FC = () => {
   return (
     <div className="min-h-screen">
       {/* ヘッダー */}
@@ -205,3 +206,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

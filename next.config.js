@@ -4,18 +4,22 @@ const nextConfig = {
   swcMinify: true,
   images: {
     unoptimized: true,
+    domains: ['apparel-ec.netlify.app']
   },
   output: 'export',
   distDir: 'out',
   trailingSlash: true,
   poweredByHeader: false,
   compress: true,
-  assetPrefix: 'https://apparel-ec.netlify.app',
   basePath: '',
   env: {
     NETLIFY: process.env.NETLIFY ?? 'false',
-    NEXT_PUBLIC_API_URL: 'https://apparel-ec.netlify.app/api',
-    NEXT_PUBLIC_BASE_URL: 'https://apparel-ec.netlify.app'
+    NEXT_PUBLIC_API_URL: process.env.NETLIFY === 'true' 
+      ? 'https://apparel-ec.netlify.app/.netlify/functions'
+      : 'http://localhost:8888/.netlify/functions',
+    NEXT_PUBLIC_BASE_URL: process.env.NETLIFY === 'true'
+      ? 'https://apparel-ec.netlify.app'
+      : 'http://localhost:3000'
   },
   experimental: {
     // Next.js 14での正しい設定

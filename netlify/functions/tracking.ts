@@ -1,105 +1,132 @@
 import { Handler } from '@netlify/functions'
 import { PrismaClient } from '@prisma/client'
-import { YamatoClient } from '../../utils/carriers/yamato'
-import { SagawaClient } from '../../utils/carriers/sagawa'
-import { ExtendedError, TrackingInfo } from '../../types/tracking'
+import { YamatoClient } from '../../../lib/carriers/yamato'
+import { SagawaClient } from '../../../lib/carriers/sagawa'
+import { CarrierClient } from '../../../types/tracking'
+
+interface ErrorResponse {
+  error: {
+    message: string
+    code: string
+    statusCode: number
+  }
+}
 
 const prisma = new PrismaClient()
 
-export const handler: Handler = async (event, context) => {
-  // CORSヘッダーを追加
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'GET, OPTIONS'
-  }
+const errorMessages = {
+  METHOD_NOT_ALLOWED: 'このメソッドは許可されていません',
+  MISSING_ORDER_ID: '注文IDが必要です',
+  ORDER_NOT_FOUND: '注文が見つかりません',
+  TRACKING_NOT_FOUND: '配送情報が見つかりません',
+  UNSUPPORTED_CARRIER: '未対応の配送業者です',
+  INTERNAL_SERVER_ERROR: 'サーバーエラーが発生しました'
+} as const;
 
-  // OPTIONSリクエストの処理
-  if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 204,
-      headers
-    }
-  }
-
+export const handler: Handler = async (event) => {
   if (event.httpMethod !== 'GET') {
+    const error: ErrorResponse = {
+      error: {
+        message: errorMessages.METHOD_NOT_ALLOWED,
+        code: 'METHOD_NOT_ALLOWED',
+        statusCode: 405
+      }
+    }
     return {
       statusCode: 405,
-      headers,
-      body: JSON.stringify({ error: 'Method not allowed' })
+      body: JSON.stringify(error)
     }
   }
 
-  const orderId = event.path.split('/').pop()
+  const orderId = event.queryStringParameters?.orderId
   if (!orderId) {
+    const error: ErrorResponse = {
+      error: {
+        message: errorMessages.MISSING_ORDER_ID,
+        code: 'MISSING_ORDER_ID',
+        statusCode: 400
+      }
+    }
     return {
       statusCode: 400,
-      headers,
-      body: JSON.stringify({ error: 'Order ID is required' })
+      body: JSON.stringify(error)
     }
   }
 
   try {
     const order = await prisma.order.findUnique({
       where: { id: orderId },
-      include: { trackingInfo: true }
+      include: { tracking: true }
     })
 
     if (!order) {
+      const error: ErrorResponse = {
+        error: {
+          message: errorMessages.ORDER_NOT_FOUND,
+          code: 'ORDER_NOT_FOUND',
+          statusCode: 404
+        }
+      }
       return {
         statusCode: 404,
-        headers,
-        body: JSON.stringify({ error: 'Order not found' })
+        body: JSON.stringify(error)
       }
     }
 
-    if (!order.trackingInfo) {
+    if (!order.tracking) {
+      const error: ErrorResponse = {
+        error: {
+          message: errorMessages.TRACKING_NOT_FOUND,
+          code: 'TRACKING_NOT_FOUND',
+          statusCode: 404
+        }
+      }
       return {
         statusCode: 404,
-        headers,
-        body: JSON.stringify({ error: 'Tracking information not found' })
+        body: JSON.stringify(error)
       }
     }
 
-    let carrierClient
-    switch (order.trackingInfo.carrier.toLowerCase()) {
-      case 'yamato':
-        carrierClient = new YamatoClient(process.env.YAMATO_API_KEY || '')
+    let client: CarrierClient
+    switch (order.tracking.carrier) {
+      case 'YAMATO':
+        client = new YamatoClient()
         break
-      case 'sagawa':
-        carrierClient = new SagawaClient(process.env.SAGAWA_API_KEY || '')
+      case 'SAGAWA':
+        client = new SagawaClient()
         break
       default:
+        const error: ErrorResponse = {
+          error: {
+            message: `${errorMessages.UNSUPPORTED_CARRIER}: ${order.tracking.carrier}`,
+            code: 'UNSUPPORTED_CARRIER',
+            statusCode: 400
+          }
+        }
         return {
           statusCode: 400,
-          headers,
-          body: JSON.stringify({ error: 'Unsupported carrier' })
+          body: JSON.stringify(error)
         }
     }
 
-    const trackingInfo = await carrierClient.getTrackingInfo(order.trackingInfo.trackingNumber)
-    
+    const trackingInfo = await client.getTrackingInfo(order.tracking.trackingNumber)
+
     return {
       statusCode: 200,
-      headers,
-      body: JSON.stringify({
-        success: true,
-        data: trackingInfo
-      })
+      body: JSON.stringify(trackingInfo)
     }
   } catch (error) {
-    const e = error as ExtendedError
+    console.error('Error fetching tracking info:', error)
+    const errorResponse: ErrorResponse = {
+      error: {
+        message: errorMessages.INTERNAL_SERVER_ERROR,
+        code: 'INTERNAL_SERVER_ERROR',
+        statusCode: 500
+      }
+    }
     return {
-      statusCode: e.statusCode || 500,
-      headers,
-      body: JSON.stringify({
-        success: false,
-        error: {
-          message: e.message,
-          code: e.code,
-          data: e.data
-        }
-      })
+      statusCode: 500,
+      body: JSON.stringify(errorResponse)
     }
   } finally {
     await prisma.$disconnect()

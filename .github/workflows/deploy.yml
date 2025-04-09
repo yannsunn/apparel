@@ -1,14 +1,28 @@
 name: Deploy to Netlify
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
     types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  deployments: write
+  id-token: write
+  pull-requests: write
+  statuses: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      NEXT_PUBLIC_API_URL: 'https://apparel-ec.netlify.app/.netlify/functions'
+      NEXT_PUBLIC_BASE_URL: 'https://apparel-ec.netlify.app'
+      NETLIFY: 'true'
+      NODE_ENV: 'production'
     steps:
       - uses: actions/checkout@v3
 
@@ -23,17 +37,9 @@ jobs:
 
       - name: Generate Prisma Client
         run: npx prisma generate
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Build
         run: npm run build
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          NEXT_PUBLIC_API_URL: 'https://apparel-ec.netlify.app/api'
-          NEXT_PUBLIC_BASE_URL: 'https://apparel-ec.netlify.app'
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0
@@ -41,12 +47,12 @@ jobs:
           publish-dir: './out'
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: 'Deploy from GitHub Actions'
-          enable-pull-request-comment: true
+          deploy-message: "Deploy from GitHub Actions"
+          enable-commit-status: true
           enable-commit-comment: true
-          overwrites-pull-request-comment: true
+          enable-pull-request-comment: true
+          fails-without-credentials: true
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         timeout-minutes: 10 
