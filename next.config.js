@@ -7,7 +7,7 @@ const nextConfig = {
     domains: ['apparel-ec.netlify.app']
   },
   output: 'export',
-  distDir: '.next',
+  distDir: 'out',
   trailingSlash: true,
   poweredByHeader: false,
   compress: true,
