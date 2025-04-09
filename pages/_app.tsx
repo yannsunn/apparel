@@ -1,13 +1,18 @@
-import type { AppProps } from 'next/app';
-import { CartProvider } from '../contexts/CartContext';
-import '../styles/globals.css';
+import '../styles/globals.css'
+import type { AppProps } from 'next/app'
+import Head from 'next/head'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <CartProvider>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="AparelEC - オンラインアパレルショップ" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Component {...pageProps} />
-    </CartProvider>
-  );
+    </>
+  )
 }
 
-export default MyApp; 
+export default MyApp 
