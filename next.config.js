@@ -6,12 +6,11 @@ const nextConfig = {
     unoptimized: true,
     domains: ['apparel-ec.netlify.app']
   },
-  output: 'standalone',
-  distDir: 'out',
+  output: 'export',
+  distDir: '.next',
   trailingSlash: true,
   poweredByHeader: false,
   compress: true,
-  basePath: '',
   env: {
     NETLIFY: process.env.NETLIFY ?? 'false',
     NEXT_PUBLIC_API_URL: process.env.NETLIFY === 'true' 

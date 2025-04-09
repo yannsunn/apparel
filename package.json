@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export -o out",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
@@ -14,7 +14,8 @@
     "test:coverage": "jest --coverage",
     "prepare": "husky install",
     "postbuild": "next-sitemap --config next-sitemap.config.js",
-    "netlify-build": "NEXT_TELEMETRY_DISABLED=1 next build",
+    "netlify-build": "NEXT_TELEMETRY_DISABLED=1 next build && next export -o out",
+    "preview": "next build && next export -o out && serve out",
     "cache-clean": "rm -rf .next/cache",
     "analyze": "ANALYZE=true next build"
   },
@@ -31,8 +32,8 @@
     "nodemailer": "^6.10.0",
     "react": "^18",
     "react-dom": "^18",
-    "winston": "^3.11.0",
-    "netlify-plugin-cache": "^1.0.3"
+    "serve": "^14.2.1",
+    "winston": "^3.11.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
