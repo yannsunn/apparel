@@ -8,11 +8,11 @@ const prisma = new PrismaClient();
 
 interface AddressFormData {
   name: string;
-  postalCode: string;
+  zipCode: string;
   prefecture: string;
   city: string;
-  address1: string;
-  address2: string;
+  street: string;
+  building: string;
   phone: string;
   isDefault: boolean;
 }
@@ -23,11 +23,11 @@ const EditAddressPage: React.FC = () => {
   const { id } = router.query;
   const [formData, setFormData] = useState<AddressFormData>({
     name: '',
-    postalCode: '',
+    zipCode: '',
     prefecture: '',
     city: '',
-    address1: '',
-    address2: '',
+    street: '',
+    building: '',
     phone: '',
     isDefault: false,
   });
@@ -47,11 +47,11 @@ const EditAddressPage: React.FC = () => {
         if (address) {
           setFormData({
             name: address.name,
-            postalCode: address.postalCode,
+            zipCode: address.zipCode,
             prefecture: address.prefecture,
             city: address.city,
-            address1: address.address1,
-            address2: address.address2 || '',
+            street: address.street,
+            building: address.building || '',
             phone: address.phone,
             isDefault: address.isDefault,
           });
@@ -169,14 +169,14 @@ const EditAddressPage: React.FC = () => {
             </div>
 
             <div>
-              <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700">
                 郵便番号
               </label>
               <input
                 type="text"
-                id="postalCode"
-                value={formData.postalCode}
-                onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
+                id="zipCode"
+                value={formData.zipCode}
+                onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })}
                 className="input-field"
                 required
                 pattern="[0-9]{3}-[0-9]{4}"
@@ -261,28 +261,28 @@ const EditAddressPage: React.FC = () => {
             </div>
 
             <div>
-              <label htmlFor="address1" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="street" className="block text-sm font-medium text-gray-700">
                 番地
               </label>
               <input
                 type="text"
-                id="address1"
-                value={formData.address1}
-                onChange={(e) => setFormData({ ...formData, address1: e.target.value })}
+                id="street"
+                value={formData.street}
+                onChange={(e) => setFormData({ ...formData, street: e.target.value })}
                 className="input-field"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="address2" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="building" className="block text-sm font-medium text-gray-700">
                 建物名・部屋番号
               </label>
               <input
                 type="text"
-                id="address2"
-                value={formData.address2}
-                onChange={(e) => setFormData({ ...formData, address2: e.target.value })}
+                id="building"
+                value={formData.building}
+                onChange={(e) => setFormData({ ...formData, building: e.target.value })}
                 className="input-field"
               />
             </div>

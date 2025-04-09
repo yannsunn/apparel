@@ -1,106 +1,72 @@
 import React from 'react';
-import Layout from '../components/Layout';
+import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 
-const Home: React.FC = () => {
+export default function Home() {
   return (
-    <Layout>
-      {/* ヒーローセクション */}
-      <section className="relative h-[600px] mb-12">
-        <div className="absolute inset-0 bg-black/50 z-10" />
-        <div className="absolute inset-0">
-          <Image
-            src="/images/hero-bg.jpg"
-            alt="スポーツユニフォーム"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-        <div className="relative z-20 h-full flex items-center justify-center text-center text-white">
-          <div>
-            <h1 className="text-5xl font-bold mb-4">
-              あなたのチームに最適な
-              <br />
-              オリジナルユニフォーム
+    <>
+      <Head>
+        <title>AparelEC | オンラインアパレルショップ</title>
+        <meta name="description" content="オンラインアパレルショッピングの新しい体験" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      
+      <main className="min-h-screen bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          {/* ヒーローセクション */}
+          <div className="text-center mb-16">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+              <span className="block">AparelEC</span>
+              <span className="block text-blue-600">オンラインアパレルショップ</span>
             </h1>
-            <p className="text-xl mb-8">
-              高品質な素材とカスタマイズ性で、
-              <br />
-              チームの個性を表現
+            <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+              高品質なオリジナルアパレル製品をオンラインでカスタマイズ
             </p>
-            <Link
-              href="/customize"
-              className="bg-accent hover:bg-red-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-colors"
-            >
-              カスタマイズを始める
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 特徴セクション */}
-      <section className="py-12">
-        <h2 className="text-3xl font-bold text-center mb-12">特徴</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="text-center p-6">
-            <div className="text-4xl mb-4">🎨</div>
-            <h3 className="text-xl font-semibold mb-2">完全カスタマイズ</h3>
-            <p className="text-gray-600">
-              色、デザイン、ロゴ、番号など、
-              すべてを自由にカスタマイズできます
-            </p>
-          </div>
-          <div className="text-center p-6">
-            <div className="text-4xl mb-4">✨</div>
-            <h3 className="text-xl font-semibold mb-2">高品質素材</h3>
-            <p className="text-gray-600">
-              快適な着心地と耐久性を
-              両立した素材を使用
-            </p>
-          </div>
-          <div className="text-center p-6">
-            <div className="text-4xl mb-4">🚚</div>
-            <h3 className="text-xl font-semibold mb-2">迅速な納期</h3>
-            <p className="text-gray-600">
-              最短2週間で
-              お届け可能です
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 商品一覧セクション */}
-      <section className="py-12">
-        <h2 className="text-3xl font-bold text-center mb-12">人気商品</h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="border rounded-lg overflow-hidden">
-              <div className="relative h-48">
-                <Image
-                  src={`/images/product-${i}.jpg`}
-                  alt={`商品${i}`}
-                  fill
-                  className="object-cover"
-                />
+            <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
+              <div className="rounded-md shadow">
+                <Link href="#" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10">
+                  カタログを見る
+                </Link>
               </div>
-              <div className="p-4">
-                <h3 className="font-semibold mb-2">サッカーユニフォーム</h3>
-                <p className="text-gray-600 mb-2">¥12,800〜</p>
-                <Link
-                  href={`/products/${i}`}
-                  className="block text-center bg-primary text-white py-2 rounded hover:bg-primary/90 transition-colors"
-                >
-                  詳細を見る
+              <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+                <Link href="#" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
+                  お問い合わせ
                 </Link>
               </div>
             </div>
-          ))}
+          </div>
+          
+          {/* 特徴セクション */}
+          <div className="py-12 bg-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="lg:text-center">
+                <h2 className="text-base text-blue-600 font-semibold tracking-wide uppercase">特徴</h2>
+                <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                  最高品質のアパレル製品
+                </p>
+                <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                  当社の製品は、品質、デザイン、持続可能性にこだわって製造されています。
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          {/* 準備中メッセージ */}
+          <div className="mt-16 text-center">
+            <p className="text-lg text-gray-500 mb-6">
+              このサイトは現在構築中です。すぐに新しいコレクションをお届けします。
+            </p>
+          </div>
         </div>
-      </section>
-    </Layout>
+      </main>
+    </>
   );
-};
+}
 
-export default Home; 
+// 静的ページとして事前生成
+export async function getStaticProps() {
+  return {
+    props: {},
+  };
+} 

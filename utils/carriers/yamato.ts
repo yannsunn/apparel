@@ -1,51 +1,54 @@
-import axios from 'axios';
-import { BaseCarrierClient, TrackingData } from './base';
+import logger from '../../lib/logger';
+import { CarrierClient, TrackingInfo } from '../../types/tracking';
 
-export class YamatoClient extends BaseCarrierClient {
-  private readonly baseUrl = 'https://api.yamato.co.jp/tracking';
+/**
+ * ヤマト運輸の追跡APIクライアントモック実装
+ */
+export class YamatoClient implements CarrierClient {
+  private apiKey: string;
+  private baseUrl: string;
 
-  async getTrackingInfo(trackingNumber: string): Promise<TrackingData> {
-    // キャッシュをチェック
-    const cached = await this.getCachedTrackingInfo(trackingNumber);
-    if (cached) {
-      return cached;
-    }
-
-    try {
-      const response = await axios.get(`${this.baseUrl}/${trackingNumber}`, {
-        headers: {
-          'Authorization': `Bearer ${process.env.YAMATO_API_KEY}`,
-        },
-      });
-
-      const data = response.data;
-      const trackingData: TrackingData = {
-        status: this.mapStatus(data.status),
-        currentLocation: data.currentLocation,
-        estimatedDelivery: data.estimatedDelivery,
-        description: data.description,
-        timestamp: new Date().toISOString(),
-      };
-
-      // キャッシュを更新
-      this.setCache(trackingNumber, trackingData);
-
-      return trackingData;
-    } catch (error) {
-      console.error('ヤマト運輸APIエラー:', error);
-      throw new Error('配送状況の取得に失敗しました');
-    }
+  constructor(apiKey: string, baseUrl: string = 'https://api.yamato.co.jp/v1') {
+    this.apiKey = apiKey;
+    this.baseUrl = baseUrl;
   }
 
-  private mapStatus(status: string): string {
-    const statusMap: { [key: string]: string } = {
-      'PICKUP': '集荷完了',
-      'IN_TRANSIT': '配送中',
-      'OUT_FOR_DELIVERY': '配達中',
-      'DELIVERED': '配達完了',
-      'EXCEPTION': '配送エラー',
-    };
+  /**
+   * ヤマト運輸の配送状況を取得する
+   * 注: これはモック実装です
+   */
+  async getTrackingInfo(trackingNumber: string): Promise<TrackingInfo> {
+    try {
+      logger.info(`Requesting tracking info for Yamato tracking number: ${trackingNumber}`);
 
-    return statusMap[status] || status;
+      // モックデータを生成
+      const statuses = ['配送中', '配達完了', '集荷完了', '配送遅延'];
+      const locations = ['東京都中央区', '大阪府大阪市', '愛知県名古屋市', '福岡県福岡市'];
+      
+      const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+      const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+      
+      const now = new Date();
+      const estimatedDelivery = new Date(now.getTime() + Math.random() * 7 * 24 * 60 * 60 * 1000);
+
+      return {
+        trackingNumber,
+        status: randomStatus,
+        currentLocation: randomLocation,
+        description: `荷物は${randomLocation}にあります。${randomStatus}です。`,
+        timestamp: now.toISOString(),
+        estimatedDelivery: estimatedDelivery.toISOString(),
+        carrier: 'yamato',
+        additionalInfo: {
+          deliveryTimeWindow: '14:00-16:00',
+          packageSize: '60サイズ',
+          weight: `${Math.floor(Math.random() * 10) + 1}kg`,
+          deliveryType: '通常配送'
+        }
+      };
+    } catch (error) {
+      logger.error('Error fetching Yamato tracking info:', error);
+      throw new Error('ヤマトの配送情報の取得に失敗しました');
+    }
   }
 } 

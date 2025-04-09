@@ -6,8 +6,13 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  NEXT_PUBLIC_API_URL: https://apparel-ec.netlify.app/api
+  NEXT_PUBLIC_BASE_URL: https://apparel-ec.netlify.app
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,34 +21,31 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: |
+            .next/cache
+            ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+            ${{ runner.os }}-nextjs-
       - name: Install dependencies
         run: npm ci
       - name: Lint Check
         run: npm run lint
       - name: Format Check
         run: npm run format:check
-      - name: Build and Export
-        run: |
-          npm run build
-          npm run export
-      - name: Upload Build
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          path: out
-
-  deploy:
-    needs: [build]
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Download Build
-        uses: actions/download-artifact@v4
-        with:
-          name: build
-          path: out
+      - name: Generate Prisma Client
+        run: npx prisma generate
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: Deploy to Netlify
+        if: github.ref == 'refs/heads/main'
         uses: nwtgck/actions-netlify@v2.0
         with:
           publish-dir: out

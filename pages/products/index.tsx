@@ -38,7 +38,7 @@ const Products: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {products.map((product) => (
             <div key={product.id} className="card">
-              <div className="relative h-48 mb-4">
+              <div className="relative h-48 mb-4" style={{ position: 'relative' }}>
                 <Image
                   src={product.image}
                   alt={product.name}

@@ -5,19 +5,14 @@ import Link from 'next/link';
 import { useCart } from '../contexts/CartContext';
 
 const Cart: React.FC = () => {
-  const { items, removeFromCart, updateQuantity, total } = useCart();
+  const { items = [], removeFromCart, updateQuantity, total = 0 } = useCart();
 
-  if (items.length === 0) {
+  if (!Array.isArray(items) || items.length === 0) {
     return (
       <Layout>
-        <div className="container py-8">
-          <h1 className="text-3xl font-bold mb-8">カート</h1>
-          <div className="text-center py-12">
-            <p className="text-gray-600 mb-4">カートに商品がありません</p>
-            <Link href="/products" className="btn btn-primary">
-              商品一覧へ
-            </Link>
-          </div>
+        <div className="container mx-auto px-4 py-8">
+          <h1 className="text-2xl font-bold mb-4">カート</h1>
+          <p>カートに商品がありません。</p>
         </div>
       </Layout>
     );

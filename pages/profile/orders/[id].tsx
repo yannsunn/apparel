@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import Layout from '../../../components/Layout';
 import CancelOrderModal from '../../../components/CancelOrderModal';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import TrackingInfo from '../../../components/TrackingInfo';
 import DeliveryNotification from '../../../components/DeliveryNotification';
 
@@ -14,11 +14,7 @@ interface OrderItem {
   productName: string;
   quantity: number;
   price: number;
-  customization: {
-    color: string;
-    size: string;
-    number: string;
-  };
+  customization: Prisma.JsonValue;
 }
 
 interface Order {
@@ -29,11 +25,11 @@ interface Order {
   items: OrderItem[];
   shippingAddress: {
     name: string;
-    postalCode: string;
+    zipCode: string;
     prefecture: string;
     city: string;
-    address1: string;
-    address2: string | null;
+    street: string;
+    building: string | null;
     phone: string;
   };
   cancelReason?: string;
@@ -230,9 +226,9 @@ const OrderDetailPage: React.FC = () => {
                           <div className="mt-2 text-sm">
                             <p>カスタマイズ情報:</p>
                             <ul className="list-disc list-inside text-gray-600">
-                              <li>カラー: {item.customization.color}</li>
-                              <li>サイズ: {item.customization.size}</li>
-                              <li>背番号: {item.customization.number}</li>
+                              <li>カラー: {(item.customization as { color: string }).color}</li>
+                              <li>サイズ: {(item.customization as { size: string }).size}</li>
+                              <li>背番号: {(item.customization as { number: string }).number}</li>
                             </ul>
                           </div>
                         </div>
@@ -251,13 +247,13 @@ const OrderDetailPage: React.FC = () => {
                 <div className="bg-gray-50 rounded-lg p-4">
                   <p className="font-medium">{order.shippingAddress.name}</p>
                   <p className="text-gray-600">
-                    〒{order.shippingAddress.postalCode}
+                    〒{order.shippingAddress.zipCode}
                     <br />
                     {order.shippingAddress.prefecture}
                     {order.shippingAddress.city}
-                    {order.shippingAddress.address1}
-                    {order.shippingAddress.address2 && <br />}
-                    {order.shippingAddress.address2}
+                    {order.shippingAddress.street}
+                    {order.shippingAddress.building && <br />}
+                    {order.shippingAddress.building}
                   </p>
                   <p className="text-gray-600 mt-1">
                     TEL: {order.shippingAddress.phone}
@@ -287,7 +283,7 @@ const OrderDetailPage: React.FC = () => {
           {/* 配送状況 */}
           {order.status === 'shipped' && order.trackingInfo && (
             <div className="space-y-6">
-              <TrackingInfo {...order.trackingInfo} />
+              <TrackingInfo orderId={order.id} {...order.trackingInfo} />
               <DeliveryNotification
                 orderId={order.id}
                 trackingInfo={order.trackingInfo}

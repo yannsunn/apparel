@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "export": "next export",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
@@ -13,19 +12,27 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postbuild": "next-sitemap --config next-sitemap.config.js",
+    "netlify-build": "NEXT_TELEMETRY_DISABLED=1 npm run build",
+    "cache-clean": "rm -rf .next/cache",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
-    "@netlify/plugin-nextjs": "^4.41.3",
+    "@heroicons/react": "^2.2.0",
     "@netlify/functions": "^2.6.0",
+    "@netlify/plugin-nextjs": "^4.41.3",
     "@prisma/client": "^5.10.2",
+    "@types/nodemailer": "^6.4.17",
     "bcryptjs": "^2.4.3",
     "next": "14.1.0",
     "next-auth": "^4.24.6",
     "next-sitemap": "^4.2.3",
+    "nodemailer": "^6.10.0",
     "react": "^18",
     "react-dom": "^18",
-    "winston": "^3.11.0"
+    "winston": "^3.11.0",
+    "netlify-plugin-cache": "^1.0.3"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import Layout from '../../components/Layout';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { generateTrackingCsv, downloadCsv } from '../../utils/export';
@@ -11,26 +11,38 @@ const prisma = new PrismaClient();
 
 const ITEMS_PER_PAGE = 10;
 
-interface ProfileData {
+interface Address {
+  id: string;
   name: string;
-  email: string;
-  addresses: {
-    id: string;
-    name: string;
-    postalCode: string;
-    prefecture: string;
-    city: string;
-    address1: string;
-    address2?: string;
-    phone: string;
-    isDefault: boolean;
-  }[];
-  orders: {
-    id: string;
-    createdAt: string;
-    totalAmount: number;
+  zipCode: string;
+  prefecture: string;
+  city: string;
+  street: string;
+  building?: string;
+  phone: string;
+  isDefault: boolean;
+}
+
+interface OrderItem {
+  id: string;
+  productName: string;
+  quantity: number;
+  price: number;
+  customization: Prisma.JsonValue;
+}
+
+interface TrackingInfo {
+  carrier: string;
+  trackingNumber: string;
+  status: string;
+  estimatedDelivery: string | null;
+  currentLocation: string | null;
+  history: Array<{
     status: string;
-  }[];
+    location: string;
+    timestamp: string;
+    description: string;
+  }>;
 }
 
 interface Order {
@@ -39,21 +51,15 @@ interface Order {
   status: string;
   totalAmount: number;
   items: OrderItem[];
+  trackingInfo?: TrackingInfo;
   cancelReason?: string;
-  cancelledAt?: Date;
-  trackingInfo?: {
-    carrier: string;
-    trackingNumber: string;
-    status: string;
-    estimatedDelivery: string | null;
-    currentLocation: string | null;
-    history: Array<{
-      timestamp: string;
-      status: string;
-      location: string;
-      description: string;
-    }>;
-  };
+}
+
+interface ProfileData {
+  name: string;
+  email: string;
+  addresses: Address[];
+  orders: Order[];
 }
 
 const ProfilePage: React.FC = () => {
@@ -78,16 +84,53 @@ const ProfilePage: React.FC = () => {
     const fetchProfileData = async () => {
       if (session?.user?.id) {
         const user = await prisma.user.findUnique({
-          where: { id: session.user.id },
-          include: {
-            addresses: true,
+          where: {
+            id: session.user.id,
+          },
+          select: {
+            name: true,
+            email: true,
+            addresses: {
+              select: {
+                id: true,
+                name: true,
+                zipCode: true,
+                prefecture: true,
+                city: true,
+                street: true,
+                building: true,
+                phone: true,
+                isDefault: true,
+              },
+            },
             orders: {
-              orderBy: { createdAt: 'desc' },
-              take: 10,
+              select: {
+                id: true,
+                createdAt: true,
+                status: true,
+                totalAmount: true,
+                items: {
+                  select: {
+                    id: true,
+                    productName: true,
+                    quantity: true,
+                    price: true,
+                    customization: true,
+                  },
+                },
+              },
             },
           },
         });
-        setProfileData(user);
+
+        if (user) {
+          setProfileData({
+            name: user.name,
+            email: user.email,
+            addresses: user.addresses,
+            orders: user.orders,
+          });
+        }
       }
     };
     fetchProfileData();
@@ -257,13 +300,13 @@ const ProfilePage: React.FC = () => {
                     <div>
                       <p className="font-medium">{address.name}</p>
                       <p className="text-sm text-gray-600">
-                        〒{address.postalCode}
+                        〒{address.zipCode}
                         <br />
                         {address.prefecture}
                         {address.city}
-                        {address.address1}
-                        {address.address2 && <br />}
-                        {address.address2}
+                        {address.street}
+                        {address.building && <br />}
+                        {address.building}
                       </p>
                       <p className="text-sm text-gray-600 mt-1">
                         TEL: {address.phone}

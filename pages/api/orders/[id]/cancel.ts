@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 import { PrismaClient } from '@prisma/client';
+import { handleApiError, AppError } from '@/utils/error-handling';
+import { handleDatabaseError } from '@/utils/db-error-handling';
 
 const prisma = new PrismaClient();
 
@@ -8,24 +10,24 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
-  }
-
   try {
+    if (req.method !== 'POST') {
+      throw new AppError('METHOD_NOT_ALLOWED', '許可されていないメソッドです', 405);
+    }
+
     const session = await getSession({ req });
     if (!session?.user?.id) {
-      return res.status(401).json({ message: '認証が必要です' });
+      throw new AppError('UNAUTHORIZED', '認証が必要です', 401);
     }
 
     const orderId = req.query.id as string;
     if (!orderId) {
-      return res.status(400).json({ message: '注文IDが必要です' });
+      throw new AppError('INVALID_PARAMETER', '注文IDが必要です', 400);
     }
 
     const { reason } = req.body;
     if (!reason) {
-      return res.status(400).json({ message: 'キャンセル理由が必要です' });
+      throw new AppError('INVALID_PARAMETER', 'キャンセル理由が必要です', 400);
     }
 
     // 注文の存在確認と権限チェック
@@ -37,12 +39,12 @@ export default async function handler(
     });
 
     if (!order) {
-      return res.status(404).json({ message: '注文が見つかりません' });
+      throw new AppError('NOT_FOUND', '注文が見つかりません', 404);
     }
 
     // キャンセル可能な状態かチェック
     if (order.status !== 'pending') {
-      return res.status(400).json({ message: 'この注文はキャンセルできません' });
+      throw new AppError('INVALID_ORDER_STATE', 'この注文はキャンセルできません', 400);
     }
 
     // 注文をキャンセル状態に更新
@@ -51,14 +53,14 @@ export default async function handler(
       data: {
         status: 'cancelled',
         cancelReason: reason,
-        cancelledAt: new Date(),
       },
     });
 
     return res.status(200).json(updatedOrder);
   } catch (error) {
-    console.error('注文キャンセルエラー:', error);
-    return res.status(500).json({ message: 'サーバーエラーが発生しました' });
+    const dbError = handleDatabaseError(error);
+    const { status, body } = handleApiError(dbError);
+    return res.status(status).json(body);
   } finally {
     await prisma.$disconnect();
   }
