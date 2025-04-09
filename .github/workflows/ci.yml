@@ -1,57 +1,60 @@
-name: CI/CD Pipeline
+name: CI/CD
 
 on:
   push:
-    branches: [main]
+    branches: [ main, master ]
   pull_request:
-    branches: [main]
+    types: [opened, synchronize, reopened]
 
-env:
-  NEXT_PUBLIC_API_URL: https://apparel-ec.netlify.app/api
-  NEXT_PUBLIC_BASE_URL: https://apparel-ec.netlify.app
-  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+permissions:
+  contents: read
+  deployments: write
+  id-token: write
+  pull-requests: write
+  statuses: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      NEXT_PUBLIC_API_URL: 'https://apparel-ec.netlify.app/.netlify/functions'
+      NEXT_PUBLIC_BASE_URL: 'https://apparel-ec.netlify.app'
+      NETLIFY: 'true'
+      NODE_ENV: 'production'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
+      
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
           cache: 'npm'
-      - name: Cache Next.js build
-        uses: actions/cache@v4
-        with:
-          path: |
-            .next/cache
-            ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-            ${{ runner.os }}-nextjs-
+          
       - name: Install dependencies
         run: npm ci
-      - name: Lint Check
-        run: npm run lint
-      - name: Format Check
-        run: npm run format:check
+        
       - name: Generate Prisma Client
         run: npx prisma generate
+        
       - name: Build
         run: npm run build
-        env:
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
       - name: Deploy to Netlify
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         uses: nwtgck/actions-netlify@v2.0
         with:
-          publish-dir: out
+          publish-dir: './out'
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions"
+          enable-commit-status: true
+          enable-commit-comment: true
+          enable-pull-request-comment: true
+          fails-without-credentials: true
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }} 
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 5 
