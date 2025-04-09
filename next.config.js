@@ -6,7 +6,7 @@ const nextConfig = {
     unoptimized: true,
     domains: ['apparel-ec.netlify.app']
   },
-  output: 'export',
+  output: 'standalone',
   distDir: 'out',
   trailingSlash: true,
   poweredByHeader: false,
@@ -15,20 +15,15 @@ const nextConfig = {
   env: {
     NETLIFY: process.env.NETLIFY ?? 'false',
     NEXT_PUBLIC_API_URL: process.env.NETLIFY === 'true' 
-      ? 'https://apparel-ec.netlify.app/.netlify/functions'
+      ? '/.netlify/functions'
       : 'http://localhost:8888/.netlify/functions',
     NEXT_PUBLIC_BASE_URL: process.env.NETLIFY === 'true'
-      ? 'https://apparel-ec.netlify.app'
+      ? ''
       : 'http://localhost:3000'
   },
   experimental: {
-    // Next.js 14での正しい設定
     serverComponentsExternalPackages: [
-      'pino',
-      'pino-pretty',
-      '@prisma/client',
-      '@aws-sdk/client-s3',
-      '@aws-sdk/s3-request-presigner'
+      '@prisma/client'
     ]
   },
   webpack: (config, { isServer }) => {

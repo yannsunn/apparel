@@ -168,3 +168,81 @@ export default function TrackingPage() {
     </div>
   );
 } 
+                  {entry.description && (
+                    <p className="text-sm text-gray-600">{entry.description}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {trackingInfo.additionalInfo && Object.keys(trackingInfo.additionalInfo).length > 0 && (
+          <div className="border-t mt-6 pt-4">
+            <h2 className="text-lg font-semibold mb-3">追加情報</h2>
+            <div className="grid grid-cols-2 gap-4">
+              {Object.entries(trackingInfo.additionalInfo).map(([key, value]) => (
+                <div key={key}>
+                  <p className="text-gray-600">{key}</p>
+                  <p className="font-semibold">{value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+} 
+                  {entry.description && (
+                    <p className="text-sm text-gray-600">{entry.description}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {trackingInfo.additionalInfo && Object.keys(trackingInfo.additionalInfo).length > 0 && (
+          <div className="border-t mt-6 pt-4">
+            <h2 className="text-lg font-semibold mb-3">追加情報</h2>
+            <div className="grid grid-cols-2 gap-4">
+              {Object.entries(trackingInfo.additionalInfo).map(([key, value]) => (
+                <div key={key}>
+                  <p className="text-gray-600">{key}</p>
+                  <p className="font-semibold">{value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+} 
+                  {entry.description && (
+                    <p className="text-sm text-gray-600">{entry.description}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {trackingInfo.additionalInfo && Object.keys(trackingInfo.additionalInfo).length > 0 && (
+          <div className="border-t mt-6 pt-4">
+            <h2 className="text-lg font-semibold mb-3">追加情報</h2>
+            <div className="grid grid-cols-2 gap-4">
+              {Object.entries(trackingInfo.additionalInfo).map(([key, value]) => (
+                <div key={key}>
+                  <p className="text-gray-600">{key}</p>
+                  <p className="font-semibold">{value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+} 
