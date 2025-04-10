@@ -168,81 +168,80 @@ export default function TrackingPage() {
     </div>
   );
 } 
-                  {entry.description && (
-                    <p className="text-sm text-gray-600">{entry.description}</p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+  if (error) {
+    return (
+      <div className="error-container">
+        <h1>エラーが発生しました</h1>
+        <p>{error}</p>
+        <button 
+          onClick={() => router.back()} 
+          className="back-button"
+        >
+          前のページに戻る
+        </button>
+      </div>
+    );
+  }
 
-        {trackingInfo.additionalInfo && Object.keys(trackingInfo.additionalInfo).length > 0 && (
-          <div className="border-t mt-6 pt-4">
-            <h2 className="text-lg font-semibold mb-3">追加情報</h2>
-            <div className="grid grid-cols-2 gap-4">
-              {Object.entries(trackingInfo.additionalInfo).map(([key, value]) => (
-                <div key={key}>
-                  <p className="text-gray-600">{key}</p>
-                  <p className="font-semibold">{value}</p>
-                </div>
-              ))}
-            </div>
+  if (!trackingInfo) {
+    return (
+      <div className="no-data-container">
+        <p>配送情報が見つかりません</p>
+        <button 
+          onClick={() => router.back()} 
+          className="back-button"
+        >
+          前のページに戻る
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="tracking-container">
+      <h1>配送状況</h1>
+      <div className="tracking-details">
+        <p>追跡番号: {trackingInfo.trackingNumber}</p>
+        <p>ステータス: {trackingInfo.status}</p>
+        <p>現在地: {trackingInfo.currentLocation || '不明'}</p>
+        {trackingInfo.estimatedDeliveryDate && (
+          <p>配達予定日: {new Date(trackingInfo.estimatedDeliveryDate).toLocaleDateString('ja-JP')}</p>
+        )}
+        {trackingInfo.additionalInfo && (
+          <div className="additional-info">
+            <h2>追加情報</h2>
+            <p>配達時間帯: {trackingInfo.additionalInfo.deliveryTimeWindow || '指定なし'}</p>
+            <p>荷物サイズ: {trackingInfo.additionalInfo.packageSize || '不明'}</p>
+            <p>配送タイプ: {trackingInfo.additionalInfo.deliveryType || '通常配送'}</p>
           </div>
         )}
       </div>
-    </div>
-  );
-} 
-                  {entry.description && (
-                    <p className="text-sm text-gray-600">{entry.description}</p>
-                  )}
-                </div>
-              </div>
+      {trackingInfo.history && Array.isArray(trackingInfo.history) && (
+        <div className="tracking-history">
+          <h2>配送履歴</h2>
+          <ul>
+            {trackingInfo.history.map((entry, index) => (
+              <li key={index} className="history-entry">
+                <time>{new Date(entry.timestamp).toLocaleString('ja-JP')}</time>
+                <span className="description">{entry.description}</span>
+                {entry.location && <span className="location">（{entry.location}）</span>}
+                {entry.additionalInfo && (
+                  <div className="entry-additional-info">
+                    {Object.entries(entry.additionalInfo).map(([key, value]) => (
+                      <p key={key}>{key}: {value}</p>
+                    ))}
+                  </div>
+                )}
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
-
-        {trackingInfo.additionalInfo && Object.keys(trackingInfo.additionalInfo).length > 0 && (
-          <div className="border-t mt-6 pt-4">
-            <h2 className="text-lg font-semibold mb-3">追加情報</h2>
-            <div className="grid grid-cols-2 gap-4">
-              {Object.entries(trackingInfo.additionalInfo).map(([key, value]) => (
-                <div key={key}>
-                  <p className="text-gray-600">{key}</p>
-                  <p className="font-semibold">{value}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
+      )}
+      <button 
+        onClick={() => router.back()} 
+        className="back-button"
+      >
+        前のページに戻る
+      </button>
     </div>
   );
-} 
-                  {entry.description && (
-                    <p className="text-sm text-gray-600">{entry.description}</p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {trackingInfo.additionalInfo && Object.keys(trackingInfo.additionalInfo).length > 0 && (
-          <div className="border-t mt-6 pt-4">
-            <h2 className="text-lg font-semibold mb-3">追加情報</h2>
-            <div className="grid grid-cols-2 gap-4">
-              {Object.entries(trackingInfo.additionalInfo).map(([key, value]) => (
-                <div key={key}>
-                  <p className="text-gray-600">{key}</p>
-                  <p className="font-semibold">{value}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-} 

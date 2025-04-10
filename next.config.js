@@ -6,8 +6,8 @@ const nextConfig = {
     unoptimized: true,
     domains: ['apparel-ec.netlify.app']
   },
-  output: 'export',
-  distDir: 'out',
+  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
+  distDir: process.env.NODE_ENV === 'production' ? 'out' : '.next',
   trailingSlash: true,
   poweredByHeader: false,
   compress: true,
@@ -18,7 +18,7 @@ const nextConfig = {
       : 'http://localhost:8888/.netlify/functions',
     NEXT_PUBLIC_BASE_URL: process.env.NETLIFY === 'true'
       ? ''
-      : 'http://localhost:3000'
+      : 'http://localhost:3002'
   },
   experimental: {
     serverComponentsExternalPackages: [
