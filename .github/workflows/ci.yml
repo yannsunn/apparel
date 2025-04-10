@@ -1,0 +1,83 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main, master, preview-deploy ]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  deployments: write
+  id-token: write
+  pull-requests: write
+  statuses: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Lint
+        run: npm run lint
+        
+      - name: Type check
+        run: npx tsc --noEmit
+        
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_API_URL: 'https://apparel-ec.netlify.app/.netlify/functions'
+          NEXT_PUBLIC_BASE_URL: 'https://apparel-ec.netlify.app'
+          NETLIFY: 'true'
+          NODE_ENV: 'production'
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/preview-deploy'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_API_URL: 'https://apparel-ec.netlify.app/.netlify/functions'
+          NEXT_PUBLIC_BASE_URL: 'https://apparel-ec.netlify.app'
+          NETLIFY: 'true'
+          NODE_ENV: 'production'
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2.0
+        with:
+          publish-dir: './out'
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
+          enable-commit-status: true
+          enable-commit-comment: true
+          enable-pull-request-comment: true
+          fails-without-credentials: false
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 5 
