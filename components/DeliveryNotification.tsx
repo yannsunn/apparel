@@ -78,7 +78,9 @@ const DeliveryNotification: React.FC<DeliveryNotificationProps> = ({
           </button>
         </div>
         {error && (
-          <p className="text-sm text-red-600 mt-2">{error}</p>
+          <p className="text-sm text-red-600 mt-2" role="alert" aria-live="polite">
+            {error}
+          </p>
         )}
         {isSubscribed && (
           <div className="bg-blue-50 p-4 rounded-md">

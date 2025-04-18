@@ -1,18 +1,24 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import Head from 'next/head'
+import { SessionProvider } from 'next-auth/react'
+import Layout from '../components/Layout'
+import { Session } from 'next-auth'
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="AparelEC - オンラインアパレルショップ" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Component {...pageProps} />
-    </>
-  )
+type AppPropsWithSession = AppProps & {
+  pageProps: {
+    session?: Session
+  }
 }
 
-export default MyApp 
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps }
+}: AppPropsWithSession) {
+  return (
+    <SessionProvider session={session}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </SessionProvider>
+  )
+}

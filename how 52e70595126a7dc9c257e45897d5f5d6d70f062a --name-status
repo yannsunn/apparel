@@ -1,0 +1,5 @@
+[33mcommit 52e70595126a7dc9c257e45897d5f5d6d70f062a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mpreview-deploy[m[33m, [m[1;31morigin/preview-deploy[m[33m)[m
+Author: Your Name <annsunn1116@gmail.com>
+Date:   Thu Apr 10 20:40:14 2025 +0900
+
+    fix: Optimize GitHub Actions workflow

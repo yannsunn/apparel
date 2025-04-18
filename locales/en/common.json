@@ -1,0 +1,88 @@
+{
+  "site": {
+    "name": "AparelEC",
+    "description": "High-quality apparel at affordable prices",
+    "copyright": "© 2024 AparelEC. All rights reserved."
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "customize": "Customize",
+    "cart": "Cart",
+    "mypage": "My Page",
+    "login": "Login",
+    "register": "Sign Up",
+    "logout": "Logout"
+  },
+  "product": {
+    "title": "Products",
+    "price": "${price}",
+    "size": "Size",
+    "color": "Color",
+    "quantity": "Quantity",
+    "addToCart": "Add to Cart",
+    "customize": "Customize",
+    "noProducts": "No products found",
+    "loading": "Loading products..."
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "remove": "Remove",
+    "updateQuantity": "Update Quantity"
+  },
+  "order": {
+    "title": "Order Details",
+    "orderNumber": "Order Number",
+    "orderDate": "Order Date",
+    "status": {
+      "pending": "Pending",
+      "processing": "Processing",
+      "shipped": "Shipped",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+    }
+  },
+  "user": {
+    "profile": "Profile",
+    "orders": "Order History",
+    "settings": "Settings",
+    "address": "Shipping Address",
+    "payment": "Payment Methods"
+  },
+  "tracking": {
+    "title": "Delivery Status",
+    "trackingNumber": "Tracking Number",
+    "exportCsv": "Export CSV",
+    "exportCsvLabel": "Download delivery history as CSV file",
+    "error": {
+      "exportFailed": "Failed to export CSV."
+    }
+  },
+  "footer": {
+    "about": "About Us",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "company": {
+      "name": "AparelEC",
+      "description": "Providing high-quality sports uniforms at affordable prices",
+      "email": "info@aparelec.com",
+      "phone": "+81-3-1234-5678"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "required": "Required",
+    "optional": "Optional",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "back": "Back",
+    "next": "Next"
+  }
+} 

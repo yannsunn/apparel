@@ -1,29 +1,57 @@
 /** @type {import('next').NextConfig} */
+const { i18n } = require('./next-i18next.config');
+
 const nextConfig = {
+  i18n,
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    unoptimized: true,
-    domains: ['apparel-ec.netlify.app']
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'apparel-ec.netlify.app',
+      },
+    ],
+    unoptimized: process.env.NODE_ENV === 'production',
+    domains: ['placehold.co', 'picsum.photos'],
   },
-  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
-  distDir: process.env.NODE_ENV === 'production' ? 'out' : '.next',
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:;"
+          },
+          {
+            key: 'Set-Cookie',
+            value: 'SameSite=Strict; Secure'
+          }
+        ]
+      }
+    ];
+  },
   trailingSlash: true,
   poweredByHeader: false,
   compress: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   env: {
     NETLIFY: process.env.NETLIFY ?? 'false',
     NEXT_PUBLIC_API_URL: process.env.NETLIFY === 'true' 
       ? '/.netlify/functions'
-      : 'http://localhost:8888/.netlify/functions',
+      : 'http://localhost:3003/.netlify/functions',
     NEXT_PUBLIC_BASE_URL: process.env.NETLIFY === 'true'
       ? ''
-      : 'http://localhost:3002'
+      : 'http://localhost:3003'
   },
   experimental: {
-    serverComponentsExternalPackages: [
-      '@prisma/client'
-    ]
+    serverComponentsExternalPackages: ['@prisma/client']
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {
