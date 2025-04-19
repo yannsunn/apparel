@@ -1,12 +1,15 @@
-import '../styles/globals.css'
+'use client'
+
+import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
-import Layout from '../components/Layout'
-import { Session } from 'next-auth'
+import Layout from '@/components/Layout'
+import type { Session } from 'next-auth'
 
 type AppPropsWithSession = AppProps & {
   pageProps: {
     session?: Session
+    [key: string]: any
   }
 }
 

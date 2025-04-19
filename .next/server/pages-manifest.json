@@ -1,1 +1,9 @@
-{}
+{
+  "/_error": "pages/_error.js",
+  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
+  "/_document": "pages/_document.js",
+  "/_app": "pages/_app.js",
+  "/api/items": "pages/api/items.js",
+  "/api/orders/[orderId]/notifications": "pages/api/orders/[orderId]/notifications.js",
+  "/auth/login": "pages/auth/login.js"
+}
