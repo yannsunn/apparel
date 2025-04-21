@@ -1,14 +1,17 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 export default function DashboardPage() {
-  const { data: session, status } = useSession({ required: true });
+  const { data: session, status } = useSession();
 
-  const isLoading = status === 'loading';
-
-  if (isLoading) {
+  if (status === 'loading') {
     return <div>読み込み中...</div>;
+  }
+
+  if (status === 'unauthenticated') {
+    redirect('/auth/login');
   }
 
   return (
