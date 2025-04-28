@@ -1,2 +1,0 @@
-# apparel
-Apparel EC - スポーツユニフォームのECサイト

@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  output: 'standalone',
+  output: 'export',
   images: {
     remotePatterns: [
       {
@@ -21,6 +21,15 @@ const nextConfig = {
   },
   typescript: {
     ignoreBuildErrors: true,
+  },
+  async redirects() {
+    return [
+      {
+        source: '/products',
+        destination: '/products/',
+        permanent: true,
+      },
+    ]
   }
 }
 
