@@ -1,24 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
-import { ShoppingCartIcon, UserIcon } from '@heroicons/react/24/outline';
-import { useSession, signOut } from 'next-auth/react';
 
 export default function Header() {
-  const { data: session, status } = useSession({
-    required: false,
-    onUnauthenticated() {
-      // 未認証時の処理
-    },
-  });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const handleSignOut = useCallback(async () => {
-    try {
-      await signOut({ redirect: true, callbackUrl: '/' });
-    } catch (error) {
-      console.error('ログアウトエラー:', error);
-    }
-  }, []);
 
   const handleMenuToggle = useCallback(() => {
     setIsMenuOpen(prev => !prev);
@@ -49,42 +33,16 @@ export default function Header() {
             <Link href="/contact" className="hover:text-gray-600">
               お問い合わせ
             </Link>
-            {status === 'loading' ? null : session ? (
-              <>
-                <Link href="/account" className="hover:text-gray-600">
-                  マイページ
-                </Link>
-                <button
-                  onClick={handleSignOut}
-                  className="hover:text-gray-600"
-                >
-                  ログアウト
-                </button>
-              </>
-            ) : (
-              <Link
-                href="/auth/login"
-                className="bg-black text-white px-6 py-2 rounded-full hover:bg-opacity-90"
-              >
-                ログイン
-              </Link>
-            )}
-          </nav>
-
-          <div className="flex items-center space-x-4">
-            <Link href="/cart" className="text-gray-700 hover:text-primary">
-              <ShoppingCartIcon className="h-6 w-6" />
+            <Link href="/cart" className="hover:text-gray-600">
+              カート
             </Link>
-            {session ? (
-              <Link href="/account" className="text-gray-700 hover:text-primary">
-                <UserIcon className="h-6 w-6" />
-              </Link>
-            ) : (
-              <Link href="/auth/login" className="text-gray-700 hover:text-primary">
-                <UserIcon className="h-6 w-6" />
-              </Link>
-            )}
-          </div>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600">
+              Instagram
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600">
+              Twitter
+            </a>
+          </nav>
 
           <button
             className="md:hidden"
@@ -140,34 +98,31 @@ export default function Header() {
               >
                 お問い合わせ
               </Link>
-              {status === 'loading' ? null : session ? (
-                <>
-                  <Link
-                    href="/account"
-                    className="hover:text-gray-600"
-                    onClick={handleMenuClose}
-                  >
-                    マイページ
-                  </Link>
-                  <button
-                    onClick={() => {
-                      handleSignOut();
-                      handleMenuClose();
-                    }}
-                    className="hover:text-gray-600 text-left"
-                  >
-                    ログアウト
-                  </button>
-                </>
-              ) : (
-                <Link
-                  href="/auth/login"
-                  className="bg-black text-white px-6 py-2 rounded-full hover:bg-opacity-90 inline-block"
-                  onClick={handleMenuClose}
-                >
-                  ログイン
-                </Link>
-              )}
+              <Link
+                href="/cart"
+                className="hover:text-gray-600"
+                onClick={handleMenuClose}
+              >
+                カート
+              </Link>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-gray-600"
+                onClick={handleMenuClose}
+              >
+                Instagram
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-gray-600"
+                onClick={handleMenuClose}
+              >
+                Twitter
+              </a>
             </nav>
           </div>
         )}
