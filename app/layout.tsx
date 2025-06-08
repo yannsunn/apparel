@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import ExtensionErrorBoundary from './components/ExtensionErrorBoundary'
 
 export const metadata: Metadata = {
   title: 'Next.js Minimal',
@@ -38,8 +39,10 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <meta name="ext-protection" content="enabled" />
       </head>
       <body style={{ margin: 0, fontFamily: 'system-ui, sans-serif' }}>
+        <ExtensionErrorBoundary />
         {children}
       </body>
     </html>
