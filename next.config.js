@@ -7,6 +7,10 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['react', 'react-dom'],
   },
+  // Optimize trace file generation
+  generateBuildId: async () => {
+    return 'build-' + Date.now()
+  },
   headers: async () => {
     return [
       {
