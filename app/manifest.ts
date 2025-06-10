@@ -2,16 +2,16 @@ import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Modern Web Application',
-    short_name: 'ModernApp',
-    description: 'Professional web application built with Next.js 15, React 19, and TypeScript',
+    name: 'アパレルEC - ファッション通販',
+    short_name: 'アパレルEC',
+    description: 'トレンドファッションを手軽にお買い物できるアパレル専門通販サイト',
     start_url: '/',
     display: 'standalone',
     background_color: '#1e3c72',
     theme_color: '#2a5298',
     orientation: 'portrait-primary',
-    categories: ['productivity', 'business', 'technology'],
-    lang: 'en',
+    categories: ['shopping', 'lifestyle', 'fashion'],
+    lang: 'ja',
     dir: 'ltr',
     icons: [
       {

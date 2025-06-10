@@ -54,7 +54,7 @@ export function Header() {
               e.currentTarget.style.color = '#111827'
             }}
           >
-            Products
+            商品一覧
           </Link>
           
           <Suspense fallback={
@@ -63,7 +63,7 @@ export function Header() {
               color: '#6b7280',
               fontSize: '0.875rem'
             }}>
-              Cart (...)
+              カート (...)
             </div>
           }>
             <CartIndicator />

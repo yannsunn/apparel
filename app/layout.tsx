@@ -1,23 +1,21 @@
 import type { Metadata, Viewport } from 'next'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import ExtensionErrorBoundary from './components/ExtensionErrorBoundary'
-import PerformanceMonitor from './components/PerformanceMonitor'
 import { ErrorBoundary } from '@/components/ui/error-boundary'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Modern Web Application',
-    default: 'Modern Web Application - Next.js 15 & React 19',
+    template: '%s | アパレルEC',
+    default: 'アパレルEC - ファッション通販サイト',
   },
-  description: 'Professional web application built with cutting-edge technology: Next.js 15.3.3, React 19, TypeScript 5.7.3. Optimized for performance, security, and user experience.',
+  description: '最新トレンドのアパレルを取り揃えた、モダンなオンラインファッションストア。高品質な商品とスムーズなショッピング体験をお届けします。',
   metadataBase: new URL('https://apparel-roan.vercel.app'),
-  keywords: ['Next.js', 'React', 'TypeScript', 'Modern Web App', 'Performance', 'Security', 'PWA'],
-  authors: [{ name: 'Claude Code', url: 'https://claude.ai/code' }],
-  creator: 'Claude Code',
-  publisher: 'Vercel',
-  category: 'technology',
-  classification: 'Business',
+  keywords: ['アパレル', 'ファッション', '通販', 'EC', 'オンラインショップ', '衣類', 'トレンド', 'スタイル'],
+  authors: [{ name: 'アパレルEC', url: 'https://apparel-roan.vercel.app' }],
+  creator: 'アパレルEC',
+  publisher: 'アパレルEC',
+  category: 'shopping',
+  classification: 'E-commerce',
   robots: {
     index: true,
     follow: true,
@@ -31,24 +29,24 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'ja_JP',
     url: 'https://apparel-roan.vercel.app',
-    title: 'Modern Web Application - Next.js 15 & React 19',
-    description: 'Professional web application built with cutting-edge technology',
-    siteName: 'Modern Web Application',
+    title: 'アパレルEC - ファッション通販サイト',
+    description: '最新トレンドのアパレルを取り揃えたオンラインファッションストア',
+    siteName: 'アパレルEC',
     images: [
       {
         url: '/api/og?title=Modern Web Application&description=Next.js 15 + React 19&theme=gradient',
         width: 1200,
         height: 630,
-        alt: 'Modern Web Application - Built with Next.js 15 & React 19',
+        alt: 'アパレルEC - ファッション通販サイト',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Modern Web Application',
-    description: 'Professional web application built with cutting-edge technology',
+    title: 'アパレルEC',
+    description: '最新トレンドのアパレルを取り揃えたオンラインファッションストア',
     creator: '@claudeai',
     images: ['/api/og?title=Modern Web Application&description=Next.js 15 + React 19&theme=gradient'],
   },
@@ -82,7 +80,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ja" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
@@ -90,18 +88,16 @@ export default function RootLayout({
         <link rel="preconnect" href="https://vercel.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://vercel.com" />
         <meta name="ext-protection" content="enabled" />
-        <meta name="application-name" content="Modern Web Application" />
+        <meta name="application-name" content="アパレルEC" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Modern Web App" />
+        <meta name="apple-mobile-web-app-title" content="アパレルEC" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="msapplication-TileColor" content="#2a5298" />
         <meta name="msapplication-tap-highlight" content="no" />
       </head>
       <body style={{ margin: 0, fontFamily: 'system-ui, sans-serif' }}>
         <ErrorBoundary>
-          <ExtensionErrorBoundary />
-          <PerformanceMonitor />
           {children}
           <Analytics />
           <SpeedInsights />
