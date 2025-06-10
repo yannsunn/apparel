@@ -1,15 +1,46 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   poweredByHeader: false,
   compress: true,
+  // Ultra-optimized build configuration for maximum performance
   experimental: {
     optimizePackageImports: ['react', 'react-dom'],
+    optimizeServerReact: true,
   },
-  // Optimize trace file generation
+  serverExternalPackages: [],
+  // Extreme performance optimizations
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  modularizeImports: {
+    'react': {
+      transform: 'react/{{member}}',
+    },
+  },
+  // Ultra-performance image optimization
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 31536000, // 1 year
+    dangerouslyAllowSVG: false,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'apparel-roan.vercel.app',
+      },
+    ],
+  },
+  // Edge-first caching strategy
+  onDemandEntries: {
+    maxInactiveAge: 60 * 1000, // 1 minute
+    pagesBufferLength: 5,
+  },
+  // Ultra-fast build ID generation
   generateBuildId: async () => {
-    return 'build-' + Date.now()
+    return process.env.NODE_ENV === 'production' ? 'prod-' + Date.now() : 'dev-' + Date.now()
   },
   headers: async () => {
     return [
