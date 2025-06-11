@@ -39,24 +39,29 @@ export default function NeuroHomePage() {
   // 価格アンカリング
   const pricing = useAnchoring([2980, 8900, 12800, 6900])
 
-  // リアルタイム統計
+  // リアルタイム統計（SSR対応）
   const [stats, setStats] = useState({
     activeUsers: 127,
     todayOrders: 89,
     satisfaction: 98.2
   })
+  const [mounted, setMounted] = useState(false)
 
   // 動的要素の更新
   useEffect(() => {
-    const interval = setInterval(() => {
-      setStats(prev => ({
-        activeUsers: prev.activeUsers + Math.floor(Math.random() * 5) - 2,
-        todayOrders: prev.todayOrders + (Math.random() > 0.7 ? 1 : 0),
-        satisfaction: Math.min(prev.satisfaction + (Math.random() * 0.2 - 0.1), 100)
-      }))
-    }, 3000)
+    setMounted(true)
+    
+    if (typeof window !== 'undefined') {
+      const interval = setInterval(() => {
+        setStats(prev => ({
+          activeUsers: prev.activeUsers + Math.floor(Math.random() * 5) - 2,
+          todayOrders: prev.todayOrders + (Math.random() > 0.7 ? 1 : 0),
+          satisfaction: Math.min(prev.satisfaction + (Math.random() * 0.2 - 0.1), 100)
+        }))
+      }, 3000)
 
-    return () => clearInterval(interval)
+      return () => clearInterval(interval)
+    }
   }, [])
 
   // インタラクション記録
@@ -196,23 +201,25 @@ export default function NeuroHomePage() {
             >
               🛒 カート
               {/* カート内アイテム数（社会的証明） */}
-              <span style={{
-                position: 'absolute',
-                top: '-8px',
-                right: '-8px',
-                background: NeuroColors.urgency.primary,
-                color: 'white',
-                borderRadius: '50%',
-                width: '20px',
-                height: '20px',
-                fontSize: '0.7rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 'bold'
-              }}>
-                {Math.floor(Math.random() * 9) + 1}
-              </span>
+              {mounted && (
+                <span style={{
+                  position: 'absolute',
+                  top: '-8px',
+                  right: '-8px',
+                  backgroundColor: NeuroColors.urgency.primary,
+                  color: 'white',
+                  borderRadius: '50%',
+                  width: '20px',
+                  height: '20px',
+                  fontSize: '0.7rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: 'bold'
+                }}>
+                  {Math.floor(Math.random() * 9) + 1}
+                </span>
+              )}
             </Link>
           </nav>
         </div>
@@ -222,7 +229,7 @@ export default function NeuroHomePage() {
       <section 
         ref={heroNeuro.elementRef as any}
         style={{
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          backgroundColor: NeuroColors.trust.primary,
           padding: '8rem 2rem',
           textAlign: 'center',
           position: 'relative',
@@ -254,7 +261,7 @@ export default function NeuroHomePage() {
         <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
           {/* 緊急性アラート */}
           <div style={{
-            background: `linear-gradient(135deg, ${NeuroColors.urgency.primary}, ${NeuroColors.urgency.secondary})`,
+            backgroundColor: NeuroColors.urgency.primary,
             color: 'white',
             padding: '1rem 2rem',
             borderRadius: '50px',
@@ -281,9 +288,7 @@ export default function NeuroHomePage() {
               fontWeight: '800',
               marginBottom: '1.5rem',
               lineHeight: '1.1',
-              background: `linear-gradient(135deg, ${NeuroColors.trust.primary}, ${NeuroColors.dopamine.primary})`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
+              color: '#111827'
             }}>
               アパレルブランドの
               <br />
@@ -298,7 +303,7 @@ export default function NeuroHomePage() {
             
             {/* 価値提案 - アンカリング効果 */}
             <div style={{
-              background: `linear-gradient(135deg, ${NeuroColors.dopamine.accent}20, ${NeuroColors.trust.accent}20)`,
+              backgroundColor: `${NeuroColors.dopamine.accent}20`,
               padding: '1.5rem',
               borderRadius: '16px',
               marginBottom: '2rem',
@@ -337,7 +342,7 @@ export default function NeuroHomePage() {
                 { label: '個人事業主様', icon: '💼', users: '5,600+' }
               ].map((badge, index) => (
                 <div key={badge.label} style={{
-                  background: `linear-gradient(135deg, ${Object.values(NeuroColors)[index % 4].primary}15, ${Object.values(NeuroColors)[index % 4].secondary}15)`,
+                  backgroundColor: `${Object.values(NeuroColors)[index % 4].primary}15`,
                   color: Object.values(NeuroColors)[index % 4].primary,
                   padding: '1rem 1.5rem',
                   borderRadius: '20px',

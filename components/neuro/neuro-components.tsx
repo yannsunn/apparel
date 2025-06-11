@@ -71,7 +71,8 @@ export function NeuroButton({
       onClick={handleClick}
       disabled={disabled || loading}
       style={{
-        ...generateNeuroStyles(mood, variant),
+        backgroundColor: NeuroColors[mood][variant],
+        color: variant === 'accent' ? '#000000' : '#FFFFFF',
         ...sizes[size],
         border: 'none',
         borderRadius: size === 'small' ? '12px' : size === 'large' ? '25px' : '16px',
@@ -91,13 +92,13 @@ export function NeuroButton({
       onMouseEnter={(e) => {
         if (!disabled) {
           e.currentTarget.style.transform = 'scale(1.05) translateY(-2px)'
-          e.currentTarget.style.boxShadow = `0 8px 25px ${generateNeuroStyles(mood, variant).background}40`
+          e.currentTarget.style.boxShadow = `0 8px 25px ${NeuroColors[mood][variant]}40`
         }
       }}
       onMouseLeave={(e) => {
         if (!disabled) {
           e.currentTarget.style.transform = 'scale(1) translateY(0)'
-          e.currentTarget.style.boxShadow = generateNeuroStyles(mood, variant).boxShadow
+          e.currentTarget.style.boxShadow = `0 4px 12px ${NeuroColors[mood][variant]}40`
         }
       }}
     >
@@ -217,9 +218,9 @@ export function ScarcityAlert({
     <div
       ref={alertRef}
       style={{
-        background: scarcity.alertLevel === 'critical' 
-          ? `linear-gradient(135deg, ${NeuroColors.urgency.primary}, ${NeuroColors.urgency.secondary})`
-          : `linear-gradient(135deg, ${NeuroColors.urgency.secondary}, ${NeuroColors.urgency.accent})`,
+        backgroundColor: scarcity.alertLevel === 'critical' 
+          ? NeuroColors.urgency.primary
+          : NeuroColors.urgency.secondary,
         color: scarcity.alertLevel === 'critical' ? 'white' : '#000',
         padding: '0.75rem 1rem',
         borderRadius: '12px',
@@ -504,7 +505,7 @@ export function NeuroProgress({
         <div style={{
           width: `${displayPercentage}%`,
           height: '100%',
-          background: `linear-gradient(90deg, ${NeuroColors[color].primary}, ${NeuroColors[color].secondary})`,
+          backgroundColor: NeuroColors[color].primary,
           borderRadius: '6px',
           transition: animated ? 'width 1s cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
           position: 'relative',

@@ -124,9 +124,34 @@ export function useSocialProof(productId: string) {
   })
   
   const [visibleProof, setVisibleProof] = useState<string[]>([])
+  const [mounted, setMounted] = useState(false)
   
   useEffect(() => {
-    // リアルタイムデータシミュレーション
+    setMounted(true)
+    
+    // 初期値を設定（SSR/CSR一致のため）
+    if (typeof window !== 'undefined') {
+      const hashCode = productId.split('').reduce((a, b) => {
+        a = ((a << 5) - a) + b.charCodeAt(0)
+        return a & a
+      }, 0)
+      
+      const baseViews = Math.abs(hashCode % 30) + 15
+      const basePurchases = Math.abs(hashCode % 10) + 2
+      
+      setProofData({
+        viewCount: baseViews,
+        purchaseCount: basePurchases,
+        reviewCount: Math.abs(hashCode % 50) + 10,
+        lastPurchase: null
+      })
+    }
+  }, [productId])
+  
+  useEffect(() => {
+    if (!mounted) return
+    
+    // リアルタイムデータシミュレーション（クライアントサイドのみ）
     const interval = setInterval(() => {
       setProofData(prev => ({
         viewCount: prev.viewCount + Math.floor(Math.random() * 3),
@@ -137,9 +162,11 @@ export function useSocialProof(productId: string) {
     }, 5000)
     
     return () => clearInterval(interval)
-  }, [productId])
+  }, [mounted])
   
   useEffect(() => {
+    if (!mounted) return
+    
     const proofs = []
     
     if (proofData.viewCount > 10) {
@@ -156,7 +183,7 @@ export function useSocialProof(productId: string) {
     }
     
     setVisibleProof(proofs.slice(0, 2)) // 最大2つまで表示
-  }, [proofData])
+  }, [proofData, mounted])
   
   return { proofData, visibleProof }
 }

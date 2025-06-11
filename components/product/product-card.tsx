@@ -213,9 +213,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
         <div style={{
           width: '100%',
           height: '260px',
-          background: `linear-gradient(135deg, 
-            ${NeuroColors.calm.secondary}30 0%, 
-            ${NeuroColors.trust.secondary}20 100%)`,
+          backgroundColor: '#f3f4f6',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -305,7 +303,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
           <div style={{
             position: 'absolute',
             inset: 0,
-            background: `linear-gradient(135deg, ${NeuroColors.dopamine.primary}90, ${NeuroColors.trust.primary}90)`,
+            backgroundColor: `${NeuroColors.dopamine.primary}90`,
             opacity: isHovered ? 1 : 0,
             transition: 'opacity 0.3s ease',
             display: 'flex',
@@ -421,7 +419,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
 
           {/* 行動促進要素 */}
           <div style={{
-            background: `linear-gradient(135deg, ${NeuroColors.calm.primary}10, ${NeuroColors.trust.primary}10)`,
+            backgroundColor: `${NeuroColors.calm.primary}10`,
             padding: '0.75rem',
             borderRadius: '12px',
             fontSize: '0.8rem',
@@ -447,7 +445,8 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
             position: 'absolute',
             bottom: '1rem',
             right: '1rem',
-            ...generateNeuroStyles('dopamine', 'primary'),
+            backgroundColor: NeuroColors.dopamine.primary,
+            color: '#ffffff',
             border: 'none',
             borderRadius: '50%',
             width: '48px',

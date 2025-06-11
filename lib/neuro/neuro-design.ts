@@ -215,13 +215,13 @@ export function generateEmotionalMessage(
 }
 
 /**
- * 色彩心理に基づくスタイル生成
+ * 色彩心理に基づくスタイル生成（高パフォーマンス版）
  */
 export function generateNeuroStyles(
   mood: keyof typeof NeuroColors,
   emphasis: 'primary' | 'secondary' | 'accent' = 'primary'
 ): {
-  background: string
+  backgroundColor: string
   color: string
   borderColor: string
   boxShadow: string
@@ -230,7 +230,7 @@ export function generateNeuroStyles(
   const baseColor = colorScheme[emphasis]
   
   return {
-    background: `linear-gradient(135deg, ${baseColor}, ${colorScheme.secondary})`,
+    backgroundColor: baseColor,
     color: emphasis === 'accent' ? '#000000' : '#FFFFFF',
     borderColor: baseColor,
     boxShadow: `0 4px 12px ${baseColor}40`

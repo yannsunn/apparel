@@ -196,7 +196,8 @@ export default function NeuroProductsPage() {
               商品一覧
             </span>
             <Link href="/cart" style={{ 
-              ...generateNeuroStyles('dopamine', 'primary'),
+              backgroundColor: NeuroColors.dopamine.primary,
+              color: '#ffffff',
               padding: '0.5rem 1rem', 
               borderRadius: '20px',
               textDecoration: 'none', 
@@ -211,7 +212,7 @@ export default function NeuroProductsPage() {
 
       {/* ヒーローセクション - 統計表示 */}
       <section style={{
-        background: `linear-gradient(135deg, ${NeuroColors.trust.primary}, ${NeuroColors.trust.secondary})`,
+        backgroundColor: NeuroColors.trust.primary,
         color: 'white',
         padding: '3rem 2rem',
         textAlign: 'center'
@@ -571,7 +572,8 @@ export default function NeuroProductsPage() {
                 setSortBy('featured')
               }}
               style={{
-                ...generateNeuroStyles('trust', 'primary'),
+                backgroundColor: NeuroColors.trust.primary,
+                color: '#ffffff',
                 padding: '1rem 2rem',
                 border: 'none',
                 borderRadius: '25px',
