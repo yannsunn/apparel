@@ -1,26 +1,12 @@
 'use client'
 
-import { useState, useEffect, useMemo, useRef } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { products, categories } from '@/lib/data/mock-products'
 import { ProductCard } from '@/components/product/product-card'
 import { useCartStore } from '@/lib/store/cart'
-import { 
-  useNeuroUX, 
-  useCognitiveLoad, 
-  useChoiceArchitecture,
-  useAttentionSpan,
-  useEmotionalStyling
-} from '@/lib/neuro/neuro-hooks'
-import { 
-  NeuroColors, 
-  CognitiveOptimization,
-  generateNeuroStyles, 
-  calculateOptimalLayout,
-  NeuroFeedback 
-} from '@/lib/neuro/neuro-design'
 
-export default function NeuroProductsPage() {
+export default function ProductsPage() {
   // カートストア
   const { addItem } = useCartStore()
   
@@ -30,20 +16,6 @@ export default function NeuroProductsPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
-
-  // ニューロUX統合
-  const pageNeuro = useNeuroUX('products-page', {
-    trackAttention: true,
-    enableSocialProof: true,
-    monitorPerformance: true
-  })
-
-  // 感情的スタイリング
-  const primaryEmotion = useEmotionalStyling('trust')
-  const filterEmotion = useEmotionalStyling('calm')
-
-  // 注意持続管理
-  const attention = useAttentionSpan('products-grid')
 
   // 商品フィルタリング
   const filteredProducts = useMemo(() => {
@@ -85,18 +57,8 @@ export default function NeuroProductsPage() {
     return filtered
   }, [selectedCategory, searchQuery, sortBy])
 
-  // 認知負荷管理
-  const cognitiveLoad = useCognitiveLoad(filteredProducts.length)
-  const layout = calculateOptimalLayout(filteredProducts.length)
-
-  // 選択アーキテクチャ（カテゴリ選択）
-  const categoryChoice = useChoiceArchitecture(
-    [{ id: 'all', name: '全て' }, ...categories],
-    0
-  )
-
-  // ページネーション（認知負荷軽減）
-  const itemsPerPage = cognitiveLoad.isOverloaded ? 8 : 12
+  // ページネーション
+  const itemsPerPage = 12
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
   const startIndex = (currentPage - 1) * itemsPerPage
   const currentProducts = filteredProducts.slice(startIndex, startIndex + itemsPerPage)
@@ -109,19 +71,12 @@ export default function NeuroProductsPage() {
     featuredCount: filteredProducts.filter(p => p.featured).length
   }), [filteredProducts])
 
-  // インタラクション記録
-  const recordInteraction = (element: string, action: string) => {
-    NeuroFeedback.recordInteraction(element, action)
-  }
-
   // フィルタ変更ハンドラ
   const handleCategoryChange = (categoryId: string) => {
     setIsLoading(true)
     setSelectedCategory(categoryId)
     setCurrentPage(1)
-    recordInteraction('category-filter', categoryId)
     
-    // ローディング演出（認知的フィードバック）
     setTimeout(() => {
       setIsLoading(false)
     }, 300)
@@ -130,7 +85,6 @@ export default function NeuroProductsPage() {
   const handleSortChange = (sort: string) => {
     setIsLoading(true)
     setSortBy(sort)
-    recordInteraction('sort-filter', sort)
     
     setTimeout(() => {
       setIsLoading(false)
@@ -138,40 +92,16 @@ export default function NeuroProductsPage() {
   }
 
   return (
-    <div ref={pageNeuro.elementRef as any} style={{ minHeight: '100vh', background: '#fafafa' }}>
-      {/* ニューロ分析ダッシュボード（開発環境） */}
-      {process.env.NODE_ENV === 'development' && (
-        <div style={{
-          position: 'fixed',
-          top: '10px',
-          right: '10px',
-          background: 'rgba(0,0,0,0.8)',
-          color: 'white',
-          padding: '1rem',
-          borderRadius: '8px',
-          fontSize: '0.8rem',
-          zIndex: 1000,
-          minWidth: '200px'
-        }}>
-          <h4>🧠 認知負荷分析</h4>
-          <div>商品数: {filteredProducts.length}</div>
-          <div>認知負荷: {cognitiveLoad.isOverloaded ? '⚠️ 過負荷' : '✅ 最適'}</div>
-          <div>注意レベル: {attention.attentionLevel}</div>
-          <div>推奨レイアウト: {layout.columns}列</div>
-          <div>ページスコア: {pageNeuro.neuroScore}/100</div>
-        </div>
-      )}
-
+    <div style={{ minHeight: '100vh', background: '#fafafa' }}>
       {/* ヘッダー */}
       <header style={{
-        background: 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,250,252,0.95))',
-        backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
+        background: '#ffffff',
+        borderBottom: '1px solid #e5e7eb',
         padding: '1rem 2rem',
         position: 'sticky',
         top: 0,
         zIndex: 40,
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
+        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
       }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link 
@@ -179,9 +109,7 @@ export default function NeuroProductsPage() {
             style={{
               fontSize: '1.8rem',
               fontWeight: 'bold',
-              background: `linear-gradient(135deg, ${NeuroColors.trust.primary}, ${NeuroColors.dopamine.primary})`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
+              color: '#111827',
               textDecoration: 'none'
             }}
           >
@@ -192,17 +120,16 @@ export default function NeuroProductsPage() {
             <Link href="/" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
               ホーム
             </Link>
-            <span style={{ color: NeuroColors.trust.primary, fontWeight: '600' }}>
+            <span style={{ color: '#3b82f6', fontWeight: '600' }}>
               商品一覧
             </span>
             <Link href="/cart" style={{ 
-              backgroundColor: NeuroColors.dopamine.primary,
+              backgroundColor: '#3b82f6',
               color: '#ffffff',
               padding: '0.5rem 1rem', 
-              borderRadius: '20px',
+              borderRadius: '8px',
               textDecoration: 'none', 
-              fontWeight: '600',
-              fontSize: '0.9rem'
+              fontWeight: '600'
             }}>
               🛒 カート
             </Link>
@@ -210,9 +137,9 @@ export default function NeuroProductsPage() {
         </div>
       </header>
 
-      {/* ヒーローセクション - 統計表示 */}
+      {/* ヒーローセクション */}
       <section style={{
-        backgroundColor: NeuroColors.trust.primary,
+        backgroundColor: '#3b82f6',
         color: 'white',
         padding: '3rem 2rem',
         textAlign: 'center'
@@ -233,7 +160,7 @@ export default function NeuroProductsPage() {
             厳選されたアパレル商品をお探しください
           </p>
           
-          {/* リアルタイム統計 */}
+          {/* 統計表示 */}
           <div style={{
             display: 'flex',
             justifyContent: 'center',
@@ -243,8 +170,7 @@ export default function NeuroProductsPage() {
             <div style={{
               background: 'rgba(255, 255, 255, 0.15)',
               padding: '1rem 1.5rem',
-              borderRadius: '12px',
-              backdropFilter: 'blur(10px)'
+              borderRadius: '12px'
             }}>
               <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>{stats.totalProducts}</div>
               <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>総商品数</div>
@@ -252,8 +178,7 @@ export default function NeuroProductsPage() {
             <div style={{
               background: 'rgba(255, 255, 255, 0.15)',
               padding: '1rem 1.5rem',
-              borderRadius: '12px',
-              backdropFilter: 'blur(10px)'
+              borderRadius: '12px'
             }}>
               <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>¥{stats.averagePrice.toLocaleString()}</div>
               <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>平均価格</div>
@@ -261,8 +186,7 @@ export default function NeuroProductsPage() {
             <div style={{
               background: 'rgba(255, 255, 255, 0.15)',
               padding: '1rem 1.5rem',
-              borderRadius: '12px',
-              backdropFilter: 'blur(10px)'
+              borderRadius: '12px'
             }}>
               <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>{stats.featuredCount}</div>
               <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>おすすめ商品</div>
@@ -271,7 +195,7 @@ export default function NeuroProductsPage() {
         </div>
       </section>
 
-      {/* フィルタエリア - 認知負荷最適化 */}
+      {/* フィルタエリア */}
       <section style={{
         background: '#ffffff',
         padding: '2rem',
@@ -292,19 +216,17 @@ export default function NeuroProductsPage() {
                 width: '100%',
                 maxWidth: '400px',
                 padding: '0.75rem 1rem',
-                border: `2px solid ${NeuroColors.calm.primary}`,
-                borderRadius: '25px',
+                border: '2px solid #d1d5db',
+                borderRadius: '8px',
                 fontSize: '1rem',
                 outline: 'none',
-                transition: 'all 0.3s ease'
+                transition: 'border-color 0.3s ease'
               }}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = NeuroColors.trust.primary
-                e.currentTarget.style.boxShadow = `0 0 0 3px ${NeuroColors.trust.primary}20`
+                e.currentTarget.style.borderColor = '#3b82f6'
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = NeuroColors.calm.primary
-                e.currentTarget.style.boxShadow = 'none'
+                e.currentTarget.style.borderColor = '#d1d5db'
               }}
             />
           </div>
@@ -316,7 +238,7 @@ export default function NeuroProductsPage() {
             flexWrap: 'wrap',
             justifyContent: 'space-between'
           }}>
-            {/* カテゴリフィルタ - 7±2法則適用 */}
+            {/* カテゴリフィルタ */}
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
               <span style={{ 
                 color: '#6b7280', 
@@ -327,18 +249,18 @@ export default function NeuroProductsPage() {
               }}>
                 📂 カテゴリ:
               </span>
-              {[{ id: 'all', name: '全て' }, ...categories].slice(0, CognitiveOptimization.maxChoices).map((category) => (
+              {[{ id: 'all', name: '全て' }, ...categories].slice(0, 7).map((category) => (
                 <button
                   key={category.id}
                   onClick={() => handleCategoryChange(category.id)}
                   style={{
                     padding: '0.5rem 1rem',
                     border: selectedCategory === category.id 
-                      ? `2px solid ${NeuroColors.trust.primary}` 
+                      ? '2px solid #3b82f6' 
                       : '2px solid #e5e7eb',
                     borderRadius: '20px',
                     background: selectedCategory === category.id 
-                      ? NeuroColors.trust.primary 
+                      ? '#3b82f6' 
                       : '#ffffff',
                     color: selectedCategory === category.id 
                       ? '#ffffff' 
@@ -347,18 +269,6 @@ export default function NeuroProductsPage() {
                     cursor: 'pointer',
                     transition: 'all 0.3s ease',
                     fontSize: '0.9rem'
-                  }}
-                  onMouseEnter={(e) => {
-                    if (selectedCategory !== category.id) {
-                      e.currentTarget.style.borderColor = NeuroColors.trust.primary
-                      e.currentTarget.style.color = NeuroColors.trust.primary
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (selectedCategory !== category.id) {
-                      e.currentTarget.style.borderColor = '#e5e7eb'
-                      e.currentTarget.style.color = '#374151'
-                    }
                   }}
                 >
                   {category.name}
@@ -383,8 +293,8 @@ export default function NeuroProductsPage() {
                 onChange={(e) => handleSortChange(e.target.value)}
                 style={{
                   padding: '0.5rem 1rem',
-                  border: `2px solid ${NeuroColors.calm.primary}`,
-                  borderRadius: '12px',
+                  border: '2px solid #d1d5db',
+                  borderRadius: '8px',
                   background: '#ffffff',
                   fontSize: '0.9rem',
                   fontWeight: '500',
@@ -405,9 +315,9 @@ export default function NeuroProductsPage() {
             marginTop: '1rem',
             padding: '0.75rem 1rem',
             background: stats.filteredCount < stats.totalProducts 
-              ? `${NeuroColors.dopamine.accent}20` 
-              : `${NeuroColors.calm.primary}20`,
-            borderRadius: '12px',
+              ? '#fef3c7' 
+              : '#e0f2fe',
+            borderRadius: '8px',
             color: '#374151',
             fontSize: '0.9rem',
             fontWeight: '500'
@@ -416,15 +326,6 @@ export default function NeuroProductsPage() {
               <>🔍 {stats.filteredCount}件の商品が見つかりました（全{stats.totalProducts}件中）</>
             ) : (
               <>✨ 全{stats.totalProducts}件の商品を表示中</>
-            )}
-            {cognitiveLoad.isOverloaded && (
-              <span style={{ 
-                marginLeft: '1rem',
-                color: NeuroColors.urgency.primary,
-                fontWeight: '600'
-              }}>
-                ⚠️ 認知負荷軽減のため8件表示
-              </span>
             )}
           </div>
         </div>
@@ -441,7 +342,7 @@ export default function NeuroProductsPage() {
           /* ローディング状態 */
           <div style={{
             display: 'grid',
-            gridTemplateColumns: `repeat(${layout.columns}, 1fr)`,
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
             gap: '2rem'
           }}>
             {Array.from({ length: itemsPerPage }).map((_, index) => (
@@ -455,10 +356,10 @@ export default function NeuroProductsPage() {
           </div>
         ) : currentProducts.length > 0 ? (
           <>
-            {/* 商品グリッド - 認知負荷最適化レイアウト */}
+            {/* 商品グリッド */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: `repeat(auto-fit, minmax(280px, 1fr))`,
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
               gap: '2rem',
               marginBottom: '3rem'
             }}>
@@ -468,7 +369,6 @@ export default function NeuroProductsPage() {
                   product={product}
                   index={index}
                   onQuickAdd={(product) => {
-                    recordInteraction(`quick-add-${product.id}`, 'click')
                     // デフォルトサイズ・カラーでカートに追加
                     const defaultSize = product.sizes[0]?.id || 'M'
                     const defaultColor = product.colors[0]?.id || 'default'
@@ -495,7 +395,7 @@ export default function NeuroProductsPage() {
                     padding: '0.75rem 1rem',
                     border: 'none',
                     borderRadius: '8px',
-                    background: currentPage === 1 ? '#e5e7eb' : NeuroColors.trust.primary,
+                    background: currentPage === 1 ? '#e5e7eb' : '#3b82f6',
                     color: currentPage === 1 ? '#9ca3af' : '#ffffff',
                     fontWeight: '600',
                     cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
@@ -516,11 +416,11 @@ export default function NeuroProductsPage() {
                         border: 'none',
                         borderRadius: '8px',
                         background: currentPage === pageNum 
-                          ? NeuroColors.dopamine.primary 
+                          ? '#f59e0b' 
                           : '#ffffff',
                         color: currentPage === pageNum 
                           ? '#ffffff' 
-                          : NeuroColors.trust.primary,
+                          : '#3b82f6',
                         fontWeight: '600',
                         cursor: 'pointer',
                         transition: 'all 0.3s ease',
@@ -539,7 +439,7 @@ export default function NeuroProductsPage() {
                     padding: '0.75rem 1rem',
                     border: 'none',
                     borderRadius: '8px',
-                    background: currentPage === totalPages ? '#e5e7eb' : NeuroColors.trust.primary,
+                    background: currentPage === totalPages ? '#e5e7eb' : '#3b82f6',
                     color: currentPage === totalPages ? '#9ca3af' : '#ffffff',
                     fontWeight: '600',
                     cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
@@ -572,11 +472,11 @@ export default function NeuroProductsPage() {
                 setSortBy('featured')
               }}
               style={{
-                backgroundColor: NeuroColors.trust.primary,
+                backgroundColor: '#3b82f6',
                 color: '#ffffff',
                 padding: '1rem 2rem',
                 border: 'none',
-                borderRadius: '25px',
+                borderRadius: '8px',
                 fontWeight: '600',
                 cursor: 'pointer',
                 fontSize: '1rem'

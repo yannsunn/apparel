@@ -3,20 +3,6 @@
 import { memo, useMemo, useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { Product } from '@/lib/types/product'
-import { 
-  useNeuroUX, 
-  useSocialProof, 
-  useScarcityAlert, 
-  useEmotionalStyling,
-  useAnchoring,
-  useMimicryTrigger
-} from '@/lib/neuro/neuro-hooks'
-import { 
-  NeuroColors, 
-  generateNeuroStyles, 
-  createAttentionAnimation,
-  NeuroFeedback 
-} from '@/lib/neuro/neuro-design'
 
 interface ProductCardProps {
   product: Product
@@ -31,39 +17,8 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
   loading = false,
   index = 0
 }) {
-  // ニューロUX統合
-  const neuroUX = useNeuroUX(`product-card-${product.id}`, {
-    trackAttention: true,
-    enableSocialProof: true,
-    monitorPerformance: true
-  })
-
-  // 感情的スタイリング
-  const primaryEmotion = useEmotionalStyling('dopamine')
-  const urgencyEmotion = useEmotionalStyling('urgency')
-  
-  // 社会的証明
-  const socialProof = useSocialProof(product.id)
-  
-  // 希少性アラート
-  const totalStock = useMemo(() => 
-    product.stock.reduce((sum, item) => sum + item.quantity, 0), 
-    [product.stock]
-  )
-  const scarcity = useScarcityAlert(totalStock, 10)
-  
-  // 価格アンカリング
-  const pricing = useAnchoring(product.originalPrice ? [product.originalPrice, product.price] : [product.price])
-  
-  // ミラーニューロン活用
-  const mimicry = useMimicryTrigger(neuroUX.elementRef as any)
-
   // インタラクション状態
   const [isHovered, setIsHovered] = useState(false)
-  const [hasBeenViewed, setHasBeenViewed] = useState(false)
-  const [interactionCount, setInteractionCount] = useState(0)
-
-  // 遅延ローディング効果
   const [isVisible, setIsVisible] = useState(false)
   
   useEffect(() => {
@@ -74,32 +29,8 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
     return () => clearTimeout(timer)
   }, [index])
 
-  // ビューポート検知
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasBeenViewed) {
-          setHasBeenViewed(true)
-          NeuroFeedback.recordInteraction(`product-card-${product.id}`, 'viewed')
-          
-          // 注意喚起アニメーション（初回のみ）
-          if (neuroUX.elementRef.current) {
-            createAttentionAnimation(neuroUX.elementRef.current, 'glow')
-          }
-        }
-      },
-      { threshold: 0.5 }
-    )
-
-    if (neuroUX.elementRef.current) {
-      observer.observe(neuroUX.elementRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [hasBeenViewed, product.id, neuroUX.elementRef])
-
   const formatPrice = useMemo(() => {
-    return `¥${product.price.toLocaleString('ja-JP')}`
+    return `¥${product.price?.toLocaleString('ja-JP') || '0'}`
   }, [product.price])
 
   const discountPercentage = useMemo(() => {
@@ -118,14 +49,13 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
       'Outerwear': '🧥',
       'Accessories': '👟'
     }
-    return iconMap[product.category.name as keyof typeof iconMap] || '👕'
-  }, [product.category.name])
+    return iconMap[product.category?.name as keyof typeof iconMap] || '👕'
+  }, [product.category?.name])
 
-  // インタラクション記録
-  const recordInteraction = (action: string) => {
-    setInteractionCount(prev => prev + 1)
-    NeuroFeedback.recordInteraction(`product-card-${product.id}`, action)
-  }
+  const totalStock = useMemo(() => 
+    product.stock?.reduce((sum, item) => sum + item.quantity, 0) || 0, 
+    [product.stock]
+  )
 
   // ローディング状態
   if (loading) {
@@ -138,37 +68,30 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
         height: '440px',
         position: 'relative'
       }}>
-        {/* スケルトンローディング - ニューロ最適化 */}
+        {/* スケルトンローディング */}
         <div style={{ 
           width: '100%', 
           height: '260px', 
-          background: `linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%)`,
-          backgroundSize: '200% 100%',
+          background: '#f3f4f6',
           animation: 'shimmer 1.5s infinite'
         }} />
         <div style={{ padding: '1.5rem' }}>
           <div style={{ 
             height: '1.5rem', 
-            background: `linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%)`,
-            backgroundSize: '200% 100%',
-            animation: 'shimmer 1.5s infinite',
+            background: '#f3f4f6',
             marginBottom: '0.5rem', 
             borderRadius: '4px' 
           }} />
           <div style={{ 
             height: '1rem', 
-            background: `linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%)`,
-            backgroundSize: '200% 100%',
-            animation: 'shimmer 1.5s infinite',
+            background: '#f3f4f6',
             marginBottom: '1rem', 
             borderRadius: '4px', 
             width: '60%' 
           }} />
           <div style={{ 
             height: '1.25rem', 
-            background: `linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%)`,
-            backgroundSize: '200% 100%',
-            animation: 'shimmer 1.5s infinite',
+            background: '#f3f4f6',
             borderRadius: '4px', 
             width: '40%' 
           }} />
@@ -179,30 +102,26 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
 
   return (
     <article 
-      ref={neuroUX.elementRef}
       style={{
         background: '#ffffff',
         borderRadius: '16px',
         overflow: 'hidden',
-        border: isHovered ? `2px solid ${NeuroColors.dopamine.primary}` : '2px solid #e5e7eb',
-        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        border: isHovered ? '2px solid #3b82f6' : '2px solid #e5e7eb',
+        transition: 'all 0.4s ease',
         cursor: 'pointer',
         position: 'relative',
         transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)',
         opacity: isVisible ? 1 : 0,
         boxShadow: isHovered 
-          ? `0 20px 40px ${NeuroColors.dopamine.primary}20, 0 8px 16px rgba(0, 0, 0, 0.1)` 
+          ? '0 20px 40px rgba(59, 130, 246, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1)' 
           : '0 4px 8px rgba(0, 0, 0, 0.05)'
       }}
       onMouseEnter={() => {
         setIsHovered(true)
-        recordInteraction('hover')
-        mimicry.triggerMimicry('hover')
       }}
       onMouseLeave={() => {
         setIsHovered(false)
       }}
-      onClick={() => recordInteraction('click')}
     >
       <Link
         href={`/products/${product.id}`}
@@ -225,13 +144,13 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
             {/* 特集バッジ */}
             {product.featured && (
               <div style={{
-                ...generateNeuroStyles('urgency', 'primary'),
+                backgroundColor: '#dc2626',
+                color: '#ffffff',
                 padding: '0.4rem 0.8rem',
                 borderRadius: '20px',
                 fontSize: '0.75rem',
                 fontWeight: '700',
-                marginBottom: '0.5rem',
-                animation: 'pulse 2s infinite'
+                marginBottom: '0.5rem'
               }}>
                 ⭐ 売れ筋
               </div>
@@ -240,7 +159,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
             {/* 割引バッジ */}
             {product.originalPrice && (
               <div style={{
-                ...generateNeuroStyles('dopamine', 'accent'),
+                backgroundColor: '#f59e0b',
                 color: '#000',
                 padding: '0.4rem 0.8rem',
                 borderRadius: '20px',
@@ -252,41 +171,20 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
               </div>
             )}
 
-            {/* 希少性バッジ */}
-            {scarcity.isScarcityActive && (
+            {/* 在庫バッジ */}
+            {totalStock <= 10 && totalStock > 0 && (
               <div style={{
-                background: scarcity.alertLevel === 'critical' 
-                  ? NeuroColors.urgency.primary 
-                  : NeuroColors.urgency.secondary,
+                backgroundColor: '#dc2626',
                 color: 'white',
                 padding: '0.4rem 0.8rem',
                 borderRadius: '20px',
                 fontSize: '0.75rem',
-                fontWeight: '700',
-                animation: scarcity.alertLevel === 'critical' ? 'pulse 1s infinite' : 'none'
+                fontWeight: '700'
               }}>
-                🔥 {scarcity.message}
+                🔥 残り{totalStock}点
               </div>
             )}
           </div>
-
-          {/* 社会的証明 */}
-          {socialProof.visibleProof.length > 0 && (
-            <div style={{
-              position: 'absolute',
-              top: '1rem',
-              right: '1rem',
-              background: 'rgba(16, 185, 129, 0.9)',
-              color: 'white',
-              padding: '0.3rem 0.6rem',
-              borderRadius: '12px',
-              fontSize: '0.7rem',
-              fontWeight: '600',
-              backdropFilter: 'blur(10px)'
-            }}>
-              👥 {socialProof.visibleProof[0]}
-            </div>
-          )}
 
           {/* 商品アイコン */}
           <div style={{ 
@@ -299,11 +197,11 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
             {categoryIcon}
           </div>
 
-          {/* ホバーオーバーレイ - ミラーニューロン活用 */}
+          {/* ホバーオーバーレイ */}
           <div style={{
             position: 'absolute',
             inset: 0,
-            backgroundColor: `${NeuroColors.dopamine.primary}90`,
+            backgroundColor: 'rgba(59, 130, 246, 0.9)',
             opacity: isHovered ? 1 : 0,
             transition: 'opacity 0.3s ease',
             display: 'flex',
@@ -316,13 +214,6 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
           }}>
             <div style={{ marginBottom: '0.5rem', fontSize: '2rem' }}>👀</div>
             詳細を見る →
-            <div style={{ 
-              fontSize: '0.9rem', 
-              marginTop: '0.5rem',
-              opacity: 0.9
-            }}>
-              {interactionCount > 0 && `${interactionCount}回閲覧`}
-            </div>
           </div>
         </div>
 
@@ -338,7 +229,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
               lineHeight: '1.3',
               minHeight: '2.6rem'
             }}>
-              {product.name}
+              {product.name || 'Sample Product'}
             </h3>
             <p style={{
               fontSize: '0.9rem',
@@ -346,43 +237,45 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
               margin: 0,
               fontWeight: '600'
             }}>
-              {product.brand}
+              {product.brand || 'Sample Brand'}
             </p>
           </div>
 
           {/* カラーパレット */}
-          <div style={{ marginBottom: '1rem' }}>
-            <div style={{ display: 'flex', gap: '0.3rem', alignItems: 'center' }}>
-              {product.colors.slice(0, 4).map(color => (
-                <div
-                  key={color.id}
-                  style={{
-                    width: '18px',
-                    height: '18px',
-                    borderRadius: '50%',
-                    background: color.hex,
-                    border: '2px solid #fff',
-                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.15)',
-                    transform: isHovered ? 'scale(1.1)' : 'scale(1)',
-                    transition: 'transform 0.2s ease'
-                  }}
-                  title={color.name}
-                />
-              ))}
-              {product.colors.length > 4 && (
-                <div style={{
-                  fontSize: '0.8rem',
-                  color: '#6b7280',
-                  marginLeft: '0.5rem',
-                  fontWeight: '600'
-                }}>
-                  +{product.colors.length - 4}色
-                </div>
-              )}
+          {product.colors && (
+            <div style={{ marginBottom: '1rem' }}>
+              <div style={{ display: 'flex', gap: '0.3rem', alignItems: 'center' }}>
+                {product.colors.slice(0, 4).map(color => (
+                  <div
+                    key={color.id}
+                    style={{
+                      width: '18px',
+                      height: '18px',
+                      borderRadius: '50%',
+                      background: color.hex,
+                      border: '2px solid #fff',
+                      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.15)',
+                      transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+                      transition: 'transform 0.2s ease'
+                    }}
+                    title={color.name}
+                  />
+                ))}
+                {product.colors.length > 4 && (
+                  <div style={{
+                    fontSize: '0.8rem',
+                    color: '#6b7280',
+                    marginLeft: '0.5rem',
+                    fontWeight: '600'
+                  }}>
+                    +{product.colors.length - 4}色
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          )}
 
-          {/* 価格エリア - アンカリング効果 */}
+          {/* 価格エリア */}
           <div style={{ 
             display: 'flex', 
             alignItems: 'center', 
@@ -392,7 +285,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
             <span style={{
               fontSize: '1.6rem',
               fontWeight: '800',
-              color: NeuroColors.dopamine.primary
+              color: '#3b82f6'
             }}>
               {formatPrice}
             </span>
@@ -408,7 +301,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
                 </span>
                 <span style={{
                   fontSize: '0.75rem',
-                  color: NeuroColors.dopamine.primary,
+                  color: '#3b82f6',
                   fontWeight: '600'
                 }}>
                   ¥{(product.originalPrice - product.price).toLocaleString()}お得
@@ -417,13 +310,13 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
             )}
           </div>
 
-          {/* 行動促進要素 */}
+          {/* 在庫状況 */}
           <div style={{
-            backgroundColor: `${NeuroColors.calm.primary}10`,
+            backgroundColor: totalStock > 50 ? '#dcfce7' : totalStock > 10 ? '#fef3c7' : '#fee2e2',
+            color: totalStock > 50 ? '#15803d' : totalStock > 10 ? '#92400e' : '#dc2626',
             padding: '0.75rem',
             borderRadius: '12px',
             fontSize: '0.8rem',
-            color: NeuroColors.trust.primary,
             fontWeight: '600',
             textAlign: 'center'
           }}>
@@ -439,13 +332,12 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
             e.preventDefault()
             e.stopPropagation()
             onQuickAdd(product)
-            recordInteraction('quick-add')
           }}
           style={{
             position: 'absolute',
             bottom: '1rem',
             right: '1rem',
-            backgroundColor: NeuroColors.dopamine.primary,
+            backgroundColor: '#3b82f6',
             color: '#ffffff',
             border: 'none',
             borderRadius: '50%',
@@ -459,8 +351,9 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
             fontWeight: 'bold',
             transform: isHovered ? 'translateY(0) scale(1)' : 'translateY(60px) scale(0.8)',
             opacity: isHovered ? 1 : 0,
-            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-            zIndex: 10
+            transition: 'all 0.3s ease',
+            zIndex: 10,
+            boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(0) scale(1.1)'
@@ -474,32 +367,10 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
         </button>
       )}
 
-      {/* ニューロスコア表示（開発環境のみ） */}
-      {process.env.NODE_ENV === 'development' && (
-        <div style={{
-          position: 'absolute',
-          top: '5px',
-          left: '5px',
-          background: 'rgba(0,0,0,0.7)',
-          color: 'white',
-          padding: '2px 6px',
-          borderRadius: '4px',
-          fontSize: '0.7rem',
-          zIndex: 20
-        }}>
-          🧠{neuroUX.neuroScore}
-        </div>
-      )}
-
       <style jsx>{`
         @keyframes shimmer {
           0% { background-position: -200% 0; }
           100% { background-position: 200% 0; }
-        }
-        
-        @keyframes pulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.8; transform: scale(1.02); }
         }
       `}</style>
     </article>
