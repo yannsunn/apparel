@@ -34,7 +34,7 @@ export default function CartPage() {
 
   const getColorLabel = (colorId: string) => {
     const colorMap: { [key: string]: string } = {
-      '1': 'Black', '2': 'White', '3': 'Navy', '4': 'Gray', '5': 'Beige', '6': 'Brown'
+      '1': '黒', '2': '白', '3': 'ネイビー', '4': 'グレー', '5': 'ベージュ', '6': 'ブラウン'
     }
     return colorMap[colorId] || colorId
   }
@@ -62,10 +62,10 @@ export default function CartPage() {
             </Link>
             <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
               <Link href="/products" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-                Products
+                商品
               </Link>
               <Link href="/cart" style={{ color: '#3b82f6', textDecoration: 'none', fontWeight: '500' }}>
-                Cart ({totalItems()})
+                カート ({totalItems()})
               </Link>
             </nav>
           </div>
@@ -81,10 +81,10 @@ export default function CartPage() {
           }}>
             <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🛒</div>
             <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem', color: '#111827' }}>
-              Your cart is empty
+              カートが空です
             </h1>
             <p style={{ color: '#6b7280', marginBottom: '2rem' }}>
-              Looks like you haven't added any items to your cart yet.
+              まだ商品がカートに追加されていません。
             </p>
             <Link
               href="/products"
@@ -99,7 +99,7 @@ export default function CartPage() {
                 transition: 'all 0.2s'
               }}
             >
-              Start Shopping
+              ショッピングを始める
             </Link>
           </div>
         </main>
@@ -129,10 +129,10 @@ export default function CartPage() {
           </Link>
           <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
             <Link href="/products" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-              Products
+              商品
             </Link>
             <Link href="/cart" style={{ color: '#3b82f6', textDecoration: 'none', fontWeight: '500' }}>
-              Cart ({totalItems()})
+              カート ({totalItems()})
             </Link>
           </nav>
         </div>
@@ -141,10 +141,10 @@ export default function CartPage() {
       <main style={{ maxWidth: '1280px', margin: '0 auto', padding: '2rem' }}>
         <div style={{ marginBottom: '2rem' }}>
           <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#111827', marginBottom: '0.5rem' }}>
-            Shopping Cart
+            ショッピングカート
           </h1>
           <p style={{ color: '#6b7280' }}>
-            {totalItems()} {totalItems() === 1 ? 'item' : 'items'} in your cart
+            カートに{totalItems()}点の商品
           </p>
         </div>
 
@@ -162,7 +162,7 @@ export default function CartPage() {
               justifyContent: 'space-between',
               alignItems: 'center'
             }}>
-              <h2 style={{ fontSize: '1.25rem', fontWeight: '600' }}>Items</h2>
+              <h2 style={{ fontSize: '1.25rem', fontWeight: '600' }}>商品</h2>
               <button
                 onClick={() => setShowClearConfirm(true)}
                 style={{
@@ -174,7 +174,7 @@ export default function CartPage() {
                   textDecoration: 'underline'
                 }}
               >
-                Clear all
+                すべてクリア
               </button>
             </div>
 
@@ -214,7 +214,7 @@ export default function CartPage() {
                       {item.product?.brand}
                     </p>
                     <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>
-                      Size: {getSizeLabel(item.sizeId)} • Color: {getColorLabel(item.colorId)}
+                      サイズ: {getSizeLabel(item.sizeId)} • 色: {getColorLabel(item.colorId)}
                     </div>
                     <div style={{ fontSize: '1.125rem', fontWeight: '600', marginTop: '0.5rem' }}>
                       {formatPrice(item.price)}
@@ -273,7 +273,7 @@ export default function CartPage() {
                         textDecoration: 'underline'
                       }}
                     >
-                      Remove
+                      削除
                     </button>
                   </div>
                 </div>
@@ -291,21 +291,21 @@ export default function CartPage() {
             top: '6rem'
           }}>
             <div style={{ padding: '1.5rem', borderBottom: '1px solid #e5e7eb' }}>
-              <h2 style={{ fontSize: '1.25rem', fontWeight: '600' }}>Order Summary</h2>
+              <h2 style={{ fontSize: '1.25rem', fontWeight: '600' }}>注文サマリー</h2>
             </div>
 
             <div style={{ padding: '1.5rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-                <span>Subtotal</span>
+                <span>小計</span>
                 <span>{formatPrice(subtotal())}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-                <span>Tax</span>
+                <span>税金</span>
                 <span>{formatPrice(tax())}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                <span>Shipping</span>
-                <span>{shipping() === 0 ? 'Free' : formatPrice(shipping())}</span>
+                <span>送料</span>
+                <span>{shipping() === 0 ? '無料' : formatPrice(shipping())}</span>
               </div>
               <div style={{
                 display: 'flex',
@@ -315,7 +315,7 @@ export default function CartPage() {
                 fontSize: '1.125rem',
                 fontWeight: '600'
               }}>
-                <span>Total</span>
+                <span>合計</span>
                 <span>{formatPrice(total())}</span>
               </div>
             </div>
@@ -335,7 +335,7 @@ export default function CartPage() {
                   marginBottom: '1rem'
                 }}
               >
-                Proceed to Checkout
+                決済に進む
               </button>
               <Link
                 href="/products"
@@ -347,7 +347,7 @@ export default function CartPage() {
                   fontSize: '0.875rem'
                 }}
               >
-                Continue Shopping
+                ショッピングを継続
               </Link>
             </div>
           </div>
@@ -372,10 +372,10 @@ export default function CartPage() {
               width: '90%'
             }}>
               <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '1rem' }}>
-                Clear Cart?
+                カートをクリアしますか？
               </h3>
               <p style={{ color: '#6b7280', marginBottom: '2rem' }}>
-                Are you sure you want to remove all items from your cart? This action cannot be undone.
+                カート内のすべての商品を削除します。この操作は元に戻せません。
               </p>
               <div style={{ display: 'flex', gap: '1rem' }}>
                 <button
@@ -389,7 +389,7 @@ export default function CartPage() {
                     cursor: 'pointer'
                   }}
                 >
-                  Cancel
+                  キャンセル
                 </button>
                 <button
                   onClick={() => {
@@ -406,7 +406,7 @@ export default function CartPage() {
                     cursor: 'pointer'
                   }}
                 >
-                  Clear Cart
+                  カートをクリア
                 </button>
               </div>
             </div>

@@ -22,9 +22,9 @@ export default function ProductDetailPage() {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Product not found</h1>
+          <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>商品が見つかりません</h1>
           <Link href="/products" style={{ color: '#3b82f6', textDecoration: 'underline' }}>
-            Back to products
+            商品一覧に戻る
           </Link>
         </div>
       </div>
@@ -47,7 +47,7 @@ export default function ProductDetailPage() {
 
   const handleAddToCart = () => {
     if (!selectedSize || !selectedColor) {
-      alert('Please select size and color')
+      alert('サイズと色を選択してください')
       return
     }
 
@@ -81,10 +81,10 @@ export default function ProductDetailPage() {
           </Link>
           <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
             <Link href="/products" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-              Products
+              商品
             </Link>
             <Link href="/cart" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-              Cart ({totalItems()})
+              カート ({totalItems()})
             </Link>
           </nav>
         </div>
@@ -94,9 +94,9 @@ export default function ProductDetailPage() {
         {/* Breadcrumb */}
         <nav style={{ marginBottom: '2rem' }}>
           <ol style={{ display: 'flex', gap: '0.5rem', fontSize: '0.875rem', color: '#6b7280' }}>
-            <li><Link href="/" style={{ color: '#6b7280', textDecoration: 'none' }}>Home</Link></li>
+            <li><Link href="/" style={{ color: '#6b7280', textDecoration: 'none' }}>ホーム</Link></li>
             <li>/</li>
-            <li><Link href="/products" style={{ color: '#6b7280', textDecoration: 'none' }}>Products</Link></li>
+            <li><Link href="/products" style={{ color: '#6b7280', textDecoration: 'none' }}>商品</Link></li>
             <li>/</li>
             <li style={{ color: '#111827' }}>{product.name}</li>
           </ol>
@@ -165,7 +165,7 @@ export default function ProductDetailPage() {
 
             {/* Description */}
             <div style={{ marginBottom: '2rem' }}>
-              <h3 style={{ fontWeight: '600', marginBottom: '0.5rem' }}>Description</h3>
+              <h3 style={{ fontWeight: '600', marginBottom: '0.5rem' }}>商品説明</h3>
               <p style={{ color: '#4b5563', lineHeight: '1.6' }}>
                 {product.description}
               </p>
@@ -174,7 +174,7 @@ export default function ProductDetailPage() {
             {/* Color Selection */}
             <div style={{ marginBottom: '2rem' }}>
               <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>
-                Color {selectedColor && <span style={{ fontWeight: 'normal', color: '#6b7280' }}>- {selectedColor.name}</span>}
+                色 {selectedColor && <span style={{ fontWeight: 'normal', color: '#6b7280' }}>- {selectedColor.name}</span>}
               </h3>
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 {product.colors.map(color => (
@@ -213,7 +213,7 @@ export default function ProductDetailPage() {
 
             {/* Size Selection */}
             <div style={{ marginBottom: '2rem' }}>
-              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>Size</h3>
+              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>サイズ</h3>
               <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                 {product.sizes.map(size => {
                   const hasStock = selectedColor && product.stock.some(s => 
@@ -243,7 +243,7 @@ export default function ProductDetailPage() {
 
             {/* Quantity */}
             <div style={{ marginBottom: '2rem' }}>
-              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>Quantity</h3>
+              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>数量</h3>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -285,7 +285,7 @@ export default function ProductDetailPage() {
                 </button>
                 {selectedSize && selectedColor && getStock() && (
                   <span style={{ color: '#6b7280', fontSize: '0.875rem' }}>
-                    {getStock()!.quantity} in stock
+                    在庫 {getStock()!.quantity}点
                   </span>
                 )}
               </div>
@@ -309,7 +309,7 @@ export default function ProductDetailPage() {
                   transition: 'all 0.2s'
                 }}
               >
-                {!selectedSize || !selectedColor ? 'Select Options' : !isInStock() ? 'Out of Stock' : 'Add to Cart'}
+                {!selectedSize || !selectedColor ? 'オプションを選択' : !isInStock() ? '在庫切れ' : 'カートに追加'}
               </button>
               <button
                 style={{
@@ -319,7 +319,7 @@ export default function ProductDetailPage() {
                   background: '#ffffff',
                   cursor: 'pointer'
                 }}
-                title="Add to wishlist"
+                title="お気に入りに追加"
               >
                 ❤️
               </button>
@@ -336,19 +336,19 @@ export default function ProductDetailPage() {
                 textAlign: 'center',
                 fontWeight: '500'
               }}>
-                ✓ Added to cart successfully!
+                ✓ カートに追加しました！
               </div>
             )}
 
             {/* Product Details */}
             <div style={{ marginTop: '2rem', paddingTop: '2rem', borderTop: '1px solid #e5e7eb' }}>
-              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>Product Details</h3>
+              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>商品詳細</h3>
               <dl style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: '0.5rem', fontSize: '0.875rem' }}>
-                <dt style={{ color: '#6b7280' }}>Category:</dt>
+                <dt style={{ color: '#6b7280' }}>カテゴリー:</dt>
                 <dd>{product.category.name}</dd>
-                <dt style={{ color: '#6b7280' }}>Brand:</dt>
+                <dt style={{ color: '#6b7280' }}>ブランド:</dt>
                 <dd>{product.brand}</dd>
-                <dt style={{ color: '#6b7280' }}>Tags:</dt>
+                <dt style={{ color: '#6b7280' }}>タグ:</dt>
                 <dd>{product.tags.join(', ')}</dd>
               </dl>
             </div>
