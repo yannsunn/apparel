@@ -531,10 +531,10 @@ export default function HomePage() {
                   <a href="/products" style={{ color: '#9ca3af', textDecoration: 'none' }}>商品一覧</a>
                 </li>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <a href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>OEM・ODM</a>
+                  <a href="/services/oem" style={{ color: '#9ca3af', textDecoration: 'none' }}>OEM・ODM</a>
                 </li>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <a href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>小ロット対応</a>
+                  <a href="/services/small-lot" style={{ color: '#9ca3af', textDecoration: 'none' }}>小ロット対応</a>
                 </li>
               </ul>
             </div>
@@ -542,13 +542,13 @@ export default function HomePage() {
               <h4 style={{ fontWeight: '600', marginBottom: '1rem' }}>サポート</h4>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <a href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>よくある質問</a>
+                  <a href="/support/faq" style={{ color: '#9ca3af', textDecoration: 'none' }}>よくある質問</a>
                 </li>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <a href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>お問い合わせ</a>
+                  <a href="/support/contact" style={{ color: '#9ca3af', textDecoration: 'none' }}>お問い合わせ</a>
                 </li>
                 <li style={{ marginBottom: '0.5rem' }}>
-                  <a href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>配送について</a>
+                  <a href="/support/shipping" style={{ color: '#9ca3af', textDecoration: 'none' }}>配送について</a>
                 </li>
               </ul>
             </div>
