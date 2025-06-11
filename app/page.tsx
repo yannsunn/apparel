@@ -91,14 +91,14 @@ export default function HomePage() {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
             {[
-              { name: 'トップス', icon: '👔', desc: 'Tシャツ・シャツなど' },
-              { name: 'ボトムス', icon: '👖', desc: 'ジーンズ・パンツ・ショーツ' },
-              { name: 'アウター', icon: '🧥', desc: 'ジャケット・コート' },
-              { name: 'アクセサリー', icon: '👟', desc: 'シューズ・ベルトなど' }
+              { name: 'トップス', icon: '👔', desc: 'Tシャツ・シャツなど', categoryId: '1' },
+              { name: 'ボトムス', icon: '👖', desc: 'ジーンズ・パンツ・ショーツ', categoryId: '2' },
+              { name: 'アウター', icon: '🧥', desc: 'ジャケット・コート', categoryId: '3' },
+              { name: 'アクセサリー', icon: '👟', desc: 'シューズ・ベルトなど', categoryId: '4' }
             ].map(category => (
               <a
                 key={category.name}
-                href="/products"
+                href={`/products?category=${category.categoryId}`}
                 style={{
                   textDecoration: 'none',
                   color: 'inherit'

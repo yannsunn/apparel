@@ -26,6 +26,11 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
 
   const categoryIcon = useMemo(() => {
     const iconMap = {
+      'トップス': '👔',
+      'ボトムス': '👖', 
+      'アウター': '🧥',
+      'アクセサリー': '👟',
+      // 英語版との互換性維持
       'Tops': '👔',
       'Bottoms': '👖', 
       'Outerwear': '🧥',
