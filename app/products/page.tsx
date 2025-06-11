@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, useRef } from 'react'
 import Link from 'next/link'
 import { products, categories } from '@/lib/data/mock-products'
 import { ProductCard } from '@/components/product/product-card'
+import { useCartStore } from '@/lib/store/cart'
 import { 
   useNeuroUX, 
   useCognitiveLoad, 
@@ -20,6 +21,9 @@ import {
 } from '@/lib/neuro/neuro-design'
 
 export default function NeuroProductsPage() {
+  // カートストア
+  const { addItem } = useCartStore()
+  
   // 状態管理
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [sortBy, setSortBy] = useState<string>('featured')
@@ -464,7 +468,11 @@ export default function NeuroProductsPage() {
                   index={index}
                   onQuickAdd={(product) => {
                     recordInteraction(`quick-add-${product.id}`, 'click')
-                    // カート追加ロジック
+                    // デフォルトサイズ・カラーでカートに追加
+                    const defaultSize = product.sizes[0]?.id || 'M'
+                    const defaultColor = product.colors[0]?.id || 'default'
+                    addItem(product, defaultSize, defaultColor, 1)
+                    alert(`${product.name}をカートに追加しました！`)
                   }}
                 />
               ))}
