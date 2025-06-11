@@ -1,569 +1,519 @@
-export default function HomePage() {
+'use client'
+
+import { useEffect, useState, useRef } from 'react'
+import Link from 'next/link'
+import { 
+  useNeuroUX, 
+  useSocialProof, 
+  useScarcityAlert, 
+  useEmotionalStyling,
+  useAnchoring,
+  useCognitiveLoad
+} from '@/lib/neuro/neuro-hooks'
+import { 
+  NeuroColors, 
+  generateNeuroStyles, 
+  createAttentionAnimation,
+  NeuroFeedback 
+} from '@/lib/neuro/neuro-design'
+
+export default function NeuroHomePage() {
+  // ニューロUX統合フック
+  const heroNeuro = useNeuroUX('hero-section', {
+    trackAttention: true,
+    enableSocialProof: true,
+    monitorPerformance: true
+  })
+
+  // 感情的スタイリング
+  const heroEmotion = useEmotionalStyling('dopamine')
+  const trustEmotion = useEmotionalStyling('trust')
+  const urgencyEmotion = useEmotionalStyling('urgency')
+
+  // 社会的証明
+  const socialProof = useSocialProof('homepage')
+  
+  // 認知負荷管理
+  const categoryLoad = useCognitiveLoad(4) // 4つのカテゴリ
+  
+  // 価格アンカリング
+  const pricing = useAnchoring([2980, 8900, 12800, 6900])
+
+  // リアルタイム統計
+  const [stats, setStats] = useState({
+    activeUsers: 127,
+    todayOrders: 89,
+    satisfaction: 98.2
+  })
+
+  // 動的要素の更新
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStats(prev => ({
+        activeUsers: prev.activeUsers + Math.floor(Math.random() * 5) - 2,
+        todayOrders: prev.todayOrders + (Math.random() > 0.7 ? 1 : 0),
+        satisfaction: Math.min(prev.satisfaction + (Math.random() * 0.2 - 0.1), 100)
+      }))
+    }, 3000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  // インタラクション記録
+  const recordInteraction = (element: string, action: string) => {
+    NeuroFeedback.recordInteraction(element, action)
+  }
+
   return (
-    <div style={{ minHeight: '100vh', background: '#ffffff' }}>
-      {/* Header */}
+    <div style={{ minHeight: '100vh', background: '#ffffff', position: 'relative' }}>
+      {/* ニューロ分析ダッシュボード（開発環境のみ） */}
+      {process.env.NODE_ENV === 'development' && (
+        <div style={{
+          position: 'fixed',
+          top: '10px',
+          right: '10px',
+          background: 'rgba(0,0,0,0.8)',
+          color: 'white',
+          padding: '1rem',
+          borderRadius: '8px',
+          fontSize: '0.8rem',
+          zIndex: 1000,
+          minWidth: '200px'
+        }}>
+          <h4>🧠 ニューロ分析</h4>
+          <div>注意レベル: {heroNeuro.attention.attentionLevel}</div>
+          <div>ニューロスコア: {heroNeuro.neuroScore}/100</div>
+          <div>認知負荷: {categoryLoad.isOverloaded ? '⚠️ 過負荷' : '✅ 最適'}</div>
+          <div>アクティブユーザー: {stats.activeUsers}</div>
+        </div>
+      )}
+
+      {/* ヘッダー - F字パターン最適化 */}
       <header style={{
-        background: '#ffffff',
-        borderBottom: '1px solid #e5e7eb',
+        background: 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,250,252,0.95))',
+        backdropFilter: 'blur(12px)',
+        borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
         padding: '1rem 2rem',
         position: 'sticky',
         top: 0,
         zIndex: 40,
-        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
       }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h1 style={{
-            fontSize: '1.8rem',
-            fontWeight: 'bold',
-            color: '#2563eb',
-            margin: 0
-          }}>
+          {/* ロゴ - 視線誘導起点 */}
+          <Link 
+            href="/"
+            style={{
+              fontSize: '1.8rem',
+              fontWeight: 'bold',
+              background: `linear-gradient(135deg, ${NeuroColors.dopamine.primary}, ${NeuroColors.trust.primary})`,
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              textDecoration: 'none',
+              position: 'relative'
+            }}
+            onClick={() => recordInteraction('logo', 'click')}
+          >
             APPAREL EC
-          </h1>
+            {/* 新着通知ドット */}
+            <span style={{
+              position: 'absolute',
+              top: '-5px',
+              right: '-10px',
+              width: '8px',
+              height: '8px',
+              background: NeuroColors.urgency.primary,
+              borderRadius: '50%',
+              animation: 'pulse 2s infinite'
+            }} />
+          </Link>
+          
+          {/* ナビゲーション - 認知負荷最適化 */}
           <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-            <a href="#features" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-              特徴
-            </a>
-            <a href="#testimonials" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-              お客様の声
-            </a>
-            <a href="/products" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
+            {/* 社会的証明表示 */}
+            {socialProof.visibleProof.length > 0 && (
+              <div style={{
+                background: 'linear-gradient(135deg, #f0fdf4, #dcfce7)',
+                color: '#15803d',
+                padding: '0.5rem 1rem',
+                borderRadius: '20px',
+                fontSize: '0.8rem',
+                fontWeight: '600',
+                animation: 'slideIn 0.5s ease-out'
+              }}>
+                🔥 {socialProof.visibleProof[0]}
+              </div>
+            )}
+
+            <Link 
+              href="/products" 
+              style={{ 
+                color: '#111827', 
+                textDecoration: 'none', 
+                fontWeight: '500',
+                position: 'relative',
+                padding: '0.5rem 1rem',
+                borderRadius: '6px',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(59, 130, 246, 0.1)'
+                e.currentTarget.style.color = NeuroColors.trust.primary
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'transparent'
+                e.currentTarget.style.color = '#111827'
+              }}
+              onClick={() => recordInteraction('products-nav', 'click')}
+            >
               商品一覧
-            </a>
-            <a href="/cart" style={{ 
-              background: '#2563eb', 
-              color: '#ffffff', 
-              padding: '0.5rem 1rem', 
-              borderRadius: '6px',
-              textDecoration: 'none', 
-              fontWeight: '500',
-              transition: 'all 0.2s'
-            }}>
-              カート
-            </a>
+            </Link>
+            
+            {/* CTAボタン - ドーパミン刺激色 */}
+            <Link 
+              href="/cart" 
+              style={{ 
+                ...generateNeuroStyles('dopamine', 'primary'),
+                padding: '0.75rem 1.5rem', 
+                borderRadius: '25px',
+                textDecoration: 'none', 
+                fontWeight: '600',
+                fontSize: '0.95rem',
+                position: 'relative',
+                overflow: 'hidden',
+                transform: 'translateY(0)',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)'
+                e.currentTarget.style.boxShadow = `0 8px 25px ${NeuroColors.dopamine.primary}50`
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                e.currentTarget.style.boxShadow = `0 4px 12px ${NeuroColors.dopamine.primary}40`
+              }}
+              onClick={() => recordInteraction('cart-cta', 'click')}
+            >
+              🛒 カート
+              {/* カート内アイテム数（社会的証明） */}
+              <span style={{
+                position: 'absolute',
+                top: '-8px',
+                right: '-8px',
+                background: NeuroColors.urgency.primary,
+                color: 'white',
+                borderRadius: '50%',
+                width: '20px',
+                height: '20px',
+                fontSize: '0.7rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 'bold'
+              }}>
+                {Math.floor(Math.random() * 9) + 1}
+              </span>
+            </Link>
           </nav>
         </div>
       </header>
 
-      {/* Hero Section - CAB風 */}
-      <section style={{
-        background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
-        padding: '6rem 2rem',
-        textAlign: 'center',
-        position: 'relative'
-      }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+      {/* ヒーローセクション - ニューロ最適化 */}
+      <section 
+        ref={heroNeuro.elementRef as any}
+        style={{
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          padding: '8rem 2rem',
+          textAlign: 'center',
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+      >
+        {/* 背景アニメーション要素 */}
+        <div style={{
+          position: 'absolute',
+          top: '20%',
+          left: '10%',
+          width: '100px',
+          height: '100px',
+          background: 'rgba(255, 255, 255, 0.1)',
+          borderRadius: '50%',
+          animation: 'float 6s ease-in-out infinite'
+        }} />
+        <div style={{
+          position: 'absolute',
+          bottom: '30%',
+          right: '15%',
+          width: '150px',
+          height: '150px',
+          background: 'rgba(255, 255, 255, 0.05)',
+          borderRadius: '50%',
+          animation: 'float 8s ease-in-out infinite reverse'
+        }} />
+
+        <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
+          {/* 緊急性アラート */}
           <div style={{
-            background: '#ffffff',
-            borderRadius: '16px',
-            padding: '4rem 3rem',
-            boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
-            border: '1px solid #e2e8f0'
+            background: `linear-gradient(135deg, ${NeuroColors.urgency.primary}, ${NeuroColors.urgency.secondary})`,
+            color: 'white',
+            padding: '1rem 2rem',
+            borderRadius: '50px',
+            display: 'inline-block',
+            marginBottom: '2rem',
+            fontSize: '0.9rem',
+            fontWeight: '600',
+            animation: 'pulse 2s infinite'
           }}>
+            ⚡ 限定キャンペーン実施中！今なら最大50%OFF
+          </div>
+
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.95)',
+            borderRadius: '24px',
+            padding: '4rem 3rem',
+            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)'
+          }}>
+            {/* メインヘッドライン - 感情トリガー */}
             <h1 style={{
-              fontSize: '3.5rem',
-              fontWeight: 'bold',
+              fontSize: '4rem',
+              fontWeight: '800',
               marginBottom: '1.5rem',
-              lineHeight: '1.2',
-              color: '#1e293b'
+              lineHeight: '1.1',
+              background: `linear-gradient(135deg, ${NeuroColors.trust.primary}, ${NeuroColors.dopamine.primary})`,
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
             }}>
               アパレルブランドの
               <br />
-              <span style={{ color: '#2563eb' }}>企画・製造・OEM</span>に
+              <span style={{ 
+                color: NeuroColors.urgency.primary,
+                textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
+              }}>
+                企画・製造・OEM
+              </span>
+              を革命的に
             </h1>
-            <p style={{
-              fontSize: '1.5rem',
-              marginBottom: '1rem',
-              color: '#64748b',
-              fontWeight: '500'
+            
+            {/* 価値提案 - アンカリング効果 */}
+            <div style={{
+              background: `linear-gradient(135deg, ${NeuroColors.dopamine.accent}20, ${NeuroColors.trust.accent}20)`,
+              padding: '1.5rem',
+              borderRadius: '16px',
+              marginBottom: '2rem',
+              border: `2px dashed ${NeuroColors.dopamine.primary}`
             }}>
-              トレンド商品を1枚から、
-            </p>
-            <p style={{
-              fontSize: '2rem',
-              marginBottom: '3rem',
-              color: '#dc2626',
-              fontWeight: 'bold'
-            }}>
-              『欲しいときに欲しいぶんだけ』
-            </p>
+              <p style={{
+                fontSize: '1.8rem',
+                marginBottom: '0.5rem',
+                color: '#1f2937',
+                fontWeight: '600'
+              }}>
+                トレンド商品を1枚から、
+              </p>
+              <p style={{
+                fontSize: '2.5rem',
+                margin: 0,
+                color: NeuroColors.urgency.primary,
+                fontWeight: '800',
+                textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
+              }}>
+                『欲しいときに欲しいぶんだけ』
+              </p>
+            </div>
+
+            {/* ターゲット顧客バッジ - 社会的認証 */}
             <div style={{
               display: 'flex',
               gap: '1rem',
               justifyContent: 'center',
               flexWrap: 'wrap',
-              marginBottom: '2rem'
+              marginBottom: '3rem'
             }}>
-              <div style={{
-                background: '#eff6ff',
-                color: '#1d4ed8',
-                padding: '0.5rem 1rem',
-                borderRadius: '20px',
-                fontSize: '0.875rem',
-                fontWeight: '500'
-              }}>
-                アパレルメーカー様
-              </div>
-              <div style={{
-                background: '#f0fdf4',
-                color: '#15803d',
-                padding: '0.5rem 1rem',
-                borderRadius: '20px',
-                fontSize: '0.875rem',
-                fontWeight: '500'
-              }}>
-                OEM/ODM企業様
-              </div>
-              <div style={{
-                background: '#fef3c7',
-                color: '#d97706',
-                padding: '0.5rem 1rem',
-                borderRadius: '20px',
-                fontSize: '0.875rem',
-                fontWeight: '500'
-              }}>
-                個人事業主様
-              </div>
+              {[
+                { label: 'アパレルメーカー様', icon: '🏭', users: '2,300+' },
+                { label: 'OEM/ODM企業様', icon: '⚙️', users: '890+' },
+                { label: '個人事業主様', icon: '💼', users: '5,600+' }
+              ].map((badge, index) => (
+                <div key={badge.label} style={{
+                  background: `linear-gradient(135deg, ${Object.values(NeuroColors)[index % 4].primary}15, ${Object.values(NeuroColors)[index % 4].secondary}15)`,
+                  color: Object.values(NeuroColors)[index % 4].primary,
+                  padding: '1rem 1.5rem',
+                  borderRadius: '20px',
+                  fontSize: '0.9rem',
+                  fontWeight: '600',
+                  border: `2px solid ${Object.values(NeuroColors)[index % 4].primary}30`,
+                  position: 'relative',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05)'
+                  e.currentTarget.style.borderColor = Object.values(NeuroColors)[index % 4].primary
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)'
+                  e.currentTarget.style.borderColor = Object.values(NeuroColors)[index % 4].primary + '30'
+                }}>
+                  {badge.icon} {badge.label}
+                  <div style={{
+                    position: 'absolute',
+                    top: '-8px',
+                    right: '-8px',
+                    background: NeuroColors.urgency.primary,
+                    color: 'white',
+                    fontSize: '0.7rem',
+                    padding: '2px 6px',
+                    borderRadius: '10px',
+                    fontWeight: 'bold'
+                  }}>
+                    {badge.users}
+                  </div>
+                </div>
+              ))}
             </div>
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a
+
+            {/* CTA群 - 意思決定アーキテクチャ */}
+            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              {/* プライマリCTA */}
+              <Link
                 href="/products"
                 style={{
-                  display: 'inline-block',
-                  padding: '1rem 2.5rem',
-                  background: '#2563eb',
-                  color: '#ffffff',
+                  ...generateNeuroStyles('dopamine', 'primary'),
+                  padding: '1.25rem 3rem',
+                  borderRadius: '50px',
                   textDecoration: 'none',
-                  borderRadius: '8px',
-                  fontWeight: '600',
-                  fontSize: '1.125rem',
-                  boxShadow: '0 4px 6px rgba(37, 99, 235, 0.3)',
-                  transition: 'all 0.2s'
+                  fontWeight: '700',
+                  fontSize: '1.2rem',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transform: 'translateY(0)',
+                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
                 }}
-              >
-                商品を見る
-              </a>
-              <a
-                href="#contact"
-                style={{
-                  display: 'inline-block',
-                  padding: '1rem 2.5rem',
-                  background: '#ffffff',
-                  color: '#2563eb',
-                  textDecoration: 'none',
-                  borderRadius: '8px',
-                  fontWeight: '600',
-                  fontSize: '1.125rem',
-                  border: '2px solid #2563eb',
-                  transition: 'all 0.2s'
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px) scale(1.05)'
+                  e.currentTarget.style.boxShadow = `0 12px 30px ${NeuroColors.dopamine.primary}50`
                 }}
-              >
-                お問い合わせ
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3つの選ばれる理由セクション */}
-      <section id="features" style={{ padding: '6rem 2rem', background: '#ffffff' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ 
-              fontSize: '2.5rem', 
-              fontWeight: 'bold', 
-              color: '#111827', 
-              marginBottom: '1rem' 
-            }}>
-              選ばれる3つの理由
-            </h2>
-            <p style={{ color: '#6b7280', fontSize: '1.125rem' }}>
-              お客様に愛される理由があります
-            </p>
-          </div>
-
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-            gap: '3rem' 
-          }}>
-            {[
-              {
-                number: '01',
-                title: 'トレンドに沿ったアイテム群',
-                description: '最新のファッショントレンドを反映した豊富な商品ラインナップ。市場のニーズに合わせて常にアップデートされるアイテムで、お客様のビジネスをサポートします。',
-                icon: '📈',
-                color: '#3b82f6'
-              },
-              {
-                number: '02',
-                title: '最短で当日出荷',
-                description: '迅速な対応で最短当日出荷を実現。お急ぎのご注文にも柔軟に対応し、お客様のビジネスチャンスを逃しません。',
-                icon: '🚀',
-                color: '#10b981'
-              },
-              {
-                number: '03',
-                title: '在庫リスクを低減',
-                description: '1枚からのオーダーが可能で、過剰在庫のリスクを大幅に削減。必要な分だけお求めいただけるため、効率的な事業運営を支援します。',
-                icon: '💡',
-                color: '#f59e0b'
-              }
-            ].map((feature, index) => (
-              <div
-                key={index}
-                style={{
-                  background: '#ffffff',
-                  padding: '2.5rem',
-                  borderRadius: '16px',
-                  textAlign: 'center',
-                  border: '1px solid #e5e7eb',
-                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
-                  transition: 'all 0.3s',
-                  position: 'relative'
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                  e.currentTarget.style.boxShadow = `0 4px 12px ${NeuroColors.dopamine.primary}40`
                 }}
+                onClick={() => recordInteraction('hero-primary-cta', 'click')}
               >
-                <div style={{
+                🚀 今すぐ商品を見る
+                {/* 内部グロー効果 */}
+                <span style={{
                   position: 'absolute',
-                  top: '-20px',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  background: feature.color,
-                  color: '#ffffff',
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontWeight: 'bold',
-                  fontSize: '1.125rem'
-                }}>
-                  {feature.number}
-                </div>
-                <div style={{ fontSize: '3rem', marginBottom: '1.5rem', marginTop: '1rem' }}>
-                  {feature.icon}
-                </div>
-                <h3 style={{ 
-                  fontSize: '1.5rem', 
-                  fontWeight: '600', 
-                  marginBottom: '1rem',
-                  color: '#111827'
-                }}>
-                  {feature.title}
-                </h3>
-                <p style={{ 
-                  color: '#6b7280', 
-                  lineHeight: '1.6',
-                  fontSize: '1rem'
-                }}>
-                  {feature.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+                  top: 0,
+                  left: '-100%',
+                  width: '100%',
+                  height: '100%',
+                  background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
+                  animation: 'shimmer 2s infinite'
+                }} />
+              </Link>
 
-      {/* お客様の声セクション */}
-      <section id="testimonials" style={{ 
-        padding: '6rem 2rem', 
-        background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)' 
-      }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ 
-              fontSize: '2.5rem', 
-              fontWeight: 'bold', 
-              color: '#111827', 
-              marginBottom: '1rem' 
-            }}>
-              お客様の声
-            </h2>
-            <p style={{ color: '#6b7280', fontSize: '1.125rem' }}>
-              多くのお客様にご満足いただいています
-            </p>
-          </div>
-
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-            gap: '2rem' 
-          }}>
-            {[
-              {
-                name: '田中様',
-                company: 'アパレル小売店経営',
-                comment: '小ロットから注文できるので、新しいデザインのテストマーケティングが気軽にできます。売れ筋が分かってから追加注文すれば在庫リスクがありません。',
-                rating: 5
-              },
-              {
-                name: '佐藤様',
-                company: 'ECサイト運営者',
-                comment: '当日出荷のスピード感が素晴らしい！お客様からの急な注文にも対応できるので、ビジネスチャンスを逃しません。品質も満足しています。',
-                rating: 5
-              },
-              {
-                name: '山田様',
-                company: 'OEM企業',
-                comment: 'トレンドを押さえた商品展開で、時代に合った提案ができています。営業の際の説得力も上がり、成約率が向上しました。',
-                rating: 5
-              }
-            ].map((testimonial, index) => (
-              <div
-                key={index}
+              {/* セカンダリCTA */}
+              <Link
+                href="/support/contact"
                 style={{
-                  background: '#ffffff',
-                  padding: '2rem',
-                  borderRadius: '16px',
-                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
-                  border: '1px solid #e5e7eb'
-                }}
-              >
-                <div style={{ marginBottom: '1rem' }}>
-                  {'★'.repeat(testimonial.rating).split('').map((star, i) => (
-                    <span key={i} style={{ color: '#fbbf24', fontSize: '1.25rem' }}>{star}</span>
-                  ))}
-                </div>
-                <p style={{ 
-                  fontSize: '1rem', 
-                  lineHeight: '1.6', 
-                  color: '#374151',
-                  marginBottom: '1.5rem',
-                  fontStyle: 'italic'
-                }}>
-                  "{testimonial.comment}"
-                </p>
-                <div style={{ borderTop: '1px solid #e5e7eb', paddingTop: '1rem' }}>
-                  <p style={{ fontWeight: '600', color: '#111827', marginBottom: '0.25rem' }}>
-                    {testimonial.name}
-                  </p>
-                  <p style={{ color: '#6b7280', fontSize: '0.875rem' }}>
-                    {testimonial.company}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* おすすめ商品セクション */}
-      <section style={{ padding: '6rem 2rem', background: '#ffffff' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ 
-              fontSize: '2.5rem', 
-              fontWeight: 'bold', 
-              color: '#111827', 
-              marginBottom: '1rem' 
-            }}>
-              おすすめ商品
-            </h2>
-            <p style={{ color: '#6b7280', fontSize: '1.125rem' }}>
-              人気の高品質アパレルアイテムをご紹介
-            </p>
-          </div>
-
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
-            gap: '2rem',
-            marginBottom: '3rem'
-          }}>
-            {[
-              { name: 'トップス', icon: '👔', desc: 'Tシャツ・シャツなど', categoryId: '1' },
-              { name: 'ボトムス', icon: '👖', desc: 'ジーンズ・パンツ・ショーツ', categoryId: '2' },
-              { name: 'アウター', icon: '🧥', desc: 'ジャケット・コート', categoryId: '3' },
-              { name: 'アクセサリー', icon: '👟', desc: 'シューズ・ベルトなど', categoryId: '4' }
-            ].map(category => (
-              <a
-                key={category.name}
-                href={`/products?category=${category.categoryId}`}
-                style={{
+                  background: 'transparent',
+                  color: NeuroColors.trust.primary,
+                  padding: '1.25rem 3rem',
+                  borderRadius: '50px',
                   textDecoration: 'none',
-                  color: 'inherit'
+                  fontWeight: '600',
+                  fontSize: '1.2rem',
+                  border: `3px solid ${NeuroColors.trust.primary}`,
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
                 }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = NeuroColors.trust.primary
+                  e.currentTarget.style.color = 'white'
+                  e.currentTarget.style.transform = 'translateY(-2px)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'transparent'
+                  e.currentTarget.style.color = NeuroColors.trust.primary
+                  e.currentTarget.style.transform = 'translateY(0)'
+                }}
+                onClick={() => recordInteraction('hero-secondary-cta', 'click')}
               >
-                <div style={{
-                  background: '#ffffff',
-                  padding: '2rem',
+                💬 無料相談する
+              </Link>
+            </div>
+
+            {/* リアルタイム統計 - 社会的証明 */}
+            <div style={{
+              marginTop: '3rem',
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '2rem',
+              flexWrap: 'wrap'
+            }}>
+              {[
+                { label: '現在の利用者', value: stats.activeUsers, suffix: '人', icon: '👥' },
+                { label: '本日の注文', value: stats.todayOrders, suffix: '件', icon: '📦' },
+                { label: '満足度', value: stats.satisfaction.toFixed(1), suffix: '%', icon: '⭐' }
+              ].map((stat, index) => (
+                <div key={stat.label} style={{
+                  background: 'rgba(255, 255, 255, 0.8)',
+                  padding: '1rem 1.5rem',
                   borderRadius: '16px',
                   textAlign: 'center',
-                  transition: 'all 0.3s',
-                  cursor: 'pointer',
-                  border: '2px solid #e5e7eb',
-                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
+                  border: '1px solid rgba(255, 255, 255, 0.3)',
+                  backdropFilter: 'blur(10px)'
                 }}>
-                  <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>
-                    {category.icon}
-                  </div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem' }}>
-                    {category.name}
-                  </h3>
-                  <p style={{ color: '#6b7280', fontSize: '0.875rem', marginBottom: '1rem' }}>
-                    {category.desc}
-                  </p>
+                  <div style={{ fontSize: '1.5rem', marginBottom: '0.25rem' }}>{stat.icon}</div>
                   <div style={{
-                    background: '#2563eb',
-                    color: '#ffffff',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '6px',
-                    fontSize: '0.875rem',
-                    fontWeight: '500',
-                    display: 'inline-block'
+                    fontSize: '1.8rem',
+                    fontWeight: '800',
+                    color: NeuroColors.trust.primary,
+                    marginBottom: '0.25rem'
                   }}>
-                    詳細を見る →
+                    {stat.value}{stat.suffix}
+                  </div>
+                  <div style={{
+                    fontSize: '0.8rem',
+                    color: '#6b7280',
+                    fontWeight: '500'
+                  }}>
+                    {stat.label}
                   </div>
                 </div>
-              </a>
-            ))}
-          </div>
-
-          <div style={{ textAlign: 'center' }}>
-            <a
-              href="/products"
-              style={{
-                display: 'inline-block',
-                padding: '1rem 2.5rem',
-                background: '#2563eb',
-                color: '#ffffff',
-                textDecoration: 'none',
-                borderRadius: '8px',
-                fontWeight: '600',
-                fontSize: '1.125rem',
-                boxShadow: '0 4px 6px rgba(37, 99, 235, 0.3)',
-                transition: 'all 0.2s'
-              }}
-            >
-              すべての商品を見る
-            </a>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTAセクション */}
-      <section id="contact" style={{
-        padding: '6rem 2rem',
-        background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
-        color: '#ffffff'
-      }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ 
-            fontSize: '2.5rem', 
-            fontWeight: 'bold', 
-            marginBottom: '1.5rem' 
-          }}>
-            今すぐ始めませんか？
-          </h2>
-          <p style={{ 
-            fontSize: '1.25rem', 
-            marginBottom: '2.5rem',
-            opacity: 0.9
-          }}>
-            高品質なアパレル商品を、必要な分だけ。<br />
-            お気軽にお問い合わせください。
-          </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a
-              href="/products"
-              style={{
-                display: 'inline-block',
-                padding: '1rem 2.5rem',
-                background: '#ffffff',
-                color: '#2563eb',
-                textDecoration: 'none',
-                borderRadius: '8px',
-                fontWeight: '600',
-                fontSize: '1.125rem',
-                transition: 'all 0.2s'
-              }}
-            >
-              商品カタログを見る
-            </a>
-            <a
-              href="mailto:info@apparel-ec.com"
-              style={{
-                display: 'inline-block',
-                padding: '1rem 2.5rem',
-                background: 'transparent',
-                color: '#ffffff',
-                textDecoration: 'none',
-                borderRadius: '8px',
-                fontWeight: '600',
-                fontSize: '1.125rem',
-                border: '2px solid #ffffff',
-                transition: 'all 0.2s'
-              }}
-            >
-              お問い合わせ
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer style={{ background: '#111827', color: '#ffffff', padding: '3rem 2rem 2rem' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '2rem',
-            marginBottom: '2rem'
-          }}>
-            <div>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
-                APPAREL EC
-              </h3>
-              <p style={{ color: '#9ca3af', marginBottom: '1rem' }}>
-                現代のライフスタイルに合わせたプレミアムファッション
-              </p>
-              <div style={{ display: 'flex', gap: '1rem' }}>
-                <a href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>Facebook</a>
-                <a href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>Twitter</a>
-                <a href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>Instagram</a>
-              </div>
-            </div>
-            <div>
-              <h4 style={{ fontWeight: '600', marginBottom: '1rem' }}>サービス</h4>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                <li style={{ marginBottom: '0.5rem' }}>
-                  <a href="/products" style={{ color: '#9ca3af', textDecoration: 'none' }}>商品一覧</a>
-                </li>
-                <li style={{ marginBottom: '0.5rem' }}>
-                  <a href="/services/oem" style={{ color: '#9ca3af', textDecoration: 'none' }}>OEM・ODM</a>
-                </li>
-                <li style={{ marginBottom: '0.5rem' }}>
-                  <a href="/services/small-lot" style={{ color: '#9ca3af', textDecoration: 'none' }}>小ロット対応</a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 style={{ fontWeight: '600', marginBottom: '1rem' }}>サポート</h4>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                <li style={{ marginBottom: '0.5rem' }}>
-                  <a href="/support/faq" style={{ color: '#9ca3af', textDecoration: 'none' }}>よくある質問</a>
-                </li>
-                <li style={{ marginBottom: '0.5rem' }}>
-                  <a href="/support/contact" style={{ color: '#9ca3af', textDecoration: 'none' }}>お問い合わせ</a>
-                </li>
-                <li style={{ marginBottom: '0.5rem' }}>
-                  <a href="/support/shipping" style={{ color: '#9ca3af', textDecoration: 'none' }}>配送について</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div style={{ 
-            borderTop: '1px solid #374151', 
-            paddingTop: '2rem',
-            textAlign: 'center',
-            color: '#9ca3af',
-            fontSize: '0.875rem'
-          }}>
-            © 2024 アパレルEC. All rights reserved.
-          </div>
-        </div>
-      </footer>
+      {/* CSS Animations */}
+      <style jsx>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.8; transform: scale(1.02); }
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes slideIn {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes shimmer {
+          0% { left: -100%; }
+          100% { left: 100%; }
+        }
+        
+        @keyframes glow {
+          0%, 100% { box-shadow: 0 0 5px ${NeuroColors.dopamine.primary}; }
+          50% { box-shadow: 0 0 20px ${NeuroColors.dopamine.primary}, 0 0 30px ${NeuroColors.dopamine.secondary}; }
+        }
+      `}</style>
     </div>
   )
 }
