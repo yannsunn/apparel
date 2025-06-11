@@ -84,10 +84,10 @@ export default function ProductsPage() {
         {/* Page Title */}
         <div style={{ marginBottom: '2rem' }}>
           <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#111827', marginBottom: '0.5rem' }}>
-            All Products
+            すべての商品
           </h1>
           <p style={{ color: '#6b7280' }}>
-            {filteredProducts.length} items found
+            {filteredProducts.length}件の商品が見つかりました
           </p>
         </div>
 
@@ -101,12 +101,12 @@ export default function ProductsPage() {
             border: '1px solid #e5e7eb'
           }}>
             <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>
-              Filters
+              絞り込み
             </h2>
 
             {/* Category Filter */}
             <div style={{ marginBottom: '2rem' }}>
-              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>Category</h3>
+              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>カテゴリー</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
                   <input
@@ -116,7 +116,7 @@ export default function ProductsPage() {
                     checked={selectedCategory === 'all'}
                     onChange={(e) => setSelectedCategory(e.target.value)}
                   />
-                  <span>All Categories</span>
+                  <span>すべてのカテゴリー</span>
                 </label>
                 {categories.map(cat => (
                   <label key={cat.id} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
@@ -135,7 +135,7 @@ export default function ProductsPage() {
 
             {/* Color Filter */}
             <div style={{ marginBottom: '2rem' }}>
-              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>Color</h3>
+              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>色</h3>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
                 <button
                   onClick={() => setSelectedColor('all')}
@@ -148,7 +148,7 @@ export default function ProductsPage() {
                     cursor: 'pointer'
                   }}
                 >
-                  All
+                  すべて
                 </button>
                 {colors.map(color => (
                   <button
@@ -171,7 +171,7 @@ export default function ProductsPage() {
 
             {/* Price Range */}
             <div style={{ marginBottom: '2rem' }}>
-              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>Price Range</h3>
+              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>価格帯</h3>
               <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                 <input
                   type="number"
@@ -183,7 +183,7 @@ export default function ProductsPage() {
                     border: '1px solid #e5e7eb',
                     borderRadius: '4px'
                   }}
-                  placeholder="Min"
+                  placeholder="最低価格"
                 />
                 <span>-</span>
                 <input
@@ -196,14 +196,14 @@ export default function ProductsPage() {
                     border: '1px solid #e5e7eb',
                     borderRadius: '4px'
                   }}
-                  placeholder="Max"
+                  placeholder="最高価格"
                 />
               </div>
             </div>
 
             {/* Sort */}
             <div>
-              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>Sort By</h3>
+              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>並び替え</h3>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
@@ -215,10 +215,10 @@ export default function ProductsPage() {
                   background: '#ffffff'
                 }}
               >
-                <option value="featured">Featured</option>
-                <option value="name">Name</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
+                <option value="featured">おすすめ順</option>
+                <option value="name">商品名順</option>
+                <option value="price-low">価格: 安い順</option>
+                <option value="price-high">価格: 高い順</option>
               </select>
             </div>
           </aside>

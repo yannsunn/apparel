@@ -32,7 +32,7 @@ export function CartIndicator() {
       }}
     >
       <span>🛒</span>
-      <span>Cart</span>
+      <span>カート</span>
       
       {/* Animated Count Badge */}
       <div

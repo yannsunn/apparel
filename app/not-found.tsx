@@ -11,9 +11,9 @@ export default function NotFound() {
       padding: '2rem',
       textAlign: 'center'
     }}>
-      <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>404 - Page Not Found</h2>
+      <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>404 - ページが見つかりません</h2>
       <p style={{ marginBottom: '1rem', color: '#666' }}>
-        The page you are looking for does not exist.
+        お探しのページは存在しません。
       </p>
       <Link 
         href="/" 
@@ -25,7 +25,7 @@ export default function NotFound() {
           borderRadius: '4px'
         }}
       >
-        Return Home
+        ホームに戻る
       </Link>
     </div>
   )

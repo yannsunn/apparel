@@ -21,10 +21,10 @@ export default function HomePage() {
           </h1>
           <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
             <a href="/products" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-              Products
+              商品
             </a>
             <a href="/cart" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-              Cart
+              カート
             </a>
           </nav>
         </div>
@@ -44,9 +44,9 @@ export default function HomePage() {
             marginBottom: '1.5rem',
             lineHeight: '1.1'
           }}>
-            Premium Fashion
+            プレミアムファッション
             <br />
-            <span style={{ color: '#fbbf24' }}>Redefined</span>
+            <span style={{ color: '#fbbf24' }}>新たな定義</span>
           </h1>
           <p style={{
             fontSize: '1.25rem',
@@ -55,7 +55,7 @@ export default function HomePage() {
             maxWidth: '600px',
             margin: '0 auto 2.5rem'
           }}>
-            Discover our curated collection of high-quality apparel designed for the modern lifestyle.
+            現代のライフスタイルに合わせて厳選された高品質アパレルコレクションをご覧ください。
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a
@@ -71,7 +71,7 @@ export default function HomePage() {
                 fontSize: '1.125rem'
               }}
             >
-              Shop Now
+              今すぐショッピング
             </a>
           </div>
         </div>
@@ -82,19 +82,19 @@ export default function HomePage() {
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <h2 style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#111827', marginBottom: '1rem' }}>
-              Shop by Category
+              カテゴリーから探す
             </h2>
             <p style={{ color: '#6b7280', fontSize: '1.125rem' }}>
-              Find exactly what you're looking for
+              お探しの商品がきっと見つかります
             </p>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
             {[
-              { name: 'Tops', icon: '👔', desc: 'T-shirts, Shirts & More' },
-              { name: 'Bottoms', icon: '👖', desc: 'Jeans, Pants & Shorts' },
-              { name: 'Outerwear', icon: '🧥', desc: 'Jackets & Coats' },
-              { name: 'Accessories', icon: '👟', desc: 'Shoes, Belts & More' }
+              { name: 'トップス', icon: '👔', desc: 'Tシャツ・シャツなど' },
+              { name: 'ボトムス', icon: '👖', desc: 'ジーンズ・パンツ・ショーツ' },
+              { name: 'アウター', icon: '🧥', desc: 'ジャケット・コート' },
+              { name: 'アクセサリー', icon: '👟', desc: 'シューズ・ベルトなど' }
             ].map(category => (
               <a
                 key={category.name}
@@ -137,7 +137,7 @@ export default function HomePage() {
               APPAREL EC
             </h3>
             <p style={{ color: '#9ca3af' }}>
-              Premium fashion for the modern lifestyle
+              現代のライフスタイルに合わせたプレミアムファッション
             </p>
           </div>
           <div style={{ 
@@ -146,7 +146,7 @@ export default function HomePage() {
             color: '#9ca3af',
             fontSize: '0.875rem'
           }}>
-            © 2024 Apparel EC. All rights reserved.
+            © 2024 アパレルEC. All rights reserved.
           </div>
         </div>
       </footer>

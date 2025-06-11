@@ -102,7 +102,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
                 display: 'block',
                 marginBottom: '0.5rem'
               }}>
-                ⭐ Featured
+                ⭐ おすすめ
               </span>
             )}
             {product.originalPrice && (
@@ -150,7 +150,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
             e.currentTarget.style.opacity = '0'
           }}
           >
-            View Details →
+            詳細を見る →
           </div>
         </div>
 
@@ -265,7 +265,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
             e.currentTarget.style.transform = 'translateY(0) scale(1)'
             e.currentTarget.style.background = '#3b82f6'
           }}
-          aria-label={`Quick add ${product.name} to cart`}
+          aria-label={`${product.name}をカートに追加`}
         >
           +
         </button>
