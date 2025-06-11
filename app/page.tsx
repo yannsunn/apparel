@@ -44,9 +44,8 @@ export default function HomePage() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: NeuroColorPsychology.trust.gradient,
-      position: 'relative',
-      overflow: 'hidden'
+      background: '#ffffff',
+      position: 'relative'
     }}>
       {/* 🧬 ニューロデザイン最適化ヘッダー */}
       <header style={{
@@ -70,54 +69,47 @@ export default function HomePage() {
           <Link href="/" style={{
             fontSize: '2.2rem',
             fontWeight: '900',
-            background: NeuroColorPsychology.dopamine.gradient,
-            backgroundClip: 'text',
-            WebkitBackgroundClip: 'text',
-            color: 'transparent',
+            color: '#111827',
             textDecoration: 'none',
             letterSpacing: '-0.02em'
           }}>
-            ⚡ APPAREL PRO
+            APPAREL PRO
           </Link>
           
           {/* 🚀 緊急性ナビゲーション */}
           <nav style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
             {/* ⏰ 希少性タイマー */}
             <div style={{
-              background: NeuroColorPsychology.urgency.gradient,
+              background: '#dc2626',
               color: 'white',
               padding: '0.5rem 1rem',
               borderRadius: '25px',
               fontSize: '0.9rem',
-              fontWeight: '700',
-              animation: timeLeft.hours === 0 && timeLeft.minutes < 10 ? 'pulse 1s infinite' : 'none'
+              fontWeight: '700'
             }}>
               ⚡ 限定セール終了まで {timeLeft.hours}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
             </div>
             
             <Link href="/products" style={{ 
-              background: NeuroColorPsychology.trust.primary,
+              background: '#3b82f6',
               color: 'white',
               padding: '0.75rem 1.5rem',
               borderRadius: '25px',
               textDecoration: 'none', 
               fontWeight: '600',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 4px 15px rgba(59, 130, 246, 0.4)'
+              transition: 'all 0.3s ease'
             }}>
               🎯 今すぐ商品を見る
             </Link>
             
             <Link href="/cart" style={{ 
-              background: NeuroColorPsychology.dopamine.gradient,
+              background: '#ef4444',
               color: 'white',
               padding: '0.75rem 1.5rem', 
               borderRadius: '25px',
               textDecoration: 'none', 
               fontWeight: '700',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 4px 15px rgba(255, 71, 87, 0.4)',
-              position: 'relative'
+              transition: 'all 0.3s ease'
             }}>
               🛒 カート {dopamineBoost > 0 && `(+${dopamineBoost})`}
             </Link>
@@ -129,7 +121,7 @@ export default function HomePage() {
       <section style={{
         position: 'relative',
         padding: '4rem 2rem',
-        background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%)',
+        background: '#f9fafb',
         overflow: 'hidden'
       }}>
         {/* 🌟 背景パーティクル効果 */}
@@ -151,7 +143,7 @@ export default function HomePage() {
             <div>
               {/* 🚨 緊急性アラート */}
               <div style={{
-                background: NeuroColorPsychology.urgency.gradient,
+                background: '#dc2626',
                 color: 'white',
                 padding: '0.75rem 1.5rem',
                 borderRadius: '30px',
@@ -172,30 +164,22 @@ export default function HomePage() {
                 fontWeight: '900',
                 lineHeight: '1.1',
                 marginBottom: '1.5rem',
-                background: NeuroColorPsychology.dopamine.gradient,
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                color: 'transparent',
+                color: '#111827',
                 letterSpacing: '-0.02em',
                 transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
                 opacity: isVisible ? 1 : 0,
                 transition: 'all 0.8s ease-out'
               }}>
                 {MirrorNeuronActivation.actionVerbs.ja[0]}<br />
-                <span style={{ color: '#111827' }}>プレミアム</span><br />
-                <span style={{
-                  background: NeuroColorPsychology.urgency.gradient,
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  color: 'transparent'
-                }}>アパレルコレクション</span>
+                <span style={{ color: '#3b82f6' }}>プレミアム</span><br />
+                <span style={{ color: '#dc2626' }}>アパレルコレクション</span>
               </h1>
               
               {/* 💎 価値提案（ニューロ最適化） */}
               <div style={{
                 background: 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(10px)',
-                border: `3px solid ${NeuroColorPsychology.dopamine.primary}`,
+                border: '3px solid #ef4444',
                 borderRadius: '20px',
                 padding: '2rem',
                 marginBottom: '2.5rem',
@@ -208,7 +192,7 @@ export default function HomePage() {
                   right: '-50%',
                   width: '200%',
                   height: '200%',
-                  background: `conic-gradient(from 0deg, ${NeuroColorPsychology.dopamine.primary}, ${NeuroColorPsychology.trust.primary}, ${NeuroColorPsychology.dopamine.primary})`,
+                  background: 'rgba(239, 68, 68, 0.1)',
                   opacity: 0.1,
                   animation: 'rotate 20s linear infinite'
                 }} />
@@ -226,10 +210,10 @@ export default function HomePage() {
                     fontSize: '2.2rem',
                     fontWeight: '800',
                     margin: 0,
-                    background: NeuroColorPsychology.urgency.gradient,
+                    background: '#dc2626',
                     backgroundClip: 'text',
                     WebkitBackgroundClip: 'text',
-                    color: 'transparent'
+                    color: '#dc2626'
                   }}>
                     限定74%OFF で{MirrorNeuronActivation.actionVerbs.ja[2]}
                   </p>
@@ -239,7 +223,7 @@ export default function HomePage() {
               {/* 🚀 ドーパミン誘発CTA群 */}
               <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
                 <Link href="/products" style={{
-                  background: NeuroColorPsychology.dopamine.gradient,
+                  background: '#ef4444',
                   color: 'white',
                   padding: '1rem 2.5rem',
                   borderRadius: '50px',
@@ -256,13 +240,13 @@ export default function HomePage() {
                 
                 <Link href="/products?filter=limited" style={{
                   background: 'rgba(255, 255, 255, 0.9)',
-                  color: NeuroColorPsychology.dopamine.primary,
+                  color: '#ef4444',
                   padding: '1rem 2.5rem',
                   borderRadius: '50px',
                   textDecoration: 'none',
                   fontWeight: '700',
                   fontSize: '1.2rem',
-                  border: `3px solid ${NeuroColorPsychology.dopamine.primary}`,
+                  border: '3px solid #ef4444',
                   transition: 'all 0.3s ease'
                 }}>
                   👑 限定コレクション
@@ -286,16 +270,16 @@ export default function HomePage() {
                   fontSize: '1.2rem', 
                   fontWeight: '700', 
                   marginBottom: '1.5rem',
-                  color: NeuroColorPsychology.trust.primary
+                  color: '#3b82f6'
                 }}>
                   🔥 リアルタイム実績
                 </h3>
                 
                 {[
-                  { label: '今日の購入者', value: salesCount.toString(), suffix: '人', icon: '🛒', color: NeuroColorPsychology.dopamine.primary },
-                  { label: '現在の閲覧者', value: viewerCount.toString(), suffix: '人', icon: '👀', color: NeuroColorPsychology.trust.primary },
-                  { label: '在庫残り', value: '7', suffix: '点のみ', icon: '📦', color: NeuroColorPsychology.urgency.primary },
-                  { label: '満足度', value: '99.2', suffix: '%', icon: '⭐', color: NeuroColorPsychology.safety.primary }
+                  { label: '今日の購入者', value: salesCount.toString(), suffix: '人', icon: '🛒', color: '#ef4444' },
+                  { label: '現在の閲覧者', value: viewerCount.toString(), suffix: '人', icon: '👀', color: '#3b82f6' },
+                  { label: '在庫残り', value: '7', suffix: '点のみ', icon: '📦', color: '#dc2626' },
+                  { label: '満足度', value: '99.2', suffix: '%', icon: '⭐', color: '#059669' }
                 ].map((stat, index) => (
                   <div key={stat.label} style={{
                     display: 'flex',
@@ -321,7 +305,7 @@ export default function HomePage() {
               
               {/* ⏰ 希少性カウントダウン */}
               <div style={{
-                background: NeuroColorPsychology.urgency.gradient,
+                background: '#dc2626',
                 color: 'white',
                 borderRadius: '20px',
                 padding: '1.5rem',
@@ -357,10 +341,7 @@ export default function HomePage() {
           {/* 🎯 認知負荷最適化ヘッダー */}
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <div style={{
-              background: NeuroColorPsychology.trust.gradient,
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              color: 'transparent',
+              color: '#3b82f6',
               fontSize: '0.9rem',
               fontWeight: '700',
               textTransform: 'uppercase',
@@ -400,8 +381,8 @@ export default function HomePage() {
                 icon: '🚀',
                 title: MirrorNeuronActivation.actionVerbs.ja[4],
                 description: 'AI駆動の次世代デザインで業界を革命的に変革',
-                color: NeuroColorPsychology.dopamine.primary,
-                gradient: NeuroColorPsychology.dopamine.gradient,
+                color: '#ef4444',
+                color: '#ef4444',
                 benefit: '売上300%アップ',
                 proof: '実績97社で証明済み'
               },
@@ -410,7 +391,7 @@ export default function HomePage() {
                 title: MirrorNeuronActivation.actionVerbs.ja[1],
                 description: '限定素材とプレミアム品質で圧倒的な差別化を実現',
                 color: NeuroColorPsychology.trust.primary,
-                gradient: NeuroColorPsychology.trust.gradient,
+                color: '#3b82f6',
                 benefit: 'コスト50%削減',
                 proof: '顧客満足度99.2%'
               },
@@ -419,7 +400,7 @@ export default function HomePage() {
                 title: MirrorNeuronActivation.actionVerbs.ja[6],
                 description: '1枚から対応可能な超小ロット生産システム',
                 color: NeuroColorPsychology.urgency.primary,
-                gradient: NeuroColorPsychology.urgency.gradient,
+                color: '#dc2626',
                 benefit: '在庫リスク0%',
                 proof: '最短48時間納期'
               },
@@ -428,7 +409,7 @@ export default function HomePage() {
                 title: MirrorNeuronActivation.actionVerbs.ja[3],
                 description: 'VIP専用ルートでトレンド情報を独占的に先取り',
                 color: NeuroColorPsychology.safety.primary,
-                gradient: NeuroColorPsychology.safety.gradient,
+                color: '#059669',
                 benefit: 'トレンド3ヶ月先取り',
                 proof: '業界シェア第1位'
               }
@@ -452,7 +433,7 @@ export default function HomePage() {
                   right: 0,
                   width: '100px',
                   height: '100px',
-                  background: feature.gradient,
+                  background: feature.color,
                   opacity: 0.1,
                   borderRadius: '50%',
                   transform: 'translate(30px, -30px)'
@@ -469,7 +450,7 @@ export default function HomePage() {
                       {feature.icon}
                     </div>
                     <div style={{
-                      background: feature.gradient,
+                      background: feature.color,
                       color: 'white',
                       padding: '0.3rem 0.8rem',
                       borderRadius: '15px',
@@ -548,9 +529,7 @@ export default function HomePage() {
                 fontSize: '2.2rem',
                 fontWeight: '900',
                 marginBottom: '1rem',
-                background: NeuroColorPsychology.dopamine.gradient,
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
+                background: '#ef4444',
                 color: 'transparent'
               }}>
                 🔥 {timeLeft.hours === 0 && timeLeft.minutes < 30 ? '最後のチャンス！' : '今だけ特別価格'}
@@ -563,12 +542,12 @@ export default function HomePage() {
                 fontWeight: '600'
               }}>
                 {viewerCount}人が検討中。残り{timeLeft.minutes}分で
-                <span style={{ color: NeuroColorPsychology.urgency.primary, fontWeight: '800' }}>74%OFF</span>
+                <span style={{ color: '#dc2626', fontWeight: '800' }}>74%OFF</span>
                 終了します
               </p>
               
               <Link href="/products" style={{
-                background: NeuroColorPsychology.dopamine.gradient,
+                background: '#ef4444',
                 color: 'white',
                 padding: '1.25rem 3rem',
                 borderRadius: '50px',
@@ -590,7 +569,7 @@ export default function HomePage() {
 
       {/* 🧠 ニューロマーケティング最適化フッター */}
       <footer style={{ 
-        background: 'linear-gradient(135deg, #111827 0%, #1f2937 50%, #374151 100%)',
+        background: '#111827',
         color: '#ffffff', 
         padding: '4rem 2rem 2rem',
         position: 'relative',
@@ -659,7 +638,7 @@ export default function HomePage() {
                   <div style={{
                     fontSize: '1.8rem',
                     fontWeight: '800',
-                    color: NeuroColorPsychology.dopamine.primary,
+                    color: '#ef4444',
                     marginBottom: '0.25rem'
                   }}>
                     {stat.value}{stat.suffix}
@@ -685,9 +664,9 @@ export default function HomePage() {
             marginBottom: '2rem'
           }}>
             {[
-              { href: '/products', label: '🎯 商品一覧', color: NeuroColorPsychology.trust.primary },
-              { href: '/cart', label: '🛒 カート', color: NeuroColorPsychology.dopamine.primary },
-              { href: '/support/contact', label: '💬 VIPサポート', color: NeuroColorPsychology.safety.primary }
+              { href: '/products', label: '🎯 商品一覧', color: '#3b82f6' },
+              { href: '/cart', label: '🛒 カート', color: '#ef4444' },
+              { href: '/support/contact', label: '💬 VIPサポート', color: '#059669' }
             ].map((link, index) => (
               <Link key={link.href} href={link.href} style={{ 
                 color: link.color,
