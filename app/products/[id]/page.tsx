@@ -110,15 +110,35 @@ export default function ProductDetailPage() {
               height: '600px',
               background: '#f3f4f6',
               borderRadius: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '1rem'
+              overflow: 'hidden',
+              marginBottom: '1rem',
+              position: 'relative'
             }}>
-              <div style={{ color: '#9ca3af', textAlign: 'center' }}>
-                <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>👔</div>
-                <div>Product Image {activeImageIndex + 1}</div>
-              </div>
+              <img
+                src={`/product${(activeImageIndex % 2) + 1}.jpg`}
+                alt={`${product.name} - 画像 ${activeImageIndex + 1}`}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'center'
+                }}
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none'
+                  const parent = e.currentTarget.parentElement
+                  if (parent) {
+                    parent.style.display = 'flex'
+                    parent.style.alignItems = 'center'
+                    parent.style.justifyContent = 'center'
+                    parent.innerHTML = `
+                      <div style="color: #9ca3af; text-align: center;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">👔</div>
+                        <div>商品画像 ${activeImageIndex + 1}</div>
+                      </div>
+                    `
+                  }
+                }}
+              />
             </div>
             {/* Thumbnails */}
             <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -132,9 +152,25 @@ export default function ProductDetailPage() {
                     background: '#f3f4f6',
                     border: activeImageIndex === index ? '2px solid #3b82f6' : '1px solid #e5e7eb',
                     borderRadius: '4px',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    overflow: 'hidden',
+                    position: 'relative'
                   }}
-                />
+                >
+                  <img
+                    src={`/product${(index % 2) + 1}.jpg`}
+                    alt={`サムネイル ${index + 1}`}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center'
+                    }}
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none'
+                    }}
+                  />
+                </button>
               ))}
             </div>
           </div>

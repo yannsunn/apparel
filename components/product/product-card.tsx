@@ -186,13 +186,39 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
             )}
           </div>
 
-          {/* 商品アイコン */}
+          {/* 商品画像 */}
+          <img
+            src={`/product${(index % 2) + 1}.jpg`}
+            alt={product.name || 'アパレル商品'}
+            loading="lazy"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
+              transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+              transition: 'all 0.3s ease',
+              filter: isHovered ? 'brightness(1.1)' : 'brightness(1)'
+            }}
+            onError={(e) => {
+              // フォールバック: アイコン表示
+              e.currentTarget.style.display = 'none'
+              const fallback = e.currentTarget.nextElementSibling as HTMLElement
+              if (fallback) fallback.style.display = 'flex'
+            }}
+          />
+          {/* フォールバックアイコン */}
           <div style={{ 
             fontSize: '5rem',
             opacity: 0.7,
             filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15))',
             transform: isHovered ? 'scale(1.1) rotate(5deg)' : 'scale(1) rotate(0deg)',
-            transition: 'all 0.3s ease'
+            transition: 'all 0.3s ease',
+            display: 'none',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            height: '100%'
           }}>
             {categoryIcon}
           </div>
