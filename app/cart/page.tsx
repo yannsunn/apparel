@@ -304,8 +304,6 @@ export default function NeuroCartPage() {
         </div>
       )}
 
-      <UltraHeader />
-
       {/* プログレスバー */}
       <div style={{ background: '#ffffff', padding: '1rem 2rem', borderBottom: '1px solid #e5e7eb' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>

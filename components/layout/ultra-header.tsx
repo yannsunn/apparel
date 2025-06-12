@@ -224,6 +224,7 @@ export default function UltraHeader({
           <div style={navLinksStyle}>
             {(UltraSync.Navigation.main as unknown as any[])
               .filter((item: any) => item.special !== 'cart')
+              .slice(0, 5) // 最大5個のメインナビゲーション
               .map(renderNavItem)
             }
             

@@ -66,26 +66,35 @@ export const ULTRA_NAVIGATION = {
       icon: '👕',
       description: 'すべての商品を見る'
     },
-    {
-      label: 'サービス',
-      href: '/services',
-      icon: '⚙️',
-      description: 'OEM・小ロット対応',
-      submenu: [
-        { label: 'OEM・ODM', href: '/services/oem', icon: '🏭' },
-        { label: '小ロット対応', href: '/services/small-lot', icon: '📦' }
-      ]
+    { 
+      label: 'OEM・ODM', 
+      href: '/services/oem', 
+      icon: '🏭',
+      description: 'OEM・ODMサービス'
     },
-    {
-      label: 'サポート',
-      href: '/support',
-      icon: '🛠️', 
-      description: 'お客様サポート',
-      submenu: [
-        { label: 'よくある質問', href: '/support/faq', icon: '❓' },
-        { label: 'お問い合わせ', href: '/support/contact', icon: '📧' },
-        { label: '配送について', href: '/support/shipping', icon: '🚚' }
-      ]
+    { 
+      label: '小ロット対応', 
+      href: '/services/small-lot', 
+      icon: '📦',
+      description: '小ロット生産サービス'
+    },
+    { 
+      label: 'よくある質問', 
+      href: '/support/faq', 
+      icon: '❓',
+      description: 'FAQ・よくある質問'
+    },
+    { 
+      label: 'お問い合わせ', 
+      href: '/support/contact', 
+      icon: '📧',
+      description: 'お問い合わせフォーム'
+    },
+    { 
+      label: '配送について', 
+      href: '/support/shipping', 
+      icon: '🚚',
+      description: '配送・送料について'
     },
     { 
       label: 'カート', 
