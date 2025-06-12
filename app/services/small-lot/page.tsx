@@ -17,56 +17,16 @@ export default function SmallLotPage() {
 
       {/* Hero Section */}
       <section style={{
-        background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.9) 0%, rgba(4, 120, 87, 0.9) 100%)',
+        background: '#ef4444',
         color: '#ffffff',
         padding: '4rem 2rem',
-        position: 'relative',
-        overflow: 'hidden',
         minHeight: '60vh',
         display: 'flex',
         alignItems: 'center'
       }}>
-        {/* Background image */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundImage: 'url("https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          zIndex: 0
-        }} />
-        
-        {/* Background overlay */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.85) 0%, rgba(4, 120, 87, 0.85) 100%)',
-          zIndex: 1
-        }} />
-        
-        {/* Background pattern */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M20 20c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4 4 1.8 4 4zm16 0c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4 4 1.8 4 4z'/%3E%3C/g%3E%3C/svg%3E")`,
-          opacity: 0.3,
-          zIndex: 2
-        }} />
-        
         <div style={{ 
           maxWidth: '1280px', 
           margin: '0 auto', 
-          position: 'relative', 
-          zIndex: 3,
           display: 'grid',
           gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)',
           gap: '3rem',
@@ -85,7 +45,6 @@ export default function SmallLotPage() {
             </h1>
             <p style={{
               fontSize: '1.25rem',
-              opacity: 0.95,
               marginBottom: '2rem',
               lineHeight: '1.6'
             }}>
@@ -101,9 +60,11 @@ export default function SmallLotPage() {
                   size="large"
                   style={{
                     background: '#ffffff',
-                    color: '#10b981',
+                    color: '#ef4444',
                     border: 'none',
-                    fontWeight: 'bold'
+                    fontWeight: '600',
+                    fontSize: '1.1rem',
+                    padding: '1rem 2rem'
                   }}
                 >
                   1枚から相談
@@ -117,7 +78,10 @@ export default function SmallLotPage() {
                   style={{
                     background: 'transparent',
                     color: '#ffffff',
-                    border: '2px solid #ffffff'
+                    border: '2px solid #ffffff',
+                    fontWeight: '600',
+                    fontSize: '1rem',
+                    padding: '0.875rem 1.75rem'
                   }}
                 >
                   製作事例を見る
@@ -127,14 +91,13 @@ export default function SmallLotPage() {
             
             {/* Urgency indicator */}
             <div style={{
-              background: 'rgba(255,255,255,0.15)',
-              backdropFilter: 'blur(10px)',
-              borderRadius: '12px',
-              padding: '1rem 2rem',
+              background: 'rgba(255, 255, 255, 0.1)',
+              borderRadius: '8px',
+              padding: '1.5rem 2rem',
               display: 'inline-block',
-              border: '1px solid rgba(255,255,255,0.3)'
+              border: '1px solid rgba(255, 255, 255, 0.2)'
             }}>
-              <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem', opacity: 0.9 }}>
+              <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>
                 ⚡ 今始めよう
               </div>
               <div style={{ fontWeight: '600', fontSize: '1.1rem' }}>
@@ -153,8 +116,7 @@ export default function SmallLotPage() {
             {/* Small lot showcase image */}
             <div style={{
               background: 'rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(10px)',
-              borderRadius: '20px',
+              borderRadius: '16px',
               padding: '1.5rem',
               border: '1px solid rgba(255, 255, 255, 0.2)',
               width: '100%',
@@ -167,13 +129,13 @@ export default function SmallLotPage() {
                   width: '100%',
                   height: '200px',
                   objectFit: 'cover',
-                  borderRadius: '12px',
+                  borderRadius: '8px',
                   marginBottom: '1rem'
                 }}
               />
               
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.5rem' }}>
+                <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>
                   📊 リスク最小化
                 </div>
                 <div style={{ fontSize: '1rem', fontWeight: '600' }}>
@@ -192,25 +154,23 @@ export default function SmallLotPage() {
             }}>
               <div style={{
                 background: 'rgba(255, 255, 255, 0.1)',
-                backdropFilter: 'blur(10px)',
-                borderRadius: '12px',
+                borderRadius: '8px',
                 padding: '1rem',
                 textAlign: 'center',
                 border: '1px solid rgba(255, 255, 255, 0.2)'
               }}>
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>ゼロ</div>
-                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>在庫リスク</div>
+                <div style={{ fontSize: '0.8rem' }}>在庫リスク</div>
               </div>
               <div style={{
                 background: 'rgba(255, 255, 255, 0.1)',
-                backdropFilter: 'blur(10px)',
-                borderRadius: '12px',
+                borderRadius: '8px',
                 padding: '1rem',
                 textAlign: 'center',
                 border: '1px solid rgba(255, 255, 255, 0.2)'
               }}>
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>即日</div>
-                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>対応可能</div>
+                <div style={{ fontSize: '0.8rem' }}>対応可能</div>
               </div>
             </div>
           </div>

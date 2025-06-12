@@ -111,49 +111,21 @@ export default function ProductsPage() {
 
       {/* ヒーローセクション */}
       <section style={{
-        background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.9) 0%, rgba(220, 38, 38, 0.9) 100%)',
+        background: '#ef4444',
         color: '#ffffff',
         padding: '4rem 2rem',
-        position: 'relative',
-        overflow: 'hidden',
-        minHeight: '50vh',
+        minHeight: '60vh',
         display: 'flex',
         alignItems: 'center'
       }}>
-        {/* Background image */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundImage: 'url("https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          zIndex: 0
-        }} />
-        
-        {/* Background overlay */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.85) 0%, rgba(220, 38, 38, 0.85) 100%)',
-          zIndex: 1
-        }} />
-        
         <div style={{ 
           maxWidth: '1280px', 
           margin: '0 auto', 
-          position: 'relative', 
-          zIndex: 3,
           textAlign: 'center',
           width: '100%'
         }}>
           <h1 style={{
-            fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+            fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
             fontWeight: 'bold',
             marginBottom: '1.5rem',
             lineHeight: '1.2'
@@ -162,7 +134,6 @@ export default function ProductsPage() {
           </h1>
           <p style={{
             fontSize: '1.25rem',
-            opacity: 0.95,
             marginBottom: '2rem',
             lineHeight: '1.6',
             maxWidth: '600px',
@@ -180,28 +151,31 @@ export default function ProductsPage() {
             flexWrap: 'wrap'
           }}>
             <div style={{
-              background: 'rgba(255, 255, 255, 0.15)',
+              background: 'rgba(255, 255, 255, 0.1)',
               padding: '1rem 1.5rem',
-              borderRadius: '12px'
+              borderRadius: '8px',
+              border: '1px solid rgba(255, 255, 255, 0.2)'
             }}>
               <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>{stats.totalProducts}</div>
-              <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>総商品数</div>
+              <div style={{ fontSize: '0.9rem' }}>総商品数</div>
             </div>
             <div style={{
-              background: 'rgba(255, 255, 255, 0.15)',
+              background: 'rgba(255, 255, 255, 0.1)',
               padding: '1rem 1.5rem',
-              borderRadius: '12px'
+              borderRadius: '8px',
+              border: '1px solid rgba(255, 255, 255, 0.2)'
             }}>
               <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>¥{stats.averagePrice.toLocaleString()}</div>
-              <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>平均価格</div>
+              <div style={{ fontSize: '0.9rem' }}>平均価格</div>
             </div>
             <div style={{
-              background: 'rgba(255, 255, 255, 0.15)',
+              background: 'rgba(255, 255, 255, 0.1)',
               padding: '1rem 1.5rem',
-              borderRadius: '12px'
+              borderRadius: '8px',
+              border: '1px solid rgba(255, 255, 255, 0.2)'
             }}>
               <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>{stats.featuredCount}</div>
-              <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>おすすめ商品</div>
+              <div style={{ fontSize: '0.9rem' }}>おすすめ商品</div>
             </div>
           </div>
         </div>

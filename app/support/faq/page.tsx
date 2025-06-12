@@ -125,56 +125,16 @@ export default function FAQPage() {
 
       {/* Hero Section */}
       <section style={{
-        background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.9) 0%, rgba(217, 119, 6, 0.9) 100%)',
+        background: '#ef4444',
         color: '#ffffff',
         padding: '4rem 2rem',
-        position: 'relative',
-        overflow: 'hidden',
-        minHeight: '50vh',
+        minHeight: '60vh',
         display: 'flex',
         alignItems: 'center'
       }}>
-        {/* Background image */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundImage: 'url("https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          zIndex: 0
-        }} />
-        
-        {/* Background overlay */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.85) 0%, rgba(217, 119, 6, 0.85) 100%)',
-          zIndex: 1
-        }} />
-        
-        {/* Background pattern */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M25 25m-8 0a8 8 0 1 1 16 0a8 8 0 1 1 -16 0'/%3E%3C/g%3E%3C/svg%3E")`,
-          opacity: 0.3,
-          zIndex: 2
-        }} />
-        
         <div style={{ 
           maxWidth: '1280px', 
           margin: '0 auto', 
-          position: 'relative', 
-          zIndex: 3,
           display: 'grid',
           gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)',
           gap: '3rem',
@@ -193,7 +153,6 @@ export default function FAQPage() {
             </h1>
             <p style={{
               fontSize: '1.25rem',
-              opacity: 0.95,
               marginBottom: '2rem',
               lineHeight: '1.6'
             }}>
@@ -209,9 +168,11 @@ export default function FAQPage() {
                   size="large"
                   style={{
                     background: '#ffffff',
-                    color: '#f59e0b',
+                    color: '#ef4444',
                     border: 'none',
-                    fontWeight: 'bold'
+                    fontWeight: '600',
+                    fontSize: '1.1rem',
+                    padding: '1rem 2rem'
                   }}
                 >
                   🙋‍♀️ 質問する
@@ -224,7 +185,10 @@ export default function FAQPage() {
                 style={{
                   background: 'transparent',
                   color: '#ffffff',
-                  border: '2px solid #ffffff'
+                  border: '2px solid #ffffff',
+                  fontWeight: '600',
+                  fontSize: '1rem',
+                  padding: '0.875rem 1.75rem'
                 }}
               >
                 📞 電話サポート
@@ -242,8 +206,7 @@ export default function FAQPage() {
             {/* FAQ support image */}
             <div style={{
               background: 'rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(10px)',
-              borderRadius: '20px',
+              borderRadius: '16px',
               padding: '1.5rem',
               border: '1px solid rgba(255, 255, 255, 0.2)',
               width: '100%',
@@ -256,13 +219,13 @@ export default function FAQPage() {
                   width: '100%',
                   height: '200px',
                   objectFit: 'cover',
-                  borderRadius: '12px',
+                  borderRadius: '8px',
                   marginBottom: '1rem'
                 }}
               />
               
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.5rem' }}>
+                <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>
                   ❓ 即座に解決
                 </div>
                 <div style={{ fontSize: '1rem', fontWeight: '600' }}>
@@ -281,25 +244,23 @@ export default function FAQPage() {
             }}>
               <div style={{
                 background: 'rgba(255, 255, 255, 0.1)',
-                backdropFilter: 'blur(10px)',
-                borderRadius: '12px',
+                borderRadius: '8px',
                 padding: '1rem',
                 textAlign: 'center',
                 border: '1px solid rgba(255, 255, 255, 0.2)'
               }}>
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>95%</div>
-                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>解決率</div>
+                <div style={{ fontSize: '0.8rem' }}>解決率</div>
               </div>
               <div style={{
                 background: 'rgba(255, 255, 255, 0.1)',
-                backdropFilter: 'blur(10px)',
-                borderRadius: '12px',
+                borderRadius: '8px',
                 padding: '1rem',
                 textAlign: 'center',
                 border: '1px solid rgba(255, 255, 255, 0.2)'
               }}>
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>即時</div>
-                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>回答</div>
+                <div style={{ fontSize: '0.8rem' }}>回答</div>
               </div>
             </div>
           </div>

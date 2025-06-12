@@ -218,6 +218,142 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* プロフェッショナル画像セクション */}
+      <section style={{ 
+        padding: '4rem 2rem', 
+        background: '#ffffff'
+      }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <h2 style={{ 
+              fontSize: '2rem', 
+              fontWeight: 'bold', 
+              marginBottom: '1rem',
+              color: '#111827'
+            }}>
+              プロフェッショナルな製造環境
+            </h2>
+            <p style={{
+              fontSize: '1.1rem',
+              color: '#6b7280',
+              maxWidth: '600px',
+              margin: '0 auto'
+            }}>
+              最新設備と熟練技術で、高品質なアパレル製品を製造しています
+            </p>
+          </div>
+          
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '2rem',
+            marginBottom: '4rem'
+          }}>
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              border: '1px solid #e5e7eb',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
+            }}>
+              <img 
+                src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="最新製造工場"
+                style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover'
+                }}
+              />
+              <div style={{ padding: '1.5rem' }}>
+                <h3 style={{ 
+                  fontSize: '1.25rem', 
+                  fontWeight: '600', 
+                  marginBottom: '0.5rem',
+                  color: '#111827'
+                }}>
+                  最新製造工場
+                </h3>
+                <p style={{ 
+                  color: '#6b7280', 
+                  lineHeight: '1.6'
+                }}>
+                  ISO認証取得工場で品質管理を徹底し、安定した製品をお届けします。
+                </p>
+              </div>
+            </div>
+            
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              border: '1px solid #e5e7eb',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
+            }}>
+              <img 
+                src="https://images.unsplash.com/photo-1565022687882-5d5c7c3d8b5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="高品質素材"
+                style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover'
+                }}
+              />
+              <div style={{ padding: '1.5rem' }}>
+                <h3 style={{ 
+                  fontSize: '1.25rem', 
+                  fontWeight: '600', 
+                  marginBottom: '0.5rem',
+                  color: '#111827'
+                }}>
+                  厳選された素材
+                </h3>
+                <p style={{ 
+                  color: '#6b7280', 
+                  lineHeight: '1.6'
+                }}>
+                  世界各地から厳選した高品質素材を使用し、耐久性と美しさを追求します。
+                </p>
+              </div>
+            </div>
+            
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              border: '1px solid #e5e7eb',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
+            }}>
+              <img 
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="専門チーム"
+                style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover'
+                }}
+              />
+              <div style={{ padding: '1.5rem' }}>
+                <h3 style={{ 
+                  fontSize: '1.25rem', 
+                  fontWeight: '600', 
+                  marginBottom: '0.5rem',
+                  color: '#111827'
+                }}>
+                  専門チーム
+                </h3>
+                <p style={{ 
+                  color: '#6b7280', 
+                  lineHeight: '1.6'
+                }}>
+                  経験豊富な専門スタッフが、企画から納品まで責任を持ってサポートします。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* サービス特徴セクション */}
       <section style={{ 
         padding: '4rem 2rem', 
