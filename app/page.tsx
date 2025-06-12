@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import UltraHeader from '@/components/layout/ultra-header'
 import { NeuroColorPsychology, MirrorNeuronActivation, DopamineRewardSystem } from '@/lib/neuro/advanced-neuro-system'
 
 export default function HomePage() {
@@ -47,75 +48,64 @@ export default function HomePage() {
       background: '#ffffff',
       position: 'relative'
     }}>
-      {/* 🧬 ニューロデザイン最適化ヘッダー */}
-      <header style={{
+      <UltraHeader transparent={true} />
+
+      {/* 🚀 緊急性ナビゲーション追加セクション */}
+      <div style={{
         background: 'rgba(255, 255, 255, 0.95)',
-        backdropFilter: 'blur(20px)',
         borderBottom: `3px solid ${NeuroColorPsychology.dopamine.primary}`,
-        padding: '1rem 2rem',
+        padding: '0.5rem 2rem',
         position: 'sticky',
-        top: 0,
-        zIndex: 50,
-        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)'
+        top: '80px',
+        zIndex: 45,
+        boxShadow: '0 4px 16px rgba(0, 0, 0, 0.05)'
       }}>
         <div style={{ 
           maxWidth: '1400px', 
           margin: '0 auto', 
           display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center' 
+          justifyContent: 'center', 
+          alignItems: 'center',
+          gap: '1rem',
+          flexWrap: 'wrap'
         }}>
-          {/* 🎯 ブランド認知最適化 */}
-          <Link href="/" style={{
-            fontSize: '2.2rem',
-            fontWeight: '900',
-            color: '#111827',
-            textDecoration: 'none',
-            letterSpacing: '-0.02em'
+          {/* ⏰ 希少性タイマー */}
+          <div style={{
+            background: '#dc2626',
+            color: 'white',
+            padding: '0.5rem 1rem',
+            borderRadius: '25px',
+            fontSize: '0.9rem',
+            fontWeight: '700'
           }}>
-            APPAREL PRO
+            ⚡ 限定セール終了まで {timeLeft.hours}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
+          </div>
+          
+          <Link href="/products" style={{ 
+            background: '#3b82f6',
+            color: 'white',
+            padding: '0.75rem 1.5rem',
+            borderRadius: '25px',
+            textDecoration: 'none', 
+            fontWeight: '600',
+            transition: 'all 0.3s ease'
+          }}>
+            🎯 今すぐ商品を見る
           </Link>
           
-          {/* 🚀 緊急性ナビゲーション */}
-          <nav style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-            {/* ⏰ 希少性タイマー */}
-            <div style={{
-              background: '#dc2626',
-              color: 'white',
-              padding: '0.5rem 1rem',
-              borderRadius: '25px',
-              fontSize: '0.9rem',
-              fontWeight: '700'
-            }}>
-              ⚡ 限定セール終了まで {timeLeft.hours}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
-            </div>
-            
-            <Link href="/products" style={{ 
-              background: '#3b82f6',
-              color: 'white',
-              padding: '0.75rem 1.5rem',
-              borderRadius: '25px',
-              textDecoration: 'none', 
-              fontWeight: '600',
-              transition: 'all 0.3s ease'
-            }}>
-              🎯 今すぐ商品を見る
-            </Link>
-            
-            <Link href="/cart" style={{ 
-              background: '#ef4444',
-              color: 'white',
-              padding: '0.75rem 1.5rem', 
-              borderRadius: '25px',
-              textDecoration: 'none', 
-              fontWeight: '700',
-              transition: 'all 0.3s ease'
-            }}>
-              🛒 カート {dopamineBoost > 0 && `(+${dopamineBoost})`}
-            </Link>
-          </nav>
+          <Link href="/cart" style={{ 
+            background: '#ef4444',
+            color: 'white',
+            padding: '0.75rem 1.5rem', 
+            borderRadius: '25px',
+            textDecoration: 'none', 
+            fontWeight: '700',
+            transition: 'all 0.3s ease'
+          }}>
+            🛒 カート {dopamineBoost > 0 && `(+${dopamineBoost})`}
+          </Link>
         </div>
-      </header>
+      </div>
 
       {/* 🧠 ニューロマーケティング最適化ヒーローセクション */}
       <section style={{
@@ -601,7 +591,7 @@ export default function HomePage() {
               WebkitBackgroundClip: 'text',
               color: 'transparent'
             }}>
-              ⚡ APPAREL PRO
+              ⚡ APPAREL EC
             </h3>
             <p style={{ 
               color: '#d1d5db', 
@@ -687,7 +677,7 @@ export default function HomePage() {
             color: '#9ca3af',
             fontSize: '0.9rem'
           }}>
-            © 2024 APPAREL PRO. 全ての革命的体験を独占提供.
+            © 2024 APPAREL EC. 全ての革命的体験を独占提供.
           </div>
         </div>
       </footer>

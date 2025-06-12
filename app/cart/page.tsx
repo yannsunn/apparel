@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { useCartStore } from '@/lib/store/cart'
+import UltraHeader from '@/components/layout/ultra-header'
 import { 
   useNeuroUX, 
   useChoiceArchitecture, 
@@ -163,37 +164,7 @@ export default function NeuroCartPage() {
     return (
       <div style={{ minHeight: '100vh', background: '#fafafa' }}>
         <NeuroStyles />
-        
-        {/* ヘッダー */}
-        <header style={{
-          background: 'rgba(255,255,255,0.95)',
-          backdropFilter: 'blur(12px)',
-          borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
-          padding: '1rem 2rem',
-          position: 'sticky',
-          top: 0,
-          zIndex: 40
-        }}>
-          <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Link href="/" style={{
-              fontSize: '1.8rem',
-              fontWeight: 'bold',
-              color: '#3b82f6',
-              textDecoration: 'none'
-            }}>
-              APPAREL EC
-            </Link>
-            
-            <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-              <Link href="/" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-                ホーム
-              </Link>
-              <Link href="/products" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-                商品一覧
-              </Link>
-            </nav>
-          </div>
-        </header>
+        <UltraHeader />
 
         {/* 空のカート */}
         <main style={{ maxWidth: '800px', margin: '0 auto', padding: '4rem 2rem', textAlign: 'center' }}>
@@ -333,41 +304,7 @@ export default function NeuroCartPage() {
         </div>
       )}
 
-      {/* ヘッダー */}
-      <header style={{
-        background: 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,250,252,0.95))',
-        backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
-        padding: '1rem 2rem',
-        position: 'sticky',
-        top: 0,
-        zIndex: 40
-      }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link href="/" style={{
-            fontSize: '1.8rem',
-            fontWeight: 'bold',
-            background: `linear-gradient(135deg, ${NeuroColors.trust.primary}, ${NeuroColors.dopamine.primary})`,
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            textDecoration: 'none'
-          }}>
-            APPAREL EC
-          </Link>
-          
-          <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-            <Link href="/" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-              ホーム
-            </Link>
-            <Link href="/products" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-              商品一覧
-            </Link>
-            <span style={{ color: NeuroColors.trust.primary, fontWeight: '600' }}>
-              カート ({totalItems()})
-            </span>
-          </nav>
-        </div>
-      </header>
+      <UltraHeader />
 
       {/* プログレスバー */}
       <div style={{ background: '#ffffff', padding: '1rem 2rem', borderBottom: '1px solid #e5e7eb' }}>

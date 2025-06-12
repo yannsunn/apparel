@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import UnifiedHeader from '@/components/layout/unified-header'
+import UltraHeader from '@/components/layout/ultra-header'
 import { NeuroButton, NeuroStyles } from '@/components/neuro/neuro-components'
 
 export const metadata: Metadata = {
@@ -120,7 +120,7 @@ export default function FAQPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#ffffff' }}>
-      <UnifiedHeader />
+      <UltraHeader />
       <NeuroStyles />
 
       {/* Hero Section */}

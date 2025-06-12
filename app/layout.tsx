@@ -2,18 +2,19 @@ import type { Metadata, Viewport } from 'next'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { ErrorBoundary } from '@/components/ui/error-boundary'
+import UltraSyncProvider from '@/components/ultra-sync-provider'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | アパレルEC',
-    default: 'アパレルEC - ファッション通販サイト',
+    template: '%s | APPAREL EC',
+    default: 'APPAREL EC - プロフェッショナルアパレルソリューション',
   },
-  description: '最新トレンドのアパレルを取り揃えた、モダンなオンラインファッションストア。高品質な商品とスムーズなショッピング体験をお届けします。',
+  description: 'プロフェッショナルなアパレルソリューション。OEM・ODM、小ロット対応から高品質な商品まで、あらゆるニーズにお応えします。',
   metadataBase: new URL('https://apparel-roan.vercel.app'),
-  keywords: ['アパレル', 'ファッション', '通販', 'EC', 'オンラインショップ', '衣類', 'トレンド', 'スタイル'],
-  authors: [{ name: 'アパレルEC', url: 'https://apparel-roan.vercel.app' }],
-  creator: 'アパレルEC',
-  publisher: 'アパレルEC',
+  keywords: ['APPAREL EC', 'アパレル', 'OEM', 'ODM', '小ロット', 'ファッション', 'プロフェッショナル'],
+  authors: [{ name: 'APPAREL EC', url: 'https://apparel-roan.vercel.app' }],
+  creator: 'APPAREL EC',
+  publisher: 'APPAREL EC',
   category: 'shopping',
   classification: 'E-commerce',
   robots: {
@@ -31,9 +32,9 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'ja_JP',
     url: 'https://apparel-roan.vercel.app',
-    title: 'アパレルEC - ファッション通販サイト',
-    description: '最新トレンドのアパレルを取り揃えたオンラインファッションストア',
-    siteName: 'アパレルEC',
+    title: 'APPAREL EC - プロフェッショナルアパレルソリューション',
+    description: 'プロフェッショナルなアパレルソリューション。OEM・ODM、小ロット対応',
+    siteName: 'APPAREL EC',
     images: [
       {
         url: '/api/og?title=Modern Web Application&description=Next.js 15 + React 19&theme=gradient',
@@ -45,8 +46,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'アパレルEC',
-    description: '最新トレンドのアパレルを取り揃えたオンラインファッションストア',
+    title: 'APPAREL EC',
+    description: 'プロフェッショナルなアパレルソリューション',
     creator: '@claudeai',
     images: ['/api/og?title=Modern Web Application&description=Next.js 15 + React 19&theme=gradient'],
   },
@@ -88,17 +89,19 @@ export default function RootLayout({
         <link rel="preconnect" href="https://vercel.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://vercel.com" />
         <meta name="ext-protection" content="enabled" />
-        <meta name="application-name" content="アパレルEC" />
+        <meta name="application-name" content="APPAREL EC" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="アパレルEC" />
+        <meta name="apple-mobile-web-app-title" content="APPAREL EC" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="msapplication-TileColor" content="#2a5298" />
         <meta name="msapplication-tap-highlight" content="no" />
       </head>
       <body style={{ margin: 0, fontFamily: 'system-ui, sans-serif' }}>
         <ErrorBoundary>
-          {children}
+          <UltraSyncProvider>
+            {children}
+          </UltraSyncProvider>
           <Analytics />
           <SpeedInsights />
         </ErrorBoundary>

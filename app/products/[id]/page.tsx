@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation'
 import { getProductById } from '@/lib/data/mock-products'
 import { useCartStore } from '@/lib/store/cart'
 import { Product, Size, Color } from '@/lib/types/product'
-import UnifiedHeader from '@/components/layout/unified-header'
+import UltraHeader from '@/components/layout/ultra-header'
 import { NeuroSocialProof, NeuroScarcity, NeuroTrustBadge } from '@/components/neuro/neuro-components'
 
 export default function ProductDetailPage() {
@@ -63,7 +63,7 @@ export default function ProductDetailPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#f9fafb' }}>
-      <UnifiedHeader />
+      <UltraHeader />
       
       {/* ニューロマーケティング要素 */}
       <NeuroSocialProof 

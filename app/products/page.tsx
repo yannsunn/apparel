@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { products, categories } from '@/lib/data/mock-products'
 import { ProductCard } from '@/components/product/product-card'
 import { useCartStore } from '@/lib/store/cart'
-import UnifiedHeader from '@/components/layout/unified-header'
+import UltraHeader from '@/components/layout/ultra-header'
 import { NeuroSocialProof, NeuroScarcity } from '@/components/neuro/neuro-components'
 
 export default function ProductsPage() {
@@ -95,7 +95,7 @@ export default function ProductsPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#fafafa' }}>
-      <UnifiedHeader />
+      <UltraHeader />
       
       {/* ニューロマーケティング要素 */}
       <NeuroSocialProof 
