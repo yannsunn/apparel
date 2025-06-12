@@ -254,6 +254,118 @@ export default function OEMPage() {
           </div>
         </section>
 
+        {/* OEM製造プロセス画像セクション */}
+        <section style={{ marginBottom: '4rem', padding: '3rem 2rem', background: '#f8fafc', borderRadius: '16px' }}>
+          <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem', textAlign: 'center', color: '#111827' }}>
+            OEM製造プロセス
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '16px',
+              padding: '1.5rem',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
+              textAlign: 'center'
+            }}>
+              <img 
+                src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="デザイン企画"
+                style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover',
+                  borderRadius: '12px',
+                  marginBottom: '1rem'
+                }}
+              />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem', color: '#111827' }}>
+                🎨 デザイン企画
+              </h3>
+              <p style={{ color: '#6b7280', lineHeight: '1.6' }}>
+                お客様のブランドイメージに合わせたオリジナルデザインを企画・提案いたします。
+              </p>
+            </div>
+            
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '16px',
+              padding: '1.5rem',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
+              textAlign: 'center'
+            }}>
+              <img 
+                src="https://images.unsplash.com/photo-1565022687882-5d5c7c3d8b5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="生地選定"
+                style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover',
+                  borderRadius: '12px',
+                  marginBottom: '1rem'
+                }}
+              />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem', color: '#111827' }}>
+                🧵 素材選定
+              </h3>
+              <p style={{ color: '#6b7280', lineHeight: '1.6' }}>
+                高品質な素材を厳選し、商品特性に最適な生地をご提案いたします。
+              </p>
+            </div>
+            
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '16px',
+              padding: '1.5rem',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
+              textAlign: 'center'
+            }}>
+              <img 
+                src="https://images.unsplash.com/photo-1512732261157-b0ba5d4a2dd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="パターン製作"
+                style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover',
+                  borderRadius: '12px',
+                  marginBottom: '1rem'
+                }}
+              />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem', color: '#111827' }}>
+                📏 パターン製作
+              </h3>
+              <p style={{ color: '#6b7280', lineHeight: '1.6' }}>
+                正確なパターン製作により、美しいシルエットと着心地を実現します。
+              </p>
+            </div>
+            
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '16px',
+              padding: '1.5rem',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
+              textAlign: 'center'
+            }}>
+              <img 
+                src="https://images.unsplash.com/photo-1594736797933-d0300ee9f7ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="品質検査"
+                style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover',
+                  borderRadius: '12px',
+                  marginBottom: '1rem'
+                }}
+              />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem', color: '#111827' }}>
+                🔍 品質検査
+              </h3>
+              <p style={{ color: '#6b7280', lineHeight: '1.6' }}>
+                厳格な品質管理基準のもと、一つ一つ丁寧に検査を行います。
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Service Features */}
         <section style={{ marginBottom: '4rem' }}>
           <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem', textAlign: 'center', color: '#111827' }}>

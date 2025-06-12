@@ -219,6 +219,118 @@ export default function SmallLotPage() {
 
       {/* Main Content */}
       <main style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 2rem' }}>
+        {/* 小ロット製造プロセス画像セクション */}
+        <section style={{ marginBottom: '4rem', padding: '3rem 2rem', background: '#f0f9ff', borderRadius: '16px' }}>
+          <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem', textAlign: 'center', color: '#111827' }}>
+            小ロット製造の流れ
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '16px',
+              padding: '1.5rem',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
+              textAlign: 'center'
+            }}>
+              <img 
+                src="https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="テストマーケティング"
+                style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover',
+                  borderRadius: '12px',
+                  marginBottom: '1rem'
+                }}
+              />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem', color: '#111827' }}>
+                📊 テストマーケティング
+              </h3>
+              <p style={{ color: '#6b7280', lineHeight: '1.6' }}>
+                小ロットで市場反応をテストし、リスクを最小限に抑えて商品開発を進められます。
+              </p>
+            </div>
+            
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '16px',
+              padding: '1.5rem',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
+              textAlign: 'center'
+            }}>
+              <img 
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="クイック生産"
+                style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover',
+                  borderRadius: '12px',
+                  marginBottom: '1rem'
+                }}
+              />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem', color: '#111827' }}>
+                ⚡ スピード製造
+              </h3>
+              <p style={{ color: '#6b7280', lineHeight: '1.6' }}>
+                小ロット生産により、通常より短期間での製造・納品が可能です。
+              </p>
+            </div>
+            
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '16px',
+              padding: '1.5rem',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
+              textAlign: 'center'
+            }}>
+              <img 
+                src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="カスタマイズ対応"
+                style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover',
+                  borderRadius: '12px',
+                  marginBottom: '1rem'
+                }}
+              />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem', color: '#111827' }}>
+                🎨 カスタマイズ
+              </h3>
+              <p style={{ color: '#6b7280', lineHeight: '1.6' }}>
+                小ロットならではの柔軟なカスタマイズ対応で、理想の商品を実現します。
+              </p>
+            </div>
+            
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '16px',
+              padding: '1.5rem',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
+              textAlign: 'center'
+            }}>
+              <img 
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="コスト効率"
+                style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover',
+                  borderRadius: '12px',
+                  marginBottom: '1rem'
+                }}
+              />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem', color: '#111827' }}>
+                💰 コスト効率
+              </h3>
+              <p style={{ color: '#6b7280', lineHeight: '1.6' }}>
+                初期投資を抑え、在庫リスクなしで事業を開始できます。
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Service Overview */}
         <section style={{ marginBottom: '4rem' }}>
           <div style={{
