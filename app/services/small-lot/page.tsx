@@ -1,5 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import UnifiedHeader from '@/components/layout/unified-header'
+import { NeuroButton, ScarcityAlert, NeuroStyles } from '@/components/neuro/neuro-components'
 
 export const metadata: Metadata = {
   title: '小ロット対応サービス | APPAREL EC',
@@ -10,54 +12,29 @@ export const metadata: Metadata = {
 export default function SmallLotPage() {
   return (
     <div style={{ minHeight: '100vh', background: '#ffffff' }}>
-      {/* Header */}
-      <header style={{
-        background: '#ffffff',
-        borderBottom: '1px solid #e5e7eb',
-        padding: '1rem 2rem',
-        position: 'sticky',
-        top: 0,
-        zIndex: 40,
-        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
-      }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link href="/" style={{
-            fontSize: '1.8rem',
-            fontWeight: 'bold',
-            color: '#2563eb',
-            textDecoration: 'none'
-          }}>
-            APPAREL EC
-          </Link>
-          <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-            <Link href="/" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-              ホーム
-            </Link>
-            <Link href="/products" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-              商品一覧
-            </Link>
-            <Link href="/cart" style={{ 
-              background: '#2563eb', 
-              color: '#ffffff', 
-              padding: '0.5rem 1rem', 
-              borderRadius: '6px',
-              textDecoration: 'none', 
-              fontWeight: '500'
-            }}>
-              カート
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <UnifiedHeader />
+      <NeuroStyles />
 
       {/* Hero Section */}
       <section style={{
-        background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+        background: 'linear-gradient(135deg, #10b981 0%, #047857 100%)',
         color: '#ffffff',
         padding: '4rem 2rem',
-        textAlign: 'center'
+        textAlign: 'center',
+        position: 'relative',
+        overflow: 'hidden'
       }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+        {/* Background pattern */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M20 20c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4 4 1.8 4 4zm16 0c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4 4 1.8 4 4z'/%3E%3C/g%3E%3C/svg%3E")`,
+          opacity: 0.3
+        }} />
+        <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <h1 style={{
             fontSize: '3rem',
             fontWeight: 'bold',
@@ -74,6 +51,24 @@ export default function SmallLotPage() {
             1枚から始める新しいビジネス。<br />
             在庫リスクを最小限に抑えて、アイデアを形にしませんか？
           </p>
+          
+          {/* Urgency indicator */}
+          <div style={{
+            background: 'rgba(255,255,255,0.15)',
+            backdropFilter: 'blur(10px)',
+            borderRadius: '12px',
+            padding: '1rem 2rem',
+            marginTop: '2rem',
+            display: 'inline-block',
+            border: '1px solid rgba(255,255,255,0.2)'
+          }}>
+            <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem', opacity: 0.9 }}>
+              ⚡ 今始めよう
+            </div>
+            <div style={{ fontWeight: '600', fontSize: '1.1rem' }}>
+              最短1日で製作開始 | 在庫リスクゼロ
+            </div>
+          </div>
         </div>
       </section>
 
@@ -94,7 +89,7 @@ export default function SmallLotPage() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
               <div style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📊</div>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#10b981', marginBottom: '1rem' }}>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#ef4444', marginBottom: '1rem' }}>
                   リスク最小化
                 </h3>
                 <p style={{ color: '#6b7280', lineHeight: '1.6' }}>
@@ -104,7 +99,7 @@ export default function SmallLotPage() {
               </div>
               <div style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>⚡</div>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#10b981', marginBottom: '1rem' }}>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#ef4444', marginBottom: '1rem' }}>
                   スピード対応
                 </h3>
                 <p style={{ color: '#6b7280', lineHeight: '1.6' }}>
@@ -114,7 +109,7 @@ export default function SmallLotPage() {
               </div>
               <div style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>💡</div>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#10b981', marginBottom: '1rem' }}>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#ef4444', marginBottom: '1rem' }}>
                   柔軟性
                 </h3>
                 <p style={{ color: '#6b7280', lineHeight: '1.6' }}>
@@ -311,7 +306,7 @@ export default function SmallLotPage() {
             ].map((process, index) => (
               <div key={index} style={{ textAlign: 'center' }}>
                 <div style={{
-                  background: '#10b981',
+                  background: '#ef4444',
                   color: '#ffffff',
                   width: '60px',
                   height: '60px',
@@ -321,7 +316,8 @@ export default function SmallLotPage() {
                   justifyContent: 'center',
                   fontWeight: 'bold',
                   fontSize: '1rem',
-                  margin: '0 auto 1rem'
+                  margin: '0 auto 1rem',
+                  boxShadow: '0 4px 12px rgba(239, 68, 68, 0.3)'
                 }}>
                   {process.step}
                 </div>
@@ -341,12 +337,25 @@ export default function SmallLotPage() {
 
         {/* CTA Section */}
         <section style={{
-          background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+          background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
           color: '#ffffff',
           padding: '3rem 2rem',
-          borderRadius: '16px',
-          textAlign: 'center'
+          borderRadius: '20px',
+          textAlign: 'center',
+          position: 'relative',
+          overflow: 'hidden',
+          boxShadow: '0 10px 30px rgba(239, 68, 68, 0.3)'
         }}>
+          {/* Animated background */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: '-100%',
+            width: '100%',
+            height: '100%',
+            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)',
+            animation: 'shimmer 3s infinite'
+          }} />
           <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
             小ロットから始めてみませんか？
           </h2>
@@ -354,39 +363,34 @@ export default function SmallLotPage() {
             1枚からでも丁寧に対応いたします。<br />
             まずはお気軽にご相談ください。
           </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link
-              href="/support/contact"
-              style={{
-                display: 'inline-block',
-                padding: '1rem 2rem',
-                background: '#ffffff',
-                color: '#10b981',
-                textDecoration: 'none',
-                borderRadius: '8px',
-                fontWeight: '600',
-                fontSize: '1.125rem',
-                transition: 'all 0.2s'
-              }}
-            >
-              今すぐ相談する
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', position: 'relative', zIndex: 1 }}>
+            <Link href="/support/contact">
+              <NeuroButton 
+                mood="urgency" 
+                size="large" 
+                variant="secondary"
+                style={{
+                  background: '#ffffff',
+                  color: '#ef4444',
+                  border: '2px solid #ffffff'
+                }}
+              >
+                今すぐ相談する
+              </NeuroButton>
             </Link>
-            <Link
-              href="/services/oem"
-              style={{
-                display: 'inline-block',
-                padding: '1rem 2rem',
-                background: 'transparent',
-                color: '#ffffff',
-                textDecoration: 'none',
-                borderRadius: '8px',
-                fontWeight: '600',
-                fontSize: '1.125rem',
-                border: '2px solid #ffffff',
-                transition: 'all 0.2s'
-              }}
-            >
-              OEMサービスも見る
+            <Link href="/services/oem">
+              <NeuroButton 
+                mood="trust" 
+                size="large" 
+                variant="accent"
+                style={{
+                  background: 'transparent',
+                  color: '#ffffff',
+                  border: '2px solid #ffffff'
+                }}
+              >
+                OEMサービスも見る
+              </NeuroButton>
             </Link>
           </div>
         </section>

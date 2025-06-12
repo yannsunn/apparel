@@ -1,5 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import UnifiedHeader from '@/components/layout/unified-header'
+import { NeuroButton, NeuroStyles } from '@/components/neuro/neuro-components'
 
 export const metadata: Metadata = {
   title: 'よくある質問 | APPAREL EC',
@@ -118,54 +120,29 @@ export default function FAQPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#ffffff' }}>
-      {/* Header */}
-      <header style={{
-        background: '#ffffff',
-        borderBottom: '1px solid #e5e7eb',
-        padding: '1rem 2rem',
-        position: 'sticky',
-        top: 0,
-        zIndex: 40,
-        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
-      }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link href="/" style={{
-            fontSize: '1.8rem',
-            fontWeight: 'bold',
-            color: '#2563eb',
-            textDecoration: 'none'
-          }}>
-            APPAREL EC
-          </Link>
-          <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-            <Link href="/" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-              ホーム
-            </Link>
-            <Link href="/products" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-              商品一覧
-            </Link>
-            <Link href="/cart" style={{ 
-              background: '#2563eb', 
-              color: '#ffffff', 
-              padding: '0.5rem 1rem', 
-              borderRadius: '6px',
-              textDecoration: 'none', 
-              fontWeight: '500'
-            }}>
-              カート
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <UnifiedHeader />
+      <NeuroStyles />
 
       {/* Hero Section */}
       <section style={{
         background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
         color: '#ffffff',
         padding: '4rem 2rem',
-        textAlign: 'center'
+        textAlign: 'center',
+        position: 'relative',
+        overflow: 'hidden'
       }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+        {/* Background pattern */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M25 25m-8 0a8 8 0 1 1 16 0a8 8 0 1 1 -16 0'/%3E%3C/g%3E%3C/svg%3E")`,
+          opacity: 0.3
+        }} />
+        <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <h1 style={{
             fontSize: '3rem',
             fontWeight: 'bold',
@@ -201,8 +178,8 @@ export default function FAQPage() {
                   padding: '0.75rem 1.5rem',
                   borderRadius: '25px',
                   textDecoration: 'none',
-                  color: '#2563eb',
-                  border: '2px solid #2563eb',
+                  color: '#3b82f6',
+                  border: '2px solid #3b82f6',
                   fontWeight: '500',
                   transition: 'all 0.2s'
                 }}
@@ -255,7 +232,7 @@ export default function FAQPage() {
                       gap: '0.5rem'
                     }}>
                       <span style={{
-                        background: '#2563eb',
+                        background: '#3b82f6',
                         color: '#ffffff',
                         padding: '0.25rem 0.5rem',
                         borderRadius: '4px',
@@ -314,38 +291,33 @@ export default function FAQPage() {
             お気軽にお問い合わせください。
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link
-              href="/support/contact"
-              style={{
-                display: 'inline-block',
-                padding: '1rem 2rem',
-                background: '#ffffff',
-                color: '#f59e0b',
-                textDecoration: 'none',
-                borderRadius: '8px',
-                fontWeight: '600',
-                fontSize: '1.125rem',
-                transition: 'all 0.2s'
-              }}
-            >
-              お問い合わせ
+            <Link href="/support/contact">
+              <NeuroButton 
+                mood="trust" 
+                size="large" 
+                variant="secondary"
+                style={{
+                  background: '#ffffff',
+                  color: '#f59e0b',
+                  border: '2px solid #ffffff'
+                }}
+              >
+                お問い合わせ
+              </NeuroButton>
             </Link>
-            <Link
-              href="/support/shipping"
-              style={{
-                display: 'inline-block',
-                padding: '1rem 2rem',
-                background: 'transparent',
-                color: '#ffffff',
-                textDecoration: 'none',
-                borderRadius: '8px',
-                fontWeight: '600',
-                fontSize: '1.125rem',
-                border: '2px solid #ffffff',
-                transition: 'all 0.2s'
-              }}
-            >
-              配送について
+            <Link href="/support/shipping">
+              <NeuroButton 
+                mood="calm" 
+                size="large" 
+                variant="accent"
+                style={{
+                  background: 'transparent',
+                  color: '#ffffff',
+                  border: '2px solid #ffffff'
+                }}
+              >
+                配送について
+              </NeuroButton>
             </Link>
           </div>
         </section>

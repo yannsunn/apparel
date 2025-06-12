@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { products, categories } from '@/lib/data/mock-products'
 import { ProductCard } from '@/components/product/product-card'
 import { useCartStore } from '@/lib/store/cart'
+import UnifiedHeader from '@/components/layout/unified-header'
+import { NeuroSocialProof, NeuroScarcity } from '@/components/neuro/neuro-components'
 
 export default function ProductsPage() {
   // カートストア
@@ -93,49 +95,19 @@ export default function ProductsPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#fafafa' }}>
-      {/* ヘッダー */}
-      <header style={{
-        background: '#ffffff',
-        borderBottom: '1px solid #e5e7eb',
-        padding: '1rem 2rem',
-        position: 'sticky',
-        top: 0,
-        zIndex: 40,
-        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
-      }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link 
-            href="/"
-            style={{
-              fontSize: '1.8rem',
-              fontWeight: 'bold',
-              color: '#111827',
-              textDecoration: 'none'
-            }}
-          >
-            APPAREL EC
-          </Link>
-          
-          <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-            <Link href="/" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-              ホーム
-            </Link>
-            <span style={{ color: '#3b82f6', fontWeight: '600' }}>
-              商品一覧
-            </span>
-            <Link href="/cart" style={{ 
-              backgroundColor: '#3b82f6',
-              color: '#ffffff',
-              padding: '0.5rem 1rem', 
-              borderRadius: '8px',
-              textDecoration: 'none', 
-              fontWeight: '600'
-            }}>
-              🛒 カート
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <UnifiedHeader />
+      
+      {/* ニューロマーケティング要素 */}
+      <NeuroSocialProof 
+        productId="general"
+        type="viewers"
+        position="top-right"
+      />
+      <NeuroScarcity 
+        stock={15}
+        threshold={20}
+        animated={true}
+      />
 
       {/* ヒーローセクション */}
       <section style={{

@@ -131,7 +131,7 @@ export default function HomePage() {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'radial-gradient(circle at 20% 80%, rgba(255, 71, 87, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)',
+          background: 'rgba(248, 250, 252, 0.8)',
           zIndex: 0
         }} />
         
@@ -335,7 +335,7 @@ export default function HomePage() {
       {/* 🧠 ニューロマーケティング特徴セクション */}
       <section style={{ 
         padding: '4rem 2rem', 
-        background: 'linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(249,250,251,1) 100%)'
+        background: '#f8fafc'
       }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           {/* 🎯 認知負荷最適化ヘッダー */}
@@ -515,9 +515,8 @@ export default function HomePage() {
               left: '-50%',
               width: '200%',
               height: '200%',
-              background: `conic-gradient(from 0deg, ${NeuroColorPsychology.dopamine.primary}20, ${NeuroColorPsychology.trust.primary}20, ${NeuroColorPsychology.dopamine.primary}20)`,
-              animation: 'rotate 30s linear infinite',
-              opacity: 0.3
+              background: '#ef4444',
+              opacity: 0.1
             }} />
             
             <div style={{ position: 'relative', zIndex: 1 }}>

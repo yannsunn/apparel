@@ -6,6 +6,8 @@ import { useParams } from 'next/navigation'
 import { getProductById } from '@/lib/data/mock-products'
 import { useCartStore } from '@/lib/store/cart'
 import { Product, Size, Color } from '@/lib/types/product'
+import UnifiedHeader from '@/components/layout/unified-header'
+import { NeuroSocialProof, NeuroScarcity, NeuroTrustBadge } from '@/components/neuro/neuro-components'
 
 export default function ProductDetailPage() {
   const params = useParams()
@@ -61,34 +63,19 @@ export default function ProductDetailPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#f9fafb' }}>
-      {/* Header */}
-      <header style={{
-        background: '#ffffff',
-        borderBottom: '1px solid #e5e7eb',
-        padding: '1rem 2rem',
-        position: 'sticky',
-        top: 0,
-        zIndex: 40
-      }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link href="/" style={{
-            fontSize: '1.5rem',
-            fontWeight: 'bold',
-            color: '#111827',
-            textDecoration: 'none'
-          }}>
-            APPAREL EC
-          </Link>
-          <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-            <Link href="/products" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-              商品
-            </Link>
-            <Link href="/cart" style={{ color: '#111827', textDecoration: 'none', fontWeight: '500' }}>
-              カート ({totalItems()})
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <UnifiedHeader />
+      
+      {/* ニューロマーケティング要素 */}
+      <NeuroSocialProof 
+        productId={params.id as string}
+        type="purchases"
+        position="top-right"
+      />
+      <NeuroTrustBadge 
+        productId={params.id as string}
+        type="reviews"
+        position="bottom-right"
+      />
 
       <main style={{ maxWidth: '1280px', margin: '0 auto', padding: '2rem' }}>
         {/* Breadcrumb */}

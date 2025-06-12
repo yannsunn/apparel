@@ -169,7 +169,7 @@ export function SocialProofBadge({
     <div style={{
       position: 'absolute',
       ...positions[position],
-      background: 'linear-gradient(135deg, #10b981, #059669)',
+      background: '#10b981',
       color: 'white',
       padding: '0.25rem 0.75rem',
       borderRadius: '12px',
@@ -325,7 +325,7 @@ export function EmpathyStory({ story }: EmpathyStoryProps) {
           width: '50px',
           height: '50px',
           borderRadius: '50%',
-          background: `linear-gradient(135deg, ${emotionColors[story.emotion]}, ${emotionColors[story.emotion]}80)`,
+          background: emotionColors[story.emotion],
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -557,6 +557,11 @@ export const NeuroStyles = () => (
     }
   `}</style>
 )
+
+// Named exports for better tree-shaking  
+export { SocialProofBadge as NeuroSocialProof }
+export { ScarcityAlert as NeuroScarcity }
+export { SocialProofBadge as NeuroTrustBadge }
 
 export default {
   NeuroButton,

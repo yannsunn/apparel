@@ -3,6 +3,7 @@
 import { memo, useMemo, useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { Product } from '@/lib/types/product'
+import { useNeuroIntersection, useNeuroAnimation } from '@/lib/neuro/neuro-performance-hooks'
 
 interface ProductCardProps {
   product: Product

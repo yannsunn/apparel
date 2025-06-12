@@ -166,7 +166,7 @@ export default function NeuroCartPage() {
         
         {/* ヘッダー */}
         <header style={{
-          background: 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,250,252,0.95))',
+          background: 'rgba(255,255,255,0.95)',
           backdropFilter: 'blur(12px)',
           borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
           padding: '1rem 2rem',
@@ -178,9 +178,7 @@ export default function NeuroCartPage() {
             <Link href="/" style={{
               fontSize: '1.8rem',
               fontWeight: 'bold',
-              background: `linear-gradient(135deg, ${NeuroColors.trust.primary}, ${NeuroColors.dopamine.primary})`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
+              color: '#3b82f6',
               textDecoration: 'none'
             }}>
               APPAREL EC
