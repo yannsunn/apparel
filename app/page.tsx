@@ -382,7 +382,6 @@ export default function HomePage() {
                 title: MirrorNeuronActivation.actionVerbs.ja[4],
                 description: 'AI駆動の次世代デザインで業界を革命的に変革',
                 color: '#ef4444',
-                color: '#ef4444',
                 benefit: '売上300%アップ',
                 proof: '実績97社で証明済み'
               },
@@ -391,7 +390,6 @@ export default function HomePage() {
                 title: MirrorNeuronActivation.actionVerbs.ja[1],
                 description: '限定素材とプレミアム品質で圧倒的な差別化を実現',
                 color: NeuroColorPsychology.trust.primary,
-                color: '#3b82f6',
                 benefit: 'コスト50%削減',
                 proof: '顧客満足度99.2%'
               },
@@ -400,7 +398,6 @@ export default function HomePage() {
                 title: MirrorNeuronActivation.actionVerbs.ja[6],
                 description: '1枚から対応可能な超小ロット生産システム',
                 color: NeuroColorPsychology.urgency.primary,
-                color: '#dc2626',
                 benefit: '在庫リスク0%',
                 proof: '最短48時間納期'
               },
@@ -409,7 +406,6 @@ export default function HomePage() {
                 title: MirrorNeuronActivation.actionVerbs.ja[3],
                 description: 'VIP専用ルートでトレンド情報を独占的に先取り',
                 color: NeuroColorPsychology.safety.primary,
-                color: '#059669',
                 benefit: 'トレンド3ヶ月先取り',
                 proof: '業界シェア第1位'
               }
