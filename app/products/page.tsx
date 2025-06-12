@@ -111,25 +111,65 @@ export default function ProductsPage() {
 
       {/* ヒーローセクション */}
       <section style={{
-        backgroundColor: '#3b82f6',
-        color: 'white',
-        padding: '3rem 2rem',
-        textAlign: 'center'
+        background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.9) 0%, rgba(220, 38, 38, 0.9) 100%)',
+        color: '#ffffff',
+        padding: '4rem 2rem',
+        position: 'relative',
+        overflow: 'hidden',
+        minHeight: '50vh',
+        display: 'flex',
+        alignItems: 'center'
       }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+        {/* Background image */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: 'url("https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          zIndex: 0
+        }} />
+        
+        {/* Background overlay */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.85) 0%, rgba(220, 38, 38, 0.85) 100%)',
+          zIndex: 1
+        }} />
+        
+        <div style={{ 
+          maxWidth: '1280px', 
+          margin: '0 auto', 
+          position: 'relative', 
+          zIndex: 3,
+          textAlign: 'center',
+          width: '100%'
+        }}>
           <h1 style={{
-            fontSize: '2.5rem',
+            fontSize: 'clamp(2.5rem, 5vw, 4rem)',
             fontWeight: 'bold',
-            marginBottom: '1rem'
+            marginBottom: '1.5rem',
+            lineHeight: '1.2'
           }}>
-            商品一覧
+            プレミアム商品コレクション
           </h1>
           <p style={{
-            fontSize: '1.1rem',
-            opacity: 0.9,
-            marginBottom: '2rem'
+            fontSize: '1.25rem',
+            opacity: 0.95,
+            marginBottom: '2rem',
+            lineHeight: '1.6',
+            maxWidth: '600px',
+            margin: '0 auto 2rem'
           }}>
-            厳選されたアパレル商品をお探しください
+            厳選されたアパレル商品を豊富に取り揃えています。<br />
+            あなたの理想の一着を見つけてください。
           </p>
           
           {/* 統計表示 */}

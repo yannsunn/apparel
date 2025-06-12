@@ -125,13 +125,39 @@ export default function FAQPage() {
 
       {/* Hero Section */}
       <section style={{
-        background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+        background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.9) 0%, rgba(217, 119, 6, 0.9) 100%)',
         color: '#ffffff',
         padding: '4rem 2rem',
-        textAlign: 'center',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        minHeight: '50vh',
+        display: 'flex',
+        alignItems: 'center'
       }}>
+        {/* Background image */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: 'url("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          zIndex: 0
+        }} />
+        
+        {/* Background overlay */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.85) 0%, rgba(217, 119, 6, 0.85) 100%)',
+          zIndex: 1
+        }} />
+        
         {/* Background pattern */}
         <div style={{
           position: 'absolute',
@@ -140,25 +166,143 @@ export default function FAQPage() {
           right: 0,
           bottom: 0,
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M25 25m-8 0a8 8 0 1 1 16 0a8 8 0 1 1 -16 0'/%3E%3C/g%3E%3C/svg%3E")`,
-          opacity: 0.3
+          opacity: 0.3,
+          zIndex: 2
         }} />
-        <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <h1 style={{
-            fontSize: '3rem',
-            fontWeight: 'bold',
-            marginBottom: '1.5rem'
+        
+        <div style={{ 
+          maxWidth: '1280px', 
+          margin: '0 auto', 
+          position: 'relative', 
+          zIndex: 3,
+          display: 'grid',
+          gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)',
+          gap: '3rem',
+          alignItems: 'center',
+          width: '100%'
+        }}>
+          {/* Left content */}
+          <div style={{ textAlign: 'left' }}>
+            <h1 style={{
+              fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+              fontWeight: 'bold',
+              marginBottom: '1.5rem',
+              lineHeight: '1.2'
+            }}>
+              よくある質問
+            </h1>
+            <p style={{
+              fontSize: '1.25rem',
+              opacity: 0.95,
+              marginBottom: '2rem',
+              lineHeight: '1.6'
+            }}>
+              お客様からよくいただくご質問をまとめました。<br />
+              解決しない場合はお気軽にお問い合わせください。
+            </p>
+            
+            {/* Quick action buttons */}
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <Link href="/support/contact">
+                <NeuroButton 
+                  mood="dopamine" 
+                  size="large"
+                  style={{
+                    background: '#ffffff',
+                    color: '#f59e0b',
+                    border: 'none',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  🙋‍♀️ 質問する
+                </NeuroButton>
+              </Link>
+              <NeuroButton 
+                mood="trust" 
+                size="large" 
+                variant="secondary"
+                style={{
+                  background: 'transparent',
+                  color: '#ffffff',
+                  border: '2px solid #ffffff'
+                }}
+              >
+                📞 電話サポート
+              </NeuroButton>
+            </div>
+          </div>
+          
+          {/* Right side - FAQ illustration */}
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            gap: '1rem',
+            alignItems: 'center'
           }}>
-            よくある質問
-          </h1>
-          <p style={{
-            fontSize: '1.25rem',
-            opacity: 0.9,
-            maxWidth: '600px',
-            margin: '0 auto'
-          }}>
-            お客様からよくいただくご質問をまとめました。<br />
-            解決しない場合はお気軽にお問い合わせください。
-          </p>
+            {/* FAQ support image */}
+            <div style={{
+              background: 'rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: '20px',
+              padding: '1.5rem',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              width: '100%',
+              maxWidth: '400px'
+            }}>
+              <img 
+                src="https://images.unsplash.com/photo-1562564055-71e051d33c19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="よくある質問サポート"
+                style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover',
+                  borderRadius: '12px',
+                  marginBottom: '1rem'
+                }}
+              />
+              
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.5rem' }}>
+                  ❓ 即座に解決
+                </div>
+                <div style={{ fontSize: '1rem', fontWeight: '600' }}>
+                  {faqData.reduce((total, cat) => total + cat.questions.length, 0)}の質問に回答
+                </div>
+              </div>
+            </div>
+            
+            {/* Support stats */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '1rem',
+              width: '100%',
+              maxWidth: '400px'
+            }}>
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '12px',
+                padding: '1rem',
+                textAlign: 'center',
+                border: '1px solid rgba(255, 255, 255, 0.2)'
+              }}>
+                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>95%</div>
+                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>解決率</div>
+              </div>
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '12px',
+                padding: '1rem',
+                textAlign: 'center',
+                border: '1px solid rgba(255, 255, 255, 0.2)'
+              }}>
+                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>即時</div>
+                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>回答</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
