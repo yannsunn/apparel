@@ -57,12 +57,12 @@ export default function UltraHeader({
       : theme === 'light' 
         ? 'rgba(255,255,255,0.95)' 
         : 'rgba(17,24,39,0.95)',
+    zIndex: 50,
+    pointerEvents: 'auto' as const,
     borderBottom: transparent && !isScrolled 
       ? 'none' 
       : `1px solid ${theme === 'light' ? 'rgba(226, 232, 240, 0.8)' : 'rgba(75, 85, 99, 0.3)'}`,
-    boxShadow: isScrolled ? '0 4px 20px rgba(0,0,0,0.1)' : 'none',
-    zIndex: 50, // 最高優先度で他のsticky要素と競合回避
-    pointerEvents: 'auto' // クリックイベント確実有効化
+    boxShadow: isScrolled ? '0 4px 20px rgba(0,0,0,0.1)' : 'none'
   }
 
   const navStyle = {
@@ -102,7 +102,11 @@ export default function UltraHeader({
     padding: '0.5rem 1rem',
     borderRadius: '6px',
     transition: 'all 0.2s ease',
-    position: 'relative' as const
+    position: 'relative' as const,
+    cursor: 'pointer',
+    pointerEvents: 'auto' as const,
+    display: 'flex',
+    alignItems: 'center'
   })
 
   const cartStyle = {
@@ -115,7 +119,9 @@ export default function UltraHeader({
     transition: 'all 0.2s ease',
     display: 'flex',
     alignItems: 'center',
-    gap: '0.5rem'
+    gap: '0.5rem',
+    cursor: 'pointer',
+    pointerEvents: 'auto' as const
   }
 
   const badgeStyle = {
@@ -146,6 +152,10 @@ export default function UltraHeader({
           key={item.href}
           href={item.href} 
           style={cartStyle}
+          onClick={(e) => {
+            e.preventDefault()
+            window.location.href = item.href
+          }}
           onMouseEnter={(e) => {
             e.currentTarget.style.background = 'rgba(59, 130, 246, 0.1)'
             e.currentTarget.style.color = UltraSync.Brand.colors.primary
@@ -171,6 +181,10 @@ export default function UltraHeader({
         key={item.href}
         href={item.href} 
         style={linkStyle(isActive)}
+        onClick={(e) => {
+          e.preventDefault()
+          window.location.href = item.href
+        }}
         onMouseEnter={(e) => {
           if (!isActive) {
             e.currentTarget.style.background = 'rgba(59, 130, 246, 0.1)'
