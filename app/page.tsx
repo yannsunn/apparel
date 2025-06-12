@@ -127,10 +127,15 @@ export default function HomePage() {
         
         <div style={{ maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
           {/* 🎯 F字パターン最適化レイアウト */}
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '3rem', alignItems: 'center' }}>
+          <div className="hero-grid" style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)', 
+            gap: 'clamp(1.5rem, 4vw, 3rem)', 
+            alignItems: 'center'
+          }}>
             
             {/* 👁️ 左側：メインコンテンツ（F字パターン上部水平） */}
-            <div>
+            <div className="hero-content">
               {/* 🚨 緊急性アラート */}
               <div style={{
                 background: '#dc2626',
@@ -245,7 +250,90 @@ export default function HomePage() {
             </div>
             
             {/* 📊 右側：社会的証明＋希少性（F字パターン右端） */}
-            <div>
+            <div className="hero-sidebar">
+              {/* 🎨 プロフェッショナル画像セクション */}
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.95)',
+                backdropFilter: 'blur(20px)',
+                borderRadius: '24px',
+                padding: '1.5rem',
+                marginBottom: '1.5rem',
+                border: '2px solid #3b82f6',
+                boxShadow: '0 15px 35px rgba(0, 0, 0, 0.1)',
+                overflow: 'hidden',
+                position: 'relative'
+              }}>
+                <div className="hero-image" style={{
+                  width: '100%',
+                  height: 'clamp(200px, 25vw, 280px)',
+                  borderRadius: '16px',
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  position: 'relative',
+                  overflow: 'hidden'
+                }}>
+                  <img 
+                    src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                    alt="プレミアムアパレルコレクション"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      borderRadius: '16px'
+                    }}
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none'
+                      const fallback = e.currentTarget.nextElementSibling as HTMLElement
+                      if (fallback) fallback.style.display = 'flex'
+                    }}
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '1rem',
+                    left: '1rem',
+                    right: '1rem',
+                    background: 'rgba(0, 0, 0, 0.7)',
+                    backdropFilter: 'blur(10px)',
+                    borderRadius: '12px',
+                    padding: '0.75rem 1rem',
+                    color: 'white'
+                  }}>
+                    <div style={{
+                      fontSize: '0.9rem',
+                      fontWeight: '700',
+                      marginBottom: '0.25rem'
+                    }}>
+                      ✨ プレミアムコレクション
+                    </div>
+                    <div style={{
+                      fontSize: '0.75rem',
+                      opacity: 0.9
+                    }}>
+                      最高品質のアパレルソリューション
+                    </div>
+                  </div>
+                  {/* フォールバック表示 */}
+                  <div style={{
+                    display: 'none',
+                    width: '100%',
+                    height: '100%',
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '16px',
+                    flexDirection: 'column',
+                    color: 'white',
+                    textAlign: 'center'
+                  }}>
+                    <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>👔</div>
+                    <div style={{ fontSize: '1.2rem', fontWeight: '700' }}>プレミアムアパレル</div>
+                    <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>最高品質のコレクション</div>
+                  </div>
+                </div>
+              </div>
+              
               {/* 🏆 リアルタイム社会的証明 */}
               <div style={{
                 background: 'rgba(255, 255, 255, 0.95)',
@@ -703,6 +791,26 @@ export default function HomePage() {
         @keyframes fadeInUp {
           0% { transform: translateY(30px); opacity: 0; }
           100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+          .hero-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+          
+          .hero-image {
+            height: 200px !important;
+          }
+          
+          .hero-content {
+            text-align: center;
+            order: 2;
+          }
+          
+          .hero-sidebar {
+            order: 1;
+          }
         }
       `}</style>
     </div>
