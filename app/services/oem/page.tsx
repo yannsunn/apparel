@@ -17,13 +17,39 @@ export default function OEMPage() {
 
       {/* Hero Section */}
       <section style={{
-        background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+        background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.9) 0%, rgba(29, 78, 216, 0.9) 100%)',
         color: '#ffffff',
         padding: '4rem 2rem',
-        textAlign: 'center',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        minHeight: '60vh',
+        display: 'flex',
+        alignItems: 'center'
       }}>
+        {/* Background image */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: 'url("https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          zIndex: 0
+        }} />
+        
+        {/* Background overlay */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.85) 0%, rgba(29, 78, 216, 0.85) 100%)',
+          zIndex: 1
+        }} />
+        
         {/* Background pattern */}
         <div style={{
           position: 'absolute',
@@ -32,41 +58,160 @@ export default function OEMPage() {
           right: 0,
           bottom: 0,
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          opacity: 0.3
+          opacity: 0.3,
+          zIndex: 2
         }} />
-        <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <h1 style={{
-            fontSize: '3rem',
-            fontWeight: 'bold',
-            marginBottom: '1.5rem'
-          }}>
-            OEM・ODMサービス
-          </h1>
-          <p style={{
-            fontSize: '1.25rem',
-            opacity: 0.9,
-            maxWidth: '600px',
-            margin: '0 auto'
-          }}>
-            あなたのブランドを形にします。企画から製造まで、<br />
-            トータルサポートでビジネスを成功に導きます。
-          </p>
-          
-          {/* Social proof element */}
-          <div style={{
-            background: 'rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: '12px',
-            padding: '1rem 2rem',
-            marginTop: '2rem',
-            display: 'inline-block',
-            border: '1px solid rgba(255,255,255,0.2)'
-          }}>
-            <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem', opacity: 0.9 }}>
-              🏆 信頼の実績
+        
+        <div style={{ 
+          maxWidth: '1280px', 
+          margin: '0 auto', 
+          position: 'relative', 
+          zIndex: 3,
+          display: 'grid',
+          gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)',
+          gap: '3rem',
+          alignItems: 'center',
+          width: '100%'
+        }}>
+          {/* Left content */}
+          <div style={{ textAlign: 'left' }}>
+            <h1 style={{
+              fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+              fontWeight: 'bold',
+              marginBottom: '1.5rem',
+              lineHeight: '1.2'
+            }}>
+              OEM・ODMサービス
+            </h1>
+            <p style={{
+              fontSize: '1.25rem',
+              opacity: 0.95,
+              marginBottom: '2rem',
+              lineHeight: '1.6'
+            }}>
+              あなたのブランドを形にします。企画から製造まで、<br />
+              トータルサポートでビジネスを成功に導きます。
+            </p>
+            
+            {/* Action buttons */}
+            <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
+              <Link href="/support/contact">
+                <NeuroButton 
+                  mood="dopamine" 
+                  size="large"
+                  style={{
+                    background: '#ffffff',
+                    color: '#3b82f6',
+                    border: 'none',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  無料相談予約
+                </NeuroButton>
+              </Link>
+              <Link href="/products">
+                <NeuroButton 
+                  mood="trust" 
+                  size="large" 
+                  variant="secondary"
+                  style={{
+                    background: 'transparent',
+                    color: '#ffffff',
+                    border: '2px solid #ffffff'
+                  }}
+                >
+                  製造事例を見る
+                </NeuroButton>
+              </Link>
             </div>
-            <div style={{ fontWeight: '600', fontSize: '1.1rem' }}>
-              累計製造実績 50,000点以上 | 取引企業数 500社以上
+            
+            {/* Social proof element */}
+            <div style={{
+              background: 'rgba(255,255,255,0.15)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: '12px',
+              padding: '1rem 2rem',
+              display: 'inline-block',
+              border: '1px solid rgba(255,255,255,0.3)'
+            }}>
+              <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem', opacity: 0.9 }}>
+                🏆 信頼の実績
+              </div>
+              <div style={{ fontWeight: '600', fontSize: '1.1rem' }}>
+                累計製造実績 50,000点以上 | 取引企業数 500社以上
+              </div>
+            </div>
+          </div>
+          
+          {/* Right side - Featured image/stats */}
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            gap: '1rem',
+            alignItems: 'center'
+          }}>
+            {/* Featured manufacturing image */}
+            <div style={{
+              background: 'rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: '20px',
+              padding: '1.5rem',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              width: '100%',
+              maxWidth: '400px'
+            }}>
+              <img 
+                src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="プロフェッショナル製造工場"
+                style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover',
+                  borderRadius: '12px',
+                  marginBottom: '1rem'
+                }}
+              />
+              
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.5rem' }}>
+                  ✨ ISO認証取得工場
+                </div>
+                <div style={{ fontSize: '1rem', fontWeight: '600' }}>
+                  品質管理を徹底した製造環境
+                </div>
+              </div>
+            </div>
+            
+            {/* Quick stats */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '1rem',
+              width: '100%',
+              maxWidth: '400px'
+            }}>
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '12px',
+                padding: '1rem',
+                textAlign: 'center',
+                border: '1px solid rgba(255, 255, 255, 0.2)'
+              }}>
+                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>1枚〜</div>
+                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>最小ロット</div>
+              </div>
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '12px',
+                padding: '1rem',
+                textAlign: 'center',
+                border: '1px solid rgba(255, 255, 255, 0.2)'
+              }}>
+                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>2週間</div>
+                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>最短納期</div>
+              </div>
             </div>
           </div>
         </div>

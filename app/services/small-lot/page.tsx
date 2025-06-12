@@ -17,13 +17,39 @@ export default function SmallLotPage() {
 
       {/* Hero Section */}
       <section style={{
-        background: 'linear-gradient(135deg, #10b981 0%, #047857 100%)',
+        background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.9) 0%, rgba(4, 120, 87, 0.9) 100%)',
         color: '#ffffff',
         padding: '4rem 2rem',
-        textAlign: 'center',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        minHeight: '60vh',
+        display: 'flex',
+        alignItems: 'center'
       }}>
+        {/* Background image */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: 'url("https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          zIndex: 0
+        }} />
+        
+        {/* Background overlay */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.85) 0%, rgba(4, 120, 87, 0.85) 100%)',
+          zIndex: 1
+        }} />
+        
         {/* Background pattern */}
         <div style={{
           position: 'absolute',
@@ -32,41 +58,160 @@ export default function SmallLotPage() {
           right: 0,
           bottom: 0,
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M20 20c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4 4 1.8 4 4zm16 0c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4 4 1.8 4 4z'/%3E%3C/g%3E%3C/svg%3E")`,
-          opacity: 0.3
+          opacity: 0.3,
+          zIndex: 2
         }} />
-        <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <h1 style={{
-            fontSize: '3rem',
-            fontWeight: 'bold',
-            marginBottom: '1.5rem'
-          }}>
-            小ロット対応サービス
-          </h1>
-          <p style={{
-            fontSize: '1.25rem',
-            opacity: 0.9,
-            maxWidth: '600px',
-            margin: '0 auto'
-          }}>
-            1枚から始める新しいビジネス。<br />
-            在庫リスクを最小限に抑えて、アイデアを形にしませんか？
-          </p>
-          
-          {/* Urgency indicator */}
-          <div style={{
-            background: 'rgba(255,255,255,0.15)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: '12px',
-            padding: '1rem 2rem',
-            marginTop: '2rem',
-            display: 'inline-block',
-            border: '1px solid rgba(255,255,255,0.2)'
-          }}>
-            <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem', opacity: 0.9 }}>
-              ⚡ 今始めよう
+        
+        <div style={{ 
+          maxWidth: '1280px', 
+          margin: '0 auto', 
+          position: 'relative', 
+          zIndex: 3,
+          display: 'grid',
+          gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)',
+          gap: '3rem',
+          alignItems: 'center',
+          width: '100%'
+        }}>
+          {/* Left content */}
+          <div style={{ textAlign: 'left' }}>
+            <h1 style={{
+              fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+              fontWeight: 'bold',
+              marginBottom: '1.5rem',
+              lineHeight: '1.2'
+            }}>
+              小ロット対応サービス
+            </h1>
+            <p style={{
+              fontSize: '1.25rem',
+              opacity: 0.95,
+              marginBottom: '2rem',
+              lineHeight: '1.6'
+            }}>
+              1枚から始める新しいビジネス。<br />
+              在庫リスクを最小限に抑えて、アイデアを形にしませんか？
+            </p>
+            
+            {/* Action buttons */}
+            <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
+              <Link href="/support/contact">
+                <NeuroButton 
+                  mood="dopamine" 
+                  size="large"
+                  style={{
+                    background: '#ffffff',
+                    color: '#10b981',
+                    border: 'none',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  1枚から相談
+                </NeuroButton>
+              </Link>
+              <Link href="/products">
+                <NeuroButton 
+                  mood="trust" 
+                  size="large" 
+                  variant="secondary"
+                  style={{
+                    background: 'transparent',
+                    color: '#ffffff',
+                    border: '2px solid #ffffff'
+                  }}
+                >
+                  製作事例を見る
+                </NeuroButton>
+              </Link>
             </div>
-            <div style={{ fontWeight: '600', fontSize: '1.1rem' }}>
-              最短1日で製作開始 | 在庫リスクゼロ
+            
+            {/* Urgency indicator */}
+            <div style={{
+              background: 'rgba(255,255,255,0.15)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: '12px',
+              padding: '1rem 2rem',
+              display: 'inline-block',
+              border: '1px solid rgba(255,255,255,0.3)'
+            }}>
+              <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem', opacity: 0.9 }}>
+                ⚡ 今始めよう
+              </div>
+              <div style={{ fontWeight: '600', fontSize: '1.1rem' }}>
+                最短1日で製作開始 | 在庫リスクゼロ
+              </div>
+            </div>
+          </div>
+          
+          {/* Right side - Small lot visualization */}
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            gap: '1rem',
+            alignItems: 'center'
+          }}>
+            {/* Small lot showcase image */}
+            <div style={{
+              background: 'rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: '20px',
+              padding: '1.5rem',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              width: '100%',
+              maxWidth: '400px'
+            }}>
+              <img 
+                src="https://images.unsplash.com/photo-1503341504253-dff4815485f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="小ロット製造イメージ"
+                style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover',
+                  borderRadius: '12px',
+                  marginBottom: '1rem'
+                }}
+              />
+              
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.5rem' }}>
+                  📊 リスク最小化
+                </div>
+                <div style={{ fontSize: '1rem', fontWeight: '600' }}>
+                  1枚からテストマーケティング
+                </div>
+              </div>
+            </div>
+            
+            {/* Advantage highlights */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '1rem',
+              width: '100%',
+              maxWidth: '400px'
+            }}>
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '12px',
+                padding: '1rem',
+                textAlign: 'center',
+                border: '1px solid rgba(255, 255, 255, 0.2)'
+              }}>
+                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>ゼロ</div>
+                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>在庫リスク</div>
+              </div>
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '12px',
+                padding: '1rem',
+                textAlign: 'center',
+                border: '1px solid rgba(255, 255, 255, 0.2)'
+              }}>
+                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>即日</div>
+                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>対応可能</div>
+              </div>
             </div>
           </div>
         </div>
