@@ -3,813 +3,442 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import UltraHeader from '@/components/layout/ultra-header'
-import { NeuroColorPsychology, MirrorNeuronActivation, DopamineRewardSystem } from '@/lib/neuro/advanced-neuro-system'
+import { NeuroButton, NeuroStyles } from '@/components/neuro/neuro-components'
 
 export default function HomePage() {
-  // 🧠 ニューロマーケティング状態管理
-  const [viewerCount, setViewerCount] = useState(47)
-  const [timeLeft, setTimeLeft] = useState({ hours: 2, minutes: 37, seconds: 24 })
-  const [salesCount, setSalesCount] = useState(189)
   const [isVisible, setIsVisible] = useState(false)
-  const [dopamineBoost, setDopamineBoost] = useState(0)
 
-  // ⚡ ドーパミン誘発タイマー
   useEffect(() => {
     setIsVisible(true)
-    
-    // リアルタイム希少性タイマー
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 }
-        if (prev.minutes > 0) return { ...prev, minutes: prev.minutes - 1, seconds: 59 }
-        if (prev.hours > 0) return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 }
-        return prev
-      })
-    }, 1000)
-
-    // 社会的証明カウンター
-    const socialProofTimer = setInterval(() => {
-      setViewerCount(prev => Math.max(15, prev + Math.floor(Math.random() * 3) - 1))
-      if (Math.random() > 0.7) {
-        setSalesCount(prev => prev + 1)
-        setDopamineBoost(prev => prev + 1)
-      }
-    }, 4000)
-
-    return () => {
-      clearInterval(timer)
-      clearInterval(socialProofTimer)
-    }
   }, [])
 
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: '#ffffff',
-      position: 'relative'
+      background: '#ffffff'
     }}>
-      <UltraHeader transparent={true} />
+      <UltraHeader />
+      <NeuroStyles />
 
-      {/* 🚀 緊急性ナビゲーション追加セクション */}
-      <div style={{
-        background: 'rgba(255, 255, 255, 0.95)',
-        borderBottom: `3px solid ${NeuroColorPsychology.dopamine.primary}`,
-        padding: '0.5rem 2rem',
-        position: 'sticky',
-        top: '80px',
-        zIndex: 30, // UltraHeaderより低く設定
-        boxShadow: '0 4px 16px rgba(0, 0, 0, 0.05)'
-      }}>
-        <div style={{ 
-          maxWidth: '1400px', 
-          margin: '0 auto', 
-          display: 'flex', 
-          justifyContent: 'center', 
-          alignItems: 'center',
-          gap: '1rem',
-          flexWrap: 'wrap'
-        }}>
-          {/* ⏰ 希少性タイマー */}
-          <div style={{
-            background: '#dc2626',
-            color: 'white',
-            padding: '0.5rem 1rem',
-            borderRadius: '25px',
-            fontSize: '0.9rem',
-            fontWeight: '700'
-          }}>
-            ⚡ 限定セール終了まで {timeLeft.hours}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
-          </div>
-          
-          <Link href="/products" style={{ 
-            background: '#3b82f6',
-            color: 'white',
-            padding: '0.75rem 1.5rem',
-            borderRadius: '25px',
-            textDecoration: 'none', 
-            fontWeight: '600',
-            transition: 'all 0.3s ease'
-          }}>
-            🎯 今すぐ商品を見る
-          </Link>
-          
-          <Link href="/cart" style={{ 
-            background: '#ef4444',
-            color: 'white',
-            padding: '0.75rem 1.5rem', 
-            borderRadius: '25px',
-            textDecoration: 'none', 
-            fontWeight: '700',
-            transition: 'all 0.3s ease'
-          }}>
-            🛒 カート {dopamineBoost > 0 && `(+${dopamineBoost})`}
-          </Link>
-        </div>
-      </div>
-
-      {/* 🧠 ニューロマーケティング最適化ヒーローセクション */}
+      {/* ヒーローセクション */}
       <section style={{
-        position: 'relative',
+        background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.9) 0%, rgba(220, 38, 38, 0.9) 100%)',
+        color: '#ffffff',
         padding: '4rem 2rem',
-        background: '#f9fafb',
-        overflow: 'hidden'
+        position: 'relative',
+        overflow: 'hidden',
+        minHeight: '70vh',
+        display: 'flex',
+        alignItems: 'center'
       }}>
-        {/* 🌟 背景パーティクル効果 */}
+        {/* Background image */}
         <div style={{
           position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'rgba(248, 250, 252, 0.8)',
+          backgroundImage: 'url("https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
           zIndex: 0
         }} />
         
-        <div style={{ maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          {/* 🎯 F字パターン最適化レイアウト */}
-          <div className="hero-grid" style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)', 
-            gap: 'clamp(1.5rem, 4vw, 3rem)', 
+        {/* Background overlay */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.85) 0%, rgba(220, 38, 38, 0.85) 100%)',
+          zIndex: 1
+        }} />
+        
+        <div style={{ 
+          maxWidth: '1280px', 
+          margin: '0 auto', 
+          position: 'relative', 
+          zIndex: 3,
+          display: 'grid',
+          gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)',
+          gap: '3rem',
+          alignItems: 'center',
+          width: '100%'
+        }}>
+          {/* Left content */}
+          <div style={{ textAlign: 'left' }}>
+            <h1 style={{
+              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+              fontWeight: 'bold',
+              marginBottom: '1.5rem',
+              lineHeight: '1.2',
+              transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+              opacity: isVisible ? 1 : 0,
+              transition: 'all 0.8s ease-out'
+            }}>
+              プレミアム<br />
+              アパレルコレクション
+            </h1>
+            <p style={{
+              fontSize: '1.25rem',
+              opacity: 0.95,
+              marginBottom: '2rem',
+              lineHeight: '1.6'
+            }}>
+              最高品質の素材と革新的なデザインで、<br />
+              あなたのスタイルを完璧に表現します。
+            </p>
+            
+            {/* Action buttons */}
+            <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
+              <Link href="/products">
+                <NeuroButton 
+                  mood="dopamine" 
+                  size="large"
+                  style={{
+                    background: '#ffffff',
+                    color: '#ef4444',
+                    border: 'none',
+                    fontWeight: '600',
+                    fontSize: '1.2rem',
+                    padding: '1rem 2rem'
+                  }}
+                >
+                  コレクションを見る
+                </NeuroButton>
+              </Link>
+              <Link href="/services/oem">
+                <NeuroButton 
+                  mood="trust" 
+                  size="large" 
+                  variant="secondary"
+                  style={{
+                    background: 'transparent',
+                    color: '#ffffff',
+                    border: '2px solid #ffffff',
+                    fontWeight: '600',
+                    fontSize: '1rem',
+                    padding: '0.75rem 1.5rem'
+                  }}
+                >
+                  OEMサービス
+                </NeuroButton>
+              </Link>
+            </div>
+            
+            {/* Stats */}
+            <div style={{
+              background: 'rgba(255, 255, 255, 0.15)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: '16px',
+              padding: '1.5rem 2rem',
+              display: 'inline-block',
+              border: '1px solid rgba(255, 255, 255, 0.3)'
+            }}>
+              <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem', opacity: 0.9 }}>
+                🏆 信頼の実績
+              </div>
+              <div style={{ fontWeight: '600', fontSize: '1.1rem' }}>
+                累計販売実績 50,000点以上 | 顧客満足度 99.2%
+              </div>
+            </div>
+          </div>
+          
+          {/* Right side - Hero image */}
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            gap: '1rem',
             alignItems: 'center'
           }}>
-            
-            {/* 👁️ 左側：メインコンテンツ（F字パターン上部水平） */}
-            <div className="hero-content">
-              {/* 🚨 緊急性アラート */}
-              <div style={{
-                background: '#dc2626',
-                color: 'white',
-                padding: '0.75rem 1.5rem',
-                borderRadius: '30px',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                marginBottom: '2rem',
-                fontSize: '0.9rem',
-                fontWeight: '700',
-                animation: 'pulse 2s infinite'
-              }}>
-                🔥 {viewerCount}人が今このページを見ています！
-              </div>
+            <div style={{
+              background: 'rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: '20px',
+              padding: '1.5rem',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              width: '100%',
+              maxWidth: '400px'
+            }}>
+              <img 
+                src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="プレミアムアパレル"
+                style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover',
+                  borderRadius: '12px',
+                  marginBottom: '1rem'
+                }}
+              />
               
-              {/* 🧬 ドーパミン誘発ヘッドライン */}
-              <h1 style={{
-                fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-                fontWeight: '900',
-                lineHeight: '1.1',
-                marginBottom: '1.5rem',
-                color: '#111827',
-                letterSpacing: '-0.02em',
-                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                opacity: isVisible ? 1 : 0,
-                transition: 'all 0.8s ease-out'
-              }}>
-                {MirrorNeuronActivation.actionVerbs.ja[0]}<br />
-                <span style={{ color: '#3b82f6' }}>プレミアム</span><br />
-                <span style={{ color: '#dc2626' }}>アパレルコレクション</span>
-              </h1>
-              
-              {/* 💎 価値提案（ニューロ最適化） */}
-              <div style={{
-                background: 'rgba(255, 255, 255, 0.9)',
-                backdropFilter: 'blur(10px)',
-                border: '3px solid #ef4444',
-                borderRadius: '20px',
-                padding: '2rem',
-                marginBottom: '2.5rem',
-                position: 'relative',
-                overflow: 'hidden'
-              }}>
-                <div style={{
-                  position: 'absolute',
-                  top: '-50%',
-                  right: '-50%',
-                  width: '200%',
-                  height: '200%',
-                  background: 'rgba(239, 68, 68, 0.1)',
-                  opacity: 0.1,
-                  animation: 'rotate 20s linear infinite'
-                }} />
-                
-                <div style={{ position: 'relative', zIndex: 1 }}>
-                  <p style={{
-                    fontSize: '1.4rem',
-                    fontWeight: '600',
-                    marginBottom: '1rem',
-                    color: '#111827'
-                  }}>
-                    🎯 {MirrorNeuronActivation.actionVerbs.emotional[0]}
-                  </p>
-                  <p style={{
-                    fontSize: '2.2rem',
-                    fontWeight: '800',
-                    margin: 0,
-                    background: '#dc2626',
-                    backgroundClip: 'text',
-                    WebkitBackgroundClip: 'text',
-                    color: '#dc2626'
-                  }}>
-                    限定74%OFF で{MirrorNeuronActivation.actionVerbs.ja[2]}
-                  </p>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.5rem' }}>
+                  ✨ 最高品質保証
                 </div>
-              </div>
-              
-              {/* 🚀 ドーパミン誘発CTA群 */}
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
-                <Link href="/products" style={{
-                  background: '#ef4444',
-                  color: 'white',
-                  padding: '1rem 2.5rem',
-                  borderRadius: '50px',
-                  textDecoration: 'none',
-                  fontWeight: '800',
-                  fontSize: '1.2rem',
-                  boxShadow: '0 8px 25px rgba(255, 71, 87, 0.4)',
-                  transition: 'all 0.3s ease',
-                  position: 'relative',
-                  overflow: 'hidden'
-                }}>{
-                  <>⚡ {MirrorNeuronActivation.actionVerbs.ja[0]}</>}
-                </Link>
-                
-                <Link href="/products?filter=limited" style={{
-                  background: 'rgba(255, 255, 255, 0.9)',
-                  color: '#ef4444',
-                  padding: '1rem 2.5rem',
-                  borderRadius: '50px',
-                  textDecoration: 'none',
-                  fontWeight: '700',
-                  fontSize: '1.2rem',
-                  border: '3px solid #ef4444',
-                  transition: 'all 0.3s ease'
-                }}>
-                  👑 限定コレクション
-                </Link>
+                <div style={{ fontSize: '1rem', fontWeight: '600' }}>
+                  厳選された素材とデザイン
+                </div>
               </div>
             </div>
             
-            {/* 📊 右側：社会的証明＋希少性（F字パターン右端） */}
-            <div className="hero-sidebar">
-              {/* 🎨 プロフェッショナル画像セクション */}
+            {/* Quick stats */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '1rem',
+              width: '100%',
+              maxWidth: '400px'
+            }}>
               <div style={{
-                background: 'rgba(255, 255, 255, 0.95)',
-                backdropFilter: 'blur(20px)',
-                borderRadius: '24px',
-                padding: '1.5rem',
-                marginBottom: '1.5rem',
-                border: '2px solid #3b82f6',
-                boxShadow: '0 15px 35px rgba(0, 0, 0, 0.1)',
-                overflow: 'hidden',
-                position: 'relative'
-              }}>
-                <div className="hero-image" style={{
-                  width: '100%',
-                  height: 'clamp(200px, 25vw, 280px)',
-                  borderRadius: '16px',
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  position: 'relative',
-                  overflow: 'hidden'
-                }}>
-                  <img 
-                    src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                    alt="プレミアムアパレルコレクション"
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      borderRadius: '16px'
-                    }}
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none'
-                      const fallback = e.currentTarget.nextElementSibling as HTMLElement
-                      if (fallback) fallback.style.display = 'flex'
-                    }}
-                  />
-                  <div style={{
-                    position: 'absolute',
-                    bottom: '1rem',
-                    left: '1rem',
-                    right: '1rem',
-                    background: 'rgba(0, 0, 0, 0.7)',
-                    backdropFilter: 'blur(10px)',
-                    borderRadius: '12px',
-                    padding: '0.75rem 1rem',
-                    color: 'white'
-                  }}>
-                    <div style={{
-                      fontSize: '0.9rem',
-                      fontWeight: '700',
-                      marginBottom: '0.25rem'
-                    }}>
-                      ✨ プレミアムコレクション
-                    </div>
-                    <div style={{
-                      fontSize: '0.75rem',
-                      opacity: 0.9
-                    }}>
-                      最高品質のアパレルソリューション
-                    </div>
-                  </div>
-                  {/* フォールバック表示 */}
-                  <div style={{
-                    display: 'none',
-                    width: '100%',
-                    height: '100%',
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderRadius: '16px',
-                    flexDirection: 'column',
-                    color: 'white',
-                    textAlign: 'center'
-                  }}>
-                    <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>👔</div>
-                    <div style={{ fontSize: '1.2rem', fontWeight: '700' }}>プレミアムアパレル</div>
-                    <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>最高品質のコレクション</div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* 🏆 リアルタイム社会的証明 */}
-              <div style={{
-                background: 'rgba(255, 255, 255, 0.95)',
-                backdropFilter: 'blur(20px)',
-                borderRadius: '24px',
-                padding: '2rem',
-                marginBottom: '1.5rem',
-                border: `2px solid ${NeuroColorPsychology.trust.primary}`,
-                boxShadow: '0 15px 35px rgba(0, 0, 0, 0.1)'
-              }}>
-                <h3 style={{ 
-                  fontSize: '1.2rem', 
-                  fontWeight: '700', 
-                  marginBottom: '1.5rem',
-                  color: '#3b82f6'
-                }}>
-                  🔥 リアルタイム実績
-                </h3>
-                
-                {[
-                  { label: '今日の購入者', value: salesCount.toString(), suffix: '人', icon: '🛒', color: '#ef4444' },
-                  { label: '現在の閲覧者', value: viewerCount.toString(), suffix: '人', icon: '👀', color: '#3b82f6' },
-                  { label: '在庫残り', value: '7', suffix: '点のみ', icon: '📦', color: '#dc2626' },
-                  { label: '満足度', value: '99.2', suffix: '%', icon: '⭐', color: '#059669' }
-                ].map((stat, index) => (
-                  <div key={stat.label} style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: '0.75rem 0',
-                    borderBottom: index < 3 ? '1px solid rgba(0,0,0,0.1)' : 'none'
-                  }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <span style={{ fontSize: '1.2rem' }}>{stat.icon}</span>
-                      <span style={{ fontSize: '0.9rem', fontWeight: '600' }}>{stat.label}</span>
-                    </div>
-                    <div style={{
-                      fontSize: '1.1rem',
-                      fontWeight: '800',
-                      color: stat.color
-                    }}>
-                      {stat.value}{stat.suffix}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              {/* ⏰ 希少性カウントダウン */}
-              <div style={{
-                background: '#dc2626',
-                color: 'white',
-                borderRadius: '20px',
-                padding: '1.5rem',
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '12px',
+                padding: '1rem',
                 textAlign: 'center',
-                animation: timeLeft.minutes < 10 ? 'shake 0.5s infinite' : 'none'
+                border: '1px solid rgba(255, 255, 255, 0.2)'
               }}>
-                <div style={{ fontSize: '0.9rem', fontWeight: '600', marginBottom: '0.5rem' }}>
-                  ⚡ 限定セール終了まで
-                </div>
-                <div style={{
-                  fontSize: '2rem',
-                  fontWeight: '900',
-                  marginBottom: '0.5rem',
-                  letterSpacing: '0.1em'
-                }}>
-                  {timeLeft.hours}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
-                </div>
-                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>
-                  このチャンスを逃すと次は30日後です
-                </div>
+                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>1枚〜</div>
+                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>小ロット対応</div>
+              </div>
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '12px',
+                padding: '1rem',
+                textAlign: 'center',
+                border: '1px solid rgba(255, 255, 255, 0.2)'
+              }}>
+                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>即日</div>
+                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>対応可能</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 🧠 ニューロマーケティング特徴セクション */}
+      {/* サービス特徴セクション */}
       <section style={{ 
         padding: '4rem 2rem', 
         background: '#f8fafc'
       }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          {/* 🎯 認知負荷最適化ヘッダー */}
+        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <div style={{
-              color: '#3b82f6',
-              fontSize: '0.9rem',
-              fontWeight: '700',
-              textTransform: 'uppercase',
-              letterSpacing: '0.2em',
-              marginBottom: '1rem'
-            }}>
-              💎 圧倒的差別化ポイント
-            </div>
             <h2 style={{ 
-              fontSize: 'clamp(2rem, 4vw, 3rem)', 
-              fontWeight: '900', 
+              fontSize: '2rem', 
+              fontWeight: 'bold', 
               marginBottom: '1rem',
-              color: '#111827',
-              lineHeight: '1.2'
+              color: '#111827'
             }}>
-              なぜ{salesCount}人が選んだのか？
+              選ばれる理由
             </h2>
             <p style={{
-              fontSize: '1.2rem',
+              fontSize: '1.1rem',
               color: '#6b7280',
               maxWidth: '600px',
               margin: '0 auto'
             }}>
-              科学的に実証された{MirrorNeuronActivation.actionVerbs.emotional[4]}
+              プロフェッショナルなサービスで、お客様のビジネスを成功に導きます
             </p>
           </div>
           
-          {/* 🧬 Miller's 7±2法則に基づく特徴グリッド */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
             gap: '2rem',
             marginBottom: '3rem'
           }}>
             {[
               {
-                icon: '🚀',
-                title: MirrorNeuronActivation.actionVerbs.ja[4],
-                description: 'AI駆動の次世代デザインで業界を革命的に変革',
-                color: '#ef4444',
-                benefit: '売上300%アップ',
-                proof: '実績97社で証明済み'
-              },
-              {
-                icon: '💎',
-                title: MirrorNeuronActivation.actionVerbs.ja[1],
-                description: '限定素材とプレミアム品質で圧倒的な差別化を実現',
-                color: NeuroColorPsychology.trust.primary,
-                benefit: 'コスト50%削減',
-                proof: '顧客満足度99.2%'
+                icon: '🎯',
+                title: 'プレミアム品質',
+                description: '厳選された素材と最新技術で、最高品質の製品をお届けします。',
+                color: '#3b82f6'
               },
               {
                 icon: '⚡',
-                title: MirrorNeuronActivation.actionVerbs.ja[6],
-                description: '1枚から対応可能な超小ロット生産システム',
-                color: NeuroColorPsychology.urgency.primary,
-                benefit: '在庫リスク0%',
-                proof: '最短48時間納期'
+                title: 'スピード対応',
+                description: '1枚から対応可能な小ロット生産で、迅速にご要望にお応えします。',
+                color: '#10b981'
               },
               {
-                icon: '🎯',
-                title: MirrorNeuronActivation.actionVerbs.ja[3],
-                description: 'VIP専用ルートでトレンド情報を独占的に先取り',
-                color: NeuroColorPsychology.safety.primary,
-                benefit: 'トレンド3ヶ月先取り',
-                proof: '業界シェア第1位'
+                icon: '💎',
+                title: 'カスタマイズ',
+                description: 'お客様のブランドに合わせた完全カスタマイズが可能です。',
+                color: '#f59e0b'
+              },
+              {
+                icon: '🤝',
+                title: '専任サポート',
+                description: '専門スタッフが企画から納品まで一貫してサポートします。',
+                color: '#ef4444'
               }
             ].map((feature, index) => (
               <div key={index} style={{
-                background: 'rgba(255, 255, 255, 0.9)',
-                backdropFilter: 'blur(20px)',
-                borderRadius: '24px',
-                padding: '2.5rem',
-                border: `2px solid ${feature.color}`,
-                boxShadow: '0 15px 35px rgba(0, 0, 0, 0.08)',
-                position: 'relative',
-                overflow: 'hidden',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer'
+                background: '#ffffff',
+                borderRadius: '16px',
+                padding: '2rem',
+                border: '1px solid #e5e7eb',
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
+                textAlign: 'center',
+                transition: 'all 0.3s ease'
               }}>
-                {/* 🌟 背景グラデーション */}
-                <div style={{
-                  position: 'absolute',
-                  top: 0,
-                  right: 0,
-                  width: '100px',
-                  height: '100px',
-                  background: feature.color,
-                  opacity: 0.1,
-                  borderRadius: '50%',
-                  transform: 'translate(30px, -30px)'
-                }} />
-                
-                <div style={{ position: 'relative', zIndex: 1 }}>
-                  {/* 🎯 アイコン＋即効性バッジ */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
-                    <div style={{ 
-                      fontSize: '3.5rem', 
-                      lineHeight: 1,
-                      filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.1))'
-                    }}>
-                      {feature.icon}
-                    </div>
-                    <div style={{
-                      background: feature.color,
-                      color: 'white',
-                      padding: '0.3rem 0.8rem',
-                      borderRadius: '15px',
-                      fontSize: '0.7rem',
-                      fontWeight: '700'
-                    }}>
-                      {feature.benefit}
-                    </div>
-                  </div>
-                  
-                  {/* 📝 タイトル */}
-                  <h3 style={{ 
-                    fontSize: '1.4rem', 
-                    fontWeight: '800', 
-                    marginBottom: '1rem',
-                    color: feature.color,
-                    lineHeight: '1.3'
-                  }}>
-                    {feature.title}
-                  </h3>
-                  
-                  {/* 📖 説明 */}
-                  <p style={{ 
-                    color: '#4b5563', 
-                    lineHeight: '1.6',
-                    marginBottom: '1.5rem',
-                    fontSize: '0.95rem'
-                  }}>
-                    {feature.description}
-                  </p>
-                  
-                  {/* 🏆 社会的証明 */}
-                  <div style={{
-                    background: `linear-gradient(135deg, ${feature.color}15, ${feature.color}25)`,
-                    padding: '0.75rem 1rem',
-                    borderRadius: '12px',
-                    border: `1px solid ${feature.color}40`
-                  }}>
-                    <div style={{
-                      fontSize: '0.8rem',
-                      fontWeight: '700',
-                      color: feature.color
-                    }}>
-                      ✓ {feature.proof}
-                    </div>
-                  </div>
+                <div style={{ 
+                  fontSize: '3rem', 
+                  marginBottom: '1rem'
+                }}>
+                  {feature.icon}
                 </div>
+                
+                <h3 style={{ 
+                  fontSize: '1.25rem', 
+                  fontWeight: '600', 
+                  marginBottom: '1rem',
+                  color: feature.color
+                }}>
+                  {feature.title}
+                </h3>
+                
+                <p style={{ 
+                  color: '#6b7280', 
+                  lineHeight: '1.6',
+                  fontSize: '0.95rem'
+                }}>
+                  {feature.description}
+                </p>
               </div>
             ))}
           </div>
           
-          {/* 🎯 最終ドーパミン誘発CTA */}
+          {/* CTA */}
           <div style={{
             textAlign: 'center',
-            background: 'rgba(255, 255, 255, 0.8)',
-            backdropFilter: 'blur(20px)',
-            borderRadius: '24px',
+            background: '#ffffff',
+            borderRadius: '16px',
             padding: '3rem 2rem',
-            border: `3px solid ${NeuroColorPsychology.dopamine.primary}`,
-            position: 'relative',
-            overflow: 'hidden'
+            border: '1px solid #e5e7eb',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
           }}>
-            <div style={{
-              position: 'absolute',
-              top: '-50%',
-              left: '-50%',
-              width: '200%',
-              height: '200%',
-              background: '#ef4444',
-              opacity: 0.1
-            }} />
+            <h3 style={{
+              fontSize: '1.5rem',
+              fontWeight: 'bold',
+              marginBottom: '1rem',
+              color: '#111827'
+            }}>
+              まずはお気軽にご相談ください
+            </h3>
             
-            <div style={{ position: 'relative', zIndex: 1 }}>
-              <h3 style={{
-                fontSize: '2.2rem',
-                fontWeight: '900',
-                marginBottom: '1rem',
-                background: '#ef4444',
-                color: 'transparent'
-              }}>
-                🔥 {timeLeft.hours === 0 && timeLeft.minutes < 30 ? '最後のチャンス！' : '今だけ特別価格'}
-              </h3>
-              
-              <p style={{
-                fontSize: '1.3rem',
-                color: '#4b5563',
-                marginBottom: '2rem',
-                fontWeight: '600'
-              }}>
-                {viewerCount}人が検討中。残り{timeLeft.minutes}分で
-                <span style={{ color: '#dc2626', fontWeight: '800' }}>74%OFF</span>
-                終了します
-              </p>
-              
-              <Link href="/products" style={{
-                background: '#ef4444',
-                color: 'white',
-                padding: '1.25rem 3rem',
-                borderRadius: '50px',
-                textDecoration: 'none',
-                fontWeight: '900',
-                fontSize: '1.3rem',
-                boxShadow: '0 10px 30px rgba(255, 71, 87, 0.4)',
-                transition: 'all 0.3s ease',
-                display: 'inline-block',
-                position: 'relative',
-                overflow: 'hidden'
-              }}>
-                ⚡ {MirrorNeuronActivation.actionVerbs.ja[0]}
+            <p style={{
+              fontSize: '1rem',
+              color: '#6b7280',
+              marginBottom: '2rem'
+            }}>
+              専門スタッフがお客様のご要望を詳しくお聞きし、最適なソリューションをご提案します。
+            </p>
+            
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link href="/support/contact">
+                <NeuroButton 
+                  mood="trust" 
+                  size="large"
+                  style={{
+                    background: '#ef4444',
+                    color: 'white',
+                    border: 'none',
+                    fontWeight: '600',
+                    fontSize: '1rem',
+                    padding: '0.75rem 1.5rem'
+                  }}
+                >
+                  お問い合わせ
+                </NeuroButton>
+              </Link>
+              <Link href="/services/small-lot">
+                <NeuroButton 
+                  mood="calm" 
+                  size="large" 
+                  variant="secondary"
+                  style={{
+                    background: 'transparent',
+                    color: '#3b82f6',
+                    border: '2px solid #3b82f6',
+                    fontWeight: '600',
+                    fontSize: '1rem',
+                    padding: '0.75rem 1.5rem'
+                  }}
+                >
+                  小ロット対応
+                </NeuroButton>
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 🧠 ニューロマーケティング最適化フッター */}
+      {/* フッター */}
       <footer style={{ 
         background: '#111827',
         color: '#ffffff', 
-        padding: '4rem 2rem 2rem',
-        position: 'relative',
-        overflow: 'hidden'
+        padding: '2rem'
       }}>
-        {/* 🌟 背景効果 */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'radial-gradient(circle at 30% 20%, rgba(255, 71, 87, 0.1) 0%, transparent 50%)',
-          zIndex: 0
-        }} />
-        
-        <div style={{ maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          {/* 🎯 最終ドーパミン誘発 */}
-          <div style={{
-            textAlign: 'center',
-            marginBottom: '3rem',
-            background: 'rgba(255, 255, 255, 0.05)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: '20px',
-            padding: '2rem',
-            border: '1px solid rgba(255, 255, 255, 0.1)'
-          }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', textAlign: 'center' }}>
+          <Link href="/" style={{ color: '#ffffff', textDecoration: 'none' }}>
             <h3 style={{ 
-              fontSize: '2rem', 
-              fontWeight: '900', 
-              marginBottom: '1rem',
-              background: NeuroColorPsychology.dopamine.gradient,
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              color: 'transparent'
+              fontSize: '1.5rem', 
+              fontWeight: 'bold', 
+              marginBottom: '1rem'
             }}>
-              ⚡ APPAREL EC
+              APPAREL EC
             </h3>
-            <p style={{ 
-              color: '#d1d5db', 
-              marginBottom: '1.5rem',
-              fontSize: '1.1rem',
-              fontWeight: '500'
-            }}>
-              {MirrorNeuronActivation.actionVerbs.emotional[4]}を{MirrorNeuronActivation.actionVerbs.ja[2]}
-            </p>
-            
-            {/* 🏆 最終実績アピール */}
-            <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '2rem',
-              flexWrap: 'wrap',
-              marginBottom: '1.5rem'
-            }}>
-              {[
-                { label: '累計販売数', value: `${salesCount * 47}`, suffix: '点', icon: '📦' },
-                { label: '継続利用率', value: '98.7', suffix: '%', icon: '💎' },
-                { label: '平均評価', value: '4.9', suffix: '/5.0', icon: '⭐' }
-              ].map((stat, index) => (
-                <div key={stat.label} style={{
-                  textAlign: 'center',
-                  minWidth: '120px'
-                }}>
-                  <div style={{ fontSize: '1.5rem', marginBottom: '0.25rem' }}>{stat.icon}</div>
-                  <div style={{
-                    fontSize: '1.8rem',
-                    fontWeight: '800',
-                    color: '#ef4444',
-                    marginBottom: '0.25rem'
-                  }}>
-                    {stat.value}{stat.suffix}
-                  </div>
-                  <div style={{
-                    fontSize: '0.8rem',
-                    color: '#9ca3af',
-                    fontWeight: '500'
-                  }}>
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          </Link>
+          <p style={{ 
+            color: '#9ca3af', 
+            marginBottom: '2rem'
+          }}>
+            現代のライフスタイルに合わせたプレミアムファッション
+          </p>
           
-          {/* 🔗 ナビゲーション */}
           <div style={{ 
             display: 'flex', 
             justifyContent: 'center', 
-            gap: '3rem', 
+            gap: '2rem', 
             flexWrap: 'wrap',
             marginBottom: '2rem'
           }}>
             {[
-              { href: '/products', label: '🎯 商品一覧', color: '#3b82f6' },
-              { href: '/cart', label: '🛒 カート', color: '#ef4444' },
-              { href: '/support/contact', label: '💬 VIPサポート', color: '#059669' }
+              { href: '/products', label: '商品一覧' },
+              { href: '/services/oem', label: 'OEMサービス' },
+              { href: '/services/small-lot', label: '小ロット対応' },
+              { href: '/support/contact', label: 'お問い合わせ' }
             ].map((link, index) => (
               <Link key={link.href} href={link.href} style={{ 
-                color: link.color,
+                color: '#d1d5db',
                 textDecoration: 'none',
-                fontWeight: '600',
-                fontSize: '1.1rem',
-                padding: '0.5rem 1rem',
-                borderRadius: '10px',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: `1px solid ${link.color}40`,
-                transition: 'all 0.3s ease'
+                fontWeight: '500',
+                transition: 'color 0.3s ease'
               }}>
                 {link.label}
               </Link>
             ))}
           </div>
           
-          {/* 📄 コピーライト */}
           <div style={{
-            textAlign: 'center',
+            borderTop: '1px solid #374151',
             paddingTop: '2rem',
-            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
             color: '#9ca3af',
-            fontSize: '0.9rem'
+            fontSize: '0.875rem'
           }}>
-            © 2024 APPAREL EC. 全ての革命的体験を独占提供.
+            © 2024 アパレルEC. All rights reserved.
           </div>
         </div>
       </footer>
       
-      {/* 🎨 ニューロマーケティングアニメーション */}
       <style jsx>{`
-        @keyframes pulse {
-          0%, 100% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.05); opacity: 0.9; }
-        }
-        
-        @keyframes shake {
-          0%, 100% { transform: translateX(0); }
-          25% { transform: translateX(-2px); }
-          75% { transform: translateX(2px); }
-        }
-        
-        @keyframes rotate {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        
-        @keyframes fadeInUp {
-          0% { transform: translateY(30px); opacity: 0; }
-          100% { transform: translateY(0); opacity: 1; }
-        }
-        
         @media (max-width: 768px) {
           .hero-grid {
             grid-template-columns: 1fr !important;
             gap: 2rem !important;
-          }
-          
-          .hero-image {
-            height: 200px !important;
-          }
-          
-          .hero-content {
-            text-align: center;
-            order: 2;
-          }
-          
-          .hero-sidebar {
-            order: 1;
           }
         }
       `}</style>
