@@ -1,11 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { useOptimisticCart } from '@/lib/hooks/use-optimistic-cart'
+import { useCartStore } from '@/lib/store/cart'
 
 export function CartIndicator() {
-  const { totalItems, isPending } = useOptimisticCart()
+  const { totalItems } = useCartStore()
   const count = totalItems()
+  const isPending = false // Simplified for UltraHeader integration
 
   return (
     <Link 

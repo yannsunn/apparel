@@ -174,7 +174,7 @@ export default function ProductsPage() {
         borderBottom: '1px solid #e5e7eb',
         position: 'sticky',
         top: '80px',
-        zIndex: 30
+        zIndex: 25 // UltraHeaderより低く設定
       }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           {/* 検索バー */}

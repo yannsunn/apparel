@@ -57,7 +57,7 @@ export default function HomePage() {
         padding: '0.5rem 2rem',
         position: 'sticky',
         top: '80px',
-        zIndex: 45,
+        zIndex: 30, // UltraHeaderより低く設定
         boxShadow: '0 4px 16px rgba(0, 0, 0, 0.05)'
       }}>
         <div style={{ 

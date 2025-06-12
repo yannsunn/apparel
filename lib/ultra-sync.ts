@@ -115,7 +115,7 @@ export const ULTRA_STYLES = {
     padding: '0 1rem'
   },
   
-  // ヘッダー統一スタイル
+  // ヘッダー統一スタイル - z-index最適化
   header: {
     background: 'rgba(255,255,255,0.95)',
     backdropFilter: 'blur(12px)',
@@ -123,8 +123,9 @@ export const ULTRA_STYLES = {
     padding: '1rem 2rem',
     position: 'sticky' as const,
     top: 0,
-    zIndex: 40,
-    transition: 'all 0.3s ease'
+    zIndex: 50, // 最高優先度
+    transition: 'all 0.3s ease',
+    pointerEvents: 'auto' as const // クリック有効化
   },
   
   // ボタン統一スタイル

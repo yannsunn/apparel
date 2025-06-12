@@ -49,7 +49,7 @@ export default function UltraHeader({
     UltraSync.Monitor.measurePageLoad(pathname)
   }, [pathname])
 
-  // 動的ヘッダースタイル
+  // 動的ヘッダースタイル - z-index 最適化
   const headerStyle = {
     ...UltraSync.Styles.header,
     background: transparent && !isScrolled 
@@ -60,7 +60,9 @@ export default function UltraHeader({
     borderBottom: transparent && !isScrolled 
       ? 'none' 
       : `1px solid ${theme === 'light' ? 'rgba(226, 232, 240, 0.8)' : 'rgba(75, 85, 99, 0.3)'}`,
-    boxShadow: isScrolled ? '0 4px 20px rgba(0,0,0,0.1)' : 'none'
+    boxShadow: isScrolled ? '0 4px 20px rgba(0,0,0,0.1)' : 'none',
+    zIndex: 50, // 最高優先度で他のsticky要素と競合回避
+    pointerEvents: 'auto' // クリックイベント確実有効化
   }
 
   const navStyle = {

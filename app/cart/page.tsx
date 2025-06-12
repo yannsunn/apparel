@@ -482,7 +482,7 @@ export default function NeuroCartPage() {
             padding: '1.5rem',
             boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
             position: 'sticky',
-            top: '120px'
+            top: '100px' // UltraHeaderとの重複回避
           }}>
             <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#111827' }}>
               📋 注文サマリー
