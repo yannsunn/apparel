@@ -291,11 +291,8 @@ export default function HomePage() {
               boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
             }}>
               <img 
-                src="https://images.unsplash.com/photo-1588059699568-14ac75703d87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
                 alt="高品質素材"
-                onError={(e) => {
-                  e.currentTarget.src = "https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                }}
                 style={{
                   width: '100%',
                   height: '200px',
