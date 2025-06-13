@@ -10,90 +10,23 @@ export default function OEMPage() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #4c1d95 100%)',
-      position: 'relative',
-      overflow: 'hidden'
+      background: '#ffffff'
     }}>
-      {/* 限界突破背景エフェクト */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundImage: `
-          radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.5) 0%, transparent 50%),
-          radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.5) 0%, transparent 50%),
-          radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.3) 0%, transparent 50%)
-        `,
-        animation: 'ultraGlow 10s ease-in-out infinite',
-        pointerEvents: 'none'
-      }} />
-      
-      {/* パーティクルエフェクト */}
-      <div style={{
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        overflow: 'hidden',
-        pointerEvents: 'none'
-      }}>
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            style={{
-              position: 'absolute',
-              width: '2px',
-              height: '2px',
-              background: 'rgba(255, 255, 255, 0.8)',
-              borderRadius: '50%',
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `ultraFloat ${10 + Math.random() * 20}s linear infinite`,
-              animationDelay: `${Math.random() * 10}s`
-            }}
-          />
-        ))}
-      </div>
-      
-      <style jsx>{`
-        @keyframes ultraGlow {
-          0%, 100% { filter: blur(40px) brightness(1); }
-          50% { filter: blur(60px) brightness(1.2); }
-        }
-        @keyframes ultraFloat {
-          0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-        }
-        @keyframes heroShine {
-          0% { background-position: 200% center; }
-          100% { background-position: -200% center; }
-        }
-        @keyframes ultraPulse {
-          0%, 100% { transform: scale(1); opacity: 0.8; }
-          50% { transform: scale(1.1); opacity: 1; }
-        }
-      `}</style>
       <UltraHeader />
       <NeuroStyles />
 
       {/* Hero Section */}
       <section style={{
-        background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.95) 0%, rgba(220, 38, 38, 0.95) 100%)',
-        backgroundSize: '200% 200%',
-        animation: 'heroShine 8s ease-in-out infinite',
+        background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.9) 0%, rgba(220, 38, 38, 0.9) 100%)',
         color: '#ffffff',
         padding: '4rem 2rem',
         minHeight: '60vh',
         display: 'flex',
         alignItems: 'center',
         position: 'relative',
-        overflow: 'hidden',
-        backdropFilter: 'blur(10px)'
+        overflow: 'hidden'
       }}>
-        {/* 背景イメージレイヤー */}
+        {/* Background image */}
         <div style={{
           position: 'absolute',
           top: 0,
@@ -103,24 +36,18 @@ export default function OEMPage() {
           backgroundImage: 'url(https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          opacity: 0.15,
-          filter: 'blur(2px)',
-          transform: 'scale(1.1)'
+          zIndex: 0
         }} />
         
-        {/* グリッドパターン */}
+        {/* Background overlay */}
         <div style={{
           position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px',
-          animation: 'ultraSlide 20s linear infinite'
+          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.85) 0%, rgba(220, 38, 38, 0.85) 100%)',
+          zIndex: 1
         }} />
         <div style={{ 
           maxWidth: '1280px', 
@@ -279,33 +206,17 @@ export default function OEMPage() {
       <main style={{ 
         maxWidth: '1280px', 
         margin: '0 auto', 
-        padding: '4rem 2rem',
-        position: 'relative',
-        zIndex: 1
+        padding: '4rem 2rem'
       }}>
         {/* Service Overview */}
         <section style={{ marginBottom: '4rem' }}>
           <div style={{
-            background: 'rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(20px)',
+            background: '#ffffff',
             padding: '3rem',
-            borderRadius: '24px',
-            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-            border: '1px solid rgba(255, 255, 255, 0.5)',
-            position: 'relative',
-            overflow: 'hidden'
+            borderRadius: '16px',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
+            border: '1px solid #e5e7eb'
           }}>
-            {/* グロウエフェクト */}
-            <div style={{
-              position: 'absolute',
-              top: '-50%',
-              right: '-20%',
-              width: '400px',
-              height: '400px',
-              background: 'radial-gradient(circle, rgba(239, 68, 68, 0.1) 0%, transparent 70%)',
-              animation: 'ultraPulse 6s ease-in-out infinite',
-              pointerEvents: 'none'
-            }} />
             <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '2rem', color: '#111827' }}>
               OEM・ODMサービスとは
             </h2>
@@ -336,23 +247,9 @@ export default function OEMPage() {
         <section style={{ 
           marginBottom: '4rem', 
           padding: '3rem 2rem', 
-          background: 'linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.95) 100%)',
-          backdropFilter: 'blur(10px)',
-          borderRadius: '24px',
-          position: 'relative',
-          overflow: 'hidden',
-          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+          background: '#f8fafc', 
+          borderRadius: '16px'
         }}>
-          {/* 装飾パターン */}
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundImage: `url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%233b82f6" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')`,
-            opacity: 0.5
-          }} />
           <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem', textAlign: 'center', color: '#111827' }}>
             OEM製造プロセス
           </h2>
@@ -589,27 +486,11 @@ export default function OEMPage() {
             価格ガイド
           </h2>
           <div style={{
-            background: 'linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.95) 100%)',
-            backdropFilter: 'blur(10px)',
+            background: '#f8fafc',
             padding: '2rem',
-            borderRadius: '20px',
-            border: '1px solid rgba(226, 232, 240, 0.5)',
-            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-            position: 'relative',
-            overflow: 'hidden'
+            borderRadius: '12px',
+            border: '1px solid #e2e8f0'
           }}>
-            {/* 価格セクショングロウ */}
-            <div style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              width: '600px',
-              height: '600px',
-              background: 'radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 50%)',
-              transform: 'translate(-50%, -50%)',
-              animation: 'ultraPulse 8s ease-in-out infinite',
-              pointerEvents: 'none'
-            }} />
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
               {[
                 { category: 'Tシャツ・カットソー', price: '¥800〜', quantity: '100枚〜' },
