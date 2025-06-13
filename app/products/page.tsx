@@ -190,7 +190,7 @@ export default function ProductsPage() {
               position: 'relative',
               zIndex: 5
             }}>
-              <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>{stats.totalProducts}</div>
+              <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{stats.totalProducts}</div>
               <div style={{ fontSize: '0.9rem' }}>総商品数</div>
             </div>
             <div style={{
@@ -201,7 +201,7 @@ export default function ProductsPage() {
               position: 'relative',
               zIndex: 5
             }}>
-              <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>¥{stats.averagePrice.toLocaleString()}</div>
+              <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>¥{stats.averagePrice.toLocaleString()}</div>
               <div style={{ fontSize: '0.9rem' }}>平均価格</div>
             </div>
             <div style={{
@@ -212,7 +212,7 @@ export default function ProductsPage() {
               position: 'relative',
               zIndex: 5
             }}>
-              <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>{stats.featuredCount}</div>
+              <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{stats.featuredCount}</div>
               <div style={{ fontSize: '0.9rem' }}>おすすめ商品</div>
             </div>
           </div>

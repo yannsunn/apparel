@@ -69,14 +69,14 @@ export default function HomePage() {
           {/* Left content */}
           <div style={{ textAlign: 'left' }}>
             <h1 style={{
-              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+              fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
               fontWeight: 'bold',
               marginBottom: '1.5rem',
               lineHeight: '1.2',
               transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
               opacity: isVisible ? 1 : 0,
               transition: 'all 0.8s ease-out',
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)'
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'
             }}>
               プレミアム<br />
               アパレルコレクション
@@ -86,7 +86,7 @@ export default function HomePage() {
               opacity: 0.95,
               marginBottom: '2rem',
               lineHeight: '1.6',
-              textShadow: '1px 1px 3px rgba(0, 0, 0, 0.7)'
+              textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'
             }}>
               最高品質の素材と革新的なデザインで、<br />
               あなたのスタイルを完璧に表現します。
@@ -103,7 +103,7 @@ export default function HomePage() {
                     color: '#ef4444',
                     border: 'none',
                     fontWeight: '600',
-                    fontSize: '1.2rem',
+                    fontSize: '1.1rem',
                     padding: '1rem 2rem'
                   }}
                 >
@@ -121,7 +121,7 @@ export default function HomePage() {
                     border: '2px solid #ffffff',
                     fontWeight: '600',
                     fontSize: '1rem',
-                    padding: '0.75rem 1.5rem'
+                    padding: '0.875rem 1.75rem'
                   }}
                 >
                   OEMサービス
@@ -143,7 +143,7 @@ export default function HomePage() {
               <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem', opacity: 0.9 }}>
                 🏆 信頼の実績
               </div>
-              <div style={{ fontWeight: '600', fontSize: '1.1rem' }}>
+              <div style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>
                 累計販売実績 50,000点以上 | 顧客満足度 99.2%
               </div>
             </div>
@@ -488,7 +488,7 @@ export default function HomePage() {
                     border: 'none',
                     fontWeight: '600',
                     fontSize: '1rem',
-                    padding: '0.75rem 1.5rem'
+                    padding: '0.875rem 1.75rem'
                   }}
                 >
                   お問い合わせ
@@ -505,7 +505,7 @@ export default function HomePage() {
                     border: '2px solid #3b82f6',
                     fontWeight: '600',
                     fontSize: '1rem',
-                    padding: '0.75rem 1.5rem'
+                    padding: '0.875rem 1.75rem'
                   }}
                 >
                   小ロット対応

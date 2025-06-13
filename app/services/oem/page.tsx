@@ -131,7 +131,7 @@ export default function OEMPage() {
               <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>
                 🏆 信頼の実績
               </div>
-              <div style={{ fontWeight: '600', fontSize: '1.1rem' }}>
+              <div style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>
                 累計製造実績 50,000点以上 | 取引企業数 500社以上
               </div>
             </div>

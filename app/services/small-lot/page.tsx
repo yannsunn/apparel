@@ -66,14 +66,16 @@ export default function SmallLotPage() {
               fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
               fontWeight: 'bold',
               marginBottom: '1.5rem',
-              lineHeight: '1.2'
+              lineHeight: '1.2',
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'
             }}>
               小ロット対応サービス
             </h1>
             <p style={{
               fontSize: '1.25rem',
               marginBottom: '2rem',
-              lineHeight: '1.6'
+              lineHeight: '1.6',
+              textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'
             }}>
               1枚から始める新しいビジネス。<br />
               在庫リスクを最小限に抑えて、アイデアを形にしませんか？
@@ -129,7 +131,7 @@ export default function SmallLotPage() {
               <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>
                 ⚡ 今始めよう
               </div>
-              <div style={{ fontWeight: '600', fontSize: '1.1rem' }}>
+              <div style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>
                 最短1日で製作開始 | 在庫リスクゼロ
               </div>
             </div>
