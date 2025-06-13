@@ -130,8 +130,33 @@ export default function FAQPage() {
         padding: '4rem 2rem',
         minHeight: '60vh',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        position: 'relative',
+        overflow: 'hidden'
       }}>
+        {/* Background image */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: 'url("https://images.unsplash.com/photo-1562564055-71e051d33c19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          zIndex: 0
+        }} />
+        
+        {/* Background overlay */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.85) 0%, rgba(220, 38, 38, 0.85) 100%)',
+          zIndex: 1
+        }} />
         <div style={{ 
           maxWidth: '1280px', 
           margin: '0 auto', 
@@ -139,7 +164,9 @@ export default function FAQPage() {
           gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)',
           gap: '3rem',
           alignItems: 'center',
-          width: '100%'
+          width: '100%',
+          position: 'relative',
+          zIndex: 3
         }}>
           {/* Left content */}
           <div style={{ textAlign: 'left' }}>
