@@ -94,7 +94,39 @@ export default function ProductsPage() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#fafafa' }}>
+    <div style={{ 
+      minHeight: '100vh', 
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      position: 'relative',
+      overflow: 'hidden'
+    }}>
+      {/* 限界突破背景パターン */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundImage: `url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')`,
+        opacity: 0.5,
+        animation: 'ultraMove 20s ease-in-out infinite',
+        pointerEvents: 'none'
+      }} />
+      <style jsx>{`
+        @keyframes ultraMove {
+          0%, 100% { transform: translateX(0) translateY(0); }
+          50% { transform: translateX(30px) translateY(-30px); }
+        }
+        @keyframes heroGradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes ultraPulse {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 0.6; }
+        }
+      `}</style>
       <UltraHeader />
       
       {/* ニューロマーケティング要素 */}
@@ -111,13 +143,42 @@ export default function ProductsPage() {
 
       {/* ヒーローセクション */}
       <section style={{
-        background: '#ef4444',
+        background: 'linear-gradient(135deg, #ff0844 0%, #ffb199 100%)',
+        backgroundSize: '400% 400%',
+        animation: 'heroGradient 15s ease infinite',
         color: '#ffffff',
         padding: '4rem 2rem',
         minHeight: '60vh',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        position: 'relative',
+        overflow: 'hidden'
       }}>
+        {/* 限界突破オーバーレイ */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'radial-gradient(circle at 20% 50%, rgba(255,255,255,0.3) 0%, transparent 50%)',
+          animation: 'ultraPulse 4s ease-in-out infinite',
+          pointerEvents: 'none'
+        }} />
+        {/* 背景画像レイヤー */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: 'url(https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.2,
+          filter: 'blur(1px)',
+          transform: 'scale(1.1)'
+        }} />
         <div style={{ 
           maxWidth: '1280px', 
           margin: '0 auto', 
@@ -318,7 +379,23 @@ export default function ProductsPage() {
       </section>
 
       {/* 商品特徴画像セクション */}
-      <section style={{ padding: '3rem 2rem', background: '#f8fafc' }}>
+      <section style={{ 
+        padding: '3rem 2rem', 
+        background: 'linear-gradient(180deg, rgba(248,250,252,0.95) 0%, rgba(241,245,249,0.95) 100%)',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {/* 背景装飾 */}
+        <div style={{
+          position: 'absolute',
+          top: '-50%',
+          right: '-10%',
+          width: '500px',
+          height: '500px',
+          background: 'radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%)',
+          borderRadius: '50%',
+          animation: 'ultraPulse 8s ease-in-out infinite'
+        }} />
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem', textAlign: 'center', color: '#111827' }}>
             商品の特徴
@@ -436,7 +513,12 @@ export default function ProductsPage() {
         maxWidth: '1280px', 
         margin: '0 auto', 
         padding: '3rem 2rem',
-        minHeight: '60vh'
+        minHeight: '60vh',
+        background: 'rgba(255,255,255,0.95)',
+        borderRadius: '24px',
+        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+        position: 'relative',
+        zIndex: 1
       }}>
         {isLoading ? (
           /* ローディング状態 */
