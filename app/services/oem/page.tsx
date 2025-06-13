@@ -46,7 +46,7 @@ export default function OEMPage() {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.85) 0%, rgba(220, 38, 38, 0.85) 100%)',
+          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.90) 0%, rgba(220, 38, 38, 0.90) 100%)',
           zIndex: 1
         }} />
         <div style={{ 
@@ -116,11 +116,11 @@ export default function OEMPage() {
             
             {/* Social proof element */}
             <div style={{
-              background: 'rgba(255, 255, 255, 0.1)',
+              background: 'rgba(255, 255, 255, 0.2)',
               borderRadius: '8px',
               padding: '1.5rem 2rem',
               display: 'inline-block',
-              border: '1px solid rgba(255, 255, 255, 0.2)'
+              border: '1px solid rgba(255, 255, 255, 0.3)'
             }}>
               <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>
                 🏆 信頼の実績
@@ -140,10 +140,10 @@ export default function OEMPage() {
           }}>
             {/* Featured manufacturing image */}
             <div style={{
-              background: 'rgba(255, 255, 255, 0.1)',
+              background: 'rgba(255, 255, 255, 0.2)',
               borderRadius: '16px',
               padding: '1.5rem',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
               width: '100%',
               maxWidth: '400px'
             }}>
@@ -178,21 +178,21 @@ export default function OEMPage() {
               maxWidth: '400px'
             }}>
               <div style={{
-                background: 'rgba(255, 255, 255, 0.1)',
+                background: 'rgba(255, 255, 255, 0.2)',
                 borderRadius: '8px',
                 padding: '1rem',
                 textAlign: 'center',
-                border: '1px solid rgba(255, 255, 255, 0.2)'
+                border: '1px solid rgba(255, 255, 255, 0.3)'
               }}>
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>1枚〜</div>
                 <div style={{ fontSize: '0.8rem' }}>最小ロット</div>
               </div>
               <div style={{
-                background: 'rgba(255, 255, 255, 0.1)',
+                background: 'rgba(255, 255, 255, 0.2)',
                 borderRadius: '8px',
                 padding: '1rem',
                 textAlign: 'center',
-                border: '1px solid rgba(255, 255, 255, 0.2)'
+                border: '1px solid rgba(255, 255, 255, 0.3)'
               }}>
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>2週間</div>
                 <div style={{ fontSize: '0.8rem' }}>最短納期</div>

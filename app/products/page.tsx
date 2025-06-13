@@ -143,7 +143,7 @@ export default function ProductsPage() {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.85) 0%, rgba(220, 38, 38, 0.85) 100%)',
+          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.90) 0%, rgba(220, 38, 38, 0.90) 100%)',
           zIndex: 1
         }} />
         <div style={{ 
@@ -179,28 +179,28 @@ export default function ProductsPage() {
             flexWrap: 'wrap'
           }}>
             <div style={{
-              background: 'rgba(255, 255, 255, 0.1)',
+              background: 'rgba(255, 255, 255, 0.2)',
               padding: '1rem 1.5rem',
               borderRadius: '8px',
-              border: '1px solid rgba(255, 255, 255, 0.2)'
+              border: '1px solid rgba(255, 255, 255, 0.3)'
             }}>
               <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>{stats.totalProducts}</div>
               <div style={{ fontSize: '0.9rem' }}>総商品数</div>
             </div>
             <div style={{
-              background: 'rgba(255, 255, 255, 0.1)',
+              background: 'rgba(255, 255, 255, 0.2)',
               padding: '1rem 1.5rem',
               borderRadius: '8px',
-              border: '1px solid rgba(255, 255, 255, 0.2)'
+              border: '1px solid rgba(255, 255, 255, 0.3)'
             }}>
               <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>¥{stats.averagePrice.toLocaleString()}</div>
               <div style={{ fontSize: '0.9rem' }}>平均価格</div>
             </div>
             <div style={{
-              background: 'rgba(255, 255, 255, 0.1)',
+              background: 'rgba(255, 255, 255, 0.2)',
               padding: '1rem 1.5rem',
               borderRadius: '8px',
-              border: '1px solid rgba(255, 255, 255, 0.2)'
+              border: '1px solid rgba(255, 255, 255, 0.3)'
             }}>
               <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>{stats.featuredCount}</div>
               <div style={{ fontSize: '0.9rem' }}>おすすめ商品</div>
