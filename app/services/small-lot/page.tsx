@@ -58,7 +58,7 @@ export default function SmallLotPage() {
           alignItems: 'center',
           width: '100%',
           position: 'relative',
-          zIndex: 3
+          zIndex: 10
         }}>
           {/* Left content */}
           <div style={{ textAlign: 'left' }}>
@@ -118,11 +118,13 @@ export default function SmallLotPage() {
             
             {/* Urgency indicator */}
             <div style={{
-              background: 'rgba(255, 255, 255, 0.3)',
+              background: 'rgba(255, 255, 255, 0.4)',
               borderRadius: '8px',
               padding: '1.5rem 2rem',
               display: 'inline-block',
-              border: '1px solid rgba(255, 255, 255, 0.3)'
+              border: '1px solid rgba(255, 255, 255, 0.4)',
+              position: 'relative',
+              zIndex: 5
             }}>
               <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>
                 ⚡ 今始めよう
@@ -142,10 +144,12 @@ export default function SmallLotPage() {
           }}>
             {/* Small lot showcase image */}
             <div style={{
-              background: 'rgba(255, 255, 255, 0.3)',
+              background: 'rgba(255, 255, 255, 0.4)',
               borderRadius: '16px',
               padding: '1.5rem',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
+              border: '1px solid rgba(255, 255, 255, 0.4)',
+              position: 'relative',
+              zIndex: 5,
               width: '100%',
               maxWidth: '400px'
             }}>
@@ -180,21 +184,25 @@ export default function SmallLotPage() {
               maxWidth: '400px'
             }}>
               <div style={{
-                background: 'rgba(255, 255, 255, 0.3)',
+                background: 'rgba(255, 255, 255, 0.4)',
                 borderRadius: '8px',
                 padding: '1rem',
                 textAlign: 'center',
-                border: '1px solid rgba(255, 255, 255, 0.3)'
+                border: '1px solid rgba(255, 255, 255, 0.4)',
+              position: 'relative',
+              zIndex: 5
               }}>
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>ゼロ</div>
                 <div style={{ fontSize: '0.8rem' }}>在庫リスク</div>
               </div>
               <div style={{
-                background: 'rgba(255, 255, 255, 0.3)',
+                background: 'rgba(255, 255, 255, 0.4)',
                 borderRadius: '8px',
                 padding: '1rem',
                 textAlign: 'center',
-                border: '1px solid rgba(255, 255, 255, 0.3)'
+                border: '1px solid rgba(255, 255, 255, 0.4)',
+              position: 'relative',
+              zIndex: 5
               }}>
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>即日</div>
                 <div style={{ fontSize: '0.8rem' }}>対応可能</div>

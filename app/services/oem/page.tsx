@@ -56,7 +56,9 @@ export default function OEMPage() {
           gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)',
           gap: '3rem',
           alignItems: 'center',
-          width: '100%'
+          width: '100%',
+          position: 'relative',
+          zIndex: 10
         }}>
           {/* Left content */}
           <div style={{ textAlign: 'left' }}>
@@ -118,11 +120,13 @@ export default function OEMPage() {
             
             {/* Social proof element */}
             <div style={{
-              background: 'rgba(255, 255, 255, 0.3)',
+              background: 'rgba(255, 255, 255, 0.4)',
               borderRadius: '8px',
               padding: '1.5rem 2rem',
               display: 'inline-block',
-              border: '1px solid rgba(255, 255, 255, 0.3)'
+              border: '1px solid rgba(255, 255, 255, 0.4)',
+              position: 'relative',
+              zIndex: 5
             }}>
               <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>
                 🏆 信頼の実績
@@ -142,10 +146,12 @@ export default function OEMPage() {
           }}>
             {/* Featured manufacturing image */}
             <div style={{
-              background: 'rgba(255, 255, 255, 0.3)',
+              background: 'rgba(255, 255, 255, 0.4)',
               borderRadius: '16px',
               padding: '1.5rem',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
+              border: '1px solid rgba(255, 255, 255, 0.4)',
+              position: 'relative',
+              zIndex: 5,
               width: '100%',
               maxWidth: '400px'
             }}>
@@ -180,21 +186,25 @@ export default function OEMPage() {
               maxWidth: '400px'
             }}>
               <div style={{
-                background: 'rgba(255, 255, 255, 0.3)',
+                background: 'rgba(255, 255, 255, 0.4)',
                 borderRadius: '8px',
                 padding: '1rem',
                 textAlign: 'center',
-                border: '1px solid rgba(255, 255, 255, 0.3)'
+                border: '1px solid rgba(255, 255, 255, 0.4)',
+              position: 'relative',
+              zIndex: 5
               }}>
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>1枚〜</div>
                 <div style={{ fontSize: '0.8rem' }}>最小ロット</div>
               </div>
               <div style={{
-                background: 'rgba(255, 255, 255, 0.3)',
+                background: 'rgba(255, 255, 255, 0.4)',
                 borderRadius: '8px',
                 padding: '1rem',
                 textAlign: 'center',
-                border: '1px solid rgba(255, 255, 255, 0.3)'
+                border: '1px solid rgba(255, 255, 255, 0.4)',
+              position: 'relative',
+              zIndex: 5
               }}>
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>2週間</div>
                 <div style={{ fontSize: '0.8rem' }}>最短納期</div>

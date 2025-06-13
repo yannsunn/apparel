@@ -59,7 +59,7 @@ export default function HomePage() {
           maxWidth: '1280px', 
           margin: '0 auto', 
           position: 'relative', 
-          zIndex: 3,
+          zIndex: 10,
           display: 'grid',
           gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)',
           gap: '3rem',
@@ -131,12 +131,14 @@ export default function HomePage() {
             
             {/* Stats */}
             <div style={{
-              background: 'rgba(255, 255, 255, 0.35)',
+              background: 'rgba(255, 255, 255, 0.45)',
               backdropFilter: 'blur(10px)',
               borderRadius: '16px',
               padding: '1.5rem 2rem',
               display: 'inline-block',
-              border: '1px solid rgba(255, 255, 255, 0.4)'
+              border: '1px solid rgba(255, 255, 255, 0.5)',
+              position: 'relative',
+              zIndex: 5
             }}>
               <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem', opacity: 0.9 }}>
                 🏆 信頼の実績

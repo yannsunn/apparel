@@ -150,7 +150,9 @@ export default function ProductsPage() {
           maxWidth: '1280px', 
           margin: '0 auto', 
           textAlign: 'center',
-          width: '100%'
+          width: '100%',
+          position: 'relative',
+          zIndex: 10
         }}>
           <h1 style={{
             fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
@@ -181,28 +183,34 @@ export default function ProductsPage() {
             flexWrap: 'wrap'
           }}>
             <div style={{
-              background: 'rgba(255, 255, 255, 0.3)',
+              background: 'rgba(255, 255, 255, 0.4)',
               padding: '1rem 1.5rem',
               borderRadius: '8px',
-              border: '1px solid rgba(255, 255, 255, 0.3)'
+              border: '1px solid rgba(255, 255, 255, 0.4)',
+              position: 'relative',
+              zIndex: 5
             }}>
               <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>{stats.totalProducts}</div>
               <div style={{ fontSize: '0.9rem' }}>総商品数</div>
             </div>
             <div style={{
-              background: 'rgba(255, 255, 255, 0.3)',
+              background: 'rgba(255, 255, 255, 0.4)',
               padding: '1rem 1.5rem',
               borderRadius: '8px',
-              border: '1px solid rgba(255, 255, 255, 0.3)'
+              border: '1px solid rgba(255, 255, 255, 0.4)',
+              position: 'relative',
+              zIndex: 5
             }}>
               <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>¥{stats.averagePrice.toLocaleString()}</div>
               <div style={{ fontSize: '0.9rem' }}>平均価格</div>
             </div>
             <div style={{
-              background: 'rgba(255, 255, 255, 0.3)',
+              background: 'rgba(255, 255, 255, 0.4)',
               padding: '1rem 1.5rem',
               borderRadius: '8px',
-              border: '1px solid rgba(255, 255, 255, 0.3)'
+              border: '1px solid rgba(255, 255, 255, 0.4)',
+              position: 'relative',
+              zIndex: 5
             }}>
               <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>{stats.featuredCount}</div>
               <div style={{ fontSize: '0.9rem' }}>おすすめ商品</div>
