@@ -46,7 +46,7 @@ export default function SmallLotPage() {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.90) 0%, rgba(220, 38, 38, 0.90) 100%)',
+          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.95) 0%, rgba(220, 38, 38, 0.95) 100%)',
           zIndex: 1
         }} />
         <div style={{ 
@@ -118,7 +118,7 @@ export default function SmallLotPage() {
             
             {/* Urgency indicator */}
             <div style={{
-              background: 'rgba(255, 255, 255, 0.2)',
+              background: 'rgba(255, 255, 255, 0.3)',
               borderRadius: '8px',
               padding: '1.5rem 2rem',
               display: 'inline-block',
@@ -142,7 +142,7 @@ export default function SmallLotPage() {
           }}>
             {/* Small lot showcase image */}
             <div style={{
-              background: 'rgba(255, 255, 255, 0.2)',
+              background: 'rgba(255, 255, 255, 0.3)',
               borderRadius: '16px',
               padding: '1.5rem',
               border: '1px solid rgba(255, 255, 255, 0.3)',
@@ -180,7 +180,7 @@ export default function SmallLotPage() {
               maxWidth: '400px'
             }}>
               <div style={{
-                background: 'rgba(255, 255, 255, 0.2)',
+                background: 'rgba(255, 255, 255, 0.3)',
                 borderRadius: '8px',
                 padding: '1rem',
                 textAlign: 'center',
@@ -190,7 +190,7 @@ export default function SmallLotPage() {
                 <div style={{ fontSize: '0.8rem' }}>在庫リスク</div>
               </div>
               <div style={{
-                background: 'rgba(255, 255, 255, 0.2)',
+                background: 'rgba(255, 255, 255, 0.3)',
                 borderRadius: '8px',
                 padding: '1rem',
                 textAlign: 'center',

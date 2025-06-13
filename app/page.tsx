@@ -51,7 +51,7 @@ export default function HomePage() {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.90) 0%, rgba(220, 38, 38, 0.90) 100%)',
+          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.95) 0%, rgba(220, 38, 38, 0.95) 100%)',
           zIndex: 1
         }} />
         
@@ -75,7 +75,8 @@ export default function HomePage() {
               lineHeight: '1.2',
               transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
               opacity: isVisible ? 1 : 0,
-              transition: 'all 0.8s ease-out'
+              transition: 'all 0.8s ease-out',
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)'
             }}>
               プレミアム<br />
               アパレルコレクション
@@ -84,7 +85,8 @@ export default function HomePage() {
               fontSize: '1.25rem',
               opacity: 0.95,
               marginBottom: '2rem',
-              lineHeight: '1.6'
+              lineHeight: '1.6',
+              textShadow: '1px 1px 3px rgba(0, 0, 0, 0.7)'
             }}>
               最高品質の素材と革新的なデザインで、<br />
               あなたのスタイルを完璧に表現します。
@@ -129,7 +131,7 @@ export default function HomePage() {
             
             {/* Stats */}
             <div style={{
-              background: 'rgba(255, 255, 255, 0.25)',
+              background: 'rgba(255, 255, 255, 0.35)',
               backdropFilter: 'blur(10px)',
               borderRadius: '16px',
               padding: '1.5rem 2rem',

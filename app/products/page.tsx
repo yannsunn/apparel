@@ -143,7 +143,7 @@ export default function ProductsPage() {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.90) 0%, rgba(220, 38, 38, 0.90) 100%)',
+          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.95) 0%, rgba(220, 38, 38, 0.95) 100%)',
           zIndex: 1
         }} />
         <div style={{ 
@@ -156,7 +156,8 @@ export default function ProductsPage() {
             fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
             fontWeight: 'bold',
             marginBottom: '1.5rem',
-            lineHeight: '1.2'
+            lineHeight: '1.2',
+            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'
           }}>
             プレミアム商品コレクション
           </h1>
@@ -165,7 +166,8 @@ export default function ProductsPage() {
             marginBottom: '2rem',
             lineHeight: '1.6',
             maxWidth: '600px',
-            margin: '0 auto 2rem'
+            margin: '0 auto 2rem',
+            textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'
           }}>
             厳選されたアパレル商品を豊富に取り揃えています。<br />
             あなたの理想の一着を見つけてください。
@@ -179,7 +181,7 @@ export default function ProductsPage() {
             flexWrap: 'wrap'
           }}>
             <div style={{
-              background: 'rgba(255, 255, 255, 0.2)',
+              background: 'rgba(255, 255, 255, 0.3)',
               padding: '1rem 1.5rem',
               borderRadius: '8px',
               border: '1px solid rgba(255, 255, 255, 0.3)'
@@ -188,7 +190,7 @@ export default function ProductsPage() {
               <div style={{ fontSize: '0.9rem' }}>総商品数</div>
             </div>
             <div style={{
-              background: 'rgba(255, 255, 255, 0.2)',
+              background: 'rgba(255, 255, 255, 0.3)',
               padding: '1rem 1.5rem',
               borderRadius: '8px',
               border: '1px solid rgba(255, 255, 255, 0.3)'
@@ -197,7 +199,7 @@ export default function ProductsPage() {
               <div style={{ fontSize: '0.9rem' }}>平均価格</div>
             </div>
             <div style={{
-              background: 'rgba(255, 255, 255, 0.2)',
+              background: 'rgba(255, 255, 255, 0.3)',
               padding: '1rem 1.5rem',
               borderRadius: '8px',
               border: '1px solid rgba(255, 255, 255, 0.3)'

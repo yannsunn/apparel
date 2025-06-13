@@ -46,7 +46,7 @@ export default function OEMPage() {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.90) 0%, rgba(220, 38, 38, 0.90) 100%)',
+          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.95) 0%, rgba(220, 38, 38, 0.95) 100%)',
           zIndex: 1
         }} />
         <div style={{ 
@@ -64,14 +64,16 @@ export default function OEMPage() {
               fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
               fontWeight: 'bold',
               marginBottom: '1.5rem',
-              lineHeight: '1.2'
+              lineHeight: '1.2',
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'
             }}>
               OEM・ODMサービス
             </h1>
             <p style={{
               fontSize: '1.25rem',
               marginBottom: '2rem',
-              lineHeight: '1.6'
+              lineHeight: '1.6',
+              textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'
             }}>
               あなたのブランドを形にします。企画から製造まで、<br />
               トータルサポートでビジネスを成功に導きます。
@@ -116,7 +118,7 @@ export default function OEMPage() {
             
             {/* Social proof element */}
             <div style={{
-              background: 'rgba(255, 255, 255, 0.2)',
+              background: 'rgba(255, 255, 255, 0.3)',
               borderRadius: '8px',
               padding: '1.5rem 2rem',
               display: 'inline-block',
@@ -140,7 +142,7 @@ export default function OEMPage() {
           }}>
             {/* Featured manufacturing image */}
             <div style={{
-              background: 'rgba(255, 255, 255, 0.2)',
+              background: 'rgba(255, 255, 255, 0.3)',
               borderRadius: '16px',
               padding: '1.5rem',
               border: '1px solid rgba(255, 255, 255, 0.3)',
@@ -178,7 +180,7 @@ export default function OEMPage() {
               maxWidth: '400px'
             }}>
               <div style={{
-                background: 'rgba(255, 255, 255, 0.2)',
+                background: 'rgba(255, 255, 255, 0.3)',
                 borderRadius: '8px',
                 padding: '1rem',
                 textAlign: 'center',
@@ -188,7 +190,7 @@ export default function OEMPage() {
                 <div style={{ fontSize: '0.8rem' }}>最小ロット</div>
               </div>
               <div style={{
-                background: 'rgba(255, 255, 255, 0.2)',
+                background: 'rgba(255, 255, 255, 0.3)',
                 borderRadius: '8px',
                 padding: '1rem',
                 textAlign: 'center',
