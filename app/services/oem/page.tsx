@@ -622,6 +622,22 @@ export default function OEMPage() {
           </div>
         </div>
       </footer>
+      
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .hero-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+            text-align: center !important;
+          }
+          .service-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .process-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </div>
   )
 }

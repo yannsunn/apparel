@@ -646,6 +646,18 @@ export default function ProductsPage() {
           現代のライフスタイルに合わせたアパレルファッション
         </p>
       </footer>
+      
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .hero-section {
+            grid-template-columns: 1fr !important;
+            text-align: center !important;
+          }
+          .filter-section {
+            position: static !important;
+          }
+        }
+      `}</style>
     </div>
   )
 }
