@@ -273,7 +273,7 @@ export default function CartPage() {
             color: '#9ca3af', 
             marginBottom: '2rem'
           }}>
-            現代のライフスタイルに合わせたプレミアムファッション
+            現代のライフスタイルに合わせたアパレルファッション
           </p>
           
           <div style={{

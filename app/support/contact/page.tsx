@@ -676,7 +676,7 @@ export default function ContactPage() {
             </h3>
           </Link>
           <p style={{ color: '#9ca3af', marginBottom: '2rem' }}>
-            現代のライフスタイルに合わせたプレミアムファッション
+            現代のライフスタイルに合わせたアパレルファッション
           </p>
           <div style={{ 
             borderTop: '1px solid #374151', 

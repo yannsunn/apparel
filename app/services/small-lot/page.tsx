@@ -450,7 +450,7 @@ export default function SmallLotPage() {
               },
               {
                 title: '🛍️ 限定商品',
-                description: 'プレミアム感のある限定商品として、希少性を演出。',
+                description: '限定感のある特別商品として、希少性を演出。',
                 example: '例：限定カラーのジャケットを5枚のみ製作'
               },
               {
@@ -659,7 +659,7 @@ export default function SmallLotPage() {
             </h3>
           </Link>
           <p style={{ color: '#9ca3af', marginBottom: '2rem' }}>
-            現代のライフスタイルに合わせたプレミアムファッション
+            現代のライフスタイルに合わせたアパレルファッション
           </p>
           <div style={{ 
             borderTop: '1px solid #374151', 

@@ -161,7 +161,7 @@ export default function ProductsPage() {
             lineHeight: '1.2',
             textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'
           }}>
-            プレミアム商品コレクション
+商品コレクション
           </h1>
           <p style={{
             fontSize: '1.25rem',
@@ -643,7 +643,7 @@ export default function ProductsPage() {
           </h3>
         </Link>
         <p style={{ color: '#9ca3af' }}>
-          現代のライフスタイルに合わせたプレミアムファッション
+          現代のライフスタイルに合わせたアパレルファッション
         </p>
       </footer>
     </div>

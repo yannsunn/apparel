@@ -28,8 +28,8 @@ export const colors: Color[] = [
 export const products: Product[] = [
   {
     id: '1',
-    name: 'プレミアムコットンTシャツ',
-    description: 'オーガニックコットン100%使用の、柔らかく快適な着心地のプレミアムTシャツ。クラシックフィットで日常使いに最適です。',
+    name: '高品質コットンTシャツ',
+    description: 'オーガニックコットン100%使用の、柔らかく快適な着心地の高品質Tシャツ。クラシックフィットで日常使いに最適です。',
     price: 2980,
     originalPrice: 3980,
     currency: 'JPY',
@@ -54,7 +54,7 @@ export const products: Product[] = [
   {
     id: '2',
     name: 'スリムフィットデニムジーンズ',
-    description: '日本製プレミアムデニムを使用したモダンスリムフィットジーンズ。ストレッチ素材で一日中快適に着用できます。',
+    description: '日本製高品質デニムを使用したモダンスリムフィットジーンズ。ストレッチ素材で一日中快適に着用できます。',
     price: 8900,
     originalPrice: 12900,
     currency: 'JPY',
@@ -100,7 +100,7 @@ export const products: Product[] = [
   {
     id: '4',
     name: 'Classic Oxford Shirt',
-    description: 'Timeless oxford shirt made from premium cotton. Perfect for both casual and formal occasions.',
+    description: 'Timeless oxford shirt made from high-quality cotton. Perfect for both casual and formal occasions.',
     price: 6900,
     originalPrice: 8900,
     currency: 'JPY',

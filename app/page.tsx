@@ -73,13 +73,9 @@ export default function HomePage() {
               fontWeight: 'bold',
               marginBottom: '1.5rem',
               lineHeight: '1.2',
-              transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-              opacity: isVisible ? 1 : 0,
-              transition: 'all 0.8s ease-out',
               textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'
             }}>
-              プレミアム<br />
-              アパレルコレクション
+アパレルコレクション
             </h1>
             <p style={{
               fontSize: '1.25rem',
@@ -167,7 +163,7 @@ export default function HomePage() {
             }}>
               <img 
                 src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                alt="プレミアムアパレル"
+                alt="アパレル商品"
                 style={{
                   width: '100%',
                   height: '200px',
@@ -392,7 +388,7 @@ export default function HomePage() {
             {[
               {
                 icon: '🎯',
-                title: 'プレミアム品質',
+                title: '高品質',
                 description: '厳選された素材と最新技術で、最高品質の製品をお届けします。',
                 color: '#3b82f6'
               },
@@ -536,7 +532,7 @@ export default function HomePage() {
             color: '#9ca3af', 
             marginBottom: '2rem'
           }}>
-            現代のライフスタイルに合わせたプレミアムファッション
+現代のライフスタイルに合わせたアパレルファッション
           </p>
           
           <div style={{ 
