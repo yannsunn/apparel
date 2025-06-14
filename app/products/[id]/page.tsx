@@ -117,12 +117,20 @@ export default function ProductDetailPage() {
                     parent.style.display = 'flex'
                     parent.style.alignItems = 'center'
                     parent.style.justifyContent = 'center'
-                    parent.innerHTML = `
-                      <div style="color: #9ca3af; text-align: center;">
-                        <div style="font-size: 4rem; margin-bottom: 1rem;">👔</div>
-                        <div>商品画像 ${activeImageIndex + 1}</div>
-                      </div>
-                    `
+                    parent.style.color = '#9ca3af'
+                    parent.style.textAlign = 'center'
+                    
+                    // 安全な DOM 操作でフォールバック表示
+                    const iconDiv = document.createElement('div')
+                    iconDiv.style.fontSize = '4rem'
+                    iconDiv.style.marginBottom = '1rem'
+                    iconDiv.textContent = '👔'
+                    
+                    const textDiv = document.createElement('div')
+                    textDiv.textContent = `商品画像 ${activeImageIndex + 1}`
+                    
+                    parent.appendChild(iconDiv)
+                    parent.appendChild(textDiv)
                   }
                 }}
               />

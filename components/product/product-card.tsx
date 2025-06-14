@@ -127,7 +127,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
       <Link
         href={`/products/${product.id}`}
         style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
-        aria-label={`View details for ${product.name}`}
+        aria-label={`${product.name}の詳細を見る - 価格: ${formatPrice}`}
       >
         {/* 商品画像エリア */}
         <div style={{

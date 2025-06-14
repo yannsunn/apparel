@@ -42,15 +42,13 @@ export const Loading = memo<LoadingProps>(function Loading({
           borderRadius: '50%',
           animation: 'rotate 1s linear infinite'
         }}>
-          <style dangerouslySetInnerHTML={{
-            __html: `
-              @keyframes rotate {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-              }
-            `
-          }} />
         </div>
+        <style jsx>{`
+          @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
       </div>
     )
   }

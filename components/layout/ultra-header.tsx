@@ -219,8 +219,8 @@ export default function UltraHeader({
 
   return (
     <>
-      <header style={headerStyle}>
-        <nav style={navStyle}>
+      <header style={headerStyle} role="banner">
+        <nav style={navStyle} role="navigation" aria-label="メインナビゲーション">
           {/* ロゴ */}
           <Link 
             href="/" 
