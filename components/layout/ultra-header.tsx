@@ -27,6 +27,8 @@ export default function UltraHeader({
   const { totalItems } = useOptimisticCart()
   const [isScrolled, setIsScrolled] = useState(false)
   const [currentCartCount, setCurrentCartCount] = useState(0)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   // スクロール状態監視
   useEffect(() => {
@@ -36,6 +38,17 @@ export default function UltraHeader({
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // モバイル判定
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
   // カート数監視
@@ -49,7 +62,7 @@ export default function UltraHeader({
     UltraSync.Monitor.measurePageLoad(pathname)
   }, [pathname])
 
-  // 動的ヘッダースタイル - z-index 最適化
+  // 動的ヘッダースタイル - 薄型対応
   const headerStyle = {
     ...UltraSync.Styles.header,
     background: transparent && !isScrolled 
@@ -62,7 +75,10 @@ export default function UltraHeader({
     borderBottom: transparent && !isScrolled 
       ? 'none' 
       : `1px solid ${theme === 'light' ? 'rgba(226, 232, 240, 0.8)' : 'rgba(75, 85, 99, 0.3)'}`,
-    boxShadow: isScrolled ? '0 4px 20px rgba(0,0,0,0.1)' : 'none'
+    boxShadow: isScrolled ? '0 4px 20px rgba(0,0,0,0.1)' : 'none',
+    padding: isMobile ? '0.5rem 1rem' : '1rem 2rem',
+    height: isMobile ? 'auto' : 'auto',
+    minHeight: isMobile ? '60px' : '80px'
   }
 
   const navStyle = {
@@ -74,7 +90,7 @@ export default function UltraHeader({
   }
 
   const logoStyle = {
-    fontSize: UltraSync.Brand.typography.fontSize['2xl'],
+    fontSize: isMobile ? UltraSync.Brand.typography.fontSize.xl : UltraSync.Brand.typography.fontSize['2xl'],
     fontWeight: UltraSync.Brand.typography.fontWeight.extrabold,
     color: UltraSync.Brand.colors.primary,
     textDecoration: 'none',
@@ -85,10 +101,20 @@ export default function UltraHeader({
   }
 
   const navLinksStyle = {
-    display: 'flex',
-    gap: '1.5rem',
+    display: isMobile ? (isMenuOpen ? 'flex' : 'none') : 'flex',
+    gap: isMobile ? '0.75rem' : '1.5rem',
     alignItems: 'center',
-    flexWrap: 'wrap' as const
+    flexWrap: 'wrap' as const,
+    flexDirection: isMobile ? ('column' as const) : ('row' as const),
+    position: isMobile ? ('absolute' as const) : ('relative' as const),
+    top: isMobile ? '100%' : 'auto',
+    left: isMobile ? '0' : 'auto',
+    right: isMobile ? '0' : 'auto',
+    background: isMobile ? 'rgba(255,255,255,0.98)' : 'transparent',
+    padding: isMobile ? '1rem' : '0',
+    borderRadius: isMobile ? '0 0 8px 8px' : '0',
+    boxShadow: isMobile && isMenuOpen ? '0 4px 6px rgba(0,0,0,0.1)' : 'none',
+    backdropFilter: isMobile ? 'blur(10px)' : 'none'
   }
 
   const linkStyle = (isActive: boolean) => ({
@@ -242,11 +268,32 @@ export default function UltraHeader({
             {UltraSync.Brand.name}
           </Link>
           
+          {/* モバイルメニューボタン */}
+          {isMobile && (
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              style={{
+                background: 'none',
+                border: 'none',
+                fontSize: '1.5rem',
+                cursor: 'pointer',
+                color: UltraSync.Brand.colors.primary,
+                padding: '0.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              aria-label="メニューを開く"
+            >
+              {isMenuOpen ? '✕' : '☰'}
+            </button>
+          )}
+
           {/* ナビゲーション */}
           <div style={navLinksStyle}>
             {(UltraSync.Navigation.main as unknown as any[])
               .filter((item: any) => item.special !== 'cart')
-              .slice(0, 4) // モバイル対応で4個に削減
+              .slice(0, isMobile ? 3 : 4) // モバイルでさらに削減
               .map(renderNavItem)
             }
             
@@ -258,43 +305,65 @@ export default function UltraHeader({
         </nav>
       </header>
 
-      {/* CSS アニメーション＆レスポンシブ対応 */}
+      {/* CSS アニメーション＆薄型ヘッダー対応 */}
       <style jsx>{`
         @keyframes pulse {
           0%, 100% { transform: scale(1); }
           50% { transform: scale(1.2); }
         }
         
+        @keyframes slideDown {
+          from { 
+            opacity: 0; 
+            transform: translateY(-10px); 
+          }
+          to { 
+            opacity: 1; 
+            transform: translateY(0); 
+          }
+        }
+        
+        /* 薄型ヘッダー対応 */
+        header {
+          transition: all 0.3s ease !important;
+        }
+        
+        /* モバイルメニューアニメーション */
+        header nav > div:last-child {
+          animation: ${isMenuOpen && isMobile ? 'slideDown 0.3s ease' : 'none'};
+        }
+        
         /* モバイル対応 */
         @media (max-width: 768px) {
-          header nav {
-            padding: 0.75rem 1rem !important;
+          header {
+            min-height: 60px !important;
           }
           
-          header nav > div:last-child {
-            gap: 0.75rem !important;
-            flex-wrap: wrap;
-            justify-content: flex-end;
+          header nav {
+            padding: 0.5rem 1rem !important;
+            min-height: 60px !important;
           }
           
           header nav a {
-            font-size: 0.8rem !important;
-            padding: 0.4rem 0.6rem !important;
+            font-size: 0.9rem !important;
+            padding: 0.75rem 1rem !important;
+            width: 100%;
+            justify-content: center;
+            border-bottom: 1px solid #f3f4f6;
           }
           
-          header nav a span:first-child {
-            font-size: 1rem !important;
+          header nav a:last-child {
+            border-bottom: none;
           }
         }
         
         @media (max-width: 640px) {
-          header nav > div:last-child {
-            gap: 0.5rem !important;
+          header {
+            min-height: 56px !important;
           }
           
-          header nav a {
-            font-size: 0.75rem !important;
-            padding: 0.3rem 0.5rem !important;
+          header nav {
+            min-height: 56px !important;
           }
         }
       `}</style>
