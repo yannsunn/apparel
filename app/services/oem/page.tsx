@@ -636,6 +636,38 @@ export default function OEMPage() {
           .process-grid {
             grid-template-columns: 1fr !important;
           }
+          footer {
+            padding: 1.5rem 1rem !important;
+          }
+          
+          footer h3 {
+            font-size: 1.25rem !important;
+          }
+          
+          footer p {
+            font-size: 0.875rem !important;
+            margin-bottom: 1.5rem !important;
+          }
+          
+          /* フッターリンクがある場合の対応 */
+          footer > div > div {
+            gap: 1rem !important;
+            flex-direction: column !important;
+          }
+          
+          footer a {
+            padding: 0.5rem !important;
+            min-height: 44px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+        }
+        
+        @media (max-width: 640px) {
+          footer {
+            padding: 1rem 0.75rem !important;
+          }
         }
       `}</style>
     </div>

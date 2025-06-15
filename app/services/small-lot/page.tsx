@@ -1,13 +1,8 @@
-import { Metadata } from 'next'
+'use client'
+
 import Link from 'next/link'
 import UltraHeader from '@/components/layout/ultra-header'
 import { NeuroButton, ScarcityAlert, NeuroStyles } from '@/components/neuro/neuro-components'
-
-export const metadata: Metadata = {
-  title: '小ロット対応サービス | APPAREL EC',
-  description: '1枚から対応可能な小ロット製造サービス。在庫リスクを最小限に抑え、テストマーケティングに最適。迅速な対応でビジネスチャンスを逃しません。',
-  keywords: '小ロット, 少量生産, テストマーケティング, 在庫リスク, 1枚から',
-}
 
 export default function SmallLotPage() {
   return (
@@ -671,6 +666,43 @@ export default function SmallLotPage() {
           </div>
         </div>
       </footer>
+      
+      <style jsx>{`
+        @media (max-width: 768px) {
+          footer {
+            padding: 1.5rem 1rem !important;
+          }
+          
+          footer h3 {
+            font-size: 1.25rem !important;
+          }
+          
+          footer p {
+            font-size: 0.875rem !important;
+            margin-bottom: 1.5rem !important;
+          }
+          
+          /* フッターリンクがある場合の対応 */
+          footer > div > div {
+            gap: 1rem !important;
+            flex-direction: column !important;
+          }
+          
+          footer a {
+            padding: 0.5rem !important;
+            min-height: 44px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+        }
+        
+        @media (max-width: 640px) {
+          footer {
+            padding: 1rem 0.75rem !important;
+          }
+        }
+      `}</style>
     </div>
   )
 }

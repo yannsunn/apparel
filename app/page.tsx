@@ -7,9 +7,16 @@ import { NeuroButton, NeuroStyles } from '@/components/neuro/neuro-components'
 
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     setIsVisible(true)
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
   return (
@@ -24,7 +31,7 @@ export default function HomePage() {
       <section style={{
         background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.9) 0%, rgba(220, 38, 38, 0.9) 100%)',
         color: '#ffffff',
-        padding: '4rem 2rem',
+        padding: isMobile ? '3rem 1rem' : '4rem 2rem',
         position: 'relative',
         overflow: 'hidden',
         minHeight: '70vh',
@@ -61,13 +68,13 @@ export default function HomePage() {
           position: 'relative', 
           zIndex: 10,
           display: 'grid',
-          gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)',
-          gap: '3rem',
+          gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, 2fr) minmax(0, 1fr)',
+          gap: isMobile ? '2rem' : '3rem',
           alignItems: 'center',
           width: '100%'
         }}>
           {/* Left content */}
-          <div style={{ textAlign: 'left' }}>
+          <div style={{ textAlign: isMobile ? 'center' : 'left' }}>
             <h1 style={{
               fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
               fontWeight: 'bold',
@@ -75,10 +82,10 @@ export default function HomePage() {
               lineHeight: '1.2',
               textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)'
             }}>
-アパレルコレクション
+              アパレルコレクション
             </h1>
             <p style={{
-              fontSize: '1.25rem',
+              fontSize: isMobile ? '1.1rem' : '1.25rem',
               opacity: 0.95,
               marginBottom: '2rem',
               lineHeight: '1.6',
@@ -89,7 +96,14 @@ export default function HomePage() {
             </p>
             
             {/* Action buttons */}
-            <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
+            <div style={{ 
+              display: 'flex', 
+              gap: isMobile ? '0.75rem' : '1rem', 
+              marginBottom: '2rem', 
+              flexWrap: 'wrap',
+              flexDirection: isMobile ? 'column' : 'row',
+              alignItems: isMobile ? 'stretch' : 'flex-start'
+            }}>
               <Link href="/products">
                 <NeuroButton 
                   mood="dopamine" 
@@ -99,8 +113,9 @@ export default function HomePage() {
                     color: '#ef4444',
                     border: 'none',
                     fontWeight: '600',
-                    fontSize: '1.1rem',
-                    padding: '1rem 2rem'
+                    fontSize: isMobile ? '1rem' : '1.1rem',
+                    padding: isMobile ? '0.875rem 1.5rem' : '1rem 2rem',
+                    minHeight: isMobile ? '48px' : 'auto'
                   }}
                 >
                   コレクションを見る
@@ -116,8 +131,9 @@ export default function HomePage() {
                     color: '#ffffff',
                     border: '2px solid #ffffff',
                     fontWeight: '600',
-                    fontSize: '1rem',
-                    padding: '0.875rem 1.75rem'
+                    fontSize: isMobile ? '0.95rem' : '1rem',
+                    padding: isMobile ? '0.825rem 1.5rem' : '0.875rem 1.75rem',
+                    minHeight: isMobile ? '48px' : 'auto'
                   }}
                 >
                   OEMサービス
@@ -130,16 +146,25 @@ export default function HomePage() {
               background: 'rgba(255, 255, 255, 0.45)',
               backdropFilter: 'blur(10px)',
               borderRadius: '16px',
-              padding: '1.5rem 2rem',
+              padding: isMobile ? '1.25rem 1.5rem' : '1.5rem 2rem',
               display: 'inline-block',
               border: '1px solid rgba(255, 255, 255, 0.5)',
               position: 'relative',
-              zIndex: 5
+              zIndex: 5,
+              width: isMobile ? '100%' : 'auto'
             }}>
-              <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem', opacity: 0.9 }}>
+              <div style={{ 
+                fontSize: isMobile ? '0.85rem' : '0.9rem', 
+                marginBottom: '0.5rem', 
+                opacity: 0.9 
+              }}>
                 🏆 信頼の実績
               </div>
-              <div style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>
+              <div style={{ 
+                fontWeight: 'bold', 
+                fontSize: isMobile ? '1.1rem' : '1.5rem',
+                lineHeight: '1.4'
+              }}>
                 累計販売実績 50,000点以上 | 顧客満足度 99.2%
               </div>
             </div>
@@ -159,14 +184,14 @@ export default function HomePage() {
               padding: '1.5rem',
               border: '1px solid rgba(255, 255, 255, 0.2)',
               width: '100%',
-              maxWidth: '400px'
+              maxWidth: isMobile ? '100%' : '400px'
             }}>
               <img 
                 src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
                 alt="アパレル商品"
                 style={{
                   width: '100%',
-                  height: '200px',
+                  height: isMobile ? '160px' : '200px',
                   objectFit: 'cover',
                   borderRadius: '12px',
                   marginBottom: '1rem'
@@ -174,10 +199,17 @@ export default function HomePage() {
               />
               
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '0.9rem', opacity: 0.9, marginBottom: '0.5rem' }}>
+                <div style={{ 
+                  fontSize: isMobile ? '0.85rem' : '0.9rem', 
+                  opacity: 0.9, 
+                  marginBottom: '0.5rem' 
+                }}>
                   ✨ 最高品質保証
                 </div>
-                <div style={{ fontSize: '1rem', fontWeight: '600' }}>
+                <div style={{ 
+                  fontSize: isMobile ? '0.95rem' : '1rem', 
+                  fontWeight: '600' 
+                }}>
                   厳選された素材とデザイン
                 </div>
               </div>
@@ -189,29 +221,51 @@ export default function HomePage() {
               gridTemplateColumns: '1fr 1fr',
               gap: '1rem',
               width: '100%',
-              maxWidth: '400px'
+              maxWidth: isMobile ? '100%' : '400px'
             }}>
               <div style={{
                 background: 'rgba(255, 255, 255, 0.1)',
                 backdropFilter: 'blur(10px)',
                 borderRadius: '12px',
-                padding: '1rem',
+                padding: isMobile ? '0.875rem' : '1rem',
                 textAlign: 'center',
                 border: '1px solid rgba(255, 255, 255, 0.2)'
               }}>
-                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>1枚〜</div>
-                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>小ロット対応</div>
+                <div style={{ 
+                  fontSize: isMobile ? '1.25rem' : '1.5rem', 
+                  fontWeight: 'bold', 
+                  marginBottom: '0.25rem' 
+                }}>
+                  1枚〜
+                </div>
+                <div style={{ 
+                  fontSize: isMobile ? '0.75rem' : '0.8rem', 
+                  opacity: 0.9 
+                }}>
+                  小ロット対応
+                </div>
               </div>
               <div style={{
                 background: 'rgba(255, 255, 255, 0.1)',
                 backdropFilter: 'blur(10px)',
                 borderRadius: '12px',
-                padding: '1rem',
+                padding: isMobile ? '0.875rem' : '1rem',
                 textAlign: 'center',
                 border: '1px solid rgba(255, 255, 255, 0.2)'
               }}>
-                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>即日</div>
-                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>対応可能</div>
+                <div style={{ 
+                  fontSize: isMobile ? '1.25rem' : '1.5rem', 
+                  fontWeight: 'bold', 
+                  marginBottom: '0.25rem' 
+                }}>
+                  即日
+                </div>
+                <div style={{ 
+                  fontSize: isMobile ? '0.75rem' : '0.8rem', 
+                  opacity: 0.9 
+                }}>
+                  対応可能
+                </div>
               </div>
             </div>
           </div>
@@ -220,13 +274,13 @@ export default function HomePage() {
 
       {/* プロフェッショナル画像セクション */}
       <section style={{ 
-        padding: '4rem 2rem', 
+        padding: isMobile ? '3rem 1rem' : '4rem 2rem', 
         background: '#ffffff'
       }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <h2 style={{ 
-              fontSize: '2rem', 
+              fontSize: isMobile ? '1.75rem' : '2rem', 
               fontWeight: 'bold', 
               marginBottom: '1rem',
               color: '#111827'
@@ -234,7 +288,7 @@ export default function HomePage() {
               プロフェッショナルな製造環境
             </h2>
             <p style={{
-              fontSize: '1.1rem',
+              fontSize: isMobile ? '1rem' : '1.1rem',
               color: '#6b7280',
               maxWidth: '600px',
               margin: '0 auto'
@@ -245,9 +299,9 @@ export default function HomePage() {
           
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '2rem',
-            marginBottom: '4rem'
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: isMobile ? '1.5rem' : '2rem',
+            marginBottom: isMobile ? '3rem' : '4rem'
           }}>
             <div style={{
               background: '#ffffff',
@@ -261,13 +315,13 @@ export default function HomePage() {
                 alt="最新製造工場"
                 style={{
                   width: '100%',
-                  height: '200px',
+                  height: isMobile ? '160px' : '200px',
                   objectFit: 'cover'
                 }}
               />
-              <div style={{ padding: '1.5rem' }}>
+              <div style={{ padding: isMobile ? '1.25rem' : '1.5rem' }}>
                 <h3 style={{ 
-                  fontSize: '1.25rem', 
+                  fontSize: isMobile ? '1.1rem' : '1.25rem', 
                   fontWeight: '600', 
                   marginBottom: '0.5rem',
                   color: '#111827'
@@ -276,7 +330,8 @@ export default function HomePage() {
                 </h3>
                 <p style={{ 
                   color: '#6b7280', 
-                  lineHeight: '1.6'
+                  lineHeight: '1.6',
+                  fontSize: isMobile ? '0.9rem' : '1rem'
                 }}>
                   ISO認証取得工場で品質管理を徹底し、安定した製品をお届けします。
                 </p>
@@ -295,13 +350,13 @@ export default function HomePage() {
                 alt="高品質素材"
                 style={{
                   width: '100%',
-                  height: '200px',
+                  height: isMobile ? '160px' : '200px',
                   objectFit: 'cover'
                 }}
               />
-              <div style={{ padding: '1.5rem' }}>
+              <div style={{ padding: isMobile ? '1.25rem' : '1.5rem' }}>
                 <h3 style={{ 
-                  fontSize: '1.25rem', 
+                  fontSize: isMobile ? '1.1rem' : '1.25rem', 
                   fontWeight: '600', 
                   marginBottom: '0.5rem',
                   color: '#111827'
@@ -310,7 +365,8 @@ export default function HomePage() {
                 </h3>
                 <p style={{ 
                   color: '#6b7280', 
-                  lineHeight: '1.6'
+                  lineHeight: '1.6',
+                  fontSize: isMobile ? '0.9rem' : '1rem'
                 }}>
                   世界各地から厳選した高品質素材を使用し、耐久性と美しさを追求します。
                 </p>
@@ -329,13 +385,13 @@ export default function HomePage() {
                 alt="専門チーム"
                 style={{
                   width: '100%',
-                  height: '200px',
+                  height: isMobile ? '160px' : '200px',
                   objectFit: 'cover'
                 }}
               />
-              <div style={{ padding: '1.5rem' }}>
+              <div style={{ padding: isMobile ? '1.25rem' : '1.5rem' }}>
                 <h3 style={{ 
-                  fontSize: '1.25rem', 
+                  fontSize: isMobile ? '1.1rem' : '1.25rem', 
                   fontWeight: '600', 
                   marginBottom: '0.5rem',
                   color: '#111827'
@@ -344,7 +400,8 @@ export default function HomePage() {
                 </h3>
                 <p style={{ 
                   color: '#6b7280', 
-                  lineHeight: '1.6'
+                  lineHeight: '1.6',
+                  fontSize: isMobile ? '0.9rem' : '1rem'
                 }}>
                   経験豊富な専門スタッフが、企画から納品まで責任を持ってサポートします。
                 </p>
@@ -356,13 +413,13 @@ export default function HomePage() {
 
       {/* サービス特徴セクション */}
       <section style={{ 
-        padding: '4rem 2rem', 
+        padding: isMobile ? '3rem 1rem' : '4rem 2rem', 
         background: '#f8fafc'
       }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <h2 style={{ 
-              fontSize: '2rem', 
+              fontSize: isMobile ? '1.75rem' : '2rem', 
               fontWeight: 'bold', 
               marginBottom: '1rem',
               color: '#111827'
@@ -370,7 +427,7 @@ export default function HomePage() {
               選ばれる理由
             </h2>
             <p style={{
-              fontSize: '1.1rem',
+              fontSize: isMobile ? '1rem' : '1.1rem',
               color: '#6b7280',
               maxWidth: '600px',
               margin: '0 auto'
@@ -381,8 +438,8 @@ export default function HomePage() {
           
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '2rem',
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: isMobile ? '1.5rem' : '2rem',
             marginBottom: '3rem'
           }}>
             {[
@@ -414,21 +471,21 @@ export default function HomePage() {
               <div key={index} style={{
                 background: '#ffffff',
                 borderRadius: '16px',
-                padding: '2rem',
+                padding: isMobile ? '1.5rem' : '2rem',
                 border: '1px solid #e5e7eb',
                 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
                 textAlign: 'center',
                 transition: 'all 0.3s ease'
               }}>
                 <div style={{ 
-                  fontSize: '3rem', 
+                  fontSize: isMobile ? '2.5rem' : '3rem', 
                   marginBottom: '1rem'
                 }}>
                   {feature.icon}
                 </div>
                 
                 <h3 style={{ 
-                  fontSize: '1.25rem', 
+                  fontSize: isMobile ? '1.1rem' : '1.25rem', 
                   fontWeight: '600', 
                   marginBottom: '1rem',
                   color: feature.color
@@ -439,7 +496,7 @@ export default function HomePage() {
                 <p style={{ 
                   color: '#6b7280', 
                   lineHeight: '1.6',
-                  fontSize: '0.95rem'
+                  fontSize: isMobile ? '0.9rem' : '0.95rem'
                 }}>
                   {feature.description}
                 </p>
@@ -452,12 +509,12 @@ export default function HomePage() {
             textAlign: 'center',
             background: '#ffffff',
             borderRadius: '16px',
-            padding: '3rem 2rem',
+            padding: isMobile ? '2rem 1.5rem' : '3rem 2rem',
             border: '1px solid #e5e7eb',
             boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
           }}>
             <h3 style={{
-              fontSize: '1.5rem',
+              fontSize: isMobile ? '1.25rem' : '1.5rem',
               fontWeight: 'bold',
               marginBottom: '1rem',
               color: '#111827'
@@ -466,14 +523,21 @@ export default function HomePage() {
             </h3>
             
             <p style={{
-              fontSize: '1rem',
+              fontSize: isMobile ? '0.95rem' : '1rem',
               color: '#6b7280',
               marginBottom: '2rem'
             }}>
               専門スタッフがお客様のご要望を詳しくお聞きし、最適なソリューションをご提案します。
             </p>
             
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <div style={{ 
+              display: 'flex', 
+              gap: isMobile ? '0.75rem' : '1rem', 
+              justifyContent: 'center', 
+              flexWrap: 'wrap',
+              flexDirection: isMobile ? 'column' : 'row',
+              alignItems: isMobile ? 'stretch' : 'flex-start'
+            }}>
               <Link href="/support/contact">
                 <NeuroButton 
                   mood="trust" 
@@ -483,8 +547,9 @@ export default function HomePage() {
                     color: 'white',
                     border: 'none',
                     fontWeight: '600',
-                    fontSize: '1rem',
-                    padding: '0.875rem 1.75rem'
+                    fontSize: isMobile ? '1rem' : '1rem',
+                    padding: isMobile ? '0.875rem 1.5rem' : '0.875rem 1.75rem',
+                    minHeight: isMobile ? '48px' : 'auto'
                   }}
                 >
                   お問い合わせ
@@ -500,8 +565,9 @@ export default function HomePage() {
                     color: '#3b82f6',
                     border: '2px solid #3b82f6',
                     fontWeight: '600',
-                    fontSize: '1rem',
-                    padding: '0.875rem 1.75rem'
+                    fontSize: isMobile ? '1rem' : '1rem',
+                    padding: isMobile ? '0.875rem 1.5rem' : '0.875rem 1.75rem',
+                    minHeight: isMobile ? '48px' : 'auto'
                   }}
                 >
                   小ロット対応
@@ -516,12 +582,12 @@ export default function HomePage() {
       <footer style={{ 
         background: '#111827',
         color: '#ffffff', 
-        padding: '2rem'
+        padding: isMobile ? '1.5rem 1rem' : '2rem'
       }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', textAlign: 'center' }}>
           <Link href="/" style={{ color: '#ffffff', textDecoration: 'none' }}>
             <h3 style={{ 
-              fontSize: '1.5rem', 
+              fontSize: isMobile ? '1.25rem' : '1.5rem', 
               fontWeight: 'bold', 
               marginBottom: '1rem'
             }}>
@@ -530,16 +596,18 @@ export default function HomePage() {
           </Link>
           <p style={{ 
             color: '#9ca3af', 
-            marginBottom: '2rem'
+            marginBottom: '2rem',
+            fontSize: isMobile ? '0.875rem' : '1rem'
           }}>
-現代のライフスタイルに合わせたアパレルファッション
+            現代のライフスタイルに合わせたアパレルファッション
           </p>
           
           <div style={{ 
             display: 'flex', 
             justifyContent: 'center', 
-            gap: '2rem', 
+            gap: isMobile ? '1rem' : '2rem', 
             flexWrap: 'wrap',
+            flexDirection: isMobile ? 'column' : 'row',
             marginBottom: '2rem'
           }}>
             {[
@@ -552,7 +620,13 @@ export default function HomePage() {
                 color: '#d1d5db',
                 textDecoration: 'none',
                 fontWeight: '500',
-                transition: 'color 0.3s ease'
+                transition: 'color 0.3s ease',
+                padding: isMobile ? '0.5rem' : '0',
+                minHeight: isMobile ? '44px' : 'auto',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: isMobile ? '0.95rem' : '1rem'
               }}>
                 {link.label}
               </Link>
@@ -563,21 +637,12 @@ export default function HomePage() {
             borderTop: '1px solid #374151',
             paddingTop: '2rem',
             color: '#9ca3af',
-            fontSize: '0.875rem'
+            fontSize: isMobile ? '0.8rem' : '0.875rem'
           }}>
             © 2024 アパレルEC. All rights reserved.
           </div>
         </div>
       </footer>
-      
-      <style jsx>{`
-        @media (max-width: 768px) {
-          .hero-grid {
-            grid-template-columns: 1fr !important;
-            gap: 2rem !important;
-          }
-        }
-      `}</style>
     </div>
   )
 }

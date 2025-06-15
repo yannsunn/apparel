@@ -1,13 +1,8 @@
-import { Metadata } from 'next'
+'use client'
+
 import Link from 'next/link'
 import UltraHeader from '@/components/layout/ultra-header'
 import { NeuroButton, NeuroStyles } from '@/components/neuro/neuro-components'
-
-export const metadata: Metadata = {
-  title: 'よくある質問 | APPAREL EC',
-  description: 'アパレルECサービスに関するよくある質問と回答をまとめました。OEM、小ロット対応、配送、品質等に関する疑問を解決します。',
-  keywords: 'FAQ, よくある質問, OEM, 小ロット, 配送, 品質, サポート',
-}
 
 export default function FAQPage() {
   const faqData = [
@@ -564,6 +559,43 @@ export default function FAQPage() {
           </div>
         </div>
       </footer>
+      
+      <style jsx>{`
+        @media (max-width: 768px) {
+          footer {
+            padding: 1.5rem 1rem !important;
+          }
+          
+          footer h3 {
+            font-size: 1.25rem !important;
+          }
+          
+          footer p {
+            font-size: 0.875rem !important;
+            margin-bottom: 1.5rem !important;
+          }
+          
+          /* フッターリンクがある場合の対応 */
+          footer > div > div {
+            gap: 1rem !important;
+            flex-direction: column !important;
+          }
+          
+          footer a {
+            padding: 0.5rem !important;
+            min-height: 44px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+        }
+        
+        @media (max-width: 640px) {
+          footer {
+            padding: 1rem 0.75rem !important;
+          }
+        }
+      `}</style>
     </div>
   )
 }

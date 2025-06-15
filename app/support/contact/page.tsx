@@ -1,15 +1,36 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import UltraHeader from '@/components/layout/ultra-header'
 import { NeuroButton, NeuroStyles } from '@/components/neuro/neuro-components'
 
-export const metadata: Metadata = {
-  title: 'お問い合わせ | APPAREL EC',
-  description: 'アパレルECサービスに関するお問い合わせはこちら。OEM・ODM、小ロット対応、商品に関するご質問やご相談を承ります。専門スタッフが迅速に対応いたします。',
-  keywords: 'お問い合わせ, 連絡先, OEM相談, 見積もり依頼, サポート',
-}
-
 export default function ContactPage() {
+  const [isMobile, setIsMobile] = useState(false)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    category: '',
+    message: ''
+  })
+  
+  // モバイル判定
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    alert('お問い合わせを受け付けました。2営業日以内にご返信いたします。')
+    setFormData({ name: '', email: '', category: '', message: '' })
+  }
+
   return (
     <div style={{ minHeight: '100vh', background: '#ffffff' }}>
       <UltraHeader />
@@ -19,7 +40,7 @@ export default function ContactPage() {
       <section style={{
         background: '#ef4444',
         color: '#ffffff',
-        padding: '4rem 2rem',
+        padding: isMobile ? '3rem 1rem' : '4rem 2rem',
         minHeight: '60vh',
         display: 'flex',
         alignItems: 'center',
@@ -53,15 +74,15 @@ export default function ContactPage() {
           maxWidth: '1280px', 
           margin: '0 auto', 
           display: 'grid',
-          gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)',
-          gap: '3rem',
+          gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, 2fr) minmax(0, 1fr)',
+          gap: isMobile ? '2rem' : '3rem',
           alignItems: 'center',
           width: '100%',
           position: 'relative',
           zIndex: 3
         }}>
           {/* Left content */}
-          <div style={{ textAlign: 'left' }}>
+          <div style={{ textAlign: isMobile ? 'center' : 'left' }}>
             <h1 style={{
               fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
               fontWeight: 'bold',
@@ -71,7 +92,7 @@ export default function ContactPage() {
               お問い合わせ
             </h1>
             <p style={{
-              fontSize: '1.25rem',
+              fontSize: isMobile ? '1.1rem' : '1.25rem',
               marginBottom: '2rem',
               lineHeight: '1.6'
             }}>
@@ -80,7 +101,13 @@ export default function ContactPage() {
             </p>
             
             {/* Quick contact buttons */}
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            <div style={{ 
+              display: 'flex', 
+              gap: isMobile ? '0.75rem' : '1rem', 
+              flexWrap: 'wrap',
+              flexDirection: isMobile ? 'column' : 'row',
+              alignItems: isMobile ? 'stretch' : 'flex-start'
+            }}>
               <NeuroButton 
                 mood="dopamine" 
                 size="large"
@@ -89,8 +116,9 @@ export default function ContactPage() {
                   color: '#ef4444',
                   border: 'none',
                   fontWeight: '600',
-                  fontSize: '1.1rem',
-                  padding: '1rem 2rem'
+                  fontSize: isMobile ? '1rem' : '1.1rem',
+                  padding: isMobile ? '0.875rem 1.5rem' : '1rem 2rem',
+                  minHeight: isMobile ? '48px' : 'auto'
                 }}
               >
                 📞 電話で相談
@@ -104,8 +132,9 @@ export default function ContactPage() {
                   color: '#ffffff',
                   border: '2px solid #ffffff',
                   fontWeight: '600',
-                  fontSize: '1rem',
-                  padding: '0.875rem 1.75rem'
+                  fontSize: isMobile ? '0.95rem' : '1rem',
+                  padding: isMobile ? '0.825rem 1.5rem' : '0.875rem 1.75rem',
+                  minHeight: isMobile ? '48px' : 'auto'
                 }}
               >
                 ✉️ メールで相談
@@ -127,14 +156,14 @@ export default function ContactPage() {
               padding: '1.5rem',
               border: '1px solid rgba(255, 255, 255, 0.2)',
               width: '100%',
-              maxWidth: '400px'
+              maxWidth: isMobile ? '100%' : '400px'
             }}>
               <img 
                 src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
                 alt="お問い合わせサポート"
                 style={{
                   width: '100%',
-                  height: '200px',
+                  height: isMobile ? '160px' : '200px',
                   objectFit: 'cover',
                   borderRadius: '8px',
                   marginBottom: '1rem'
@@ -150,543 +179,314 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
-            
-            {/* Response time indicators */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '1rem',
-              width: '100%',
-              maxWidth: '400px'
-            }}>
-              <div style={{
-                background: 'rgba(255, 255, 255, 0.1)',
-                borderRadius: '8px',
-                padding: '1rem',
-                textAlign: 'center',
-                border: '1px solid rgba(255, 255, 255, 0.2)'
-              }}>
-                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>1日</div>
-                <div style={{ fontSize: '0.8rem' }}>回答目安</div>
-              </div>
-              <div style={{
-                background: 'rgba(255, 255, 255, 0.1)',
-                borderRadius: '8px',
-                padding: '1rem',
-                textAlign: 'center',
-                border: '1px solid rgba(255, 255, 255, 0.2)'
-              }}>
-                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>専門</div>
-                <div style={{ fontSize: '0.8rem' }}>スタッフ</div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* 相談プロセス画像セクション */}
-      <section style={{ padding: '3rem 2rem', background: '#f8fafc' }}>
+      {/* コンタクトフォームセクション */}
+      <section style={{ 
+        padding: isMobile ? '3rem 1rem' : '4rem 2rem', 
+        background: '#f8fafc' 
+      }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem', textAlign: 'center', color: '#111827' }}>
-            相談プロセス
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
-            <div style={{
-              background: '#ffffff',
-              borderRadius: '16px',
-              padding: '1.5rem',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
-              textAlign: 'center'
-            }}>
-              <img 
-                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                alt="お問い合わせ"
-                style={{
-                  width: '100%',
-                  height: '200px',
-                  objectFit: 'cover',
-                  borderRadius: '12px',
-                  marginBottom: '1rem'
-                }}
-              />
-              <div style={{
-                background: '#6366f1',
-                color: 'white',
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 'bold',
-                margin: '0 auto 1rem'
-              }}>1</div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem', color: '#111827' }}>
-                お問い合わせ
-              </h3>
-              <p style={{ color: '#6b7280', lineHeight: '1.6' }}>
-                フォームまたはお電話でお気軽にご相談ください。
-              </p>
-            </div>
-            
-            <div style={{
-              background: '#ffffff',
-              borderRadius: '16px',
-              padding: '1.5rem',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
-              textAlign: 'center'
-            }}>
-              <img 
-                src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                alt="ヒアリング"
-                style={{
-                  width: '100%',
-                  height: '200px',
-                  objectFit: 'cover',
-                  borderRadius: '12px',
-                  marginBottom: '1rem'
-                }}
-              />
-              <div style={{
-                background: '#6366f1',
-                color: 'white',
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 'bold',
-                margin: '0 auto 1rem'
-              }}>2</div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem', color: '#111827' }}>
-                詳細ヒアリング
-              </h3>
-              <p style={{ color: '#6b7280', lineHeight: '1.6' }}>
-                専門スタッフがご要望を詳しくお聞きします。
-              </p>
-            </div>
-            
-            <div style={{
-              background: '#ffffff',
-              borderRadius: '16px',
-              padding: '1.5rem',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
-              textAlign: 'center'
-            }}>
-              <img 
-                src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                alt="提案"
-                style={{
-                  width: '100%',
-                  height: '200px',
-                  objectFit: 'cover',
-                  borderRadius: '12px',
-                  marginBottom: '1rem'
-                }}
-              />
-              <div style={{
-                background: '#6366f1',
-                color: 'white',
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 'bold',
-                margin: '0 auto 1rem'
-              }}>3</div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem', color: '#111827' }}>
-                最適な提案
-              </h3>
-              <p style={{ color: '#6b7280', lineHeight: '1.6' }}>
-                お客様に最適なソリューションをご提案いたします。
-              </p>
-            </div>
-            
-            <div style={{
-              background: '#ffffff',
-              borderRadius: '16px',
-              padding: '1.5rem',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
-              textAlign: 'center'
-            }}>
-              <img 
-                src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                alt="サポート開始"
-                style={{
-                  width: '100%',
-                  height: '200px',
-                  objectFit: 'cover',
-                  borderRadius: '12px',
-                  marginBottom: '1rem'
-                }}
-              />
-              <div style={{
-                background: '#6366f1',
-                color: 'white',
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 'bold',
-                margin: '0 auto 1rem'
-              }}>4</div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem', color: '#111827' }}>
-                サポート開始
-              </h3>
-              <p style={{ color: '#6b7280', lineHeight: '1.6' }}>
-                継続的なサポートでお客様の成功をお手伝いします。
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <main style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 2rem' }}>
-        {/* Contact Form */}
-        <section style={{ marginBottom: '4rem' }}>
           <div style={{
-            background: '#ffffff',
-            padding: '3rem',
-            borderRadius: '16px',
-            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
-            border: '1px solid #e5e7eb'
+            display: 'grid',
+            gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+            gap: isMobile ? '2rem' : '3rem',
+            alignItems: 'start'
           }}>
-            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '2rem', color: '#111827', textAlign: 'center' }}>
-              お問い合わせフォーム
-            </h2>
-            <form style={{ maxWidth: '600px', margin: '0 auto' }}>
-              <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#374151' }}>
-                  お問い合わせ種別 <span style={{ color: '#dc2626' }}>*</span>
-                </label>
-                <select style={{
-                  width: '100%',
-                  padding: '0.75rem',
-                  border: '1px solid #d1d5db',
-                  borderRadius: '6px',
-                  fontSize: '1rem',
-                  background: '#ffffff'
-                }}>
-                  <option value="">選択してください</option>
-                  <option value="general">一般的なお問い合わせ</option>
-                  <option value="oem">OEM・ODMについて</option>
-                  <option value="small-lot">小ロット対応について</option>
-                  <option value="pricing">価格・見積もりについて</option>
-                  <option value="quality">品質・仕様について</option>
-                  <option value="shipping">配送・納期について</option>
-                  <option value="support">サポート・アフターサービス</option>
-                </select>
-              </div>
+            {/* 左側：お問い合わせフォーム */}
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '16px',
+              padding: isMobile ? '1.5rem' : '2rem',
+              boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+              border: '1px solid #e5e7eb'
+            }}>
+              <h2 style={{
+                fontSize: isMobile ? '1.5rem' : '1.75rem',
+                fontWeight: 'bold',
+                marginBottom: '1.5rem',
+                color: '#111827',
+                textAlign: isMobile ? 'center' : 'left'
+              }}>
+                📝 お問い合わせフォーム
+              </h2>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
-                <div>
-                  <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#374151' }}>
-                    会社名・屋号
-                  </label>
-                  <input
-                    type="text"
-                    style={{
-                      width: '100%',
-                      padding: '0.75rem',
-                      border: '1px solid #d1d5db',
-                      borderRadius: '6px',
-                      fontSize: '1rem'
-                    }}
-                    placeholder="株式会社○○"
-                  />
-                </div>
-                <div>
-                  <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#374151' }}>
-                    お名前 <span style={{ color: '#dc2626' }}>*</span>
+              <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <label style={{
+                    display: 'block',
+                    fontSize: isMobile ? '0.95rem' : '1rem',
+                    fontWeight: '600',
+                    marginBottom: '0.5rem',
+                    color: '#374151'
+                  }}>
+                    お名前 *
                   </label>
                   <input
                     type="text"
                     required
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
                     style={{
                       width: '100%',
-                      padding: '0.75rem',
-                      border: '1px solid #d1d5db',
-                      borderRadius: '6px',
-                      fontSize: '1rem'
+                      padding: isMobile ? '0.875rem 1rem' : '0.75rem 1rem',
+                      border: '2px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontSize: isMobile ? '1rem' : '0.95rem',
+                      outline: 'none',
+                      transition: 'border-color 0.3s ease',
+                      minHeight: isMobile ? '48px' : 'auto'
                     }}
-                    placeholder="山田 太郎"
+                    onFocus={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
+                    onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
                   />
                 </div>
-              </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
-                <div>
-                  <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#374151' }}>
-                    メールアドレス <span style={{ color: '#dc2626' }}>*</span>
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <label style={{
+                    display: 'block',
+                    fontSize: isMobile ? '0.95rem' : '1rem',
+                    fontWeight: '600',
+                    marginBottom: '0.5rem',
+                    color: '#374151'
+                  }}>
+                    メールアドレス *
                   </label>
                   <input
                     type="email"
                     required
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
                     style={{
                       width: '100%',
-                      padding: '0.75rem',
-                      border: '1px solid #d1d5db',
-                      borderRadius: '6px',
-                      fontSize: '1rem'
+                      padding: isMobile ? '0.875rem 1rem' : '0.75rem 1rem',
+                      border: '2px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontSize: isMobile ? '1rem' : '0.95rem',
+                      outline: 'none',
+                      transition: 'border-color 0.3s ease',
+                      minHeight: isMobile ? '48px' : 'auto'
                     }}
-                    placeholder="example@company.com"
+                    onFocus={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
+                    onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
                   />
                 </div>
-                <div>
-                  <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#374151' }}>
-                    お電話番号
-                  </label>
-                  <input
-                    type="tel"
-                    style={{
-                      width: '100%',
-                      padding: '0.75rem',
-                      border: '1px solid #d1d5db',
-                      borderRadius: '6px',
-                      fontSize: '1rem'
-                    }}
-                    placeholder="03-1234-5678"
-                  />
-                </div>
-              </div>
 
-              <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#374151' }}>
-                  お問い合わせ内容 <span style={{ color: '#dc2626' }}>*</span>
-                </label>
-                <textarea
-                  required
-                  rows={6}
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <label style={{
+                    display: 'block',
+                    fontSize: isMobile ? '0.95rem' : '1rem',
+                    fontWeight: '600',
+                    marginBottom: '0.5rem',
+                    color: '#374151'
+                  }}>
+                    お問い合わせカテゴリ *
+                  </label>
+                  <select
+                    required
+                    value={formData.category}
+                    onChange={(e) => setFormData({...formData, category: e.target.value})}
+                    style={{
+                      width: '100%',
+                      padding: isMobile ? '0.875rem 1rem' : '0.75rem 1rem',
+                      border: '2px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontSize: isMobile ? '1rem' : '0.95rem',
+                      outline: 'none',
+                      background: '#ffffff',
+                      cursor: 'pointer',
+                      minHeight: isMobile ? '48px' : 'auto'
+                    }}
+                  >
+                    <option value="">選択してください</option>
+                    <option value="product">商品について</option>
+                    <option value="order">注文について</option>
+                    <option value="shipping">配送について</option>
+                    <option value="oem">OEM・ODMについて</option>
+                    <option value="other">その他</option>
+                  </select>
+                </div>
+
+                <div style={{ marginBottom: '2rem' }}>
+                  <label style={{
+                    display: 'block',
+                    fontSize: isMobile ? '0.95rem' : '1rem',
+                    fontWeight: '600',
+                    marginBottom: '0.5rem',
+                    color: '#374151'
+                  }}>
+                    お問い合わせ内容 *
+                  </label>
+                  <textarea
+                    required
+                    rows={isMobile ? 4 : 5}
+                    value={formData.message}
+                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    placeholder="詳細な内容をお書きください..."
+                    style={{
+                      width: '100%',
+                      padding: isMobile ? '0.875rem 1rem' : '0.75rem 1rem',
+                      border: '2px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontSize: isMobile ? '1rem' : '0.95rem',
+                      outline: 'none',
+                      resize: 'vertical',
+                      fontFamily: 'inherit',
+                      lineHeight: '1.5'
+                    }}
+                    onFocus={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
+                    onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                  />
+                </div>
+
+                <button
+                  type="submit"
                   style={{
                     width: '100%',
-                    padding: '0.75rem',
-                    border: '1px solid #d1d5db',
-                    borderRadius: '6px',
-                    fontSize: '1rem',
-                    resize: 'vertical'
+                    fontSize: isMobile ? '1rem' : '1.1rem',
+                    padding: isMobile ? '0.875rem 1.5rem' : '1rem 2rem',
+                    minHeight: isMobile ? '48px' : 'auto',
+                    background: '#ef4444',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '8px',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease'
                   }}
-                  placeholder="お問い合わせ内容を詳しくお書きください。&#10;・希望商品カテゴリ&#10;・想定数量&#10;・希望納期&#10;・その他ご要望など"
-                />
-              </div>
-
-              <div style={{ marginBottom: '2rem' }}>
-                <label style={{
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  gap: '0.5rem',
-                  cursor: 'pointer',
-                  fontSize: '0.875rem',
-                  color: '#374151'
-                }}>
-                  <input
-                    type="checkbox"
-                    required
-                    style={{ marginTop: '0.125rem' }}
-                  />
-                  <span>
-                    <a href="#" style={{ color: '#2563eb', textDecoration: 'underline' }}>プライバシーポリシー</a>
-                    に同意します <span style={{ color: '#dc2626' }}>*</span>
-                  </span>
-                </label>
-              </div>
-
-              <div style={{ textAlign: 'center' }}>
-                <NeuroButton 
-                  mood="trust" 
-                  size="large" 
-                  variant="primary"
-                  style={{
-                    fontSize: '1.125rem',
-                    padding: '1rem 3rem'
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = '#dc2626'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = '#ef4444'
                   }}
                 >
-                  送信する
-                </NeuroButton>
-              </div>
-            </form>
-          </div>
-        </section>
+                  📨 送信する
+                </button>
+              </form>
+            </div>
 
-        {/* Contact Information */}
-        <section style={{ marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem', textAlign: 'center', color: '#111827' }}>
-            その他のお問い合わせ方法
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-            {[
-              {
-                icon: '📞',
-                title: 'お電話でのお問い合わせ',
-                content: '03-1234-5678',
-                description: '営業時間：平日 9:00〜18:00（土日祝除く）',
-                action: 'tel:03-1234-5678'
-              },
-              {
-                icon: '✉️',
-                title: 'メールでのお問い合わせ',
-                content: 'info@apparel-ec.com',
-                description: '24時間受付（返信は営業時間内）',
-                action: 'mailto:info@apparel-ec.com'
-              },
-              {
-                icon: '💬',
-                title: 'チャットサポート',
-                content: 'オンラインチャット',
-                description: '平日 9:00〜17:00（リアルタイム対応）',
-                action: '#'
-              }
-            ].map((contact, index) => (
-              <div
-                key={index}
-                style={{
-                  background: '#ffffff',
-                  padding: '2rem',
-                  borderRadius: '12px',
-                  textAlign: 'center',
-                  border: '1px solid #e5e7eb',
-                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
-                }}
-              >
-                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>
-                  {contact.icon}
-                </div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '1rem', color: '#111827' }}>
-                  {contact.title}
-                </h3>
-                <div style={{
-                  fontSize: '1.125rem',
-                  fontWeight: '600',
-                  color: '#3b82f6',
-                  marginBottom: '0.5rem'
+            {/* 右側：お問い合わせ情報 */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              {/* 連絡先情報 */}
+              <div style={{
+                background: '#ffffff',
+                borderRadius: '16px',
+                padding: isMobile ? '1.5rem' : '2rem',
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
+                border: '1px solid #e5e7eb'
+              }}>
+                <h3 style={{
+                  fontSize: isMobile ? '1.25rem' : '1.5rem',
+                  fontWeight: 'bold',
+                  marginBottom: '1rem',
+                  color: '#111827'
                 }}>
-                  <a href={contact.action} style={{ color: 'inherit', textDecoration: 'none' }}>
-                    {contact.content}
-                  </a>
+                  📞 連絡先情報
+                </h3>
+                <div style={{ marginBottom: '1rem' }}>
+                  <div style={{ fontSize: isMobile ? '0.95rem' : '1rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+                    営業時間
+                  </div>
+                  <div style={{ color: '#6b7280', fontSize: isMobile ? '0.9rem' : '0.95rem' }}>
+                    平日 9:00 - 18:00<br />
+                    土日祝日はお休みです
+                  </div>
                 </div>
-                <p style={{ color: '#6b7280', fontSize: '0.875rem' }}>
-                  {contact.description}
-                </p>
+                <div style={{ marginBottom: '1rem' }}>
+                  <div style={{ fontSize: isMobile ? '0.95rem' : '1rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+                    お電話でのお問い合わせ
+                  </div>
+                  <div style={{ color: '#3b82f6', fontSize: isMobile ? '1.1rem' : '1.2rem', fontWeight: 'bold' }}>
+                    0120-123-456
+                  </div>
+                </div>
+                <div>
+                  <div style={{ fontSize: isMobile ? '0.95rem' : '1rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+                    メールでのお問い合わせ
+                  </div>
+                  <div style={{ color: '#3b82f6', fontSize: isMobile ? '0.9rem' : '1rem' }}>
+                    info@apparel-ec.com
+                  </div>
+                </div>
               </div>
-            ))}
-          </div>
-        </section>
 
-        {/* Response Time */}
-        <section style={{ marginBottom: '4rem' }}>
-          <div style={{
-            background: '#f0f9ff',
-            border: '1px solid #0ea5e9',
-            borderRadius: '12px',
-            padding: '2rem',
-            textAlign: 'center'
-          }}>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#0c4a6e', marginBottom: '1rem' }}>
-              📅 回答までの目安時間
-            </h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-              <div>
-                <div style={{ fontWeight: '600', color: '#0c4a6e' }}>一般的なお問い合わせ</div>
-                <div style={{ color: '#0369a1', fontSize: '0.875rem' }}>1営業日以内</div>
-              </div>
-              <div>
-                <div style={{ fontWeight: '600', color: '#0c4a6e' }}>見積もり依頼</div>
-                <div style={{ color: '#0369a1', fontSize: '0.875rem' }}>2〜3営業日以内</div>
-              </div>
-              <div>
-                <div style={{ fontWeight: '600', color: '#0c4a6e' }}>技術的なご相談</div>
-                <div style={{ color: '#0369a1', fontSize: '0.875rem' }}>3〜5営業日以内</div>
+              {/* FAQ */}
+              <div style={{
+                background: '#ffffff',
+                borderRadius: '16px',
+                padding: isMobile ? '1.5rem' : '2rem',
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
+                border: '1px solid #e5e7eb'
+              }}>
+                <h3 style={{
+                  fontSize: isMobile ? '1.25rem' : '1.5rem',
+                  fontWeight: 'bold',
+                  marginBottom: '1rem',
+                  color: '#111827'
+                }}>
+                  ❓ よくある質問
+                </h3>
+                <div style={{ fontSize: isMobile ? '0.9rem' : '0.95rem', color: '#6b7280', marginBottom: '1rem' }}>
+                  お問い合わせの前に、よくある質問もご確認ください。
+                </div>
+                <Link 
+                  href="/support/faq"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    color: '#3b82f6',
+                    textDecoration: 'none',
+                    fontSize: isMobile ? '0.95rem' : '1rem',
+                    fontWeight: '600',
+                    padding: isMobile ? '0.625rem 1rem' : '0.5rem 0.75rem',
+                    border: '2px solid #3b82f6',
+                    borderRadius: '8px',
+                    transition: 'all 0.3s ease',
+                    minHeight: isMobile ? '44px' : 'auto'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = '#3b82f6'
+                    e.currentTarget.style.color = '#ffffff'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'transparent'
+                    e.currentTarget.style.color = '#3b82f6'
+                  }}
+                >
+                  FAQを見る →
+                </Link>
               </div>
             </div>
           </div>
-        </section>
-
-        {/* FAQ Link */}
-        <section style={{
-          background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
-          color: '#ffffff',
-          padding: '3rem 2rem',
-          borderRadius: '20px',
-          textAlign: 'center',
-          position: 'relative',
-          overflow: 'hidden',
-          boxShadow: '0 10px 30px rgba(99, 102, 241, 0.3)'
-        }}>
-          {/* Background effect */}
-          <div style={{
-            position: 'absolute',
-            top: '-50%',
-            left: '-50%',
-            width: '200%',
-            height: '200%',
-            background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
-            animation: 'float 6s ease-in-out infinite'
-          }} />
-          <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
-            よくある質問もご確認ください
-          </h2>
-          <p style={{ fontSize: '1.125rem', marginBottom: '2rem', opacity: 0.9 }}>
-            お急ぎの場合は、よくある質問で<br />
-            解決方法が見つかるかもしれません。
-          </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', position: 'relative', zIndex: 1 }}>
-            <Link href="/support/faq">
-              <NeuroButton 
-                mood="trust" 
-                size="large" 
-                variant="secondary"
-                style={{
-                  background: '#ffffff',
-                  color: '#6366f1',
-                  border: '2px solid #ffffff'
-                }}
-              >
-                よくある質問を見る
-              </NeuroButton>
-            </Link>
-            <Link href="/support/shipping">
-              <NeuroButton 
-                mood="calm" 
-                size="large" 
-                variant="accent"
-                style={{
-                  background: 'transparent',
-                  color: '#ffffff',
-                  border: '2px solid #ffffff'
-                }}
-              >
-                配送について
-              </NeuroButton>
-            </Link>
-          </div>
-        </section>
-      </main>
-
-      {/* Footer */}
-      <footer style={{ background: '#111827', color: '#ffffff', padding: '2rem' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', textAlign: 'center' }}>
-          <Link href="/" style={{ color: '#ffffff', textDecoration: 'none' }}>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
-              APPAREL EC
-            </h3>
-          </Link>
-          <p style={{ color: '#9ca3af', marginBottom: '2rem' }}>
-            現代のライフスタイルに合わせたアパレルファッション
-          </p>
-          <div style={{ 
-            borderTop: '1px solid #374151', 
-            paddingTop: '2rem',
-            color: '#9ca3af',
-            fontSize: '0.875rem'
-          }}>
-            © 2024 アパレルEC. All rights reserved.
-          </div>
         </div>
+      </section>
+
+      {/* フッター */}
+      <footer style={{ 
+        background: '#111827', 
+        color: '#ffffff', 
+        padding: isMobile ? '1.5rem 1rem' : '2rem',
+        textAlign: 'center'
+      }}>
+        <Link href="/" style={{ color: '#ffffff', textDecoration: 'none' }}>
+          <h3 style={{ 
+            fontSize: isMobile ? '1.25rem' : '1.5rem', 
+            fontWeight: 'bold', 
+            marginBottom: '1rem' 
+          }}>
+            APPAREL EC
+          </h3>
+        </Link>
+        <p style={{ 
+          color: '#9ca3af',
+          fontSize: isMobile ? '0.875rem' : '1rem'
+        }}>
+          現代のライフスタイルに合わせたアパレルファッション
+        </p>
       </footer>
     </div>
   )

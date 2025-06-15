@@ -86,8 +86,9 @@ export default function UltraHeader({
 
   const navLinksStyle = {
     display: 'flex',
-    gap: '2rem',
-    alignItems: 'center'
+    gap: '1.5rem',
+    alignItems: 'center',
+    flexWrap: 'wrap' as const
   }
 
   const linkStyle = (isActive: boolean) => ({
@@ -98,15 +99,17 @@ export default function UltraHeader({
     fontWeight: isActive 
       ? UltraSync.Brand.typography.fontWeight.semibold
       : UltraSync.Brand.typography.fontWeight.medium,
-    fontSize: UltraSync.Brand.typography.fontSize.base,
-    padding: '0.5rem 1rem',
+    fontSize: UltraSync.Brand.typography.fontSize.sm,
+    padding: '0.5rem 0.75rem',
     borderRadius: '6px',
     transition: 'all 0.2s ease',
     position: 'relative' as const,
     cursor: 'pointer',
     pointerEvents: 'auto' as const,
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    whiteSpace: 'nowrap' as const,
+    minWidth: 'fit-content'
   })
 
   const cartStyle = {
@@ -114,14 +117,17 @@ export default function UltraHeader({
     color: theme === 'light' ? '#374151' : '#d1d5db',
     textDecoration: 'none',
     fontWeight: UltraSync.Brand.typography.fontWeight.semibold,
-    padding: '0.5rem 1rem',
+    padding: '0.5rem 0.75rem',
     borderRadius: '6px',
     transition: 'all 0.2s ease',
     display: 'flex',
     alignItems: 'center',
-    gap: '0.5rem',
+    gap: '0.4rem',
     cursor: 'pointer',
-    pointerEvents: 'auto' as const
+    pointerEvents: 'auto' as const,
+    fontSize: UltraSync.Brand.typography.fontSize.sm,
+    whiteSpace: 'nowrap' as const,
+    minWidth: 'fit-content'
   }
 
   const badgeStyle = {
@@ -240,7 +246,7 @@ export default function UltraHeader({
           <div style={navLinksStyle}>
             {(UltraSync.Navigation.main as unknown as any[])
               .filter((item: any) => item.special !== 'cart')
-              .slice(0, 5) // 最大5個のメインナビゲーション
+              .slice(0, 4) // モバイル対応で4個に削減
               .map(renderNavItem)
             }
             
@@ -252,11 +258,44 @@ export default function UltraHeader({
         </nav>
       </header>
 
-      {/* CSS アニメーション */}
+      {/* CSS アニメーション＆レスポンシブ対応 */}
       <style jsx>{`
         @keyframes pulse {
           0%, 100% { transform: scale(1); }
           50% { transform: scale(1.2); }
+        }
+        
+        /* モバイル対応 */
+        @media (max-width: 768px) {
+          header nav {
+            padding: 0.75rem 1rem !important;
+          }
+          
+          header nav > div:last-child {
+            gap: 0.75rem !important;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+          }
+          
+          header nav a {
+            font-size: 0.8rem !important;
+            padding: 0.4rem 0.6rem !important;
+          }
+          
+          header nav a span:first-child {
+            font-size: 1rem !important;
+          }
+        }
+        
+        @media (max-width: 640px) {
+          header nav > div:last-child {
+            gap: 0.5rem !important;
+          }
+          
+          header nav a {
+            font-size: 0.75rem !important;
+            padding: 0.3rem 0.5rem !important;
+          }
         }
       `}</style>
     </>

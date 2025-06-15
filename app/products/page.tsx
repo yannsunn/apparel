@@ -18,6 +18,17 @@ export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // モバイル判定
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   // 商品フィルタリング
   const filteredProducts = useMemo(() => {
@@ -116,7 +127,7 @@ export default function ProductsPage() {
       <section style={{
         background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.9) 0%, rgba(220, 38, 38, 0.9) 100%)',
         color: '#ffffff',
-        padding: '4rem 2rem',
+        padding: isMobile ? '3rem 1rem' : '4rem 2rem',
         minHeight: '60vh',
         display: 'flex',
         alignItems: 'center',
@@ -164,7 +175,7 @@ export default function ProductsPage() {
 商品コレクション
           </h1>
           <p style={{
-            fontSize: '1.25rem',
+            fontSize: isMobile ? '1.1rem' : '1.25rem',
             marginBottom: '2rem',
             lineHeight: '1.6',
             maxWidth: '600px',
@@ -179,41 +190,41 @@ export default function ProductsPage() {
           <div style={{
             display: 'flex',
             justifyContent: 'center',
-            gap: '2rem',
+            gap: isMobile ? '1rem' : '2rem',
             flexWrap: 'wrap'
           }}>
             <div style={{
               background: 'rgba(255, 255, 255, 0.4)',
-              padding: '1rem 1.5rem',
+              padding: isMobile ? '0.875rem 1.25rem' : '1rem 1.5rem',
               borderRadius: '8px',
               border: '1px solid rgba(255, 255, 255, 0.4)',
               position: 'relative',
               zIndex: 5
             }}>
-              <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{stats.totalProducts}</div>
-              <div style={{ fontSize: '0.9rem' }}>総商品数</div>
+              <div style={{ fontSize: isMobile ? '1.25rem' : '1.5rem', fontWeight: 'bold' }}>{stats.totalProducts}</div>
+              <div style={{ fontSize: isMobile ? '0.85rem' : '0.9rem' }}>総商品数</div>
             </div>
             <div style={{
               background: 'rgba(255, 255, 255, 0.4)',
-              padding: '1rem 1.5rem',
+              padding: isMobile ? '0.875rem 1.25rem' : '1rem 1.5rem',
               borderRadius: '8px',
               border: '1px solid rgba(255, 255, 255, 0.4)',
               position: 'relative',
               zIndex: 5
             }}>
-              <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>¥{stats.averagePrice.toLocaleString()}</div>
-              <div style={{ fontSize: '0.9rem' }}>平均価格</div>
+              <div style={{ fontSize: isMobile ? '1.25rem' : '1.5rem', fontWeight: 'bold' }}>¥{stats.averagePrice.toLocaleString()}</div>
+              <div style={{ fontSize: isMobile ? '0.85rem' : '0.9rem' }}>平均価格</div>
             </div>
             <div style={{
               background: 'rgba(255, 255, 255, 0.4)',
-              padding: '1rem 1.5rem',
+              padding: isMobile ? '0.875rem 1.25rem' : '1rem 1.5rem',
               borderRadius: '8px',
               border: '1px solid rgba(255, 255, 255, 0.4)',
               position: 'relative',
               zIndex: 5
             }}>
-              <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{stats.featuredCount}</div>
-              <div style={{ fontSize: '0.9rem' }}>おすすめ商品</div>
+              <div style={{ fontSize: isMobile ? '1.25rem' : '1.5rem', fontWeight: 'bold' }}>{stats.featuredCount}</div>
+              <div style={{ fontSize: isMobile ? '0.85rem' : '0.9rem' }}>おすすめ商品</div>
             </div>
           </div>
         </div>
@@ -222,10 +233,10 @@ export default function ProductsPage() {
       {/* フィルタエリア */}
       <section style={{
         background: '#ffffff',
-        padding: '2rem',
+        padding: isMobile ? '1rem' : '2rem',
         borderBottom: '1px solid #e5e7eb',
-        position: 'sticky',
-        top: '80px',
+        position: isMobile ? 'relative' : 'sticky',
+        top: isMobile ? 'auto' : '80px',
         zIndex: 25 // UltraHeaderより低く設定
       }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
@@ -239,12 +250,13 @@ export default function ProductsPage() {
               style={{
                 width: '100%',
                 maxWidth: '400px',
-                padding: '0.75rem 1rem',
+                padding: isMobile ? '0.875rem 1rem' : '0.75rem 1rem',
                 border: '2px solid #d1d5db',
                 borderRadius: '8px',
-                fontSize: '1rem',
+                fontSize: isMobile ? '1rem' : '1rem',
                 outline: 'none',
-                transition: 'border-color 0.3s ease'
+                transition: 'border-color 0.3s ease',
+                minHeight: isMobile ? '48px' : 'auto'
               }}
               onFocus={(e) => {
                 e.currentTarget.style.borderColor = '#3b82f6'
@@ -257,13 +269,19 @@ export default function ProductsPage() {
 
           <div style={{
             display: 'flex',
-            gap: '2rem',
-            alignItems: 'center',
+            gap: isMobile ? '1rem' : '2rem',
+            alignItems: isMobile ? 'stretch' : 'center',
             flexWrap: 'wrap',
+            flexDirection: isMobile ? 'column' : 'row',
             justifyContent: 'space-between'
           }}>
             {/* カテゴリフィルタ */}
-            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+            <div style={{ 
+              display: 'flex', 
+              gap: isMobile ? '0.25rem' : '0.5rem', 
+              flexWrap: 'wrap', 
+              justifyContent: isMobile ? 'center' : 'flex-start'
+            }}>
               <span style={{ 
                 color: '#6b7280', 
                 fontWeight: '600', 
@@ -278,7 +296,7 @@ export default function ProductsPage() {
                   key={category.id}
                   onClick={() => handleCategoryChange(category.id)}
                   style={{
-                    padding: '0.5rem 1rem',
+                    padding: isMobile ? '0.6rem 0.8rem' : '0.5rem 1rem',
                     border: selectedCategory === category.id 
                       ? '2px solid #3b82f6' 
                       : '2px solid #e5e7eb',
@@ -292,7 +310,8 @@ export default function ProductsPage() {
                     fontWeight: selectedCategory === category.id ? '600' : '500',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease',
-                    fontSize: '0.9rem'
+                    fontSize: isMobile ? '0.85rem' : '0.9rem',
+                    minHeight: isMobile ? '44px' : 'auto'
                   }}
                 >
                   {category.name}
@@ -310,20 +329,26 @@ export default function ProductsPage() {
             </div>
 
             {/* ソートフィルタ */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: isMobile ? '0.25rem' : '0.5rem',
+              justifyContent: isMobile ? 'center' : 'flex-end'
+            }}>
               <span style={{ color: '#6b7280', fontWeight: '600' }}>🔄 並び順:</span>
               <select
                 value={sortBy}
                 onChange={(e) => handleSortChange(e.target.value)}
                 style={{
-                  padding: '0.5rem 1rem',
+                  padding: isMobile ? '0.75rem 1rem' : '0.5rem 1rem',
                   border: '2px solid #d1d5db',
                   borderRadius: '8px',
                   background: '#ffffff',
-                  fontSize: '0.9rem',
+                  fontSize: isMobile ? '0.95rem' : '0.9rem',
                   fontWeight: '500',
                   outline: 'none',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  minHeight: isMobile ? '48px' : 'auto'
                 }}
               >
                 <option value="featured">おすすめ順</option>
@@ -343,7 +368,7 @@ export default function ProductsPage() {
               : '#e0f2fe',
             borderRadius: '8px',
             color: '#374151',
-            fontSize: '0.9rem',
+            fontSize: isMobile ? '0.85rem' : '0.9rem',
             fontWeight: '500'
           }}>
             {stats.filteredCount < stats.totalProducts ? (
@@ -357,14 +382,18 @@ export default function ProductsPage() {
 
       {/* 商品特徴画像セクション */}
       <section style={{ 
-        padding: '3rem 2rem', 
+        padding: isMobile ? '2rem 1rem' : '3rem 2rem', 
         background: '#f8fafc'
       }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '3rem', textAlign: 'center', color: '#111827' }}>
+          <h2 style={{ fontSize: isMobile ? '1.75rem' : '2rem', fontWeight: 'bold', marginBottom: '3rem', textAlign: 'center', color: '#111827' }}>
             商品の特徴
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(250px, 1fr))', 
+            gap: isMobile ? '1.5rem' : '2rem' 
+          }}>
             <div style={{
               background: '#ffffff',
               borderRadius: '16px',
@@ -377,7 +406,7 @@ export default function ProductsPage() {
                 alt="高品質素材"
                 style={{
                   width: '100%',
-                  height: '200px',
+                  height: isMobile ? '160px' : '200px',
                   objectFit: 'cover',
                   borderRadius: '12px',
                   marginBottom: '1rem'
@@ -403,7 +432,7 @@ export default function ProductsPage() {
                 alt="豊富なバリエーション"
                 style={{
                   width: '100%',
-                  height: '200px',
+                  height: isMobile ? '160px' : '200px',
                   objectFit: 'cover',
                   borderRadius: '12px',
                   marginBottom: '1rem'
@@ -429,7 +458,7 @@ export default function ProductsPage() {
                 alt="スピード配送"
                 style={{
                   width: '100%',
-                  height: '200px',
+                  height: isMobile ? '160px' : '200px',
                   objectFit: 'cover',
                   borderRadius: '12px',
                   marginBottom: '1rem'
@@ -455,7 +484,7 @@ export default function ProductsPage() {
                 alt="安心の品質保証"
                 style={{
                   width: '100%',
-                  height: '200px',
+                  height: isMobile ? '160px' : '200px',
                   objectFit: 'cover',
                   borderRadius: '12px',
                   marginBottom: '1rem'
@@ -476,7 +505,7 @@ export default function ProductsPage() {
       <main style={{ 
         maxWidth: '1280px', 
         margin: '0 auto', 
-        padding: '3rem 2rem',
+        padding: isMobile ? '2rem 1rem' : '3rem 2rem',
         minHeight: '60vh',
         background: '#ffffff'
       }}>
@@ -484,8 +513,8 @@ export default function ProductsPage() {
           /* ローディング状態 */
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '2rem'
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: isMobile ? '1.5rem' : '2rem'
           }}>
             {Array.from({ length: itemsPerPage }).map((_, index) => (
               <ProductCard
@@ -501,8 +530,8 @@ export default function ProductsPage() {
             {/* 商品グリッド */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '2rem',
+              gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: isMobile ? '1.5rem' : '2rem',
               marginBottom: '3rem'
             }}>
               {currentProducts.map((product, index) => (
@@ -527,21 +556,24 @@ export default function ProductsPage() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                gap: '0.5rem',
-                marginTop: '3rem'
+                gap: isMobile ? '0.25rem' : '0.5rem',
+                marginTop: isMobile ? '2rem' : '3rem',
+                flexWrap: 'wrap'
               }}>
                 <button
                   onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                   disabled={currentPage === 1}
                   style={{
-                    padding: '0.75rem 1rem',
+                    padding: isMobile ? '0.875rem 1.25rem' : '0.75rem 1rem',
                     border: 'none',
                     borderRadius: '8px',
                     background: currentPage === 1 ? '#e5e7eb' : '#3b82f6',
                     color: currentPage === 1 ? '#9ca3af' : '#ffffff',
                     fontWeight: '600',
                     cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
-                    transition: 'all 0.3s ease'
+                    transition: 'all 0.3s ease',
+                    minHeight: isMobile ? '48px' : 'auto',
+                    fontSize: isMobile ? '0.9rem' : '1rem'
                   }}
                 >
                   ← 前へ
@@ -554,7 +586,7 @@ export default function ProductsPage() {
                       key={pageNum}
                       onClick={() => setCurrentPage(pageNum)}
                       style={{
-                        padding: '0.75rem 1rem',
+                        padding: isMobile ? '0.875rem 1.25rem' : '0.75rem 1rem',
                         border: 'none',
                         borderRadius: '8px',
                         background: currentPage === pageNum 
@@ -566,7 +598,9 @@ export default function ProductsPage() {
                         fontWeight: '600',
                         cursor: 'pointer',
                         transition: 'all 0.3s ease',
-                        minWidth: '40px'
+                        minWidth: '40px',
+                        minHeight: isMobile ? '48px' : 'auto',
+                        fontSize: isMobile ? '0.9rem' : '1rem'
                       }}
                     >
                       {pageNum}
@@ -578,14 +612,16 @@ export default function ProductsPage() {
                   onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                   disabled={currentPage === totalPages}
                   style={{
-                    padding: '0.75rem 1rem',
+                    padding: isMobile ? '0.875rem 1.25rem' : '0.75rem 1rem',
                     border: 'none',
                     borderRadius: '8px',
                     background: currentPage === totalPages ? '#e5e7eb' : '#3b82f6',
                     color: currentPage === totalPages ? '#9ca3af' : '#ffffff',
                     fontWeight: '600',
                     cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
-                    transition: 'all 0.3s ease'
+                    transition: 'all 0.3s ease',
+                    minHeight: isMobile ? '48px' : 'auto',
+                    fontSize: isMobile ? '0.9rem' : '1rem'
                   }}
                 >
                   次へ →
@@ -597,14 +633,14 @@ export default function ProductsPage() {
           /* 商品が見つからない場合 */
           <div style={{
             textAlign: 'center',
-            padding: '4rem 2rem',
+            padding: isMobile ? '3rem 1rem' : '4rem 2rem',
             color: '#6b7280'
           }}>
-            <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🔍</div>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+            <div style={{ fontSize: isMobile ? '3rem' : '4rem', marginBottom: '1rem' }}>🔍</div>
+            <h3 style={{ fontSize: isMobile ? '1.25rem' : '1.5rem', fontWeight: '600', marginBottom: '0.5rem' }}>
               商品が見つかりませんでした
             </h3>
-            <p style={{ marginBottom: '2rem' }}>
+            <p style={{ marginBottom: '2rem', fontSize: isMobile ? '0.95rem' : '1rem' }}>
               検索条件を変更するか、カテゴリを「全て」に戻してお試しください。
             </p>
             <button
@@ -616,12 +652,13 @@ export default function ProductsPage() {
               style={{
                 backgroundColor: '#3b82f6',
                 color: '#ffffff',
-                padding: '1rem 2rem',
+                padding: isMobile ? '0.875rem 1.5rem' : '1rem 2rem',
                 border: 'none',
                 borderRadius: '8px',
                 fontWeight: '600',
                 cursor: 'pointer',
-                fontSize: '1rem'
+                fontSize: isMobile ? '0.95rem' : '1rem',
+                minHeight: isMobile ? '48px' : 'auto'
               }}
             >
               🔄 検索条件をリセット
@@ -634,30 +671,25 @@ export default function ProductsPage() {
       <footer style={{ 
         background: '#111827', 
         color: '#ffffff', 
-        padding: '2rem',
+        padding: isMobile ? '1.5rem 1rem' : '2rem',
         textAlign: 'center'
       }}>
         <Link href="/" style={{ color: '#ffffff', textDecoration: 'none' }}>
-          <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+          <h3 style={{ 
+            fontSize: isMobile ? '1.25rem' : '1.5rem', 
+            fontWeight: 'bold', 
+            marginBottom: '1rem' 
+          }}>
             APPAREL EC
           </h3>
         </Link>
-        <p style={{ color: '#9ca3af' }}>
+        <p style={{ 
+          color: '#9ca3af',
+          fontSize: isMobile ? '0.875rem' : '1rem'
+        }}>
           現代のライフスタイルに合わせたアパレルファッション
         </p>
       </footer>
-      
-      <style jsx>{`
-        @media (max-width: 768px) {
-          .hero-section {
-            grid-template-columns: 1fr !important;
-            text-align: center !important;
-          }
-          .filter-section {
-            position: static !important;
-          }
-        }
-      `}</style>
     </div>
   )
 }

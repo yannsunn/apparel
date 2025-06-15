@@ -18,8 +18,21 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
   loading = false,
   index = 0
 }) {
+  // メディアクエリ判定
+  const [isMobile, setIsMobile] = useState(false)
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   // インタラクション状態
   const [isHovered, setIsHovered] = useState(false)
+  const [isTouched, setIsTouched] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   
   useEffect(() => {
@@ -66,17 +79,18 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
         borderRadius: '16px',
         border: '1px solid #e5e7eb',
         overflow: 'hidden',
-        height: '440px',
+        minHeight: isMobile ? '380px' : '440px',
+        height: 'auto',
         position: 'relative'
       }}>
         {/* スケルトンローディング */}
         <div style={{ 
           width: '100%', 
-          height: '260px', 
+          height: isMobile ? '200px' : '260px', 
           background: '#f3f4f6',
           animation: 'shimmer 1.5s infinite'
         }} />
-        <div style={{ padding: '1.5rem' }}>
+        <div style={{ padding: isMobile ? '1rem' : '1.5rem' }}>
           <div style={{ 
             height: '1.5rem', 
             background: '#f3f4f6',
@@ -107,21 +121,29 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
         background: '#ffffff',
         borderRadius: '16px',
         overflow: 'hidden',
-        border: isHovered ? '2px solid #3b82f6' : '2px solid #e5e7eb',
+        border: (isHovered || isTouched) ? '2px solid #3b82f6' : '2px solid #e5e7eb',
         transition: 'all 0.4s ease',
         cursor: 'pointer',
         position: 'relative',
         transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)',
         opacity: isVisible ? 1 : 0,
-        boxShadow: isHovered 
+        boxShadow: (isHovered || isTouched) 
           ? '0 20px 40px rgba(59, 130, 246, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1)' 
           : '0 4px 8px rgba(0, 0, 0, 0.05)'
       }}
       onMouseEnter={() => {
-        setIsHovered(true)
+        if (!isMobile) setIsHovered(true)
       }}
       onMouseLeave={() => {
-        setIsHovered(false)
+        if (!isMobile) setIsHovered(false)
+      }}
+      onTouchStart={() => {
+        if (isMobile) setIsTouched(true)
+      }}
+      onTouchEnd={() => {
+        if (isMobile) {
+          setTimeout(() => setIsTouched(false), 300)
+        }
       }}
     >
       <Link
@@ -132,7 +154,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
         {/* 商品画像エリア */}
         <div style={{
           width: '100%',
-          height: '260px',
+          height: isMobile ? '200px' : '260px',
           backgroundColor: '#f3f4f6',
           display: 'flex',
           alignItems: 'center',
@@ -149,7 +171,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
                 color: '#ffffff',
                 padding: '0.4rem 0.8rem',
                 borderRadius: '20px',
-                fontSize: '0.75rem',
+                fontSize: isMobile ? '0.7rem' : '0.75rem',
                 fontWeight: '700',
                 marginBottom: '0.5rem'
               }}>
@@ -164,7 +186,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
                 color: '#000',
                 padding: '0.4rem 0.8rem',
                 borderRadius: '20px',
-                fontSize: '0.75rem',
+                fontSize: isMobile ? '0.7rem' : '0.75rem',
                 fontWeight: '700',
                 marginBottom: '0.5rem'
               }}>
@@ -179,7 +201,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
                 color: 'white',
                 padding: '0.4rem 0.8rem',
                 borderRadius: '20px',
-                fontSize: '0.75rem',
+                fontSize: isMobile ? '0.7rem' : '0.75rem',
                 fontWeight: '700'
               }}>
                 🔥 残り{totalStock}点
@@ -197,9 +219,9 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
               height: '100%',
               objectFit: 'cover',
               objectPosition: 'center',
-              transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+              transform: (isHovered || isTouched) ? 'scale(1.05)' : 'scale(1)',
               transition: 'all 0.3s ease',
-              filter: isHovered ? 'brightness(1.1)' : 'brightness(1)'
+              filter: (isHovered || isTouched) ? 'brightness(1.1)' : 'brightness(1)'
             }}
             onError={(e) => {
               // フォールバック: アイコン表示
@@ -210,10 +232,10 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
           />
           {/* フォールバックアイコン */}
           <div style={{ 
-            fontSize: '5rem',
+            fontSize: isMobile ? '4rem' : '5rem',
             opacity: 0.7,
             filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15))',
-            transform: isHovered ? 'scale(1.1) rotate(5deg)' : 'scale(1) rotate(0deg)',
+            transform: (isHovered || isTouched) ? 'scale(1.1) rotate(5deg)' : 'scale(1) rotate(0deg)',
             transition: 'all 0.3s ease',
             display: 'none',
             alignItems: 'center',
@@ -229,37 +251,37 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
             position: 'absolute',
             inset: 0,
             backgroundColor: 'rgba(59, 130, 246, 0.9)',
-            opacity: isHovered ? 1 : 0,
+            opacity: (isHovered || isTouched) ? 1 : 0,
             transition: 'opacity 0.3s ease',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
             color: 'white',
-            fontSize: '1.2rem',
+            fontSize: isMobile ? '1rem' : '1.2rem',
             fontWeight: '700'
           }}>
-            <div style={{ marginBottom: '0.5rem', fontSize: '2rem' }}>👀</div>
+            <div style={{ marginBottom: '0.5rem', fontSize: isMobile ? '1.5rem' : '2rem' }}>👀</div>
             詳細を見る →
           </div>
         </div>
 
         {/* 商品情報エリア */}
-        <div style={{ padding: '1.5rem' }}>
+        <div style={{ padding: isMobile ? '1rem' : '1.5rem' }}>
           {/* 商品名・ブランド */}
           <div style={{ marginBottom: '1rem' }}>
             <h3 style={{
-              fontSize: '1.2rem',
+              fontSize: isMobile ? '1.1rem' : '1.2rem',
               fontWeight: '700',
               marginBottom: '0.5rem',
               color: '#111827',
               lineHeight: '1.3',
-              minHeight: '2.6rem'
+              minHeight: isMobile ? '2.3rem' : '2.6rem'
             }}>
               {product.name || 'Sample Product'}
             </h3>
             <p style={{
-              fontSize: '0.9rem',
+              fontSize: isMobile ? '0.85rem' : '0.9rem',
               color: '#6b7280',
               margin: 0,
               fontWeight: '600'
@@ -276,13 +298,13 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
                   <div
                     key={color.id}
                     style={{
-                      width: '18px',
-                      height: '18px',
+                      width: isMobile ? '16px' : '18px',
+                      height: isMobile ? '16px' : '18px',
                       borderRadius: '50%',
                       background: color.hex,
                       border: '2px solid #fff',
                       boxShadow: '0 2px 4px rgba(0, 0, 0, 0.15)',
-                      transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+                      transform: (isHovered || isTouched) ? 'scale(1.1)' : 'scale(1)',
                       transition: 'transform 0.2s ease'
                     }}
                     title={color.name}
@@ -290,7 +312,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
                 ))}
                 {product.colors.length > 4 && (
                   <div style={{
-                    fontSize: '0.8rem',
+                    fontSize: isMobile ? '0.75rem' : '0.8rem',
                     color: '#6b7280',
                     marginLeft: '0.5rem',
                     fontWeight: '600'
@@ -306,11 +328,12 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
           <div style={{ 
             display: 'flex', 
             alignItems: 'center', 
-            gap: '1rem',
-            marginBottom: '1rem'
+            gap: isMobile ? '0.5rem' : '1rem',
+            marginBottom: '1rem',
+            flexWrap: isMobile ? 'wrap' : 'nowrap'
           }}>
             <span style={{
-              fontSize: '1.6rem',
+              fontSize: isMobile ? '1.4rem' : '1.6rem',
               fontWeight: '800',
               color: '#3b82f6'
             }}>
@@ -319,7 +342,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
             {product.originalPrice && (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                 <span style={{
-                  fontSize: '1rem',
+                  fontSize: isMobile ? '0.9rem' : '1rem',
                   color: '#9ca3af',
                   textDecoration: 'line-through',
                   fontWeight: '500'
@@ -327,7 +350,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
                   ¥{product.originalPrice.toLocaleString('ja-JP')}
                 </span>
                 <span style={{
-                  fontSize: '0.75rem',
+                  fontSize: isMobile ? '0.7rem' : '0.75rem',
                   color: '#3b82f6',
                   fontWeight: '600'
                 }}>
@@ -341,9 +364,9 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
           <div style={{
             backgroundColor: totalStock > 50 ? '#dcfce7' : totalStock > 10 ? '#fef3c7' : '#fee2e2',
             color: totalStock > 50 ? '#15803d' : totalStock > 10 ? '#92400e' : '#dc2626',
-            padding: '0.75rem',
+            padding: isMobile ? '0.5rem' : '0.75rem',
             borderRadius: '12px',
-            fontSize: '0.8rem',
+            fontSize: isMobile ? '0.75rem' : '0.8rem',
             fontWeight: '600',
             textAlign: 'center'
           }}>
@@ -368,25 +391,25 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
             color: '#ffffff',
             border: 'none',
             borderRadius: '50%',
-            width: '48px',
-            height: '48px',
+            width: isMobile ? '56px' : '48px',
+            height: isMobile ? '56px' : '48px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
-            fontSize: '1.4rem',
+            fontSize: isMobile ? '1.6rem' : '1.4rem',
             fontWeight: 'bold',
-            transform: isHovered ? 'translateY(0) scale(1)' : 'translateY(60px) scale(0.8)',
-            opacity: isHovered ? 1 : 0,
+            transform: (isHovered || isTouched) ? 'translateY(0) scale(1)' : 'translateY(60px) scale(0.8)',
+            opacity: (isHovered || isTouched) ? 1 : 0,
             transition: 'all 0.3s ease',
             zIndex: 10,
             boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)'
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(0) scale(1.1)'
+            if (!isMobile) e.currentTarget.style.transform = 'translateY(0) scale(1.1)'
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'translateY(0) scale(1)'
+            if (!isMobile) e.currentTarget.style.transform = 'translateY(0) scale(1)'
           }}
           aria-label={`${product.name}をカートに追加`}
         >
