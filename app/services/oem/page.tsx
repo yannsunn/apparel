@@ -128,7 +128,7 @@ export default function OEMPage() {
               position: 'relative',
               zIndex: 5
             }}>
-              <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>
+              <div style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>
                 🏆 信頼の実績
               </div>
               <div style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>
@@ -168,7 +168,7 @@ export default function OEMPage() {
               />
               
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>
+                <div style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>
                   ✨ ISO認証取得工場
                 </div>
                 <div style={{ fontSize: '1rem', fontWeight: '600' }}>
@@ -195,7 +195,7 @@ export default function OEMPage() {
               zIndex: 5
               }}>
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>1枚〜</div>
-                <div style={{ fontSize: '0.8rem' }}>最小ロット</div>
+                <div style={{ fontSize: '1rem' }}>最小ロット</div>
               </div>
               <div style={{
                 background: 'rgba(255, 255, 255, 0.4)',
@@ -207,7 +207,7 @@ export default function OEMPage() {
               zIndex: 5
               }}>
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>2週間</div>
-                <div style={{ fontSize: '0.8rem' }}>最短納期</div>
+                <div style={{ fontSize: '1rem' }}>最短納期</div>
               </div>
             </div>
           </div>
@@ -428,7 +428,7 @@ export default function OEMPage() {
                 <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '1rem', color: '#111827' }}>
                   {feature.title}
                 </h3>
-                <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '0.875rem' }}>
+                <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '1rem' }}>
                   {feature.description}
                 </p>
               </div>
@@ -475,7 +475,7 @@ export default function OEMPage() {
                 <h4 style={{ fontWeight: '600', marginBottom: '0.5rem', color: '#111827' }}>
                   {process.title}
                 </h4>
-                <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+                <p style={{ fontSize: '1rem', color: '#6b7280' }}>
                   {process.desc}
                 </p>
                 {index < 5 && (
@@ -523,7 +523,7 @@ export default function OEMPage() {
                   <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#3b82f6', marginBottom: '0.25rem' }}>
                     {item.price}
                   </div>
-                  <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+                  <div style={{ fontSize: '1rem', color: '#6b7280' }}>
                     {item.quantity}
                   </div>
                 </div>
@@ -533,7 +533,7 @@ export default function OEMPage() {
               marginTop: '2rem', 
               textAlign: 'center', 
               color: '#6b7280', 
-              fontSize: '0.875rem' 
+              fontSize: '1rem' 
             }}>
               ※価格は参考価格です。素材・デザイン・数量により変動いたします。詳細はお問い合わせください。
             </p>

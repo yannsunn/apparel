@@ -131,7 +131,7 @@ export default function HomePage() {
                     color: '#ffffff',
                     border: '2px solid #ffffff',
                     fontWeight: '600',
-                    fontSize: isMobile ? '0.95rem' : '1rem',
+                    fontSize: isMobile ? '1rem' : '1rem',
                     padding: isMobile ? '0.825rem 1.5rem' : '0.875rem 1.75rem',
                     minHeight: isMobile ? '48px' : 'auto'
                   }}
@@ -159,7 +159,7 @@ export default function HomePage() {
               boxSizing: 'border-box'
             }}>
               <div style={{ 
-                fontSize: isMobile ? '0.85rem' : '0.9rem', 
+                fontSize: isMobile ? '1rem' : '0.9rem', 
                 marginBottom: '0.5rem', 
                 opacity: 0.9 
               }}>
@@ -167,7 +167,7 @@ export default function HomePage() {
               </div>
               <div style={{ 
                 fontWeight: 'bold', 
-                fontSize: isMobile ? '0.8rem' : '1.5rem',
+                fontSize: isMobile ? '1.125rem' : '1.5rem',
                 lineHeight: '1.3',
                 wordWrap: 'break-word',
                 overflowWrap: 'break-word',
@@ -213,14 +213,14 @@ export default function HomePage() {
               
               <div style={{ textAlign: 'center' }}>
                 <div style={{ 
-                  fontSize: isMobile ? '0.85rem' : '0.9rem', 
+                  fontSize: isMobile ? '1rem' : '0.9rem', 
                   opacity: 0.9, 
                   marginBottom: '0.5rem' 
                 }}>
                   ✨ 最高品質保証
                 </div>
                 <div style={{ 
-                  fontSize: isMobile ? '0.95rem' : '1rem', 
+                  fontSize: isMobile ? '1rem' : '1rem', 
                   fontWeight: '600' 
                 }}>
                   厳選された素材とデザイン
@@ -252,7 +252,7 @@ export default function HomePage() {
                   1枚〜
                 </div>
                 <div style={{ 
-                  fontSize: isMobile ? '0.75rem' : '0.8rem', 
+                  fontSize: isMobile ? '1rem' : '1rem', 
                   opacity: 0.9 
                 }}>
                   小ロット対応
@@ -274,7 +274,7 @@ export default function HomePage() {
                   即日
                 </div>
                 <div style={{ 
-                  fontSize: isMobile ? '0.75rem' : '0.8rem', 
+                  fontSize: isMobile ? '1rem' : '1rem', 
                   opacity: 0.9 
                 }}>
                   対応可能
@@ -344,7 +344,7 @@ export default function HomePage() {
                 <p style={{ 
                   color: '#6b7280', 
                   lineHeight: '1.6',
-                  fontSize: isMobile ? '0.9rem' : '1rem'
+                  fontSize: isMobile ? '1rem' : '1rem'
                 }}>
                   ISO認証取得工場で品質管理を徹底し、安定した製品をお届けします。
                 </p>
@@ -379,7 +379,7 @@ export default function HomePage() {
                 <p style={{ 
                   color: '#6b7280', 
                   lineHeight: '1.6',
-                  fontSize: isMobile ? '0.9rem' : '1rem'
+                  fontSize: isMobile ? '1rem' : '1rem'
                 }}>
                   世界各地から厳選した高品質素材を使用し、耐久性と美しさを追求します。
                 </p>
@@ -414,7 +414,7 @@ export default function HomePage() {
                 <p style={{ 
                   color: '#6b7280', 
                   lineHeight: '1.6',
-                  fontSize: isMobile ? '0.9rem' : '1rem'
+                  fontSize: isMobile ? '1rem' : '1rem'
                 }}>
                   経験豊富な専門スタッフが、企画から納品まで責任を持ってサポートします。
                 </p>
@@ -509,7 +509,7 @@ export default function HomePage() {
                 <p style={{ 
                   color: '#6b7280', 
                   lineHeight: '1.6',
-                  fontSize: isMobile ? '0.9rem' : '0.95rem'
+                  fontSize: isMobile ? '1rem' : '0.95rem'
                 }}>
                   {feature.description}
                 </p>
@@ -536,7 +536,7 @@ export default function HomePage() {
             </h3>
             
             <p style={{
-              fontSize: isMobile ? '0.95rem' : '1rem',
+              fontSize: isMobile ? '1rem' : '1rem',
               color: '#6b7280',
               marginBottom: '2rem'
             }}>
@@ -610,7 +610,7 @@ export default function HomePage() {
           <p style={{ 
             color: '#9ca3af', 
             marginBottom: '2rem',
-            fontSize: isMobile ? '0.875rem' : '1rem'
+            fontSize: isMobile ? '1rem' : '1rem'
           }}>
             現代のライフスタイルに合わせたアパレルファッション
           </p>
@@ -650,7 +650,7 @@ export default function HomePage() {
             borderTop: '1px solid #374151',
             paddingTop: '2rem',
             color: '#9ca3af',
-            fontSize: isMobile ? '0.8rem' : '0.875rem'
+            fontSize: isMobile ? '1rem' : '0.875rem'
           }}>
             © 2024 アパレルEC. All rights reserved.
           </div>

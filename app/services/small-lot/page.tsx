@@ -123,7 +123,7 @@ export default function SmallLotPage() {
               position: 'relative',
               zIndex: 5
             }}>
-              <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>
+              <div style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>
                 ⚡ 今始めよう
               </div>
               <div style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>
@@ -163,7 +163,7 @@ export default function SmallLotPage() {
               />
               
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>
+                <div style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>
                   📊 リスク最小化
                 </div>
                 <div style={{ fontSize: '1rem', fontWeight: '600' }}>
@@ -190,7 +190,7 @@ export default function SmallLotPage() {
               zIndex: 5
               }}>
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>ゼロ</div>
-                <div style={{ fontSize: '0.8rem' }}>在庫リスク</div>
+                <div style={{ fontSize: '1rem' }}>在庫リスク</div>
               </div>
               <div style={{
                 background: 'rgba(255, 255, 255, 0.4)',
@@ -202,7 +202,7 @@ export default function SmallLotPage() {
               zIndex: 5
               }}>
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>即日</div>
-                <div style={{ fontSize: '0.8rem' }}>対応可能</div>
+                <div style={{ fontSize: '1rem' }}>対応可能</div>
               </div>
             </div>
           </div>

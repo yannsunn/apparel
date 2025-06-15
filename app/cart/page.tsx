@@ -172,7 +172,7 @@ export default function CartPage() {
                     </h3>
                     <div style={{ 
                       color: '#6b7280', 
-                      fontSize: isMobile ? '0.85rem' : '0.9rem', 
+                      fontSize: isMobile ? '1rem' : '0.9rem', 
                       marginBottom: '0.5rem' 
                     }}>
                       {item.product?.brand} • サイズ: {item.sizeId} • カラー: {item.colorId}
@@ -372,7 +372,7 @@ export default function CartPage() {
                 borderRadius: '8px',
                 background: '#ffffff',
                 color: '#ef4444',
-                fontSize: isMobile ? '0.95rem' : '0.9rem',
+                fontSize: isMobile ? '1rem' : '0.9rem',
                 fontWeight: '600',
                 cursor: 'pointer',
                 marginBottom: '1rem',
@@ -388,7 +388,7 @@ export default function CartPage() {
               padding: isMobile ? '0.625rem' : '0.75rem',
               borderRadius: '8px',
               textAlign: 'center',
-              fontSize: isMobile ? '0.8rem' : '0.85rem',
+              fontSize: isMobile ? '1rem' : '0.85rem',
               color: '#3b82f6',
               fontWeight: '600',
               border: '1px solid #e0f2fe'
@@ -419,7 +419,7 @@ export default function CartPage() {
           <p style={{ 
             color: '#9ca3af', 
             marginBottom: '2rem',
-            fontSize: isMobile ? '0.875rem' : '1rem'
+            fontSize: isMobile ? '1rem' : '1rem'
           }}>
             現代のライフスタイルに合わせたアパレルファッション
           </p>
@@ -428,7 +428,7 @@ export default function CartPage() {
             borderTop: '1px solid #374151',
             paddingTop: '2rem',
             color: '#9ca3af',
-            fontSize: isMobile ? '0.8rem' : '0.875rem'
+            fontSize: isMobile ? '1rem' : '0.875rem'
           }}>
             © 2024 アパレルEC. All rights reserved.
           </div>

@@ -247,7 +247,7 @@ export default function FAQPage() {
               />
               
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>
+                <div style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>
                   ❓ 即座に解決
                 </div>
                 <div style={{ fontSize: '1rem', fontWeight: '600' }}>
@@ -272,7 +272,7 @@ export default function FAQPage() {
                 border: '1px solid rgba(255, 255, 255, 0.2)'
               }}>
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>95%</div>
-                <div style={{ fontSize: '0.8rem' }}>解決率</div>
+                <div style={{ fontSize: '1rem' }}>解決率</div>
               </div>
               <div style={{
                 background: 'rgba(255, 255, 255, 0.1)',
@@ -282,7 +282,7 @@ export default function FAQPage() {
                 border: '1px solid rgba(255, 255, 255, 0.2)'
               }}>
                 <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>即時</div>
-                <div style={{ fontSize: '0.8rem' }}>回答</div>
+                <div style={{ fontSize: '1rem' }}>回答</div>
               </div>
             </div>
           </div>
@@ -451,7 +451,7 @@ export default function FAQPage() {
                         color: '#ffffff',
                         padding: '0.25rem 0.5rem',
                         borderRadius: '4px',
-                        fontSize: '0.875rem',
+                        fontSize: '1rem',
                         fontWeight: 'bold',
                         flexShrink: 0
                       }}>
@@ -474,7 +474,7 @@ export default function FAQPage() {
                         color: '#ffffff',
                         padding: '0.25rem 0.5rem',
                         borderRadius: '4px',
-                        fontSize: '0.875rem',
+                        fontSize: '1rem',
                         fontWeight: 'bold',
                         flexShrink: 0
                       }}>
@@ -553,7 +553,7 @@ export default function FAQPage() {
             borderTop: '1px solid #374151', 
             paddingTop: '2rem',
             color: '#9ca3af',
-            fontSize: '0.875rem'
+            fontSize: '1rem'
           }}>
             © 2024 アパレルEC. All rights reserved.
           </div>

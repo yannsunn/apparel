@@ -171,7 +171,7 @@ export default function ContactPage() {
               />
               
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '0.9rem', marginBottom: '0.5rem' }}>
+                <div style={{ fontSize: isMobile ? '1rem' : '0.9rem', marginBottom: '0.5rem' }}>
                   💬 24時間受付
                 </div>
                 <div style={{ fontSize: '1rem', fontWeight: '600' }}>
@@ -390,7 +390,7 @@ export default function ContactPage() {
                   <div style={{ fontSize: isMobile ? '0.95rem' : '1rem', fontWeight: '600', marginBottom: '0.5rem' }}>
                     営業時間
                   </div>
-                  <div style={{ color: '#6b7280', fontSize: isMobile ? '0.9rem' : '0.95rem' }}>
+                  <div style={{ color: '#6b7280', fontSize: isMobile ? '1rem' : '0.95rem' }}>
                     平日 9:00 - 18:00<br />
                     土日祝日はお休みです
                   </div>
@@ -407,7 +407,7 @@ export default function ContactPage() {
                   <div style={{ fontSize: isMobile ? '0.95rem' : '1rem', fontWeight: '600', marginBottom: '0.5rem' }}>
                     メールでのお問い合わせ
                   </div>
-                  <div style={{ color: '#3b82f6', fontSize: isMobile ? '0.9rem' : '1rem' }}>
+                  <div style={{ color: '#3b82f6', fontSize: isMobile ? '1rem' : '1rem' }}>
                     info@apparel-ec.com
                   </div>
                 </div>
@@ -429,7 +429,7 @@ export default function ContactPage() {
                 }}>
                   ❓ よくある質問
                 </h3>
-                <div style={{ fontSize: isMobile ? '0.9rem' : '0.95rem', color: '#6b7280', marginBottom: '1rem' }}>
+                <div style={{ fontSize: isMobile ? '1rem' : '0.95rem', color: '#6b7280', marginBottom: '1rem' }}>
                   お問い合わせの前に、よくある質問もご確認ください。
                 </div>
                 <Link 

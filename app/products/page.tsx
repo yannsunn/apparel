@@ -202,7 +202,7 @@ export default function ProductsPage() {
               zIndex: 5
             }}>
               <div style={{ fontSize: isMobile ? '1.25rem' : '1.5rem', fontWeight: 'bold' }}>{stats.totalProducts}</div>
-              <div style={{ fontSize: isMobile ? '0.85rem' : '0.9rem' }}>総商品数</div>
+              <div style={{ fontSize: isMobile ? '1rem' : '0.9rem' }}>総商品数</div>
             </div>
             <div style={{
               background: 'rgba(255, 255, 255, 0.4)',
@@ -213,7 +213,7 @@ export default function ProductsPage() {
               zIndex: 5
             }}>
               <div style={{ fontSize: isMobile ? '1.25rem' : '1.5rem', fontWeight: 'bold' }}>¥{stats.averagePrice.toLocaleString()}</div>
-              <div style={{ fontSize: isMobile ? '0.85rem' : '0.9rem' }}>平均価格</div>
+              <div style={{ fontSize: isMobile ? '1rem' : '0.9rem' }}>平均価格</div>
             </div>
             <div style={{
               background: 'rgba(255, 255, 255, 0.4)',
@@ -224,7 +224,7 @@ export default function ProductsPage() {
               zIndex: 5
             }}>
               <div style={{ fontSize: isMobile ? '1.25rem' : '1.5rem', fontWeight: 'bold' }}>{stats.featuredCount}</div>
-              <div style={{ fontSize: isMobile ? '0.85rem' : '0.9rem' }}>おすすめ商品</div>
+              <div style={{ fontSize: isMobile ? '1rem' : '0.9rem' }}>おすすめ商品</div>
             </div>
           </div>
         </div>
@@ -310,7 +310,7 @@ export default function ProductsPage() {
                     fontWeight: selectedCategory === category.id ? '600' : '500',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease',
-                    fontSize: isMobile ? '0.85rem' : '0.9rem',
+                    fontSize: isMobile ? '1rem' : '0.9rem',
                     minHeight: isMobile ? '44px' : 'auto'
                   }}
                 >
@@ -318,7 +318,7 @@ export default function ProductsPage() {
                   {category.id !== 'all' && (
                     <span style={{
                       marginLeft: '0.5rem',
-                      fontSize: '0.8rem',
+                      fontSize: '1rem',
                       opacity: 0.7
                     }}>
                       ({products.filter(p => p.category.id === category.id).length})
@@ -368,7 +368,7 @@ export default function ProductsPage() {
               : '#e0f2fe',
             borderRadius: '8px',
             color: '#374151',
-            fontSize: isMobile ? '0.85rem' : '0.9rem',
+            fontSize: isMobile ? '1rem' : '0.9rem',
             fontWeight: '500'
           }}>
             {stats.filteredCount < stats.totalProducts ? (

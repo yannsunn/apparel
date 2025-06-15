@@ -173,7 +173,7 @@ export function SocialProofBadge({
       color: 'white',
       padding: '0.25rem 0.75rem',
       borderRadius: '12px',
-      fontSize: '0.75rem',
+      fontSize: '1rem',
       fontWeight: '600',
       zIndex: 10,
       animation: 'slideInBounce 0.5s ease-out',
@@ -224,7 +224,7 @@ export function ScarcityAlert({
         color: scarcity.alertLevel === 'critical' ? 'white' : '#000',
         padding: '0.75rem 1rem',
         borderRadius: '12px',
-        fontSize: '0.9rem',
+        fontSize: '1rem',
         fontWeight: '700',
         textAlign: 'center',
         margin: '0.5rem 0',
@@ -305,7 +305,7 @@ export function EmpathyStory({ story }: EmpathyStoryProps) {
         color: 'white',
         padding: '0.25rem 0.75rem',
         borderRadius: '20px',
-        fontSize: '0.8rem',
+        fontSize: '1rem',
         fontWeight: '600'
       }}>
         {story.emotion === 'happy' ? '😊' : 
@@ -370,7 +370,7 @@ export function EmpathyStory({ story }: EmpathyStoryProps) {
       {/* Engagement metrics */}
       <div style={{
         marginTop: '1rem',
-        fontSize: '0.8rem',
+        fontSize: '1rem',
         color: '#9ca3af',
         display: 'flex',
         gap: '1rem'
@@ -485,7 +485,7 @@ export function NeuroProgress({
           display: 'flex',
           justifyContent: 'space-between',
           marginBottom: '0.5rem',
-          fontSize: '0.9rem',
+          fontSize: '1rem',
           fontWeight: '600',
           color: '#374151'
         }}>

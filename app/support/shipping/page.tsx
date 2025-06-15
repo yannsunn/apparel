@@ -114,7 +114,7 @@ export default function ShippingPage() {
                   }}>
                     {item.content}
                   </div>
-                  <p style={{ color: '#6b7280', fontSize: '0.875rem' }}>
+                  <p style={{ color: '#6b7280', fontSize: '1rem' }}>
                     {item.description}
                   </p>
                 </div>
@@ -158,7 +158,7 @@ export default function ShippingPage() {
                   color: '#166534',
                   padding: '0.5rem 1rem',
                   borderRadius: '20px',
-                  fontSize: '0.875rem',
+                  fontSize: '1rem',
                   fontWeight: '600'
                 }}>
                   ¥10,000以上で送料無料
@@ -186,7 +186,7 @@ export default function ShippingPage() {
                   color: '#d97706',
                   padding: '0.5rem 1rem',
                   borderRadius: '20px',
-                  fontSize: '0.875rem',
+                  fontSize: '1rem',
                   fontWeight: '600'
                 }}>
                   14時までの注文で翌日配送
@@ -194,7 +194,7 @@ export default function ShippingPage() {
               </div>
             </div>
           </div>
-          <p style={{ textAlign: 'center', color: '#6b7280', fontSize: '0.875rem' }}>
+          <p style={{ textAlign: 'center', color: '#6b7280', fontSize: '1rem' }}>
             ※沖縄・離島の場合は、追加料金をいただく場合がございます。
           </p>
         </section>
@@ -232,7 +232,7 @@ export default function ShippingPage() {
                   <div style={{ fontWeight: '600', color: '#111827', marginBottom: '0.25rem' }}>
                     {slot.time}
                   </div>
-                  <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+                  <div style={{ fontSize: '1rem', color: '#6b7280' }}>
                     {slot.period}
                   </div>
                 </div>
@@ -242,7 +242,7 @@ export default function ShippingPage() {
               marginTop: '1.5rem', 
               textAlign: 'center', 
               color: '#6b7280', 
-              fontSize: '0.875rem' 
+              fontSize: '1rem' 
             }}>
               ※配送地域により、一部時間指定をお受けできない場合がございます。
             </p>
@@ -299,7 +299,7 @@ export default function ShippingPage() {
               <h4 style={{ fontWeight: '600', marginBottom: '0.5rem', color: '#111827' }}>
                 📝 納期に関する注意事項
               </h4>
-              <ul style={{ color: '#6b7280', fontSize: '0.875rem', paddingLeft: '1.5rem', lineHeight: '1.6' }}>
+              <ul style={{ color: '#6b7280', fontSize: '1rem', paddingLeft: '1.5rem', lineHeight: '1.6' }}>
                 <li>土日祝日は営業日に含まれません</li>
                 <li>繁忙期（年末年始、GW等）は納期が延長される場合があります</li>
                 <li>特急対応は別途料金（商品代金の20%）が発生します</li>
@@ -349,7 +349,7 @@ export default function ShippingPage() {
                 <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '1rem', color: '#111827' }}>
                   {feature.title}
                 </h3>
-                <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '0.875rem' }}>
+                <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '1rem' }}>
                   {feature.description}
                 </p>
               </div>
@@ -396,7 +396,7 @@ export default function ShippingPage() {
                   <h4 style={{ fontWeight: '600', marginBottom: '0.5rem', color: '#111827' }}>
                     {process.title}
                   </h4>
-                  <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+                  <p style={{ fontSize: '1rem', color: '#6b7280' }}>
                     {process.desc}
                   </p>
                 </div>
@@ -412,7 +412,7 @@ export default function ShippingPage() {
               <p style={{ color: '#15803d', fontWeight: '600', marginBottom: '0.5rem' }}>
                 🔍 追跡サービス
               </p>
-              <p style={{ color: '#166534', fontSize: '0.875rem' }}>
+              <p style={{ color: '#166534', fontSize: '1rem' }}>
                 商品発送後、ヤマト運輸の追跡番号をメールでお知らせいたします。<br />
                 ヤマト運輸公式サイトから配送状況をリアルタイムでご確認いただけます。
               </p>
@@ -496,7 +496,7 @@ export default function ShippingPage() {
             borderTop: '1px solid #374151', 
             paddingTop: '2rem',
             color: '#9ca3af',
-            fontSize: '0.875rem'
+            fontSize: '1rem'
           }}>
             © 2024 アパレルEC. All rights reserved.
           </div>

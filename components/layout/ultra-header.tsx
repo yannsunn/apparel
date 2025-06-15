@@ -90,7 +90,7 @@ export default function UltraHeader({
   }
 
   const logoStyle = {
-    fontSize: isMobile ? UltraSync.Brand.typography.fontSize.xl : UltraSync.Brand.typography.fontSize['2xl'],
+    fontSize: isMobile ? '1.25rem' : UltraSync.Brand.typography.fontSize['2xl'],
     fontWeight: UltraSync.Brand.typography.fontWeight.extrabold,
     color: UltraSync.Brand.colors.primary,
     textDecoration: 'none',
@@ -125,8 +125,8 @@ export default function UltraHeader({
     fontWeight: isActive 
       ? UltraSync.Brand.typography.fontWeight.semibold
       : UltraSync.Brand.typography.fontWeight.medium,
-    fontSize: UltraSync.Brand.typography.fontSize.sm,
-    padding: '0.5rem 0.75rem',
+    fontSize: isMobile ? '1rem' : UltraSync.Brand.typography.fontSize.sm,
+    padding: isMobile ? '0.75rem 1rem' : '0.5rem 0.75rem',
     borderRadius: '6px',
     transition: 'all 0.2s ease',
     position: 'relative' as const,
@@ -143,7 +143,7 @@ export default function UltraHeader({
     color: theme === 'light' ? '#374151' : '#d1d5db',
     textDecoration: 'none',
     fontWeight: UltraSync.Brand.typography.fontWeight.semibold,
-    padding: '0.5rem 0.75rem',
+    padding: isMobile ? '0.75rem 1rem' : '0.5rem 0.75rem',
     borderRadius: '6px',
     transition: 'all 0.2s ease',
     display: 'flex',
@@ -151,7 +151,7 @@ export default function UltraHeader({
     gap: '0.4rem',
     cursor: 'pointer',
     pointerEvents: 'auto' as const,
-    fontSize: UltraSync.Brand.typography.fontSize.sm,
+    fontSize: isMobile ? '1rem' : UltraSync.Brand.typography.fontSize.sm,
     whiteSpace: 'nowrap' as const,
     minWidth: 'fit-content'
   }
@@ -345,8 +345,9 @@ export default function UltraHeader({
           }
           
           header nav a {
-            font-size: 0.9rem !important;
-            padding: 0.75rem 1rem !important;
+            font-size: 1rem !important;
+            padding: 0.875rem 1.25rem !important;
+            min-height: 44px !important;
             width: 100%;
             justify-content: center;
             border-bottom: 1px solid #f3f4f6;

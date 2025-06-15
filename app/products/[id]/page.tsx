@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { getProductById } from '@/lib/data/mock-products'
@@ -19,6 +19,17 @@ export default function ProductDetailPage() {
   const [quantity, setQuantity] = useState(1)
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const [showAddedMessage, setShowAddedMessage] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // モバイル判定
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   if (!product) {
     return (
@@ -69,18 +80,23 @@ export default function ProductDetailPage() {
       <NeuroSocialProof 
         productId={params.id as string}
         type="purchases"
-        position="top-right"
+        position={isMobile ? 'top-left' : 'top-right'}
       />
       <NeuroTrustBadge 
         productId={params.id as string}
         type="reviews"
-        position="bottom-right"
+        position={isMobile ? 'bottom-left' : 'bottom-right'}
+      />
+      <NeuroScarcity 
+        stock={selectedSize && selectedColor ? getStock()?.quantity || 0 : 0}
+        threshold={5}
+        animated={true}
       />
 
-      <main style={{ maxWidth: '1280px', margin: '0 auto', padding: '2rem' }}>
+      <main style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '1rem' : '2rem' }}>
         {/* Breadcrumb */}
-        <nav style={{ marginBottom: '2rem' }}>
-          <ol style={{ display: 'flex', gap: '0.5rem', fontSize: '0.875rem', color: '#6b7280' }}>
+        <nav style={{ marginBottom: isMobile ? '1rem' : '2rem' }}>
+          <ol style={{ display: 'flex', gap: '0.5rem', fontSize: isMobile ? '1rem' : '0.875rem', color: '#6b7280', flexWrap: 'wrap' }}>
             <li><Link href="/" style={{ color: '#6b7280', textDecoration: 'none' }}>ホーム</Link></li>
             <li>/</li>
             <li><Link href="/products" style={{ color: '#6b7280', textDecoration: 'none' }}>商品</Link></li>
@@ -89,12 +105,12 @@ export default function ProductDetailPage() {
           </ol>
         </nav>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', background: '#ffffff', padding: '2rem', borderRadius: '8px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '1.5rem' : '3rem', background: '#ffffff', padding: isMobile ? '1rem' : '2rem', borderRadius: '8px' }}>
           {/* Images Section */}
           <div>
             <div style={{
               width: '100%',
-              height: '600px',
+              height: isMobile ? '300px' : '600px',
               background: '#f3f4f6',
               borderRadius: '8px',
               overflow: 'hidden',
@@ -142,14 +158,16 @@ export default function ProductDetailPage() {
                   key={index}
                   onClick={() => setActiveImageIndex(index)}
                   style={{
-                    width: '80px',
-                    height: '80px',
+                    width: isMobile ? '60px' : '80px',
+                    height: isMobile ? '60px' : '80px',
                     background: '#f3f4f6',
                     border: activeImageIndex === index ? '2px solid #3b82f6' : '1px solid #e5e7eb',
                     borderRadius: '4px',
                     cursor: 'pointer',
                     overflow: 'hidden',
-                    position: 'relative'
+                    position: 'relative',
+                    minHeight: '44px',
+                    minWidth: '44px'
                   }}
                 >
                   <img
@@ -172,21 +190,21 @@ export default function ProductDetailPage() {
 
           {/* Product Info Section */}
           <div>
-            <div style={{ marginBottom: '2rem' }}>
-              <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>
+            <div style={{ marginBottom: isMobile ? '1.5rem' : '2rem' }}>
+              <h1 style={{ fontSize: isMobile ? '1.5rem' : '2rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>
                 {product.name}
               </h1>
-              <p style={{ color: '#6b7280', marginBottom: '1rem' }}>{product.brand}</p>
-              <div style={{ display: 'flex', gap: '1rem', alignItems: 'baseline' }}>
-                <span style={{ fontSize: '2rem', fontWeight: 'bold' }}>
+              <p style={{ color: '#6b7280', marginBottom: '1rem', fontSize: isMobile ? '1rem' : '1rem' }}>{product.brand}</p>
+              <div style={{ display: 'flex', gap: isMobile ? '0.5rem' : '1rem', alignItems: 'baseline', flexWrap: 'wrap' }}>
+                <span style={{ fontSize: isMobile ? '1.5rem' : '2rem', fontWeight: 'bold' }}>
                   {formatPrice(product.price)}
                 </span>
                 {product.originalPrice && (
                   <>
-                    <span style={{ fontSize: '1.25rem', color: '#9ca3af', textDecoration: 'line-through' }}>
+                    <span style={{ fontSize: isMobile ? '1rem' : '1.25rem', color: '#9ca3af', textDecoration: 'line-through' }}>
                       {formatPrice(product.originalPrice)}
                     </span>
-                    <span style={{ background: '#dc2626', color: 'white', padding: '0.25rem 0.75rem', borderRadius: '4px', fontSize: '0.875rem' }}>
+                    <span style={{ background: '#dc2626', color: 'white', padding: '0.25rem 0.75rem', borderRadius: '4px', fontSize: isMobile ? '1rem' : '0.875rem' }}>
                       {Math.round((1 - product.price / product.originalPrice) * 100)}% OFF
                     </span>
                   </>
@@ -195,17 +213,17 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Description */}
-            <div style={{ marginBottom: '2rem' }}>
-              <h3 style={{ fontWeight: '600', marginBottom: '0.5rem' }}>商品説明</h3>
-              <p style={{ color: '#4b5563', lineHeight: '1.6' }}>
+            <div style={{ marginBottom: isMobile ? '1.5rem' : '2rem' }}>
+              <h3 style={{ fontWeight: '600', marginBottom: '0.5rem', fontSize: isMobile ? '1rem' : '1.125rem' }}>商品説明</h3>
+              <p style={{ color: '#4b5563', lineHeight: '1.6', fontSize: isMobile ? '1rem' : '1rem' }}>
                 {product.description}
               </p>
             </div>
 
             {/* Color Selection */}
-            <div style={{ marginBottom: '2rem' }}>
-              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>
-                色 {selectedColor && <span style={{ fontWeight: 'normal', color: '#6b7280' }}>- {selectedColor.name}</span>}
+            <div style={{ marginBottom: isMobile ? '1.5rem' : '2rem' }}>
+              <h3 style={{ fontWeight: '600', marginBottom: '1rem', fontSize: isMobile ? '1rem' : '1.125rem' }}>
+                色 {selectedColor && <span style={{ fontWeight: 'normal', color: '#6b7280', fontSize: isMobile ? '1rem' : '1rem' }}>- {selectedColor.name}</span>}
               </h3>
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 {product.colors.map(color => (
@@ -213,8 +231,10 @@ export default function ProductDetailPage() {
                     key={color.id}
                     onClick={() => setSelectedColor(color)}
                     style={{
-                      width: '48px',
-                      height: '48px',
+                      width: isMobile ? '44px' : '48px',
+                      height: isMobile ? '44px' : '48px',
+                      minHeight: '44px',
+                      minWidth: '44px',
                       borderRadius: '50%',
                       background: color.hex,
                       border: selectedColor?.id === color.id ? '3px solid #3b82f6' : '2px solid #e5e7eb',
@@ -243,8 +263,8 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Size Selection */}
-            <div style={{ marginBottom: '2rem' }}>
-              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>サイズ</h3>
+            <div style={{ marginBottom: isMobile ? '1.5rem' : '2rem' }}>
+              <h3 style={{ fontWeight: '600', marginBottom: '1rem', fontSize: isMobile ? '1rem' : '1.125rem' }}>サイズ</h3>
               <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                 {product.sizes.map(size => {
                   const hasStock = selectedColor && product.stock.some(s => 
@@ -256,13 +276,16 @@ export default function ProductDetailPage() {
                       onClick={() => setSelectedSize(size)}
                       disabled={selectedColor ? !hasStock : false}
                       style={{
-                        padding: '0.75rem 1.5rem',
+                        padding: isMobile ? '0.75rem 1rem' : '0.75rem 1.5rem',
+                        minHeight: '44px',
+                        minWidth: '44px',
                         border: selectedSize?.id === size.id ? '2px solid #3b82f6' : '1px solid #e5e7eb',
                         borderRadius: '4px',
                         background: selectedSize?.id === size.id ? '#eff6ff' : '#ffffff',
                         cursor: selectedColor ? (!hasStock ? 'not-allowed' : 'pointer') : 'pointer',
                         opacity: selectedColor ? (!hasStock ? 0.5 : 1) : 1,
-                        fontWeight: selectedSize?.id === size.id ? '600' : '400'
+                        fontWeight: selectedSize?.id === size.id ? '600' : '400',
+                        fontSize: isMobile ? '1rem' : '1rem'
                       }}
                     >
                       {size.code}
@@ -273,24 +296,26 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Quantity */}
-            <div style={{ marginBottom: '2rem' }}>
-              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>数量</h3>
+            <div style={{ marginBottom: isMobile ? '1.5rem' : '2rem' }}>
+              <h3 style={{ fontWeight: '600', marginBottom: '1rem', fontSize: isMobile ? '1rem' : '1.125rem' }}>数量</h3>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                   style={{
-                    width: '40px',
-                    height: '40px',
+                    width: isMobile ? '44px' : '40px',
+                    height: isMobile ? '44px' : '40px',
+                    minHeight: '44px',
+                    minWidth: '44px',
                     border: '1px solid #e5e7eb',
                     borderRadius: '4px',
                     background: '#ffffff',
                     cursor: 'pointer',
-                    fontSize: '1.25rem'
+                    fontSize: isMobile ? '1.125rem' : '1.25rem'
                   }}
                 >
                   -
                 </button>
-                <span style={{ minWidth: '40px', textAlign: 'center', fontSize: '1.125rem' }}>
+                <span style={{ minWidth: '40px', textAlign: 'center', fontSize: isMobile ? '1rem' : '1.125rem' }}>
                   {quantity}
                 </span>
                 <button
@@ -303,19 +328,21 @@ export default function ProductDetailPage() {
                     }
                   }}
                   style={{
-                    width: '40px',
-                    height: '40px',
+                    width: isMobile ? '44px' : '40px',
+                    height: isMobile ? '44px' : '40px',
+                    minHeight: '44px',
+                    minWidth: '44px',
                     border: '1px solid #e5e7eb',
                     borderRadius: '4px',
                     background: '#ffffff',
                     cursor: 'pointer',
-                    fontSize: '1.25rem'
+                    fontSize: isMobile ? '1.125rem' : '1.25rem'
                   }}
                 >
                   +
                 </button>
                 {selectedSize && selectedColor && getStock() && (
-                  <span style={{ color: '#6b7280', fontSize: '0.875rem' }}>
+                  <span style={{ color: '#6b7280', fontSize: isMobile ? '1rem' : '0.875rem' }}>
                     在庫 {getStock()!.quantity}点
                   </span>
                 )}
@@ -323,18 +350,19 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Actions */}
-            <div style={{ display: 'flex', gap: '1rem' }}>
+            <div style={{ display: 'flex', gap: isMobile ? '0.5rem' : '1rem', flexDirection: isMobile ? 'column' : 'row' }}>
               <button
                 onClick={handleAddToCart}
                 disabled={!selectedSize || !selectedColor || !isInStock()}
                 style={{
                   flex: 1,
-                  padding: '1rem',
+                  padding: isMobile ? '1rem' : '1rem',
+                  minHeight: '44px',
                   background: (!selectedSize || !selectedColor || !isInStock()) ? '#e5e7eb' : '#3b82f6',
                   color: (!selectedSize || !selectedColor || !isInStock()) ? '#9ca3af' : '#ffffff',
                   border: 'none',
                   borderRadius: '8px',
-                  fontSize: '1.125rem',
+                  fontSize: isMobile ? '1rem' : '1.125rem',
                   fontWeight: '600',
                   cursor: (!selectedSize || !selectedColor || !isInStock()) ? 'not-allowed' : 'pointer',
                   transition: 'all 0.2s'
@@ -344,11 +372,14 @@ export default function ProductDetailPage() {
               </button>
               <button
                 style={{
-                  padding: '1rem',
+                  padding: isMobile ? '1rem' : '1rem',
+                  minHeight: '44px',
+                  minWidth: '44px',
                   border: '1px solid #e5e7eb',
                   borderRadius: '8px',
                   background: '#ffffff',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  fontSize: isMobile ? '1.25rem' : '1.5rem'
                 }}
                 title="お気に入りに追加"
               >
@@ -372,9 +403,9 @@ export default function ProductDetailPage() {
             )}
 
             {/* Product Details */}
-            <div style={{ marginTop: '2rem', paddingTop: '2rem', borderTop: '1px solid #e5e7eb' }}>
-              <h3 style={{ fontWeight: '600', marginBottom: '1rem' }}>商品詳細</h3>
-              <dl style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: '0.5rem', fontSize: '0.875rem' }}>
+            <div style={{ marginTop: isMobile ? '1.5rem' : '2rem', paddingTop: isMobile ? '1.5rem' : '2rem', borderTop: '1px solid #e5e7eb' }}>
+              <h3 style={{ fontWeight: '600', marginBottom: '1rem', fontSize: isMobile ? '1rem' : '1.125rem' }}>商品詳細</h3>
+              <dl style={{ display: 'grid', gridTemplateColumns: isMobile ? '100px 1fr' : '120px 1fr', gap: '0.5rem', fontSize: isMobile ? '1rem' : '0.875rem' }}>
                 <dt style={{ color: '#6b7280' }}>カテゴリー:</dt>
                 <dd>{product.category.name}</dd>
                 <dt style={{ color: '#6b7280' }}>ブランド:</dt>

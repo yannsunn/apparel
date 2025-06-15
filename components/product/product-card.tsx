@@ -171,7 +171,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
                 color: '#ffffff',
                 padding: '0.4rem 0.8rem',
                 borderRadius: '20px',
-                fontSize: isMobile ? '0.7rem' : '0.75rem',
+                fontSize: isMobile ? '1rem' : '0.875rem',
                 fontWeight: '700',
                 marginBottom: '0.5rem'
               }}>
@@ -186,7 +186,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
                 color: '#000',
                 padding: '0.4rem 0.8rem',
                 borderRadius: '20px',
-                fontSize: isMobile ? '0.7rem' : '0.75rem',
+                fontSize: isMobile ? '1rem' : '0.875rem',
                 fontWeight: '700',
                 marginBottom: '0.5rem'
               }}>
@@ -201,7 +201,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
                 color: 'white',
                 padding: '0.4rem 0.8rem',
                 borderRadius: '20px',
-                fontSize: isMobile ? '0.7rem' : '0.75rem',
+                fontSize: isMobile ? '1rem' : '0.875rem',
                 fontWeight: '700'
               }}>
                 🔥 残り{totalStock}点
@@ -281,7 +281,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
               {product.name || 'Sample Product'}
             </h3>
             <p style={{
-              fontSize: isMobile ? '0.85rem' : '0.9rem',
+              fontSize: isMobile ? '1rem' : '0.9rem',
               color: '#6b7280',
               margin: 0,
               fontWeight: '600'
@@ -312,7 +312,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
                 ))}
                 {product.colors.length > 4 && (
                   <div style={{
-                    fontSize: isMobile ? '0.75rem' : '0.8rem',
+                    fontSize: isMobile ? '1rem' : '0.8rem',
                     color: '#6b7280',
                     marginLeft: '0.5rem',
                     fontWeight: '600'
@@ -350,7 +350,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
                   ¥{product.originalPrice.toLocaleString('ja-JP')}
                 </span>
                 <span style={{
-                  fontSize: isMobile ? '0.7rem' : '0.75rem',
+                  fontSize: isMobile ? '1rem' : '0.875rem',
                   color: '#3b82f6',
                   fontWeight: '600'
                 }}>
@@ -366,7 +366,7 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
             color: totalStock > 50 ? '#15803d' : totalStock > 10 ? '#92400e' : '#dc2626',
             padding: isMobile ? '0.5rem' : '0.75rem',
             borderRadius: '12px',
-            fontSize: isMobile ? '0.75rem' : '0.8rem',
+            fontSize: isMobile ? '1rem' : '0.8rem',
             fontWeight: '600',
             textAlign: 'center'
           }}>
@@ -391,8 +391,8 @@ export const ProductCard = memo<ProductCardProps>(function ProductCard({
             color: '#ffffff',
             border: 'none',
             borderRadius: '50%',
-            width: isMobile ? '56px' : '48px',
-            height: isMobile ? '56px' : '48px',
+            width: isMobile ? '52px' : '48px',
+            height: isMobile ? '52px' : '48px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
