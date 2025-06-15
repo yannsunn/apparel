@@ -146,12 +146,15 @@ export default function HomePage() {
               background: 'rgba(255, 255, 255, 0.45)',
               backdropFilter: 'blur(10px)',
               borderRadius: '16px',
-              padding: isMobile ? '1.25rem 1.5rem' : '1.5rem 2rem',
-              display: 'inline-block',
+              padding: isMobile ? '1rem 1.25rem' : '1.5rem 2rem',
+              display: 'block',
               border: '1px solid rgba(255, 255, 255, 0.5)',
               position: 'relative',
               zIndex: 5,
-              width: isMobile ? '100%' : 'auto'
+              width: '100%',
+              maxWidth: isMobile ? '100%' : '600px',
+              textAlign: isMobile ? 'center' : 'left',
+              margin: isMobile ? '0 auto' : '0'
             }}>
               <div style={{ 
                 fontSize: isMobile ? '0.85rem' : '0.9rem', 
@@ -162,10 +165,18 @@ export default function HomePage() {
               </div>
               <div style={{ 
                 fontWeight: 'bold', 
-                fontSize: isMobile ? '1.1rem' : '1.5rem',
-                lineHeight: '1.4'
+                fontSize: isMobile ? '0.95rem' : '1.5rem',
+                lineHeight: '1.4',
+                wordWrap: 'break-word'
               }}>
-                累計販売実績 50,000点以上 | 顧客満足度 99.2%
+                {isMobile ? (
+                  <>
+                    累計販売実績 50,000点以上<br />
+                    顧客満足度 99.2%
+                  </>
+                ) : (
+                  '累計販売実績 50,000点以上 | 顧客満足度 99.2%'
+                )}
               </div>
             </div>
           </div>
